@@ -1,0 +1,11 @@
+pre {
+  background-color: #333;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #888;
+  font-family: 'Source Code Pro', 'Menlo', 'Consolas', 'Courier New', Courier,
+    monospace;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
