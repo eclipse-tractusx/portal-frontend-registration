@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import { createBrowserHistory } from 'history'
-import { Redirect, Route, Router, Switch, useLocation } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Router, Switch, useLocation } from 'react-router-dom'
 import './styles/newApp.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <BrowserRouter basename="/registration">
         <Switch>
           <Redirect path="/" exact to="/landing" />
           <ProtectedRoute
@@ -34,7 +34,7 @@ const App = () => {
             component={(props) => <Landing {...props} />}
           />
           <ProtectedRoute
-            path="/registration"
+            path="/form"
             rolesAllowedForTheRoute={['view_registration']}
             component={(props) => <RegistrationCax {...props} />}
           />
@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/authinfo" component={() => <Authinfo />} />
           <Route path="/403" component={() => <UnauthorisedPage />} />
         </Switch>
-      </Router>
+      </BrowserRouter>
     </Provider>
   )
 }

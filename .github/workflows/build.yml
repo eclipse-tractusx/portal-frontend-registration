@@ -28,7 +28,7 @@ jobs:
 #        run: yarn lint
 
       - name: Build Application
-        run: yarn build
+        run: yarn build:dirty
 
       - name: Unit Tests
         run: yarn test:ci

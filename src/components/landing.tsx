@@ -11,7 +11,7 @@ export const Landing = () => {
   const history = useHistory()
 
   const onClick = () => {
-    history.push('/registration')
+    history.push('/form')
   }
   return (
     <Container>
@@ -40,7 +40,7 @@ export const Landing = () => {
           <div className="mx-auto col-9 d-flex align-items-center justify-content-center info small-info">
             <span className="">
               {t('landing.footerText1')}{' '}
-              <Link to="/">{t('landing.footerText2')}</Link>.
+              <Link to="/form">{t('landing.footerText2')}</Link>.
             </span>
           </div>
         </Col>
