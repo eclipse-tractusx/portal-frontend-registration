@@ -644,3 +644,10 @@ textarea {
   width: 23em;
   word-break: break-word;
 }
+
+.error{
+  color: #d91e18;
+}
+.error input[type=search] {
+  border-color: #d91e18;
+}

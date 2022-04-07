@@ -49,7 +49,10 @@
       "businessStatus": "Geschäftsstatus",
       "stateOfActivity": "State of activity /operation",
       "validFrom": "Gültig ab",
-      "validUntil": "Gültig bis"
+      "validUntil": "Gültig bis",
+      "bpnStartError": "The entered BPN is invalid, please enter the legal entity BPN starting with BPNL*",
+      "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
+      "bpnLengthError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below."
     },
     "finish": {
       "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
