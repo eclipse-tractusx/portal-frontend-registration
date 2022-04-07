@@ -645,9 +645,9 @@ textarea {
   word-break: break-word;
 }
 
-.error{
+.error {
   color: #d91e18;
 }
-.error input[type=search] {
+.error input[type='search'] {
   border-color: #d91e18;
 }

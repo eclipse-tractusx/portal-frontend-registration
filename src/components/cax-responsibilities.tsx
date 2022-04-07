@@ -160,7 +160,9 @@ export const ResponsibilitiesCax = ({
               <select value={role} onChange={(e) => onRoleChange(e)}>
                 {availableUserRoles &&
                   availableUserRoles.map((role, index) => (
-                    <option key={index} value={role}>{role}</option>
+                    <option key={index} value={role}>
+                      {role}
+                    </option>
                   ))}
               </select>
             </div>

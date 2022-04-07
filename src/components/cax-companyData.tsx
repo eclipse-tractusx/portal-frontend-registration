@@ -28,7 +28,7 @@ export const CompanyDataCax = ({
   const { t } = useTranslation()
   const [search, setSearch] = useState([])
   const [bpn, setBpn] = useState('')
-  const [bpnErrorMsg, setBpnErrorMessage] = useState("");
+  const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState('')
   const [registeredName, setRegisteredName] = useState('')
   const [streetHouseNumber, setStreetHouseNumber] = useState('')
@@ -37,12 +37,12 @@ export const CompanyDataCax = ({
   const [country, setCountry] = useState('')
 
   const onSearchChange = (x: any) => {
-    const bpnPattern = /^BPNL[a-z0-9]{0,12}$/g;
-    if(!bpnPattern.test(x.trim())){
-      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'));
-      return;
-    }else{
-      setBpnErrorMessage('');
+    const bpnPattern = /^BPNL[a-z0-9]{0,12}$/g
+    if (!bpnPattern.test(x.trim())) {
+      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
+      return
+    } else {
+      setBpnErrorMessage('')
     }
     setSearch(x)
     const fetchData = async () => {
@@ -61,7 +61,7 @@ export const CompanyDataCax = ({
     fetchData()
       // make sure to catch any error
       .catch((errorCode: number) => {
-        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'));
+        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
           : t(`ErrorMessage.default`)
@@ -106,12 +106,12 @@ export const CompanyDataCax = ({
         </div>
         <div className="companydata-form">
           <Row className="mx-auto col-9">
-            <div className={`form-search ${ bpnErrorMsg ? 'error' : ''}`}>
+            <div className={`form-search ${bpnErrorMsg ? 'error' : ''}`}>
               <label> {t('registrationStepOne.seachDatabase')}</label>
-              <SearchInput 
-                className="search-input"  
-                value={search} 
-                onChange={(search) => onSearchChange(search)} 
+              <SearchInput
+                className="search-input"
+                value={search}
+                onChange={(search) => onSearchChange(search)}
               />
               <label>{bpnErrorMsg}</label>
             </div>
@@ -133,7 +133,11 @@ export const CompanyDataCax = ({
                   data-tip="hello world"
                 />
               </label>
-              <input type="text" value={bpn} onChange={e => setBpn(e.target.value)} />
+              <input
+                type="text"
+                value={bpn}
+                onChange={(e) => setBpn(e.target.value)}
+              />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
               </div>
