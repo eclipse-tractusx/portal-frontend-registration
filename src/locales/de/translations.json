@@ -72,7 +72,16 @@
     },
     "Responsibility": {
       "responsAndAdmin": "Responsibility & admin account",
-      "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."
+      "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+      "email": "E-mail address",
+      "emailErrorMessage": "Please enter a valid email address",
+      "role": "User role",
+      "note": "Personal note",
+      "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
+      "titleInvite": "Users Invited",
+      "userInvite": "Users invited",
+      "userInviteSubHeading": "No users defined, please use the form below to add users:",
+      "sentInvite": "Send Invite"
     },
     "verifyRegistration": {
       "title": "Verify your registration data",

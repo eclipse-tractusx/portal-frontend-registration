@@ -529,6 +529,7 @@ textarea {
 }
 
 .error input[type='text'],
+.error input[type='search'],
 .error select {
   border-color: var(--input-error-color);
 }
@@ -643,11 +644,4 @@ textarea {
 #tooltipBtn {
   width: 23em;
   word-break: break-word;
-}
-
-.error {
-  color: #d91e18;
-}
-.error input[type='search'] {
-  border-color: #d91e18;
 }

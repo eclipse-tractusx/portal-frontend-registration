@@ -93,6 +93,7 @@
       "responsAndAdmin": "Responsibility & admin account",
       "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
       "email": "E-mail address",
+      "emailErrorMessage": "Please enter a valid email address",
       "role": "User role",
       "note": "Personal note",
       "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
