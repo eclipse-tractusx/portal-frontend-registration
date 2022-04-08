@@ -70,9 +70,9 @@ export const ResponsibilitiesCax = ({
 
   const validateEmail = (email) => {
     //eslint-disable-next-line
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return (true);
-    return (false);
-}
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return true
+    return false
+  }
 
   const handleClick = () => {
     verifyEntry()
@@ -112,7 +112,11 @@ export const ResponsibilitiesCax = ({
 
   const verifyEntry = () => {
     if (email === '') setError({ email: 'Email is required', role: error.role })
-    else if (!validateEmail(email)) setError({ email: t('Responsibility.emailErrorMessage'), role: error.role })  
+    else if (!validateEmail(email))
+      setError({
+        email: t('Responsibility.emailErrorMessage'),
+        role: error.role,
+      })
     else setError({ email: '', role: error.role })
   }
 
@@ -165,7 +169,9 @@ export const ResponsibilitiesCax = ({
               <select value={role} onChange={(e) => onRoleChange(e)}>
                 {availableUserRoles &&
                   availableUserRoles.map((role, index) => (
-                    <option key={index} value={role}>{role}</option>
+                    <option key={index} value={role}>
+                      {role}
+                    </option>
                   ))}
               </select>
             </div>
