@@ -529,6 +529,7 @@ textarea {
 }
 
 .error input[type='text'],
+.error input[type='search'],
 .error select {
   border-color: var(--input-error-color);
 }

@@ -49,7 +49,9 @@
       "businessStatus": "Business status",
       "stateOfActivity": "State of activity /operation",
       "validFrom": "Valid from",
-      "validUntil": "Valid until"
+      "validUntil": "Valid until",
+      "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
+      "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
     },
     "finish": {
       "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
@@ -91,6 +93,7 @@
       "responsAndAdmin": "Responsibility & admin account",
       "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
       "email": "E-mail address",
+      "emailErrorMessage": "Please enter a valid email address",
       "role": "User role",
       "note": "Personal note",
       "hint": "Optional message in the invitation e-mail. Lorem Ipsum",

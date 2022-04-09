@@ -1,7 +1,14 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import { createBrowserHistory } from 'history'
-import { BrowserRouter, Redirect, Route, Router, Switch, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Router,
+  Switch,
+  useLocation,
+} from 'react-router-dom'
 import './styles/newApp.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'

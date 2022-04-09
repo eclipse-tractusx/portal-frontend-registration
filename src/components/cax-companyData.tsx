@@ -26,33 +26,42 @@ export const CompanyDataCax = ({
   addCompanyData,
 }: CompanyDataProps) => {
   const { t } = useTranslation()
-  const [search, setsearch] = useState([])
-  const [bpn, setbpn] = useState('')
-  const [legalEntity, setlegalEntity] = useState('')
-  const [registeredName, setregisteredName] = useState('')
-  const [streetHouseNumber, setstreetHouseNumber] = useState('')
-  const [postalCode, setpostalCode] = useState('')
-  const [city, setcity] = useState('')
-  const [country, setcountry] = useState('')
+  const [search, setSearch] = useState([])
+  const [bpn, setBpn] = useState('')
+  const [bpnErrorMsg, setBpnErrorMessage] = useState('')
+  const [legalEntity, setLegalEntity] = useState('')
+  const [registeredName, setRegisteredName] = useState('')
+  const [streetHouseNumber, setStreetHouseNumber] = useState('')
+  const [postalCode, setPostalCode] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
 
-  const onSeachChange = (x: any) => {
-    setsearch(x)
+  const onSearchChange = (x: any) => {
+    const bpnPattern = /^BPNL[a-z0-9]{0,12}$/g
+    if (!bpnPattern.test(x.trim())) {
+      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
+      return
+    } else {
+      setBpnErrorMessage('')
+    }
+    setSearch(x)
     const fetchData = async () => {
       const companyDetails = await getCompanyDetails(x)
-      setbpn(companyDetails?.[0]?.bpn)
-      setlegalEntity(companyDetails?.[0]?.names?.[0]?.value)
-      setregisteredName(companyDetails?.[0]?.names?.[0]?.value)
-      setstreetHouseNumber(
+      setBpn(companyDetails?.[0]?.bpn)
+      setLegalEntity(companyDetails?.[0]?.names?.[0]?.value)
+      setRegisteredName(companyDetails?.[0]?.names?.[0]?.value)
+      setStreetHouseNumber(
         companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
       )
-      setpostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
-      setcity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
-      setcountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
+      setPostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
+      setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
+      setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
     }
     // call the function
     fetchData()
       // make sure to catch any error
       .catch((errorCode: number) => {
+        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
           : t(`ErrorMessage.default`)
@@ -97,13 +106,14 @@ export const CompanyDataCax = ({
         </div>
         <div className="companydata-form">
           <Row className="mx-auto col-9">
-            <div className="form-search">
+            <div className={`form-search ${bpnErrorMsg ? 'error' : ''}`}>
               <label> {t('registrationStepOne.seachDatabase')}</label>
               <SearchInput
                 className="search-input"
                 value={search}
-                onChange={(search) => onSeachChange(search)}
+                onChange={(search) => onSearchChange(search)}
               />
+              <label>{bpnErrorMsg}</label>
             </div>
           </Row>
           <Row className="col-9 mx-auto">
@@ -123,7 +133,11 @@ export const CompanyDataCax = ({
                   data-tip="hello world"
                 />
               </label>
-              <input type="text" value={bpn} />
+              <input
+                type="text"
+                value={bpn}
+                onChange={(e) => setBpn(e.target.value)}
+              />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
               </div>
