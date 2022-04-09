@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build-and-push-release:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,8 +31,14 @@ jobs:
         id: npm-tag
         uses: martinbeentjes/npm-get-version-action@master
 
-      - name: Compare versions
+      - name: Output versions
         run: |
           echo git ${{ steps.git-tag.outputs.git-version }}
-          echo npm ${{ steps.npm-tag.outputs.current-version}}
+          echo npm ${{ steps.npm-tag.outputs.current-version }}
 
+      - name: Compare versions
+        if: steps.git-tag.outputs.git-version == steps.npm-tag.outputs.current-version
+        env:
+          VERSION: ${{ steps.git-tag.outputs.git-version }}
+        run: |
+          echo versions equal - building release "$VERSION"
