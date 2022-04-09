@@ -36,14 +36,46 @@ jobs:
           echo git ${{ steps.git-tag.outputs.git-version }}
           echo npm ${{ steps.npm-tag.outputs.current-version }}
 
-      - name: Compare versions
+      - name: Versions not equal
         if: steps.git-tag.outputs.git-version != steps.npm-tag.outputs.current-version
         run: |
           echo git and npm versions not equal - refusing to build release
           exit 1
 
       - name: Version equal
-        env:
-          VERSION: ${{ steps.git-tag.outputs.git-version }}
         run: |
-          echo versions equal - building release "$VERSION"
+          echo versions equal - building release ${{ steps.git-tag.outputs.git-version }}
+
+      - name: Install Dependencies
+        run: yarn
+
+#      - name: Linter Checks
+#        run: yarn lint
+
+      - name: Build Application
+        run: yarn build:dirty
+
+      - name: Unit Tests
+        run: yarn test:ci
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: .conf/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.git-tag.outputs.git-version }}
+          labels: ${{ steps.meta.outputs.labels }}
