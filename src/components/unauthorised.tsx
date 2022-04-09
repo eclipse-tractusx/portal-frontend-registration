@@ -5,7 +5,7 @@ class UnauthorisedPage extends React.Component {
   public render() {
     return (
       <div className="wrapper">
-        <img src="/Catena-X_Logo_mit_Zusatz_2021.svg" alt="logo" />
+        <img src="/registration/Catena-X_Logo_mit_Zusatz_2021.svg" alt="logo" />
         <div className="pageBody">
           <div className="infoBackground">
             <div className="infoContent">

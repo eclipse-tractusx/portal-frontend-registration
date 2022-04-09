@@ -33,7 +33,7 @@ export const Landing = () => {
                 />
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <img src="/ID_Card.png" alt="" />
+                <img src="/registration/ID_Card.png" alt="" />
               </Col>
             </Row>
           </div>

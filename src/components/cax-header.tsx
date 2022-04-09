@@ -57,7 +57,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
     <Row className="header-container">
       <Col>
         <div className="logo">
-          <img src="/logo_cx.svg" alt="logo" />
+          <img src="/registration/logo_cx.svg" alt="logo" />
         </div>
       </Col>
       <Col>

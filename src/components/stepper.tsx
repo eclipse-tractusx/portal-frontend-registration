@@ -31,7 +31,7 @@ export const Stepper: FC<StepperProps> = ({ currentActiveStep }) => {
                 >
                   {currentActiveStep > stepNumber ? (
                     <span className="step-tick">
-                      <img src="./tick.svg" alt="tick" />
+                      <img src="/registration/tick.svg" alt="tick" />
                     </span>
                   ) : (
                     stepNumber

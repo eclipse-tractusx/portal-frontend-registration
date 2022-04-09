@@ -23,7 +23,7 @@ export const Finish = () => {
                 <BulletList text={t('finish.point3')} icon="circle" />
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <img src="/mail.png" alt="" />
+                <img src="/registration/mail.png" alt="" />
               </Col>
             </Row>
           </div>
