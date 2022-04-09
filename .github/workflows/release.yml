@@ -37,7 +37,12 @@ jobs:
           echo npm ${{ steps.npm-tag.outputs.current-version }}
 
       - name: Compare versions
-        if: steps.git-tag.outputs.git-version == steps.npm-tag.outputs.current-version
+        if: steps.git-tag.outputs.git-version != steps.npm-tag.outputs.current-version
+        run: |
+          echo git and npm versions not equal - refusing to build release
+          exit 1
+
+      - name: Version equal
         env:
           VERSION: ${{ steps.git-tag.outputs.git-version }}
         run: |
