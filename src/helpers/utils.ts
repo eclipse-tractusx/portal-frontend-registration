@@ -2,14 +2,13 @@ import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../helpers/UserService'
 
-const url = process.env.REACT_APP_ONBOARDING_URL
-const endpoint = process.env.REACT_APP_ONBOARDING_ENDPOINT
+const api = process.env.REACT_APP_REGISTRATION_URL
 export function getCompanyDetails(
   oneId: string
 ): Promise<FetchBusinessPartnerDto[]> {
   console.log('API called getCompanyDetails')
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/company/${oneId}`
+  const u = `${api}/company/${oneId}`
   const myResponseData: FetchBusinessPartnerDto[] = []
   const promise = new Promise<FetchBusinessPartnerDto[]>((resolve, reject) => {
     fetch(u, {
@@ -41,7 +40,7 @@ export function getCompanyDetails(
 export function submitSendInvites(userInviteList: any): Promise<any> {
   const tenant = UserService.getTenant()
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/tenant/${tenant}/users`
+  const u = `${api}/tenant/${tenant}/users`
   const promise = new Promise<any>((resolve, reject) => {
     fetch(u, {
       method: 'POST',
@@ -70,7 +69,7 @@ export function submitSendInvites(userInviteList: any): Promise<any> {
 }
 export function submitCustodianWallet(custodianWallet): Promise<any> {
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/custodianWallet`
+  const u = `${api}/custodianWallet`
   const promise = new Promise<any>((resolve, reject) => {
     fetch(u, {
       method: 'POST',
@@ -99,7 +98,7 @@ export function submitCustodianWallet(custodianWallet): Promise<any> {
 }
 export function getCompanyRoles(): Promise<CompanyRole[]> {
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/companyRoles`
+  const u = `${api}/companyRoles`
   const companyRolesRes: CompanyRole[] = []
   const promise = new Promise<CompanyRole[]>((resolve, reject) => {
     fetch(u, {
@@ -132,7 +131,7 @@ export function getConsentForCompanyRoles(
   roleId: number
 ): Promise<ConsentForCompanyRoles[]> {
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/consentsForCompanyRole/${roleId}`
+  const u = `${api}/consentsForCompanyRole/${roleId}`
   const myConsentResponseData: ConsentForCompanyRoles[] = []
   const promise = new Promise<ConsentForCompanyRoles[]>((resolve, reject) => {
     fetch(u, {
@@ -162,7 +161,7 @@ export function getConsentForCompanyRoles(
 }
 export function getClientRolesComposite(): Promise<string[]> {
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/rolesComposite`
+  const u = `${api}/rolesComposite`
   const userRolesRes: string[] = []
   const promise = new Promise<string[]>((resolve, reject) => {
     fetch(u, {
@@ -194,7 +193,7 @@ export function getClientRolesComposite(): Promise<string[]> {
 
 export function uploadDocument(file): Promise<any> {
   const token = UserService.getToken()
-  const u = `${url}/${endpoint}/documents`
+  const u = `${api}/documents`
   const formdata = new FormData()
   formdata.append('document', file.file)
   return fetch(u, {
