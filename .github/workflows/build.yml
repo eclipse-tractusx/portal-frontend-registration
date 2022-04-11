@@ -52,5 +52,8 @@ jobs:
           context: .
           file: .conf/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          # build tag :main
+          # tags: ${{ steps.meta.outputs.tags }}
+          # build tag :latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
