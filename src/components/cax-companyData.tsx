@@ -136,7 +136,6 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={bpn}
-                onChange={(e) => setBpn(e.target.value)}
               />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
@@ -153,7 +152,7 @@ export const CompanyDataCax = ({
                   data-tip="hello world"
                 />{' '}
               </label>
-              <input type="text" value={legalEntity} />
+              <input type="text" value={legalEntity} onChange={(e) => setLegalEntity(e.target.value)} />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
               </div>
@@ -169,7 +168,7 @@ export const CompanyDataCax = ({
                   data-tip="hello world"
                 />
               </label>
-              <input type="text" value={registeredName} />
+              <input type="text" value={registeredName} onChange={(e) => setRegisteredName(e.target.value)} />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
               </div>
@@ -185,26 +184,26 @@ export const CompanyDataCax = ({
           <Row className="mx-auto col-9">
             <div className="form-data">
               <label> {t('registrationStepOne.streetHouseNumber')} </label>
-              <input type="text" value={streetHouseNumber} />
+              <input type="text" value={streetHouseNumber} onChange={(e) => setStreetHouseNumber(e.target.value)} />
             </div>
           </Row>
 
           <Row className="mx-auto col-9">
             <div className="col-4 form-data">
               <label> {t('registrationStepOne.postalCode')} </label>
-              <input type="text" value={postalCode} />
+              <input type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
             </div>
 
             <div className="col-8 form-data">
               <label>{t('registrationStepOne.city')}</label>
-              <input type="text" value={city} />
+              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
           </Row>
 
           <Row className="mx-auto col-9">
             <div className="form-data">
               <label>{t('registrationStepOne.country')}</label>
-              <input type="text" value={country} />
+              <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} />
             </div>
           </Row>
         </div>
