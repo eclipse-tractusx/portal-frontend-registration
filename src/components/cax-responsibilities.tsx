@@ -68,11 +68,9 @@ export const ResponsibilitiesCax = ({
     setRole(e.target.value)
   }
 
-  const validateEmail = (email) => {
+  const validateEmail = (email) =>
     //eslint-disable-next-line
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return true;
-    return false;
-  }
+    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
   const handleClick = () => {
     if (email && validateEmail(email)) {
@@ -110,7 +108,7 @@ export const ResponsibilitiesCax = ({
   }
 
   const validateEmailOnChange = (email) => {
-    setEmail(email);
+    setEmail(email)
     if (email === '') setError({ email: 'Email is required', role: error.role })
     else if (!validateEmail(email))
       setError({
@@ -156,7 +154,7 @@ export const ResponsibilitiesCax = ({
                 type="text"
                 name="email"
                 value={email}
-                onChange={(e) => validateEmailOnChange(e.target.value) }
+                onChange={(e) => validateEmailOnChange(e.target.value)}
               />
               <AiOutlineExclamationCircle className="error-icon" />
               <div className="error-message">{error.email}</div>
