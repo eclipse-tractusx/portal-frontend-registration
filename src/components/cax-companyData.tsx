@@ -26,7 +26,7 @@ export const CompanyDataCax = ({
   addCompanyData,
 }: CompanyDataProps) => {
   const { t } = useTranslation()
-  const [search, setSearch] = useState([])
+  const [search, setSearch] = useState('')
   const [bpn, setBpn] = useState('')
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState('')
@@ -36,29 +36,23 @@ export const CompanyDataCax = ({
   const [city, setCity] = useState('')
   const [country, setCountry] = useState('')
 
-  const onSearchChange = (x: any) => {
-    const bpnPattern = /^BPNL[a-z0-9]{0,12}$/g
-    if (!bpnPattern.test(x.trim())) {
-      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
-      return
-    } else {
-      setBpnErrorMessage('')
-    }
-    setSearch(x)
-    const fetchData = async () => {
-      const companyDetails = await getCompanyDetails(x)
-      setBpn(companyDetails?.[0]?.bpn)
-      setLegalEntity(companyDetails?.[0]?.names?.[0]?.value)
-      setRegisteredName(companyDetails?.[0]?.names?.[0]?.value)
-      setStreetHouseNumber(
-        companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
-      )
-      setPostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
-      setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
-      setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
-    }
-    // call the function
-    fetchData()
+  const fetchData = async (expr: string) => {
+    const companyDetails = await getCompanyDetails(expr)
+    setBpn(companyDetails?.[0]?.bpn)
+    setLegalEntity(companyDetails?.[0]?.names?.[0]?.value)
+    setRegisteredName(companyDetails?.[0]?.names?.[0]?.value)
+    setStreetHouseNumber(
+      companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
+    )
+    setPostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
+    setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
+    setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
+  }
+
+  const onSearchChange = (expr: string) => {
+    const bpnPattern = /^BPNL[a-z0-9]{12}$/i
+    if (bpnPattern.test(expr.trim())) {
+      fetchData(expr)
       // make sure to catch any error
       .catch((errorCode: number) => {
         setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
@@ -70,6 +64,10 @@ export const CompanyDataCax = ({
         toast.error(message)
         //  history.push("/finish");
       })
+      setBpnErrorMessage('')
+    } else {
+      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
+    }
   }
 
   const backClick = () => {
@@ -111,7 +109,7 @@ export const CompanyDataCax = ({
               <SearchInput
                 className="search-input"
                 value={search}
-                onChange={(search) => onSearchChange(search)}
+                onChange={(expr) => onSearchChange(expr)}
               />
               <label>{bpnErrorMsg}</label>
             </div>
