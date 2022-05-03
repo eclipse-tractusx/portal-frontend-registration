@@ -36,7 +36,7 @@
 
 body {
   margin: 0;
-  font-family: 'LibreFranklin' !important;
+  font-family: 'LibreFranklin', sans-serif !important;
   color: var(--body-text-color) !important;
   font-weight: 300 !important;
   background-image: url(/src/bgNew.svg);
@@ -53,7 +53,7 @@ body {
   margin-top: 20px;
   font-size: 14px;
   font-weight: 500;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 
 h1,
@@ -63,7 +63,7 @@ h4,
 h5,
 h6 {
   font-weight: 600;
-  font-family: 'Libre Franklin 600';
+  font-family: 'Libre Franklin 600', sans-serif;
 }
 
 .profile-link {
@@ -164,7 +164,7 @@ h6 {
 .nav-link {
   color: var(--body-text-color) !important;
   text-decoration: underline !important;
-  font-family: 'LibreFranklin' !important;
+  font-family: 'LibreFranklin', sans-serif !important;
   font-weight: 300;
 }
 
@@ -214,7 +214,7 @@ h6 {
 
 .step-highlight {
   font-size: 24px;
-  font-family: 'Libre Franklin 600';
+  font-family: 'Libre Franklin 600', sans-serif;
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -302,14 +302,14 @@ textarea {
 .companydata-form label {
   margin-bottom: 10px;
   font-size: 14px;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 
 .section-divider {
   display: flex;
   flex-direction: row;
   font-size: 14px;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 
 .section-divider:before,
@@ -329,7 +329,7 @@ textarea {
 .company-hint {
   color: #717171;
   font-size: 12px;
-  font-family: 'Libre Franklin 400';
+  font-family: 'Libre Franklin 400', sans-serif;
   padding-top: 10px;
 }
 
@@ -339,7 +339,7 @@ textarea {
 
 .form-heading {
   font-size: 18px;
-  font-family: 'Libre Franklin 600';
+  font-family: 'Libre Franklin 600', sans-serif;
   padding: 30px 0;
 }
 
@@ -377,8 +377,6 @@ textarea {
 }
 
 .tooltiptext {
-  display: -webkit-flex;
-  display: flex;
   -webkit-justify-content: center;
   justify-content: center;
   background: #303030;
@@ -390,7 +388,7 @@ textarea {
   width: 220px;
   position: absolute;
   display: none;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 
 .tooltiptext:before {
@@ -444,7 +442,7 @@ textarea {
 .list-header {
   background: var(--bg-color);
   border: none;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 .send-invite {
   margin-top: 50px !important;
@@ -454,13 +452,13 @@ textarea {
   text-align: right;
   font-size: 14px;
   color: #888888;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
 }
 
 .list-group-item-email {
   color: #252525;
   font-size: 16px;
-  font-family: 'Libre Franklin 400';
+  font-family: 'Libre Franklin 400', sans-serif;
 }
 
 .badge-cax {
@@ -493,13 +491,11 @@ textarea {
   user-select: none;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  border-radius: 4px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-radius: none;
   margin-bottom: 10px;
-  font-family: 'LibreFranklin-bold';
+  font-family: 'LibreFranklin-bold', sans-serif;
   font-size: 16px !important;
 }
 
@@ -537,7 +533,7 @@ textarea {
 .error-message {
   color: var(--input-error-color);
   font-size: 12px;
-  font-family: 'Libre Franklin 400';
+  font-family: 'Libre Franklin 400', sans-serif;
   padding-top: 10px;
 }
 
@@ -625,7 +621,6 @@ textarea {
   flex-direction: column;
   min-height: 15em;
   background-color: #fafafa;
-  align-items: center;
   border: 3px dashed #eeeeee;
   cursor: pointer;
   margin-bottom: 20px;
