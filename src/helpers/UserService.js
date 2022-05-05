@@ -55,6 +55,8 @@ const initKeycloak = (onAuthenticatedCallback) => {
     })
 }
 
+console.log('_kc', _kc)
+
 const doLogin = _kc.login
 
 const doLogout = _kc.logout
@@ -69,7 +71,7 @@ const isLoggedIn = () => !!_kc.token
 const updateToken = (successCallback) =>
   _kc.updateToken(5).then(successCallback).catch(doLogin)
 
-const getUsername = () => _kc.tokenParsed?.preferred_username
+const getUsername = () => _kc.tokenParsed?.given_name
 
 const getTenant = () => _kc.tokenParsed?.tenant
 
