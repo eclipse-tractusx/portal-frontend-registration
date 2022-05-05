@@ -55,8 +55,6 @@ const initKeycloak = (onAuthenticatedCallback) => {
     })
 }
 
-console.log('_kc', _kc)
-
 const doLogin = _kc.login
 
 const doLogout = _kc.logout
