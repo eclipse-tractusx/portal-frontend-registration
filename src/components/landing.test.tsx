@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import Landing from './landing'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from '../stores/store'
+import { store } from '../state/store'
 import i18n from '../i18n'
 
 describe('testSuite', () => {

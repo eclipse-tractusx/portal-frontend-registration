@@ -5,7 +5,6 @@ import {
   BrowserRouter,
   Redirect,
   Route,
-  Router,
   Switch,
   useLocation,
 } from 'react-router-dom'
@@ -15,13 +14,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import Landing from './components/landing'
 import RegistrationCax from './components/cax-registration'
 import Finish from './components/finish'
-import { Provider } from 'react-redux'
-import store from './stores/store'
 import Authinfo from './components/authinfo'
 import ProtectedRoute from './helpers/authorisation/ProtectedRoute'
 import UnauthorisedPage from './components/unauthorised'
 
-const history = createBrowserHistory()
+createBrowserHistory()
 
 const App = () => {
   const location = useLocation()
@@ -31,7 +28,6 @@ const App = () => {
   }, [location])
 
   return (
-    <Provider store={store}>
       <BrowserRouter basename="/registration">
         <Switch>
           <Redirect path="/" exact to="/landing" />
@@ -54,7 +50,6 @@ const App = () => {
           <Route path="/403" component={() => <UnauthorisedPage />} />
         </Switch>
       </BrowserRouter>
-    </Provider>
   )
 }
 

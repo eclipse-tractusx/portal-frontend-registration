@@ -6,14 +6,14 @@ import { getClientRolesComposite, submitSendInvites } from '../helpers/utils'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify'
 import { connect } from 'react-redux'
-import { IUserItem } from '../types/user/user.types'
-import { IState } from '../types/store/redux.store.types'
+import { IUserItem } from '../state/features/user/types'
+import { IState } from '../state/features/user/redux.store.types'
 import { Dispatch } from 'redux'
 import {
   addToInviteList,
   removeFromInviteList,
   addCurrentStep,
-} from '../actions/user.action'
+} from '../state/features/user/action'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'

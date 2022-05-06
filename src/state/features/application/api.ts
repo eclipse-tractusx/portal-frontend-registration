@@ -1,0 +1,43 @@
+import { getApiBase } from '../../../helpers/EnvironmentService'
+import { HttpClient } from '../../../helpers/HttpClient'
+import UserService from '../../../helpers/UserService'
+import { ApplicationStatus } from './types'
+
+export class ApplicationApi extends HttpClient {
+  private static classInstance?: ApplicationApi
+
+  public constructor() {
+    super(getApiBase())
+  }
+
+  public static getInstance() {
+    if (!this.classInstance) {
+      this.classInstance = new ApplicationApi()
+    }
+
+    return this.classInstance
+  }
+
+  public getId = () => {
+    return this.instance.get<ApplicationStatus[]>(
+      `/api/registration/applications`,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
+  public putStatus = (status: ApplicationStatus) => {
+    return this.instance.post<string>(
+      `/api/registration/applications/${status.id}/users`,
+      status.status,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+}
