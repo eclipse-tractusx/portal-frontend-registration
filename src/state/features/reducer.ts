@@ -4,7 +4,7 @@ import user from './user/reducer'
 
 export const reducers = {
   application: applicationSlice.reducer,
-  user 
+  user,
 }
 
 const rootReducer = combineReducers(reducers)

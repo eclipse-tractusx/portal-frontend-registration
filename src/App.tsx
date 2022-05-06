@@ -28,28 +28,28 @@ const App = () => {
   }, [location])
 
   return (
-      <BrowserRouter basename="/registration">
-        <Switch>
-          <Redirect path="/" exact to="/landing" />
-          <ProtectedRoute
-            path="/landing"
-            rolesAllowedForTheRoute={['view_registration']}
-            component={(props) => <Landing {...props} />}
-          />
-          <ProtectedRoute
-            path="/form"
-            rolesAllowedForTheRoute={['view_registration']}
-            component={(props) => <RegistrationCax {...props} />}
-          />
-          <ProtectedRoute
-            path="/finish"
-            rolesAllowedForTheRoute={['view_registration']}
-            component={(props) => <Finish {...props} />}
-          />
-          <Route path="/authinfo" component={() => <Authinfo />} />
-          <Route path="/403" component={() => <UnauthorisedPage />} />
-        </Switch>
-      </BrowserRouter>
+    <BrowserRouter basename="/registration">
+      <Switch>
+        <Redirect path="/" exact to="/landing" />
+        <ProtectedRoute
+          path="/landing"
+          rolesAllowedForTheRoute={['view_registration']}
+          component={(props) => <Landing {...props} />}
+        />
+        <ProtectedRoute
+          path="/form"
+          rolesAllowedForTheRoute={['view_registration']}
+          component={(props) => <RegistrationCax {...props} />}
+        />
+        <ProtectedRoute
+          path="/finish"
+          rolesAllowedForTheRoute={['view_registration']}
+          component={(props) => <Finish {...props} />}
+        />
+        <Route path="/authinfo" component={() => <Authinfo />} />
+        <Route path="/403" component={() => <UnauthorisedPage />} />
+      </Switch>
+    </BrowserRouter>
   )
 }
 

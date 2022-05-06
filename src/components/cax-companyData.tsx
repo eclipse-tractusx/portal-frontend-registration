@@ -66,17 +66,17 @@ export const CompanyDataCax = ({
     const bpnPattern = /^BPNL[a-z0-9]{12}$/i
     if (bpnPattern.test(expr.trim())) {
       fetchData(expr)
-      // make sure to catch any error
-      .catch((errorCode: number) => {
-        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-        const message = DataErrorCodes.includes(errorCode)
-          ? t(`ErrorMessage.${errorCode}`)
-          : t(`ErrorMessage.default`)
-        //   alert(message)
+        // make sure to catch any error
+        .catch((errorCode: number) => {
+          setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
+          const message = DataErrorCodes.includes(errorCode)
+            ? t(`ErrorMessage.${errorCode}`)
+            : t(`ErrorMessage.default`)
+          //   alert(message)
 
-        toast.error(message)
-        //  history.push("/finish");
-      })
+          toast.error(message)
+          //  history.push("/finish");
+        })
       setBpnErrorMessage('')
     } else {
       setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
