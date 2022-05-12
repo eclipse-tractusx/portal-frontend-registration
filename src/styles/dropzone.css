@@ -25,7 +25,7 @@
   line-height: 1.5 !important;
   color: rgb(17, 17, 17) !important;
   letter-spacing: 0px !important;
-  font-family: 'LibreFranklin-light' !important;
+  font-family: 'LibreFranklin-light', sans-serif !important;
   padding: 64px 16px 0px 16px;
 }
 
