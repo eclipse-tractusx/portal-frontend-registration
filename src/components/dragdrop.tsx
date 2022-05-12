@@ -10,6 +10,7 @@ import { Dispatch } from 'redux'
 import { uploadDocument } from '../helpers/utils'
 import { toast } from 'react-toastify'
 import { DataErrorCodes } from '../helpers/DataError'
+import { DragdropFiles } from './dragdropFiles'
 
 interface DragDropProps {
   currentActiveStep: number
@@ -73,7 +74,7 @@ export const DragDrop = ({
       <div className="mx-auto col-9 container-registration">
         <div className="head-section">
           <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            {t('documentUpload.step')}
+            4
           </div>
           <h4 className="mx-auto d-flex align-items-center justify-content-center">
             {t('documentUpload.title')}
@@ -86,7 +87,12 @@ export const DragDrop = ({
           <Dropzone
             onChangeStatus={handleChangeStatus}
             onSubmit={handleSubmit}
-            accept="image/*,audio/*,video/*"
+            accept="image/*,.pdf"
+            inputContent={t('documentUpload.dragDropMessage')}
+            inputWithFilesContent={t('documentUpload.title')}
+            submitButtonContent={t('documentUpload.upload')}
+            maxFiles={3}
+            PreviewComponent={props => <DragdropFiles props={props} />}
           />
         </div>
       </div>

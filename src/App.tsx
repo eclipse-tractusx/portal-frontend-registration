@@ -10,6 +10,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import './styles/newApp.css'
+import './styles/dropzone.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Landing from './components/landing'

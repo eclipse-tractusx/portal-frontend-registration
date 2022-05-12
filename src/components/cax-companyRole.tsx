@@ -52,7 +52,7 @@ export const CompanyRoleCax = ({
       <div className="mx-auto col-9 container-registration">
         <div className="head-section">
           <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            {t('companyRole.companyRoleStep')}
+            3
           </div>
           <h4 className="mx-auto d-flex align-items-center justify-content-center">
             {t('companyRole.title')}
