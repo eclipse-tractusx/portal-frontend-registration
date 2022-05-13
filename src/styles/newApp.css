@@ -42,7 +42,7 @@ body {
   background-image: url(/src/bgNew.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position-y: 400px;
+  background-position-y: 500px;
 }
 
 .logo {
@@ -614,17 +614,8 @@ textarea {
   cursor: pointer;
 }
 
-.dropzone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 15em;
-  background-color: #fafafa;
-  border: 3px dashed #eeeeee;
-  cursor: pointer;
-  margin-bottom: 20px;
-  border-radius: 24px;
+.registration-header {
+  margin-bottom: 100px;
 }
 
 .selected-file-wrapper {

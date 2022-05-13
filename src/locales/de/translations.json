@@ -68,7 +68,10 @@
       "title": "Dokumente hochladen",
       "subTitle": "Bitte laden Sie Ihren rechtsgültigen Handelsregisterauszug hoch.",
       "dragDropMessage": "Ziehen Sie Dateien hierher und legen Sie sie dort ab, oder klicken Sie, um Dateien auszuwählen",
-      "upload": "Hochladen"
+      "upload": "Hochladen",
+      "uploadStatusDone": "Done",
+      "uploadStatusUploading": "Uploading",
+      "uploadStatusError": "Fehler"
     },
     "Responsibility": {
       "responsAndAdmin": "Responsibility & admin account",

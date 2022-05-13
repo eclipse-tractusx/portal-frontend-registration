@@ -28,7 +28,7 @@ export const RegistrationCax = ({
       <Header />
       <Row>
         <Col>
-          <div className="mx-auto col-9">
+          <div className="mx-auto col-9 registration-header">
             <h4>{t('registration.registration')}</h4>
             <div>{t('registration.regiStep')}.</div>
             <div>{t('registration.regiSubHeading')}</div>

@@ -87,7 +87,10 @@
       "step": "4",
       "subTitle": "Please upload your legal company commercial register document.",
       "dragDropMessage": "Drag and drop files here, or click to select files",
-      "upload": "Upload"
+      "upload": "Upload",
+      "uploadStatusDone": "Done",
+      "uploadStatusUploading": "Uploading",
+      "uploadStatusError": "Error"
     },
     "Responsibility": {
       "responsAndAdmin": "Responsibility & admin account",
