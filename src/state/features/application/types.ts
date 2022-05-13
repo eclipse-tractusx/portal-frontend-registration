@@ -7,3 +7,6 @@ export interface ApplicationState {
   loading: boolean
   error: string
 }
+
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';
+export const CREATED = 'CREATED';
