@@ -3,16 +3,18 @@ import { getCompanyDetails } from '../helpers/utils'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
-import { connect } from 'react-redux'
-import { IState } from '../types/store/redux.store.types'
-import { addCurrentStep, addCompanyData } from '../actions/user.action'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { IState } from '../state/features/user/redux.store.types'
+import { addCurrentStep, addCompanyData } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
 import { CompanyDetailsData } from '../data/companyDetails'
+import { applicationSelector } from '../state/features/application/slice'
+import { fetchId } from '../state/features/application/actions'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -26,6 +28,17 @@ export const CompanyDataCax = ({
   addCompanyData,
 }: CompanyDataProps) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { status, error } = useSelector(applicationSelector)
+  if (error) {
+    console.log(status)
+    toast.error(error)
+  }
+
+  useEffect(() => {
+    dispatch(fetchId())
+  }, [dispatch])
+
   const [search, setSearch] = useState('')
   const [bpn, setBpn] = useState('')
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
@@ -53,17 +66,17 @@ export const CompanyDataCax = ({
     const bpnPattern = /^BPNL[a-z0-9]{12}$/i
     if (bpnPattern.test(expr.trim())) {
       fetchData(expr)
-      // make sure to catch any error
-      .catch((errorCode: number) => {
-        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-        const message = DataErrorCodes.includes(errorCode)
-          ? t(`ErrorMessage.${errorCode}`)
-          : t(`ErrorMessage.default`)
-        //   alert(message)
+        // make sure to catch any error
+        .catch((errorCode: number) => {
+          setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
+          const message = DataErrorCodes.includes(errorCode)
+            ? t(`ErrorMessage.${errorCode}`)
+            : t(`ErrorMessage.default`)
+          //   alert(message)
 
-        toast.error(message)
-        //  history.push("/finish");
-      })
+          toast.error(message)
+          //  history.push("/finish");
+        })
       setBpnErrorMessage('')
     } else {
       setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))

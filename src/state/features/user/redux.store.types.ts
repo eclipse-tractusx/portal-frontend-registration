@@ -1,4 +1,4 @@
-import { IUserData } from '../user/user.types'
+import { IUserData } from './types'
 
 export interface IState {
   user: IUserData

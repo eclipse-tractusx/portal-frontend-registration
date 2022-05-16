@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
-import { CompanyDetailsData } from '../data/companyDetails'
-import { IUserItem } from '../types/user/user.types'
+import { CompanyDetailsData } from '../../../data/companyDetails'
+import { IUserItem } from './types'
 
 export enum UserActions {
   ADD_TO_INVITE_LIST = 'USER/ADD_TO_INVITE_LIST',

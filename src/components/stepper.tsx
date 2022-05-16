@@ -2,7 +2,7 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { IState } from '../types/store/redux.store.types'
+import { IState } from '../state/features/user/redux.store.types'
 import { stepNames } from '../helpers/steps'
 interface StepperProps {
   currentActiveStep: number

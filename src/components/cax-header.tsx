@@ -7,10 +7,10 @@ import { withRouter, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
-import { addrolesComposite } from '../actions/user.action'
+import { addrolesComposite } from '../state/features/user/action'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { IState } from '../types/store/redux.store.types'
+import { IState } from '../state/features/user/redux.store.types'
 interface HeaderCaxProps {
   addrolesComposite: (rolesComposite: string[]) => void
 }

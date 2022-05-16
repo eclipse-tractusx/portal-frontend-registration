@@ -1,4 +1,4 @@
-import { CompanyDetailsData } from '../../data/companyDetails'
+import { CompanyDetailsData } from '../../../data/companyDetails'
 
 export interface IUserItem {
   uiId: string

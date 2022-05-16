@@ -1,18 +1,34 @@
+import { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { withRouter, useHistory, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Footer from './footer'
 import BulletList from './bulletList'
 import Header from './cax-header'
 import Button from './button'
-import { useTranslation } from 'react-i18next'
-import { withRouter, useHistory, Link } from 'react-router-dom'
+import { fetchId, updateStatus } from '../state/features/application/actions'
+import { applicationSelector } from '../state/features/application/slice'
+import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
 
 export const Landing = () => {
   const { t } = useTranslation()
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  const { status } = useSelector(applicationSelector)
+
+  useEffect(() => {
+    dispatch(fetchId())
+  },[dispatch]);
 
   const onClick = () => {
+    const obj = status.find(o => o['applicationStatus'] === CREATED);
+    const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA}
+    dispatch(updateStatus(statusData));
     history.push('/form')
   }
+  
   return (
     <Container>
       <Header />
