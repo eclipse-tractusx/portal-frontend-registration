@@ -56,7 +56,7 @@ const applicationSlice = createSlice({
     }))
     builder.addCase(getCompanyDetailsWithAddress.fulfilled, (state, { payload }) => ({
       ...state,
-      companyDetails: payload || {},
+      companyDetails: payload,
       loading: false,
       error: null,
     }))

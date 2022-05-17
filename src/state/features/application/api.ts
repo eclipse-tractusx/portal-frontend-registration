@@ -1,7 +1,7 @@
 import { getApiBase } from '../../../helpers/EnvironmentService'
 import { HttpClient } from '../../../helpers/HttpClient'
 import UserService from '../../../helpers/UserService'
-import { ApplicationStatus } from './types'
+import { ApplicationStatus, CompanyDetails } from './types'
 
 export class ApplicationApi extends HttpClient {
   private static classInstance?: ApplicationApi
@@ -42,7 +42,7 @@ export class ApplicationApi extends HttpClient {
   }
 
   public getCompanyDetailsWithAddress = (applicationId: string) => {
-    return this.instance.get<string>(
+    return this.instance.get<CompanyDetails>(
       `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
       {
         headers: {
@@ -52,7 +52,7 @@ export class ApplicationApi extends HttpClient {
     )
   }
 
-  public saveCompanyDetailsWithAddress = (applicationId: string, companyData: object) => {
+  public saveCompanyDetailsWithAddress = (applicationId: string, companyData: CompanyDetails) => {
     return this.instance.post<string>(
       `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
       companyData,

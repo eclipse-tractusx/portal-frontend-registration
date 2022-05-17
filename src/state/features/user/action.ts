@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
-import { CompanyDetailsData } from '../../../data/companyDetails'
+import { CompanyDetails } from '../application/types'
 import { IUserItem } from './types'
 
 export enum UserActions {
@@ -25,7 +25,7 @@ export const addCurrentStep = createAction(
 )
 export const addCompanyData = createAction(
   UserActions.ADD_COMPANY_DATA,
-  (companydata: CompanyDetailsData) => companydata
+  (companydata: CompanyDetails) => companydata
 )
 export const addrolesComposite = createAction(
   UserActions.ADD_ROLES_COMPOSITE,

@@ -4,15 +4,19 @@ export type ApplicationStatus = {
 }
 
 export type CompanyDetails = {
+  companyId: string
   bpn: string
-  city: string
-  countryDe: string
-  zipcode: string
   name: string
   shortname: string
-  streetadditional?: string
+  city: string
+  region: string
+  streetadditional: string
   streetname: string
   streetnumber: string
+  zipcode: number
+  countryAlpha2Code: string
+  countryDe: string
+  taxId: string
 }
 
 export interface ApplicationState {
@@ -23,14 +27,19 @@ export interface ApplicationState {
 }
 
 export const InitialCompanyDetail = {
+  companyId: '',
   bpn: '',
-  city: '',
-  countryDe: '',
-  zipcode: '',
   name: '',
   shortname: '',
+  city: '',
+  region: '',
+  streetadditional: '',
   streetname: '',
   streetnumber: '',
+  zipcode: 0,
+  countryAlpha2Code: '',
+  countryDe: '',
+  taxId: '',
 }
 
 export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';

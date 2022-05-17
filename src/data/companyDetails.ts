@@ -24,6 +24,7 @@ export class User {
   message: string
 }
 
+/*
 export class CompanyDetailsData {
   bpn: string
   legalEntity: string
@@ -33,3 +34,4 @@ export class CompanyDetailsData {
   city: string
   country: string
 }
+*/

@@ -1,4 +1,4 @@
-import { CompanyDetailsData } from '../../../data/companyDetails'
+import { CompanyDetails } from '../application/types'
 
 export interface IUserItem {
   uiId: string
@@ -10,7 +10,7 @@ export interface IUserItem {
 export interface IUserData {
   userInviteList: IUserItem[]
   currentStep: number
-  companyData: CompanyDetailsData
+  companyData: CompanyDetails
   roleComposite: string[]
   fileNames: string[]
 }

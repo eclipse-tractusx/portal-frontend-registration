@@ -8,16 +8,16 @@ import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
-import { CompanyDetailsData } from '../data/companyDetails'
 import { useHistory } from 'react-router-dom'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
 import { submitCustodianWallet } from '../helpers/utils'
+import { CompanyDetails } from '../state/features/application/types'
 
 interface VerifyRegistrationProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  companyDetailsData: CompanyDetailsData
+  companyDetailsData: CompanyDetails
   fileNames: string[]
 }
 
@@ -42,7 +42,7 @@ export const VerifyRegistration = ({
   const nextClick = () => {
     const data = {
       bpn: companyDetailsData?.bpn || '',
-      name: companyDetailsData?.registrationName || '',
+      name: companyDetailsData?.shortname || '',
     }
     const fetchData = async () => {
       const custodianWallet = await submitCustodianWallet(data)
@@ -118,7 +118,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.legalEntity')}
                   </span>
                   <span className="col-6">
-                    {companyDetailsData?.legalEntity}
+                    {companyDetailsData?.name}
                   </span>
                 </Row>
               </li>
@@ -128,7 +128,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.registeredName')}
                   </span>
                   <span className="col-6">
-                    {companyDetailsData?.registrationName}
+                    {companyDetailsData?.shortname}
                   </span>
                 </Row>
               </li>
@@ -137,7 +137,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{companyDetailsData?.address}</span>
+                  <span className="col-6">{companyDetailsData?.streetname}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -151,7 +151,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.country')}
                   </span>
-                  <span className="col-6">{companyDetailsData?.country}</span>
+                  <span className="col-6">{companyDetailsData?.countryAlpha2Code}</span>
                 </Row>
               </li>
             </ul>

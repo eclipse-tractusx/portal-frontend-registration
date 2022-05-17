@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ApplicationApi } from './api'
-import { ApplicationStatus } from './types'
+import { ApplicationStatus, CompanyDetails } from './types'
 
 const fetchId = createAsyncThunk(
   'registration/application/fetchId',
@@ -40,9 +40,9 @@ const getCompanyDetailsWithAddress = createAsyncThunk(
 
 const saveCompanyDetailsWithAddress = createAsyncThunk(
   `registration/application/companyDetailsWithAddress/save`,
-  async (applicationId: string) => {
+  async ({applicationId, companyData}: {applicationId: string, companyData: CompanyDetails}) => {
     try {
-      return await ApplicationApi.getInstance().saveCompanyDetailsWithAddress(applicationId)
+      return await ApplicationApi.getInstance().saveCompanyDetailsWithAddress(applicationId, companyData)
     } catch (error: unknown) {
       console.error('api call error:', error)
       throw Error('getApplicationId api call error')

@@ -12,15 +12,14 @@ import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
-import { CompanyDetailsData } from '../data/companyDetails'
 import { getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { CREATED } from '../state/features/application/types'
+import { CompanyDetails, CREATED } from '../state/features/application/types'
 
 interface CompanyDataProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  addCompanyData: (companydata: CompanyDetailsData) => void
+  addCompanyData: (companydata: CompanyDetails) => void
 }
 
 export const CompanyDataCax = ({
@@ -32,12 +31,13 @@ export const CompanyDataCax = ({
   const dispatch = useDispatch()
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
-  const obj = status.find(o => o['applicationStatus'] === CREATED);
+  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
   }
 
+  console.log('status',status)
   console.log('companyDetails', companyDetails)
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const CompanyDataCax = ({
     setStreetHouseNumber(
       companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
     )
-    setPostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
+    setPostalCode(parseInt(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value))
     setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
     setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
   }
@@ -105,17 +105,15 @@ export const CompanyDataCax = ({
 
   const nextClick = () => {
     addCurrentStep(currentActiveStep + 1)
-    const companydata = {
-      bpn: bpn,
-      legalEntity: legalEntity,
-      registrationName: registeredName,
-      address: streetHouseNumber,
-      postalCode: postalCode,
-      city: city,
-      country: country,
-    }
-    addCompanyData(companydata)
-    dispatch(saveCompanyDetailsWithAddress(applicationId))
+    const companyData = {...companyDetails}
+    companyData.name = legalEntity
+    companyData.shortname = registeredName
+    companyData.streetname = streetHouseNumber
+    companyData.city = city
+    companyData.zipcode = postalCode
+    companyData.countryAlpha2Code = country
+    //addCompanyData(companyData)
+    dispatch(saveCompanyDetailsWithAddress({applicationId, companyData}))
   }
 
   return (
@@ -231,7 +229,7 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
+                onChange={(e) => setPostalCode(parseInt(e.target.value))}
               />
             </div>
 
@@ -271,7 +269,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   addCurrentStep: (step: number) => {
     dispatch(addCurrentStep(step))
   },
-  addCompanyData: (companyData: CompanyDetailsData) => {
+  addCompanyData: (companyData: CompanyDetails) => {
     dispatch(addCompanyData(companyData))
   },
 })
