@@ -13,8 +13,9 @@ import { Dispatch } from 'redux'
 import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
 import { CompanyDetailsData } from '../data/companyDetails'
+import { getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { fetchId } from '../state/features/application/actions'
+import { CREATED } from '../state/features/application/types'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -29,25 +30,40 @@ export const CompanyDataCax = ({
 }: CompanyDataProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { status, error } = useSelector(applicationSelector)
+
+  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const obj = status.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId'];
   if (error) {
-    console.log(status)
     toast.error(error)
   }
 
+  console.log('companyDetails', companyDetails)
+
   useEffect(() => {
-    dispatch(fetchId())
+    console.log('****')
+    dispatch(getCompanyDetailsWithAddress(applicationId));
   }, [dispatch])
 
+  useEffect(() => {
+    setBpn(companyDetails?.bpn)
+    setLegalEntity(companyDetails?.shortname)
+    setRegisteredName(companyDetails?.name)
+    setStreetHouseNumber(companyDetails?.streetname+' ' + companyDetails?.streetnumber)
+    setPostalCode(companyDetails?.zipcode)
+    setCity(companyDetails?.city)
+    setCountry(companyDetails?.countryDe)
+  }, [companyDetails])
+
   const [search, setSearch] = useState('')
-  const [bpn, setBpn] = useState('')
+  const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
-  const [legalEntity, setLegalEntity] = useState('')
-  const [registeredName, setRegisteredName] = useState('')
-  const [streetHouseNumber, setStreetHouseNumber] = useState('')
-  const [postalCode, setPostalCode] = useState('')
-  const [city, setCity] = useState('')
-  const [country, setCountry] = useState('')
+  const [legalEntity, setLegalEntity] = useState(companyDetails.shortname)
+  const [registeredName, setRegisteredName] = useState(companyDetails.name)
+  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetname+' ' + companyDetails.streetnumber)
+  const [postalCode, setPostalCode] = useState(companyDetails.zipcode)
+  const [city, setCity] = useState(companyDetails.city)
+  const [country, setCountry] = useState(companyDetails.countryDe)
 
   const fetchData = async (expr: string) => {
     const companyDetails = await getCompanyDetails(expr)
@@ -99,6 +115,7 @@ export const CompanyDataCax = ({
       country: country,
     }
     addCompanyData(companydata)
+    dispatch(saveCompanyDetailsWithAddress(applicationId))
   }
 
   return (

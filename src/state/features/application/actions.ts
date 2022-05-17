@@ -26,4 +26,28 @@ const updateStatus = createAsyncThunk(
   }
 )
 
-export { fetchId, updateStatus }
+const getCompanyDetailsWithAddress = createAsyncThunk(
+  `registration/application/companyDetailsWithAddress`,
+  async (applicationId: string) => {
+    try {
+      return await ApplicationApi.getInstance().getCompanyDetailsWithAddress(applicationId)
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('getApplicationId api call error')
+    }
+  }
+)
+
+const saveCompanyDetailsWithAddress = createAsyncThunk(
+  `registration/application/companyDetailsWithAddress/save`,
+  async (applicationId: string) => {
+    try {
+      return await ApplicationApi.getInstance().saveCompanyDetailsWithAddress(applicationId)
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('getApplicationId api call error')
+    }
+  }
+)
+
+export { fetchId, updateStatus, getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress }

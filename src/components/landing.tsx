@@ -23,9 +23,13 @@ export const Landing = () => {
   },[dispatch]);
 
   const onClick = () => {
+    console.log('status', status)
     const obj = status.find(o => o['applicationStatus'] === CREATED);
-    const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA}
-    dispatch(updateStatus(statusData));
+    console.log('obj', obj)
+    if(obj){
+      const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA};
+      dispatch(updateStatus(statusData));
+    }
     history.push('/form')
   }
   

@@ -40,4 +40,27 @@ export class ApplicationApi extends HttpClient {
       }
     )
   }
+
+  public getCompanyDetailsWithAddress = (applicationId: string) => {
+    return this.instance.get<string>(
+      `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
+  public saveCompanyDetailsWithAddress = (applicationId: string, companyData: object) => {
+    return this.instance.post<string>(
+      `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+      companyData,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
 }
