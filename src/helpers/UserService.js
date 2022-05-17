@@ -18,11 +18,11 @@ if (!clientId) {
   clientId = localStorage.getItem('clientId')
 }
 if (!clientId || clientId === 'null') {
-  clientId = 'catenax-registration'
+  clientId = 'Cl1-CX-Registration'
 }
 localStorage.setItem('clientId', clientId)
 
-const CX_CLIENT = 'catenax-registration'
+const CX_CLIENT = 'Cl1-CX-Registration'
 
 const _kc = new Keycloak({
   url: getCentralIdp(),
