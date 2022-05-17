@@ -1,3 +1,4 @@
+import { getCentralIdp } from '../services/EnvironmentService'
 import Keycloak from 'keycloak-js'
 
 //TODO: go to company selection if no url parameter for company is specified
@@ -24,7 +25,7 @@ localStorage.setItem('clientId', clientId)
 const CX_CLIENT = 'catenax-registration'
 
 const _kc = new Keycloak({
-  url: process.env.REACT_APP_KEYCLOAK_URL,
+  url: getCentralIdp(),
   realm: realm,
   clientId: clientId,
   'ssl-required': 'external',
