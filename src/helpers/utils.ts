@@ -1,7 +1,7 @@
 import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../helpers/UserService'
-import { getApiBase } from './EnvironmentService'
+import { getApiBase } from '../services/EnvironmentService'
 
 export function getCompanyDetails(
   oneId: string
