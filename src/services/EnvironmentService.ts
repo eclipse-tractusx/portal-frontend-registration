@@ -1,7 +1,5 @@
 const LOCAL_SERVICES_FRONTEND = 'https://portal.dev.demo.catena-x.net'
 const LOCAL_SERVICES_BACKEND = 'https://portal-backend.dev.demo.catena-x.net'
-//const LOCAL_SERVICES_CENTRALIDP = 'https://centralidp.dev.demo.catena-x.net'
-//const LOCAL_SERVICES_BPDM = 'https://bpdm.dev.demo.catena-x.net'
 
 export const getHostname = () => window.location.hostname
 
@@ -17,11 +15,11 @@ export const getAssetBase = () =>
 
 export const getCentralIdp = () => {
   const hostname = getHostname()
-  return hostname === 'portal.int.demo.catena-x.net'
-    ? 'https://centralidp.demo.catena-x.net/auth'
-    : hostname === 'portal.catena-x.net'
-    ? 'https://centralidp.catena-x.net/auth'
-    : 'https://catenaxdev003akssrv.germanywestcentral.cloudapp.azure.com/iamcentralidp/auth'
+  if (hostname === 'portal.int.demo.catena-x.net')
+    return 'https://centralidp.demo.catena-x.net/auth'
+  if (hostname === 'portal.catena-x.net')
+    return 'https://centralidp.catena-x.net/auth'
+  return 'https://catenaxdev003akssrv.germanywestcentral.cloudapp.azure.com/iamcentralidp/auth'
 }
 
 const EnvironmentService = {
