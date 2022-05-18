@@ -37,11 +37,7 @@ export const CompanyDataCax = ({
     toast.error(error)
   }
 
-  console.log('status',status)
-  console.log('companyDetails', companyDetails)
-
   useEffect(() => {
-    console.log('****')
     dispatch(getCompanyDetailsWithAddress(applicationId));
   }, [dispatch])
 
@@ -49,10 +45,10 @@ export const CompanyDataCax = ({
     setBpn(companyDetails?.bpn)
     setLegalEntity(companyDetails?.shortname)
     setRegisteredName(companyDetails?.name)
-    setStreetHouseNumber(companyDetails?.streetname+' ' + companyDetails?.streetnumber)
+    setStreetHouseNumber(companyDetails?.streetnumber)
     setPostalCode(companyDetails?.zipcode)
     setCity(companyDetails?.city)
-    setCountry(companyDetails?.countryDe)
+    setCountry(companyDetails?.countryAlpha2Code)
   }, [companyDetails])
 
   const [search, setSearch] = useState('')
@@ -60,10 +56,10 @@ export const CompanyDataCax = ({
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState(companyDetails.shortname)
   const [registeredName, setRegisteredName] = useState(companyDetails.name)
-  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetname+' ' + companyDetails.streetnumber)
+  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetnumber)
   const [postalCode, setPostalCode] = useState(companyDetails.zipcode)
   const [city, setCity] = useState(companyDetails.city)
-  const [country, setCountry] = useState(companyDetails.countryDe)
+  const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
 
   const fetchData = async (expr: string) => {
     const companyDetails = await getCompanyDetails(expr)
