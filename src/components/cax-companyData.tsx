@@ -14,7 +14,7 @@ import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
 import { getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { CompanyDetails, CREATED } from '../state/features/application/types'
+import { CompanyDetails } from '../state/features/application/types'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -25,7 +25,6 @@ interface CompanyDataProps {
 export const CompanyDataCax = ({
   currentActiveStep,
   addCurrentStep,
-  addCompanyData,
 }: CompanyDataProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -62,16 +61,16 @@ export const CompanyDataCax = ({
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
 
   const fetchData = async (expr: string) => {
-    const companyDetails = await getCompanyDetails(expr)
-    setBpn(companyDetails?.[0]?.bpn)
-    setLegalEntity(companyDetails?.[0]?.names?.[0]?.value)
-    setRegisteredName(companyDetails?.[0]?.names?.[0]?.value)
+    const details = await getCompanyDetails(expr)
+    setBpn(details?.[0]?.bpn)
+    setLegalEntity(details?.[0]?.names?.[0]?.value)
+    setRegisteredName(details?.[0]?.names?.[0]?.value)
     setStreetHouseNumber(
-      companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
+      details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
     )
-    setPostalCode(parseInt(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value))
-    setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
-    setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
+    setPostalCode(parseInt(details?.[0]?.addresses?.[0]?.postCodes[0]?.value))
+    setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
+    setCountry(details?.[0]?.addresses?.[0]?.country?.name)
   }
 
   const onSearchChange = (expr: string) => {

@@ -23,15 +23,3 @@ export class User {
   role: string
   message: string
 }
-
-/*
-export class CompanyDetailsData {
-  bpn: string
-  legalEntity: string
-  registrationName: string
-  address: string
-  postalCode: string
-  city: string
-  country: string
-}
-*/

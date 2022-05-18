@@ -9,7 +9,7 @@ const fetchId = createAsyncThunk(
       return await ApplicationApi.getInstance().getId()
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('getApplicationId api call error')
+      throw Error('Application ID not existing. Please contact the administrator.')
     }
   }
 )
@@ -21,7 +21,7 @@ const updateStatus = createAsyncThunk(
       return await ApplicationApi.getInstance().putStatus(status)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('getApplicationId api call error')
+      throw Error('Application ID not existing. Please contact the administrator.')
     }
   }
 )
@@ -33,7 +33,7 @@ const getCompanyDetailsWithAddress = createAsyncThunk(
       return await ApplicationApi.getInstance().getCompanyDetailsWithAddress(applicationId)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('getApplicationId api call error')
+      throw Error('No active company application existing. Please contact the administrator.')
     }
   }
 )
@@ -45,7 +45,7 @@ const saveCompanyDetailsWithAddress = createAsyncThunk(
       return await ApplicationApi.getInstance().saveCompanyDetailsWithAddress(applicationId, companyData)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('getApplicationId api call error')
+      throw Error('Service is currently not available. Please try it later again.')
     }
   }
 )
