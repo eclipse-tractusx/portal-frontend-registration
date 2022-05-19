@@ -1,7 +1,7 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import UserService from '../../../helpers/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
-import { ApplicationStatus } from './types'
+import { ApplicationStatus, CompanyDetails } from './types'
 
 export class ApplicationApi extends HttpClient {
   private static classInstance?: ApplicationApi
@@ -33,6 +33,29 @@ export class ApplicationApi extends HttpClient {
     return this.instance.put<string>(
       `/api/registration/application/${status.id}/status?status=${status.status}`,
       {},
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
+  public getCompanyDetailsWithAddress = (applicationId: string) => {
+    return this.instance.get<CompanyDetails>(
+      `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
+  public saveCompanyDetailsWithAddress = (applicationId: string, companyData: CompanyDetails) => {
+    return this.instance.post<string>(
+      `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+      companyData,
       {
         headers: {
           authorization: `Bearer ${UserService.getToken()}`,

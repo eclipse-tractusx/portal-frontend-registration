@@ -12,54 +12,65 @@ import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
-import { CompanyDetailsData } from '../data/companyDetails'
+import { getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { fetchId } from '../state/features/application/actions'
+import { CompanyDetails } from '../state/features/application/types'
 
 interface CompanyDataProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  addCompanyData: (companydata: CompanyDetailsData) => void
+  addCompanyData: (companydata: CompanyDetails) => void
 }
 
 export const CompanyDataCax = ({
   currentActiveStep,
   addCurrentStep,
-  addCompanyData,
 }: CompanyDataProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { status, error } = useSelector(applicationSelector)
+
+  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId'];
   if (error) {
-    console.log(status)
     toast.error(error)
   }
 
   useEffect(() => {
-    dispatch(fetchId())
+    dispatch(getCompanyDetailsWithAddress(applicationId));
   }, [dispatch])
 
+  useEffect(() => {
+    setBpn(companyDetails?.bpn)
+    setLegalEntity(companyDetails?.shortname)
+    setRegisteredName(companyDetails?.name)
+    setStreetHouseNumber(companyDetails?.streetnumber)
+    setPostalCode(companyDetails?.zipcode)
+    setCity(companyDetails?.city)
+    setCountry(companyDetails?.countryAlpha2Code)
+  }, [companyDetails])
+
   const [search, setSearch] = useState('')
-  const [bpn, setBpn] = useState('')
+  const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
-  const [legalEntity, setLegalEntity] = useState('')
-  const [registeredName, setRegisteredName] = useState('')
-  const [streetHouseNumber, setStreetHouseNumber] = useState('')
-  const [postalCode, setPostalCode] = useState('')
-  const [city, setCity] = useState('')
-  const [country, setCountry] = useState('')
+  const [legalEntity, setLegalEntity] = useState(companyDetails.shortname)
+  const [registeredName, setRegisteredName] = useState(companyDetails.name)
+  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetnumber)
+  const [postalCode, setPostalCode] = useState(companyDetails.zipcode)
+  const [city, setCity] = useState(companyDetails.city)
+  const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
 
   const fetchData = async (expr: string) => {
-    const companyDetails = await getCompanyDetails(expr)
-    setBpn(companyDetails?.[0]?.bpn)
-    setLegalEntity(companyDetails?.[0]?.names?.[0]?.value)
-    setRegisteredName(companyDetails?.[0]?.names?.[0]?.value)
+    const details = await getCompanyDetails(expr)
+    setBpn(details?.[0]?.bpn)
+    setLegalEntity(details?.[0]?.names?.[0]?.value)
+    setRegisteredName(details?.[0]?.names?.[0]?.value)
     setStreetHouseNumber(
-      companyDetails?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
+      details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
     )
-    setPostalCode(companyDetails?.[0]?.addresses?.[0]?.postCodes[0]?.value)
-    setCity(companyDetails?.[0]?.addresses?.[0]?.localities[0]?.value)
-    setCountry(companyDetails?.[0]?.addresses?.[0]?.country?.name)
+    setPostalCode(parseInt(details?.[0]?.addresses?.[0]?.postCodes[0]?.value))
+    setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
+    setCountry(details?.[0]?.addresses?.[0]?.country?.name)
   }
 
   const onSearchChange = (expr: string) => {
@@ -89,16 +100,15 @@ export const CompanyDataCax = ({
 
   const nextClick = () => {
     addCurrentStep(currentActiveStep + 1)
-    const companydata = {
-      bpn: bpn,
-      legalEntity: legalEntity,
-      registrationName: registeredName,
-      address: streetHouseNumber,
-      postalCode: postalCode,
-      city: city,
-      country: country,
-    }
-    addCompanyData(companydata)
+    const companyData = {...companyDetails}
+    companyData.name = legalEntity
+    companyData.shortname = registeredName
+    companyData.streetname = streetHouseNumber
+    companyData.city = city
+    companyData.zipcode = postalCode
+    companyData.countryAlpha2Code = country
+    //addCompanyData(companyData)
+    dispatch(saveCompanyDetailsWithAddress({applicationId, companyData}))
   }
 
   return (
@@ -214,7 +224,7 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
+                onChange={(e) => setPostalCode(parseInt(e.target.value))}
               />
             </div>
 
@@ -254,7 +264,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   addCurrentStep: (step: number) => {
     dispatch(addCurrentStep(step))
   },
-  addCompanyData: (companyData: CompanyDetailsData) => {
+  addCompanyData: (companyData: CompanyDetails) => {
     dispatch(addCompanyData(companyData))
   },
 })

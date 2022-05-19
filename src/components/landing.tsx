@@ -3,12 +3,13 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { withRouter, useHistory, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import Footer from './footer'
 import BulletList from './bulletList'
 import Header from './cax-header'
 import Button from './button'
 import { fetchId, updateStatus } from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice'
+import { applicationSelector } from '../state/features/application/slice' 
 import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
 
 export const Landing = () => {
@@ -16,7 +17,11 @@ export const Landing = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const { status } = useSelector(applicationSelector)
+  const { status, error } = useSelector(applicationSelector)
+  
+  if (error) {
+    toast.error(error)
+  }
 
   useEffect(() => {
     dispatch(fetchId())
@@ -24,8 +29,10 @@ export const Landing = () => {
 
   const onClick = () => {
     const obj = status.find(o => o['applicationStatus'] === CREATED);
-    const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA}
-    dispatch(updateStatus(statusData));
+    if(obj){
+      const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA};
+      dispatch(updateStatus(statusData));
+    }
     history.push('/form')
   }
   
