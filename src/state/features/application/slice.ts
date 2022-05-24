@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { fetchId, updateStatus, getCompanyDetailsWithAddress, getInvitedUsers } from './actions'
-import { ApplicationInvitedFormUsers, ApplicationState, InitialCompanyDetail } from './types'
-import { inviteUsersData } from './mapper'
+import { fetchId, updateStatus, getCompanyDetailsWithAddress } from './actions'
+import { ApplicationState, InitialCompanyDetail } from './types'
 
 const initialState: ApplicationState = {
   status: [],
@@ -68,31 +67,10 @@ const applicationSlice = createSlice({
       loading: false,
       error: action.error.message as string,
     }))
-    builder.addCase(getInvitedUsers.pending, (state) => ({
-      ...state,
-      invitedUsers: [],
-      loading: true,
-      error: null,
-    }))
-    builder.addCase(getInvitedUsers.fulfilled, (state, { payload }) => ({
-      ...state,
-      invitedUsers: payload,
-      loading: false,
-      error: null,
-    }))
-    builder.addCase(getInvitedUsers.rejected, (state, action) => ({
-      ...state,
-      invitedUsers: [],
-      loading: false,
-      error: action.error.message as string,
-    }))
   },
 })
 
 export const applicationSelector = (state: RootState): ApplicationState =>
   state.application
-
-export const invitedUserSelector = (state: RootState): Array<ApplicationInvitedFormUsers> => 
-  state.application.invitedUsers.map((data) => inviteUsersData(data))
 
 export default applicationSlice

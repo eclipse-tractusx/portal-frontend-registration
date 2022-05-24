@@ -1,5 +1,5 @@
 import { HttpClient } from '../../../helpers/HttpClient'
-import UserService from '../../../helpers/UserService'
+import UserService from '../../../services/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
 import { ApplicationStatus, CompanyDetails, ApplicationInvitedUsers } from './types'
 
@@ -64,14 +64,4 @@ export class ApplicationApi extends HttpClient {
     )
   }
 
-  public getInvitedUsers = (applicationId: string) => {
-    return this.instance.get<Array<ApplicationInvitedUsers>>(
-      `/api/registration/application/${applicationId}/invitedusers`,
-      {
-        headers: {
-          authorization: `Bearer ${UserService.getToken()}`,
-        },
-      }
-    )
-  }
 }

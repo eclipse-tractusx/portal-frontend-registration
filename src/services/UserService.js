@@ -1,4 +1,4 @@
-import { getCentralIdp } from '../services/EnvironmentService'
+import { getCentralIdp } from './EnvironmentService'
 import Keycloak from 'keycloak-js'
 
 //TODO: go to company selection if no url parameter for company is specified

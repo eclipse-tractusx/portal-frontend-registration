@@ -2,7 +2,6 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { AiOutlineUser } from 'react-icons/ai'
 import Button from './button'
-import { getClientRolesComposite, submitSendInvites } from '../helpers/utils'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify'
 import { connect, useDispatch, useSelector } from 'react-redux'
@@ -17,11 +16,18 @@ import {
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid'
 import { FooterButton } from './footerButton'
-import { DataErrorCodes } from '../helpers/DataError'
-import { getInvitedUsers } from '../state/features/application/actions'
-import { applicationSelector, invitedUserSelector } from '../state/features/application/slice'
+import { applicationSelector } from '../state/features/application/slice'
+import {
+  invitedUserSelector,
+  rolesSelector,
+} from '../state/features/applicationInviteUser/slice'
+import {
+  fetchInvited,
+  fetchRolesComposite,
+  sendInvite,
+  setUserToInvite,
+} from '../state/features/applicationInviteUser/actions'
 
 interface ResponsibilitiesCaxProps {
   addToInviteList: (userItem: IUserItem) => void
@@ -53,42 +59,32 @@ export const ResponsibilitiesCax = ({
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
+  const rolesComposite = useSelector(rolesSelector)
   const invitedUsers = useSelector(invitedUserSelector)
+
   //console.log('status', status)
   console.log('invitedUsers', invitedUsers)
-  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj['applicationId'];
+  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
 
   console.log('userInviteList', ...userInviteList)
+  /*
   const allInvitedUsers = [...invitedUsers];
   if(userInviteList.length > 0) allInvitedUsers.push(...userInviteList);
   console.log('newInvitedUsers all', allInvitedUsers);
-
+  */
   useEffect(() => {
-    dispatch(getInvitedUsers(applicationId));
+    dispatch(fetchRolesComposite())
+    dispatch(fetchInvited(applicationId))
   }, [dispatch])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const dataRoles = await getClientRolesComposite()
-
-      setavailableUserRoles(dataRoles)
-      if (dataRoles && dataRoles.length > 0) setRole(dataRoles[0])
-    }
-
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch((errorCode: number) => {
-        const message = DataErrorCodes.includes(errorCode)
-          ? t(`ErrorMessage.${errorCode}`)
-          : t(`ErrorMessage.default`)
-        toast.error(message)
-      })
-  }, [t])
+    setavailableUserRoles(rolesComposite)
+    if (rolesComposite && rolesComposite.length > 0) setRole(rolesComposite[0])
+  }, [rolesComposite])
 
   const onRoleChange = (e) => {
     setRole(e.target.value)
@@ -98,44 +94,27 @@ export const ResponsibilitiesCax = ({
     //eslint-disable-next-line
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
-  const handleClick = () => {
+  const handleSendInvite = () => {
     if (email && validateEmail(email)) {
-      const data = {
-        uiId: uuidv4(),
+      const user = {
         email: email,
-        role: role,
+        roles: [role],
         message: message,
       }
-
-      addToInviteList(data)
-
-      const apiData = []
-      apiData.push(data)
-
-      const fetchData = async () => {
-        const dataRoles = await submitSendInvites(apiData)
-        toast.success(dataRoles)
-      }
-      fetchData().catch((errorCode: number) => {
-        const message = DataErrorCodes.includes(errorCode)
-          ? t(`ErrorMessage.${errorCode}`)
-          : t(`ErrorMessage.default`)
-        //   alert(message)
-
-        toast.error(message)
-        //  history.push("/finish");
-      })
-
-      setEmail('')
-      setMessage('')
-      if (availableUserRoles && availableUserRoles.length > 0)
-        setRole(availableUserRoles[0])
+      dispatch(setUserToInvite(user))
+      dispatch(
+        sendInvite(      {
+          applicationId,
+          user,
+        })
+      )
     }
   }
 
   const validateEmailOnChange = (email) => {
     setEmail(email)
-    if (email === '') setError({ email: 'Email is required', role: appError.role })
+    if (email === '')
+      setError({ email: 'Email is required', role: appError.role })
     else if (!validateEmail(email))
       setError({
         email: t('Responsibility.emailErrorMessage'),
@@ -218,19 +197,19 @@ export const ResponsibilitiesCax = ({
               <Button
                 styleClass="button btn-primaryCax"
                 label={t('Responsibility.sentInvite')}
-                handleClick={() => handleClick()}
+                handleClick={handleSendInvite}
                 icon={true}
               />
             </div>
             <ToastContainer />
           </Row>
 
-          {allInvitedUsers.length > 0 && allInvitedUsers && (
+          {invitedUsers.length > 0 && invitedUsers && (
             <Row className="mx-auto col-9 send-invite">
               <h5>{t('Responsibility.titleInvite')}</h5>
               <Row>
                 <ul className="list-group-cax px-2">
-                  {allInvitedUsers.map((d, index) => {
+                  {invitedUsers.map((d, index) => {
                     return (
                       <li key={index} className="list-group-item-cax">
                         <Row>
@@ -238,13 +217,13 @@ export const ResponsibilitiesCax = ({
                             <AiOutlineUser />
                           </span>
                           <span className="col-5 list-group-item-email">
-                            {d.emailId || d.email}
+                            {d.emailId}
                           </span>
                           <span className="badge-cax bg-list-group-cax col-4">
                             {d.invitationStatus || 'PENDING'}
                           </span>
                           <span className="col-2 list-group-item-status">
-                            {d.invitedUserRoles || d.role}
+                            {d.invitedUserRoles}
                           </span>
                         </Row>
                       </li>
