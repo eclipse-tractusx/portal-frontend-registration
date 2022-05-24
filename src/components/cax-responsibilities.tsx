@@ -5,7 +5,7 @@ import Button from './button'
 import { getClientRolesComposite, submitSendInvites } from '../helpers/utils'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IUserItem } from '../state/features/user/types'
 import { IState } from '../state/features/user/redux.store.types'
 import { Dispatch } from 'redux'
@@ -20,6 +20,9 @@ import { withRouter } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { FooterButton } from './footerButton'
 import { DataErrorCodes } from '../helpers/DataError'
+import { getInvitedUsers } from '../state/features/application/actions'
+import { applicationSelector, invitedUserSelector } from '../state/features/application/slice'
+
 interface ResponsibilitiesCaxProps {
   addToInviteList: (userItem: IUserItem) => void
   removeFromInviteList: (userItem: string) => void
@@ -40,10 +43,33 @@ export const ResponsibilitiesCax = ({
   const [role, setRole] = useState<string | null>('')
   const [message, setMessage] = useState<string | null>('')
   const [availableUserRoles, setavailableUserRoles] = useState([])
-  const [error, setError] = useState<{ email: string; role: string }>({
+  const [appError, setError] = useState<{ email: string; role: string }>({
     email: '',
     role: '',
   })
+
+  console.log('userInviteList', userInviteList)
+
+  const dispatch = useDispatch()
+
+  const { status, error } = useSelector(applicationSelector)
+  const invitedUsers = useSelector(invitedUserSelector)
+  //console.log('status', status)
+  console.log('invitedUsers', invitedUsers)
+  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId'];
+  if (error) {
+    toast.error(error)
+  }
+
+  console.log('userInviteList', ...userInviteList)
+  const allInvitedUsers = [...invitedUsers];
+  if(userInviteList.length > 0) allInvitedUsers.push(...userInviteList);
+  console.log('newInvitedUsers all', allInvitedUsers);
+
+  useEffect(() => {
+    dispatch(getInvitedUsers(applicationId));
+  }, [dispatch])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,13 +135,13 @@ export const ResponsibilitiesCax = ({
 
   const validateEmailOnChange = (email) => {
     setEmail(email)
-    if (email === '') setError({ email: 'Email is required', role: error.role })
+    if (email === '') setError({ email: 'Email is required', role: appError.role })
     else if (!validateEmail(email))
       setError({
         email: t('Responsibility.emailErrorMessage'),
-        role: error.role,
+        role: appError.role,
       })
-    else setError({ email: '', role: error.role })
+    else setError({ email: '', role: appError.role })
   }
 
   const backClick = () => {
@@ -144,7 +170,7 @@ export const ResponsibilitiesCax = ({
           <Row className="mx-auto col-9">
             <div
               className={
-                error.email !== ''
+                appError.email !== ''
                   ? 'form-data error calender'
                   : 'form-data calender'
               }
@@ -157,7 +183,7 @@ export const ResponsibilitiesCax = ({
                 onChange={(e) => validateEmailOnChange(e.target.value)}
               />
               <AiOutlineExclamationCircle className="error-icon" />
-              <div className="error-message">{error.email}</div>
+              <div className="error-message">{appError.email}</div>
             </div>
           </Row>
 
@@ -199,7 +225,37 @@ export const ResponsibilitiesCax = ({
             <ToastContainer />
           </Row>
 
-          {userInviteList.length > 0 && userInviteList && (
+          {allInvitedUsers.length > 0 && allInvitedUsers && (
+            <Row className="mx-auto col-9 send-invite">
+              <h5>{t('Responsibility.titleInvite')}</h5>
+              <Row>
+                <ul className="list-group-cax px-2">
+                  {allInvitedUsers.map((d, index) => {
+                    return (
+                      <li key={index} className="list-group-item-cax">
+                        <Row>
+                          <span className="col-1">
+                            <AiOutlineUser />
+                          </span>
+                          <span className="col-5 list-group-item-email">
+                            {d.emailId || d.email}
+                          </span>
+                          <span className="badge-cax bg-list-group-cax col-4">
+                            {d.invitationStatus || 'PENDING'}
+                          </span>
+                          <span className="col-2 list-group-item-status">
+                            {d.invitedUserRoles || d.role}
+                          </span>
+                        </Row>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </Row>
+            </Row>
+          )}
+
+          {/* {userInviteList.length > 0 && userInviteList && (
             <Row className="mx-auto col-9 send-invite">
               <h5>{t('Responsibility.titleInvite')}</h5>
               <Row>
@@ -227,7 +283,7 @@ export const ResponsibilitiesCax = ({
                 </ul>
               </Row>
             </Row>
-          )}
+          )} */}
         </div>
       </div>
       <FooterButton

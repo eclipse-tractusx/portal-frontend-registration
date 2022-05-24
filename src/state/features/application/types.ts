@@ -19,9 +19,22 @@ export type CompanyDetails = {
   taxId: string
 }
 
+export type ApplicationInvitedUsers = {
+  invitationStatus: string
+  emailId: string
+  invitedUserRoles: Array<string>
+}
+
+export type ApplicationInvitedFormUsers = {
+  email: string
+  status: string
+  role: Array<string>
+}
+
 export interface ApplicationState {
   status: Array<ApplicationStatus>
   companyDetails: CompanyDetails | null
+  invitedUsers: Array<ApplicationInvitedUsers>
   loading: boolean
   error: string
 }

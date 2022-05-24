@@ -50,4 +50,16 @@ const saveCompanyDetailsWithAddress = createAsyncThunk(
   }
 )
 
-export { fetchId, updateStatus, getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress }
+const getInvitedUsers = createAsyncThunk(
+  'registration/application/getInvitedUsers',
+  async (applicationId: string) => {
+    try {
+      return await ApplicationApi.getInstance().getInvitedUsers(applicationId)
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('Application ID not existing. Please contact the administrator.')
+    }
+  }
+)
+
+export { fetchId, updateStatus, getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress, getInvitedUsers }
