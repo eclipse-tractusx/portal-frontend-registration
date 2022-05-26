@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchInvited, fetchRolesComposite, sendInvite } from './actions'
-import { InvitedUser, InviteUserState } from './types'
+import { fetchInvited, fetchRolesComposite, setUserToInvite, sendInvite } from './actions'
+import { InvitedUser, InviteUserState, InitialInvitedUser } from './types'
 
 const initialState: InviteUserState = {
   roles: [],
   invitedUsers: [],
-  newUser: null,
+  newUser: InitialInvitedUser,
   request: RequestState.NONE,
   error: null,
 }
@@ -62,7 +62,16 @@ const inviteSlice = createSlice({
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))
-    
+    builder.addCase(setUserToInvite.fulfilled, (state, { payload }) => ({
+      ...state,
+      // newUser: {
+      //   invitationStatus: 'PENDING',
+      //   emailId: payload.email,
+      //   invitedUserRoles: payload.roles
+      // },
+      request: RequestState.OK,
+      error: '',
+    }))
     // invite new
     builder.addCase(sendInvite.pending, (state) => ({
       ...state,

@@ -22,3 +22,12 @@ export type InviteUserState = {
   request: RequestState
   error: string
 }
+
+export const InitialInvitedUser = {
+  userName: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  roles: [],
+  message: '',
+}

@@ -2,8 +2,16 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Api } from './api'
 import { InviteNewUser } from './types'
 
-const setUserToInvite = createAction<InviteNewUser>(
-  'registration/application/user/setUserToInvite'
+const setUserToInvite = createAsyncThunk(
+  'registration/application/user/setUserToInvite',
+  async (user: InviteNewUser) => {
+    try {
+      return user
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('Invite new user failed. Please contact the administrator.')
+    }
+  }
 )
 
 const fetchRolesComposite = createAsyncThunk(
