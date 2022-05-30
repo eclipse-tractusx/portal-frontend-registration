@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +8,11 @@ import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
+import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCompanyRole } from '../state/features/applicationCompanyRole/actions'
+import { applicationSelector } from '../state/features/application/slice'
+import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 
 interface CompanyRoleProps {
   currentActiveStep: number
@@ -20,6 +25,23 @@ export const CompanyRoleCax = ({
 }: CompanyRoleProps) => {
   const { t } = useTranslation()
   const [companyRoleChecked, setcompanyRoleChecked] = useState(new Map())
+
+  const { status } = useSelector(applicationSelector)
+  const {roleData, error } = useSelector(stateSelector)
+
+  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId']
+  if (error) {
+    toast.error(error)
+  }
+
+  console.log('roleData', roleData)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCompanyRole(applicationId))
+  },[dispatch]);
 
   // const companyRoleChecked =  new Map();
 
@@ -70,6 +92,7 @@ export const CompanyRoleCax = ({
                   name="activeParticipant"
                   className="regular-checkbox"
                   onChange={(e) => handleCheck(e)}
+                  checked={roleData.companyRoles.indexOf('ACTIVE_PARTICIPANT') != -1}
                 />
               </div>
               <div className="col-11">
@@ -131,6 +154,7 @@ export const CompanyRoleCax = ({
                   name="appProvider"
                   className="regular-checkbox"
                   onChange={(e) => handleCheck(e)}
+                  checked={roleData.companyRoles.indexOf('APP_PROVIDER') != -1}
                 />
               </div>
               <div className="col-11">

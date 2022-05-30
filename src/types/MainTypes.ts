@@ -10,3 +10,10 @@ export enum FileUploadVariant {
   PRIMARY = 'primary',
   DANGER = 'danger',
 }
+
+export enum RequestState {
+  NONE,
+  SUBMIT,
+  OK,
+  ERROR,
+}
