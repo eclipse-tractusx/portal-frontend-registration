@@ -38,7 +38,6 @@ interface ResponsibilitiesCaxProps {
 }
 
 export const ResponsibilitiesCax = ({
-  userInviteList,
   currentActiveStep,
   addCurrentStep,
   removeFromInviteList,

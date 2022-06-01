@@ -44,7 +44,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
         window.location.origin + '/silent-check-sso.html',
       pkceMethod: 'S256',
     })
-    .then((authenticated) => {
+    .then(() => {
       onAuthenticatedCallback()
     })
 }
