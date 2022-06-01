@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import UserService from '../UserService'
+import UserService from '../../services/UserService'
 
 export const isRoleAllowed = (userRoles, rolesAllowedForTheRoute) => {
   return rolesAllowedForTheRoute.some((allowed) => userRoles.includes(allowed))

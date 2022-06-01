@@ -1,5 +1,5 @@
 import * as React from 'react'
-import UserService from '../helpers/UserService'
+import UserService from '../services/UserService'
 import '../styles/authinfo.css'
 
 class Authinfo extends React.Component {

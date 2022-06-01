@@ -1,5 +1,5 @@
 import { HttpClient } from '../../../helpers/HttpClient'
-import UserService from '../../../helpers/UserService'
+import UserService from '../../../services/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
 import { ApplicationStatus, CompanyDetails } from './types'
 
@@ -63,4 +63,5 @@ export class ApplicationApi extends HttpClient {
       }
     )
   }
+
 }
