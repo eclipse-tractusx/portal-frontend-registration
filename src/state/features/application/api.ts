@@ -1,7 +1,7 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import UserService from '../../../services/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
-import { ApplicationStatus, CompanyDetails, ApplicationInvitedUsers } from './types'
+import { ApplicationStatus, CompanyDetails } from './types'
 
 export class ApplicationApi extends HttpClient {
   private static classInstance?: ApplicationApi

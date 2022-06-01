@@ -1,7 +1,6 @@
 import { getCentralIdp } from './EnvironmentService'
 import Keycloak from 'keycloak-js'
 
-//TODO: go to company selection if no url parameter for company is specified
 const searchParams = new URLSearchParams(window.location.search)
 let realm = searchParams.get('company')
 if (!realm) {
@@ -32,8 +31,6 @@ const _kc = new Keycloak({
   'public-client': true,
 })
 
-//const _kc = new Keycloak('/keycloak.json');
-
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
  *
@@ -48,11 +45,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
       pkceMethod: 'S256',
     })
     .then((authenticated) => {
-      // if (authenticated) {
       onAuthenticatedCallback()
-      // } else {
-      //   doLogin();
-      // }
     })
 }
 
@@ -81,7 +74,7 @@ const getInitials = () =>
     .substring(0, 2)
     .toUpperCase()
 
-const getDomain = () => realm //_kc.tokenParsed?.split('/').pop();
+const getDomain = () => realm
 
 const getRoles = () => _kc.tokenParsed?.resource_access[CX_CLIENT]?.roles
 

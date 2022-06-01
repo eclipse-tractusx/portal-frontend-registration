@@ -40,7 +40,6 @@ interface ResponsibilitiesCaxProps {
 export const ResponsibilitiesCax = ({
   userInviteList,
   currentActiveStep,
-  addToInviteList,
   addCurrentStep,
   removeFromInviteList,
 }: ResponsibilitiesCaxProps) => {
@@ -54,28 +53,18 @@ export const ResponsibilitiesCax = ({
     role: '',
   })
 
-  console.log('userInviteList', userInviteList)
-
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
   const rolesComposite = useSelector(rolesSelector)
   const invitedUsers = useSelector(invitedUserSelector)
 
-  //console.log('status', status)
-  console.log('invitedUsers', invitedUsers)
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
 
-  console.log('userInviteList', ...userInviteList)
-  /*
-  const allInvitedUsers = [...invitedUsers];
-  if(userInviteList.length > 0) allInvitedUsers.push(...userInviteList);
-  console.log('newInvitedUsers all', allInvitedUsers);
-  */
   useEffect(() => {
     dispatch(fetchRolesComposite())
     dispatch(fetchInvited(applicationId))
@@ -234,35 +223,6 @@ export const ResponsibilitiesCax = ({
             </Row>
           )}
 
-          {/* {userInviteList.length > 0 && userInviteList && (
-            <Row className="mx-auto col-9 send-invite">
-              <h5>{t('Responsibility.titleInvite')}</h5>
-              <Row>
-                <ul className="list-group-cax px-2">
-                  {userInviteList.map((d, index) => {
-                    return (
-                      <li key={index} className="list-group-item-cax">
-                        <Row>
-                          <span className="col-1">
-                            <AiOutlineUser />
-                          </span>
-                          <span className="col-5 list-group-item-email">
-                            {d.email}
-                          </span>
-                          <span className="badge-cax bg-list-group-cax col-4">
-                            {d.role}
-                          </span>
-                          <span className="col-2 list-group-item-status">
-                            Pending
-                          </span>
-                        </Row>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </Row>
-            </Row>
-          )} */}
         </div>
       </div>
       <FooterButton

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchInvited, fetchRolesComposite, setUserToInvite, sendInvite } from './actions'
+import { fetchInvited, fetchRolesComposite, sendInvite } from './actions'
 import { InvitedUser, InviteUserState, InitialInvitedUser } from './types'
 
 const initialState: InviteUserState = {
