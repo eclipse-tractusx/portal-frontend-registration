@@ -17,9 +17,7 @@ export const getCentralIdp = () => {
   const hostname = getHostname()
   if (hostname === 'portal.int.demo.catena-x.net')
     return 'https://centralidp.demo.catena-x.net/auth'
-  if (hostname === 'portal.catena-x.net')
-    return 'https://centralidp.catena-x.net/auth'
-  return 'https://catenaxdev003akssrv.germanywestcentral.cloudapp.azure.com/iamcentralidp/auth'
+  return 'https://centralidp.dev.demo.catena-x.net/auth'
 }
 
 const EnvironmentService = {
