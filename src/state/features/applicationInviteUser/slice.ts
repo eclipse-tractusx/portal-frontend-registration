@@ -16,7 +16,7 @@ const inviteSlice = createSlice({
   name: 'registration/application/user',
   initialState,
   reducers: {
-    setUsersToAdd: (state, action) => ({
+    setUserToInvite: (state, action) => ({
       ...state,
       newUser: action.payload,
     }),
@@ -61,16 +61,6 @@ const inviteSlice = createSlice({
       invitedUsers: [],
       request: RequestState.ERROR,
       error: action.error.message as string,
-    }))
-    builder.addCase(setUserToInvite.fulfilled, (state, { payload }) => ({
-      ...state,
-      // newUser: {
-      //   invitationStatus: 'PENDING',
-      //   emailId: payload.email,
-      //   invitedUserRoles: payload.roles
-      // },
-      request: RequestState.OK,
-      error: '',
     }))
     // invite new
     builder.addCase(sendInvite.pending, (state) => ({

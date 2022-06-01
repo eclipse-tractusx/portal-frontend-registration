@@ -30,10 +30,9 @@ export class Api extends HttpClient {
     )
 
   public postInviteNewUser = (applicationId: string, user: InviteNewUser) =>
-  true
-    // this.instance.post(
-    //   `/api/registration/application/${applicationId}/inviteNewUser`,
-    //   user,
-    //   RequestService.getHeaders()
-    // )
+    this.instance.post(
+      `/api/registration/application/${applicationId}/inviteNewUser`,
+      user,
+      RequestService.getHeaders()
+    )
 }
