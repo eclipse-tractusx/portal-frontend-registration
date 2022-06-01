@@ -42,10 +42,10 @@ export const CompanyDataCax = ({
 
   useEffect(() => {
     setBpn(companyDetails?.bpn)
-    setLegalEntity(companyDetails?.shortname)
-    setRegisteredName(companyDetails?.name)
-    setStreetHouseNumber(companyDetails?.streetnumber)
-    setPostalCode(companyDetails?.zipcode)
+    setLegalEntity(companyDetails?.shortName)
+    setRegisteredName(companyDetails?.name) 
+    setStreetHouseNumber(companyDetails?.streetName)
+    setPostalCode(companyDetails?.zipCode)
     setCity(companyDetails?.city)
     setCountry(companyDetails?.countryAlpha2Code)
   }, [companyDetails])
@@ -53,10 +53,10 @@ export const CompanyDataCax = ({
   const [search, setSearch] = useState('')
   const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
-  const [legalEntity, setLegalEntity] = useState(companyDetails.shortname)
+  const [legalEntity, setLegalEntity] = useState(companyDetails.shortName)
   const [registeredName, setRegisteredName] = useState(companyDetails.name)
-  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetnumber)
-  const [postalCode, setPostalCode] = useState(companyDetails.zipcode)
+  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetName)
+  const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
 
@@ -102,10 +102,10 @@ export const CompanyDataCax = ({
     addCurrentStep(currentActiveStep + 1)
     const companyData = {...companyDetails}
     companyData.name = legalEntity
-    companyData.shortname = registeredName
-    companyData.streetname = streetHouseNumber
+    companyData.shortName = registeredName
+    companyData.streetName = streetHouseNumber
     companyData.city = city
-    companyData.zipcode = postalCode
+    companyData.zipCode = postalCode
     companyData.countryAlpha2Code = country
     //addCompanyData(companyData)
     dispatch(saveCompanyDetailsWithAddress({applicationId, companyData}))
