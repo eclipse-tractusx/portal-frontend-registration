@@ -42,7 +42,7 @@ export const VerifyRegistration = ({
   const nextClick = () => {
     const data = {
       bpn: companyDetailsData?.bpn || '',
-      name: companyDetailsData?.shortname || '',
+      name: companyDetailsData?.shortName || '',
     }
     const fetchData = async () => {
       const custodianWallet = await submitCustodianWallet(data)
@@ -128,7 +128,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.registeredName')}
                   </span>
                   <span className="col-6">
-                    {companyDetailsData?.shortname}
+                    {companyDetailsData?.shortName}
                   </span>
                 </Row>
               </li>
@@ -137,7 +137,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{companyDetailsData?.streetname}</span>
+                  <span className="col-6">{companyDetailsData?.streetName}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
