@@ -7,16 +7,28 @@ export type CompanyDetails = {
   companyId: string
   bpn: string
   name: string
-  shortname: string
+  shortName: string
   city: string
   region: string
-  streetadditional: string
-  streetname: string
-  streetnumber: string
-  zipcode: number
+  streetAdditional: string
+  streetName: string
+  streetNumber: string
+  zipCode: number
   countryAlpha2Code: string
   countryDe: string
   taxId: string
+}
+
+export type ApplicationInvitedUsers = {
+  invitationStatus: string
+  emailId: string
+  invitedUserRoles: Array<string>
+}
+
+export type ApplicationInvitedFormUsers = {
+  email: string
+  status: string
+  role: Array<string>
 }
 
 export interface ApplicationState {
@@ -30,13 +42,13 @@ export const InitialCompanyDetail = {
   companyId: '',
   bpn: '',
   name: '',
-  shortname: '',
+  shortName: '',
   city: '',
   region: '',
-  streetadditional: '',
-  streetname: '',
-  streetnumber: '',
-  zipcode: 0,
+  streetAdditional: '',
+  streetName: '',
+  streetNumber: '',
+  zipCode: 0,
   countryAlpha2Code: '',
   countryDe: '',
   taxId: '',

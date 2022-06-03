@@ -1,12 +1,8 @@
 import { RequestState } from "../../../types/MainTypes"
 
-export type InviteNewUser = {
-  userName?: string
-  firstName?: string
-  lastName?: string
-  email: string
-  roles: string[]
-  message: string
+export type agreementData = {
+  companyRoles: Array<string>
+  agreements: Array<string>
 }
 
 export type roleData = {
@@ -14,12 +10,13 @@ export type roleData = {
   companyRoles: Array<string>
 }
 
-export const roleDataValue = {
-  agreements: [],
-  companyRoles: []
+export const agreementDataValue = {
+  companyRoles: [],
+  agreements: []
 }
 
 export type roleAggrementState = {
+  agreementData: agreementData,
   roleData: roleData,
   request: RequestState
   error: string

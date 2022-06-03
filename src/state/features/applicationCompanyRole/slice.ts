@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchCompanyRole } from './actions'
-import { roleAggrementState, roleDataValue } from './types'
+import { fetchAgreementData, fetchAgreementConsents } from './actions'
+import { agreementDataValue, roleAggrementState } from './types'
 
 const initialState: roleAggrementState = {
-  roleData: roleDataValue,
+  agreementData: agreementDataValue,
+  roleData: agreementDataValue,
   request: RequestState.NONE,
   error: null,
 }
@@ -20,23 +21,41 @@ const roleSlice = createSlice({
     }),
   },
   extraReducers: (builder) => {
-
-    // fetch roles
-    builder.addCase(fetchCompanyRole.pending, (state) => ({
+    // fetch agreement data
+    builder.addCase(fetchAgreementData.pending, (state) => ({
       ...state,
-      roleData: roleDataValue,
+      agreementData: agreementDataValue,
       request: RequestState.SUBMIT,
       error: '',
     }))
-    builder.addCase(fetchCompanyRole.fulfilled, (state, { payload }) => ({
+    builder.addCase(fetchAgreementData.fulfilled, (state, { payload }) => ({
       ...state,
-      roleData: payload || roleDataValue,
+      agreementData: payload ||agreementDataValue,
       request: RequestState.OK,
       error: '',
     }))
-    builder.addCase(fetchCompanyRole.rejected, (state, action) => ({
+    builder.addCase(fetchAgreementData.rejected, (state, action) => ({
       ...state,
-      roleData: roleDataValue,
+      agreementData: agreementDataValue,
+      request: RequestState.ERROR,
+      error: action.error.message as string,
+    }))
+    // fetch roles
+    builder.addCase(fetchAgreementConsents.pending, (state) => ({
+      ...state,
+      roleData: agreementDataValue,
+      request: RequestState.SUBMIT,
+      error: '',
+    }))
+    builder.addCase(fetchAgreementConsents.fulfilled, (state, { payload }) => ({
+      ...state,
+      roleData: payload || agreementDataValue,
+      request: RequestState.OK,
+      error: '',
+    }))
+    builder.addCase(fetchAgreementConsents.rejected, (state, action) => ({
+      ...state,
+      roleData: agreementDataValue,
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))

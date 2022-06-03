@@ -1,6 +1,6 @@
 import i18n from '../i18n'
 import { Row, Col } from 'react-bootstrap'
-import UserService from '../helpers/UserService'
+import UserService from '../services/UserService'
 import { getClientRolesComposite } from '../helpers/utils'
 import { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'

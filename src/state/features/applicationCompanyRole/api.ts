@@ -1,6 +1,6 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
-import UserService from '../../../helpers/UserService'
+import RequestService from '../../../services/RequestService'
 //import { InvitedUser, InviteNewUser } from './types'
 
 export class API extends HttpClient {
@@ -17,13 +17,15 @@ export class API extends HttpClient {
     return this.classInstance
   }
 
-  public getCompanyRole = (applicationId: string) =>
+  public companyRoleAgreementData = () =>
+    this.instance.get<any>(
+      `/api/registration/companyRoleAgreementData`,
+      RequestService.getHeaders()
+    )
+
+  public companyRoleAgreementConsents = (applicationId: string) =>
     this.instance.get<any>(
       `/api/registration/application/${applicationId}/companyRoleAgreementConsents`,
-      {
-        headers: {
-          authorization: `Bearer ${UserService.getToken()}`,
-        },
-      }
+      RequestService.getHeaders()
     )
 }
