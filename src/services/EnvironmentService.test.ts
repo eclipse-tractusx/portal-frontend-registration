@@ -13,7 +13,7 @@ const ENV = [
     origin: 'http://localhost',
     assets: 'https://portal.dev.demo.catena-x.net/assets',
     api: 'https://portal-backend.dev.demo.catena-x.net',
-    idp: 'https://catenaxdev003akssrv.germanywestcentral.cloudapp.azure.com/iamcentralidp/auth',
+    idp: 'https://centralidp.dev.demo.catena-x.net/auth',
   },
   {
     name: 'dev',
@@ -21,7 +21,7 @@ const ENV = [
     origin: 'https://portal.dev.demo.catena-x.net',
     assets: '/assets',
     api: 'https://portal-backend.dev.demo.catena-x.net',
-    idp: 'https://catenaxdev003akssrv.germanywestcentral.cloudapp.azure.com/iamcentralidp/auth',
+    idp: 'https://centralidp.dev.demo.catena-x.net/auth',
   },
   {
     name: 'int',
