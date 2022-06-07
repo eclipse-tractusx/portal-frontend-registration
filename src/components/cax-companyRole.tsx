@@ -3,13 +3,12 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { toast } from 'react-toastify'
-import { useDispatch, useSelector } from 'react-redux'
 import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from '../state/features/applicationCompanyRole/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
@@ -148,8 +147,8 @@ export const CompanyRoleCax = ({
                     <div>
                       <ul>
                         {
-                          role.agreementIds.map((id, index) => (
-                            <li key={index}>
+                          role.agreementIds.map((id, key) => (
+                            <li key={key}>
                               <input
                                 type="checkbox"
                                 name={id}

@@ -64,7 +64,7 @@ const roleSlice = createSlice({
       request: RequestState.SUBMIT,
       error: '',
     }))
-    builder.addCase(updateAgreementConsents.fulfilled, (state, { payload }) => ({
+    builder.addCase(updateAgreementConsents.fulfilled, (state) => ({
       ...state,
       request: RequestState.OK,
       error: '',
