@@ -16,8 +16,13 @@ export const agreementDataValue = {
 }
 
 export type roleAggrementState = {
-  agreementData: agreementData,
-  roleData: roleData,
+  consentData: agreementData
+  allConsentData: roleData
   request: RequestState
   error: string
 } 
+
+export type AgreementType = {
+  agreementId: string
+  name: string
+}

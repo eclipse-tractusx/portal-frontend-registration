@@ -1,7 +1,7 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
-//import { InvitedUser, InviteNewUser } from './types'
+import { agreementData } from './types'
 
 export class API extends HttpClient {
   private static classInstance?: API
@@ -26,6 +26,13 @@ export class API extends HttpClient {
   public companyRoleAgreementConsents = (applicationId: string) =>
     this.instance.get<any>(
       `/api/registration/application/${applicationId}/companyRoleAgreementConsents`,
+      RequestService.getHeaders()
+    )
+
+  public putAgreementConsent = (applicationId: string, data: agreementData) =>
+    this.instance.post<any>(
+      `/api/registration/application/${applicationId}/companyRoleAgreementConsents`,
+      data,
       RequestService.getHeaders()
     )
 }

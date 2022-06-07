@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAgreementData, fetchAgreementConsents } from '../state/features/applicationCompanyRole/actions'
+import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from '../state/features/applicationCompanyRole/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 
@@ -26,29 +26,49 @@ export const CompanyRoleCax = ({
   const { t } = useTranslation()
 
   const { status } = useSelector(applicationSelector)
-  const {agreementData, roleData, error } = useSelector(stateSelector)
+  const { allConsentData, consentData, error } = useSelector(stateSelector)
 
-  const checkIfEnabled = (id) => 
-  roleData.agreements.filter((agreement: any) => 
-    agreement.agreementId === id 
-  )
-  .length > 0
-
-  const map = new Map();
-  roleData.agreements.map((item: any) => 
-    map[item.agreementId] = checkIfEnabled(item.agreementId)
-  )
-  
-  const [companyRoleChecked, setcompanyRoleChecked] = useState(map)
-  console.log('companyRoleChecked-- ', companyRoleChecked)
-
-  const obj = status[status.length - 1]
-  const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
-  console.log('agreementData', agreementData)
-  console.log('roleData', roleData)
+
+  console.log('allConsentData', allConsentData)
+  console.log('consentData', consentData)
+
+  const checkIfAgreementEnabled = (id) => 
+    allConsentData.agreements.filter((agreement: any) => 
+      agreement.agreementId === id 
+    )
+    .length >= 0
+
+  const checkIfRoleEnabled = (item) => 
+    consentData.companyRoles.filter((role) => 
+      role === item 
+    )
+    .length >= 0
+
+  const agreementMap = new Map();
+  consentData.agreements.length && consentData.agreements.map((item: any) => 
+    agreementMap[item.agreementId] = checkIfAgreementEnabled(item.agreementId)
+  )
+
+  console.log('agreementMap', agreementMap)
+
+  const roleMap = new Map();
+  consentData.companyRoles.length && consentData.companyRoles.map((item: any) => 
+    roleMap[item] = checkIfRoleEnabled(item)
+  )
+
+  console.log('roleMap', roleMap)
+  
+  const [companyRoleChecked, setCompanyRoleChecked] = useState(roleMap) 
+  const [agreementChecked, setAgreementChecked] = useState(agreementMap)
+
+  console.log('companyRoleChecked', companyRoleChecked)
+  console.log('agreementChecked', agreementChecked)
+
+  const obj = status[status.length - 1]
+  const applicationId = obj['applicationId']
 
   const dispatch = useDispatch()
 
@@ -64,27 +84,35 @@ export const CompanyRoleCax = ({
   }
 
   const nextClick = () => {
+    const companyRoles = Object.keys(companyRoleChecked).filter(item => companyRoleChecked[item]);
+    const agreements = Object.keys(agreementChecked)
+                      .map((agreementId) => {
+                        return {
+                          "agreementId": agreementId,
+                          "consentStatus": agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE'
+                        }
+                      })
+    
+    const data = {
+      "companyRoles": companyRoles,
+      "agreements": agreements
+    }
+
+    console.log('data', data)
+    dispatch(updateAgreementConsents({applicationId, data}))
     addCurrentStep(currentActiveStep + 1)
   }
 
-  const handleCheck = (id) => {
-    console.log('**',id)
-    const updatedMap = {...map}
+  const handleAgreementCheck = (id) => {
+    const updatedMap = {...agreementChecked}
     updatedMap[id] = !updatedMap[id]
-    setcompanyRoleChecked(updatedMap)
-    // if (e.target.checked === false && companyRoleChecked.has(e.target.name)) {
-    //   const roleCheckedcopy = new Map(companyRoleChecked)
-    //   roleCheckedcopy.delete(e.target.name)
-    //   setcompanyRoleChecked(roleCheckedcopy)
-    // } else {
-    //   setcompanyRoleChecked(
-    //     new Map(companyRoleChecked.set(e.target.name, e.target.checked))
-    //   )
-    // }
+    setAgreementChecked(updatedMap)
+  }
 
-    // console.log(e.target.checked, e.target.name)
-    // console.log(companyRoleChecked)
-
+  const handleCompanyRoleCheck = (id) => {
+    const updatedMap = {...companyRoleChecked}
+    updatedMap[id] = !updatedMap[id]
+    setCompanyRoleChecked(updatedMap)
   }
 
   return (
@@ -103,7 +131,7 @@ export const CompanyRoleCax = ({
         </div>
         <div className="companydata-form mx-auto col-9">
           {
-            agreementData.companyRoles.map((role: any, index) => (
+            allConsentData.companyRoles.map((role: any, index) => (
               <div className="company-role-section" key={index}>
                 <Row>
                   <div className="col-1">
@@ -111,8 +139,8 @@ export const CompanyRoleCax = ({
                       type="checkbox"
                       name={role.companyRole}
                       className="regular-checkbox"
-                      onChange={(e) => handleCheck(e)}
-                      checked={true}
+                      onChange={() => handleCompanyRoleCheck(role.companyRole)}
+                      checked={companyRoleChecked[role.companyRole]}
                     />
                   </div>
                   <div className="col-11">
@@ -126,10 +154,10 @@ export const CompanyRoleCax = ({
                                 type="checkbox"
                                 name={id}
                                 className="regular-checkbox"
-                                onChange={(e) => handleCheck(id)}
-                                checked={companyRoleChecked[id]}
+                                onChange={() => handleAgreementCheck(id)}
+                                checked={agreementChecked[id]}
                               />
-                              {agreementData.agreements.map((agreement: any) => { if(agreement.agreementId == id) return agreement.name} )}
+                              {allConsentData.agreements.map((agreement: any) => { if(agreement.agreementId == id) return agreement.name} )}
                             </li>
                           ))
                           }

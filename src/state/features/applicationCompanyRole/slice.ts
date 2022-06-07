@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchAgreementData, fetchAgreementConsents } from './actions'
+import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from './actions'
 import { agreementDataValue, roleAggrementState } from './types'
 
 const initialState: roleAggrementState = {
-  agreementData: agreementDataValue,
-  roleData: agreementDataValue,
+  consentData: agreementDataValue,
+  allConsentData: agreementDataValue,
   request: RequestState.NONE,
   error: null,
 }
@@ -24,38 +24,53 @@ const roleSlice = createSlice({
     // fetch agreement data
     builder.addCase(fetchAgreementData.pending, (state) => ({
       ...state,
-      agreementData: agreementDataValue,
+      allConsentData: agreementDataValue,
       request: RequestState.SUBMIT,
       error: '',
     }))
     builder.addCase(fetchAgreementData.fulfilled, (state, { payload }) => ({
       ...state,
-      agreementData: payload ||agreementDataValue,
+      allConsentData: payload ||agreementDataValue,
       request: RequestState.OK,
       error: '',
     }))
     builder.addCase(fetchAgreementData.rejected, (state, action) => ({
       ...state,
-      agreementData: agreementDataValue,
+      allConsentData: agreementDataValue,
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))
     // fetch roles
     builder.addCase(fetchAgreementConsents.pending, (state) => ({
       ...state,
-      roleData: agreementDataValue,
+      consentData: agreementDataValue,
       request: RequestState.SUBMIT,
       error: '',
     }))
     builder.addCase(fetchAgreementConsents.fulfilled, (state, { payload }) => ({
       ...state,
-      roleData: payload || agreementDataValue,
+      consentData: payload || agreementDataValue,
       request: RequestState.OK,
       error: '',
     }))
     builder.addCase(fetchAgreementConsents.rejected, (state, action) => ({
       ...state,
-      roleData: agreementDataValue,
+      consentData: agreementDataValue,
+      request: RequestState.ERROR,
+      error: action.error.message as string,
+    }))
+    builder.addCase(updateAgreementConsents.pending, (state) => ({
+      ...state,
+      request: RequestState.SUBMIT,
+      error: '',
+    }))
+    builder.addCase(updateAgreementConsents.fulfilled, (state, { payload }) => ({
+      ...state,
+      request: RequestState.OK,
+      error: '',
+    }))
+    builder.addCase(updateAgreementConsents.rejected, (state, action) => ({
+      ...state,
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))
