@@ -2,7 +2,7 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
@@ -12,23 +12,24 @@ import { useHistory } from 'react-router-dom'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
 import { submitCustodianWallet } from '../helpers/utils'
-import { CompanyDetails } from '../state/features/application/types'
+import { applicationSelector } from '../state/features/application/slice'
 
 interface VerifyRegistrationProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  companyDetailsData: CompanyDetails
   fileNames: string[]
 }
 
 export const VerifyRegistration = ({
   currentActiveStep,
   addCurrentStep,
-  companyDetailsData,
   fileNames,
 }: VerifyRegistrationProps) => {
   const { t } = useTranslation()
   const history = useHistory()
+
+  const { companyDetails } = useSelector(applicationSelector)
+  console.log('companyDetails', companyDetails)
 
   const editClick = (n) => {
     // setcurrentActiveStep(n);
@@ -41,8 +42,8 @@ export const VerifyRegistration = ({
 
   const nextClick = () => {
     const data = {
-      bpn: companyDetailsData?.bpn || '',
-      name: companyDetailsData?.shortName || '',
+      bpn: companyDetails?.bpn || '',
+      name: companyDetails?.shortName || '',
     }
     const fetchData = async () => {
       const custodianWallet = await submitCustodianWallet(data)
@@ -69,7 +70,7 @@ export const VerifyRegistration = ({
     return null
   }
   const hasCompanyData = () => {
-    return companyDetailsData.bpn ? true : false
+    return companyDetails.bpn ? true : false
     // return true
   }
   const hasRoles = () => {
@@ -109,7 +110,7 @@ export const VerifyRegistration = ({
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.bpn')}</span>
-                  <span className="col-6">{companyDetailsData?.bpn}</span>
+                  <span className="col-6">{companyDetails?.bpn}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -118,7 +119,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.legalEntity')}
                   </span>
                   <span className="col-6">
-                    {companyDetailsData?.name}
+                    {companyDetails?.name}
                   </span>
                 </Row>
               </li>
@@ -128,7 +129,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.registeredName')}
                   </span>
                   <span className="col-6">
-                    {companyDetailsData?.shortName}
+                    {companyDetails?.shortName}
                   </span>
                 </Row>
               </li>
@@ -137,13 +138,13 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{companyDetailsData?.streetName}</span>
+                  <span className="col-6">{companyDetails?.streetName}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.city')}</span>
-                  <span className="col-6">{companyDetailsData?.city}</span>
+                  <span className="col-6">{companyDetails?.city}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -151,7 +152,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.country')}
                   </span>
-                  <span className="col-6">{companyDetailsData?.countryAlpha2Code}</span>
+                  <span className="col-6">{companyDetails?.countryAlpha2Code}</span>
                 </Row>
               </li>
             </ul>
@@ -225,7 +226,6 @@ export default withRouter(
   connect(
     (state: IState) => ({
       currentActiveStep: state.user.currentStep,
-      companyDetailsData: state.user.companyData,
       fileNames: state.user.fileNames,
     }),
     mapDispatchToProps
