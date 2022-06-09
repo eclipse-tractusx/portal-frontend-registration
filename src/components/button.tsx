@@ -23,7 +23,7 @@ const Button = ({
         <button
           className={styleClass}
           onClick={handleClick}
-          color="#939393"
+          color="#CBCBCB"
           disabled
         >
           {!icon ? (
