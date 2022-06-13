@@ -34,7 +34,6 @@ export type ApplicationInvitedFormUsers = {
 export interface ApplicationState {
   status: Array<ApplicationStatus>
   companyDetails: CompanyDetails | null
-  invitedUsers: Array<ApplicationInvitedUsers>
   loading: boolean
   error: string
 }

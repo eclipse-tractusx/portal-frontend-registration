@@ -29,8 +29,8 @@ export const CompanyDataCax = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { status, error, companyDetails, invitedUsers } = useSelector(applicationSelector)
-  console.log('invitedUsers', invitedUsers)
+  const { status, error, companyDetails } = useSelector(applicationSelector)
+
   const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId'];
   if (error) {
