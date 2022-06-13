@@ -6,7 +6,6 @@ import { ApplicationState, InitialCompanyDetail } from './types'
 const initialState: ApplicationState = {
   status: [],
   companyDetails: InitialCompanyDetail,
-  invitedUsers: [],
   loading: false,
   error: null,
 }

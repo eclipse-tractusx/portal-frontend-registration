@@ -1,13 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
+import { toast } from 'react-toastify'
+import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from '../state/features/applicationCompanyRole/actions'
+import { applicationSelector } from '../state/features/application/slice'
+import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 
 interface CompanyRoleProps {
   currentActiveStep: number
@@ -19,7 +23,58 @@ export const CompanyRoleCax = ({
   addCurrentStep,
 }: CompanyRoleProps) => {
   const { t } = useTranslation()
-  const [companyRoleChecked, setcompanyRoleChecked] = useState(new Map())
+
+  const { status } = useSelector(applicationSelector)
+  const { allConsentData, consentData, error } = useSelector(stateSelector)
+
+  if (error) {
+    toast.error(error)
+  }
+
+  console.log('allConsentData', allConsentData)
+  console.log('consentData', consentData)
+
+  const checkIfAgreementEnabled = (id) => 
+    allConsentData.agreements.filter((agreement: any) => 
+      agreement.agreementId === id 
+    )
+    .length >= 0
+
+  const checkIfRoleEnabled = (item) => 
+    consentData.companyRoles.filter((role) => 
+      role === item 
+    )
+    .length >= 0
+
+  const agreementMap = new Map();
+  consentData.agreements.length && consentData.agreements.map((item: any) => 
+    agreementMap[item.agreementId] = checkIfAgreementEnabled(item.agreementId)
+  )
+
+  console.log('agreementMap', agreementMap)
+
+  const roleMap = new Map();
+  consentData.companyRoles.length && consentData.companyRoles.map((item: any) => 
+    roleMap[item] = checkIfRoleEnabled(item)
+  )
+
+  console.log('roleMap', roleMap)
+  
+  const [companyRoleChecked, setCompanyRoleChecked] = useState(roleMap) 
+  const [agreementChecked, setAgreementChecked] = useState(agreementMap)
+
+  console.log('companyRoleChecked', companyRoleChecked)
+  console.log('agreementChecked', agreementChecked)
+
+  const obj = status[status.length - 1]
+  const applicationId = obj['applicationId']
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchAgreementData())
+    dispatch(fetchAgreementConsents(applicationId))
+  },[dispatch]);
 
   // const companyRoleChecked =  new Map();
 
@@ -28,23 +83,35 @@ export const CompanyRoleCax = ({
   }
 
   const nextClick = () => {
+    const companyRoles = Object.keys(companyRoleChecked).filter(item => companyRoleChecked[item]);
+    const agreements = Object.keys(agreementChecked)
+                      .map((agreementId) => {
+                        return {
+                          "agreementId": agreementId,
+                          "consentStatus": agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE'
+                        }
+                      })
+    
+    const data = {
+      "companyRoles": companyRoles,
+      "agreements": agreements
+    }
+
+    console.log('data', data)
+    dispatch(updateAgreementConsents({applicationId, data}))
     addCurrentStep(currentActiveStep + 1)
   }
 
-  const handleCheck = (e) => {
-    console.log(e)
-    if (e.target.checked === false && companyRoleChecked.has(e.target.name)) {
-      const roleCheckedcopy = new Map(companyRoleChecked)
-      roleCheckedcopy.delete(e.target.name)
-      setcompanyRoleChecked(roleCheckedcopy)
-    } else {
-      setcompanyRoleChecked(
-        new Map(companyRoleChecked.set(e.target.name, e.target.checked))
-      )
-    }
+  const handleAgreementCheck = (id) => {
+    const updatedMap = {...agreementChecked}
+    updatedMap[id] = !updatedMap[id]
+    setAgreementChecked(updatedMap)
+  }
 
-    console.log(e.target.checked, e.target.name)
-    console.log(companyRoleChecked)
+  const handleCompanyRoleCheck = (id) => {
+    const updatedMap = {...companyRoleChecked}
+    updatedMap[id] = !updatedMap[id]
+    setCompanyRoleChecked(updatedMap)
   }
 
   return (
@@ -62,187 +129,44 @@ export const CompanyRoleCax = ({
           </div>
         </div>
         <div className="companydata-form mx-auto col-9">
-          <div className="company-role-section">
-            <Row>
-              <div className="col-1">
-                <input
-                  type="checkbox"
-                  name="activeParticipant"
-                  className="regular-checkbox"
-                  onChange={(e) => handleCheck(e)}
-                />
+          {
+            allConsentData.companyRoles.map((role: any, index) => (
+              <div className="company-role-section" key={index}>
+                <Row>
+                  <div className="col-1">
+                    <input
+                      type="checkbox"
+                      name={role.companyRole}
+                      className="regular-checkbox"
+                      onChange={() => handleCompanyRoleCheck(role.companyRole)}
+                      checked={companyRoleChecked[role.companyRole]}
+                    />
+                  </div>
+                  <div className="col-11">
+                    <label>{role.descriptions.en}</label>
+                    <div>
+                      <ul>
+                        {
+                          role.agreementIds.map((id, key) => (
+                            <li key={key}>
+                              <input
+                                type="checkbox"
+                                name={id}
+                                className="regular-checkbox"
+                                onChange={() => handleAgreementCheck(id)}
+                                checked={agreementChecked[id]}
+                              />
+                              {allConsentData.agreements.map((agreement: any) => { if(agreement.agreementId == id) return agreement.name} )}
+                            </li>
+                          ))
+                          }
+                      </ul>
+                    </div>
+                  </div>
+                </Row>
               </div>
-              <div className="col-11">
-                <label>{t('companyRole.role1Label')}</label>
-                <div
-                  className={
-                    !companyRoleChecked.has('activeParticipant') ||
-                    !companyRoleChecked.get('activeParticipant')
-                      ? 'companyRoleVisible'
-                      : 'companyRoleHidden'
-                  }
-                >
-                  <div>{t('companyRole.role1')}</div>
-                  <ul>
-                    <li>{t('companyRole.role1li1')}</li>
-                    <li>{t('companyRole.role1li2')}</li>
-                  </ul>
-                </div>
-                <div
-                  className={
-                    !companyRoleChecked.has('activeParticipant') ||
-                    !companyRoleChecked.get('activeParticipant')
-                      ? 'companyRoleHidden'
-                      : 'companyRoleVisible companyRoleTnc'
-                  }
-                >
-                  <div>{t('companyRole.TermsAndCond')}</div>
-                  <ul>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCondSpan1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCondSpan2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCondSpan3')}
-                      </span>
-                    </li>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCond2Span1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCond2Span2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCond2Span3')}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Row>
-          </div>
-          <div className="company-role-section">
-            <Row>
-              <div className="col-1">
-                <input
-                  type="checkbox"
-                  name="appProvider"
-                  className="regular-checkbox"
-                  onChange={(e) => handleCheck(e)}
-                />
-              </div>
-              <div className="col-11">
-                <label>{t('companyRole.role2Label')}</label>
-                <div
-                  className={
-                    !companyRoleChecked.has('appProvider') ||
-                    !companyRoleChecked.get('appProvider')
-                      ? 'companyRoleVisible'
-                      : 'companyRoleHidden'
-                  }
-                >
-                  <div>{t('companyRole.role2')}</div>
-                  <ul>
-                    <li>{t('companyRole.role2li1')}</li>
-                  </ul>
-                </div>
-                <div
-                  className={
-                    !companyRoleChecked.has('appProvider') ||
-                    !companyRoleChecked.get('appProvider')
-                      ? 'companyRoleHidden'
-                      : 'companyRoleVisible companyRoleTnc'
-                  }
-                >
-                  <div>{t('companyRole.TermsAndCond')}</div>
-                  <ul>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCondSpan1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCondSpan2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCondSpan3')}
-                      </span>
-                    </li>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCond2Span1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCond2Span2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCond2Span3')}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Row>
-          </div>
-          <div className="company-role-section">
-            <Row>
-              <div className="col-1">
-                <input
-                  type="checkbox"
-                  name="operationAndInfra"
-                  className="regular-checkbox"
-                  onChange={(e) => handleCheck(e)}
-                />
-              </div>
-              <div className="col-11">
-                <label>{t('companyRole.role3Label')}</label>
-                <div
-                  className={
-                    !companyRoleChecked.has('operationAndInfra') ||
-                    !companyRoleChecked.get('operationAndInfra')
-                      ? 'companyRoleVisible'
-                      : 'companyRoleHidden'
-                  }
-                >
-                  <div>{t('companyRole.role3')}</div>
-                  <ul>
-                    <li>{t('companyRole.role3li1')}</li>
-                  </ul>
-                </div>
-                <div
-                  className={
-                    !companyRoleChecked.has('operationAndInfra') ||
-                    !companyRoleChecked.get('operationAndInfra')
-                      ? 'companyRoleHidden'
-                      : 'companyRoleVisible companyRoleTnc'
-                  }
-                >
-                  <div>{t('companyRole.TermsAndCond')}</div>
-                  <ul>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCondSpan1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCondSpan2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCondSpan3')}
-                      </span>
-                    </li>
-                    <li>
-                      <input type="checkbox" className="regular-checkbox" />
-                      <span>
-                        {t('companyRole.TermsAndCond2Span1')}{' '}
-                        <span className="underlineTnc">
-                          {t('companyRole.TermsAndCond2Span2')}
-                        </span>{' '}
-                        {t('companyRole.TermsAndCond2Span3')}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Row>
-          </div>
+            ))
+          }
         </div>
       </div>
       <FooterButton
