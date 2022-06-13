@@ -52,7 +52,7 @@ export const DragDrop = ({
       toast.error('Cannot upload more than two files')
       return
     }
-    files.map(async (document) => dispatch(saveDocument({applicationId, document})))
+    files.forEach((document) => dispatch(saveDocument({applicationId, document})))
     toast.success('All files uploaded')
   }
 
