@@ -42,8 +42,8 @@ export const DragDrop = ({
   }, [dispatch])
 
   // Return the current status of files being uploaded
-  const handleChangeStatus = ({ meta, file }, status) => {
-    console.log(status, meta, file)
+  const handleChangeStatus = ({ meta, file }, stats) => {
+    console.log(stats, meta, file)
   }
 
   // Return array of uploaded files after submit button is clicked
@@ -52,7 +52,7 @@ export const DragDrop = ({
       toast.error('Cannot upload more than two files')
       return
     }
-    files.map(async (document) => await dispatch(saveDocument({applicationId, document})))
+    files.map(async (document) => dispatch(saveDocument({applicationId, document})))
     toast.success('All files uploaded')
   }
 
