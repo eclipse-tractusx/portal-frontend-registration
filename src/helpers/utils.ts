@@ -67,35 +67,7 @@ export function submitSendInvites(userInviteList: any): Promise<any> {
   })
   return promise
 }
-export function submitCustodianWallet(custodianWallet): Promise<any> {
-  const token = UserService.getToken()
-  const u = `${getApiBase()}/api/registration/custodianWallet`
-  const promise = new Promise<any>((resolve, reject) => {
-    fetch(u, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(custodianWallet),
-    })
-      .then((res) =>
-        res.text().then((data) => {
-          if (res.ok) {
-            resolve('Data Submitted')
-          } else {
-            reject(res.status)
-          }
-        })
-      )
-      .catch((error) => {
-        // alert(error);
-        console.log(error, error.message, error.status)
-        reject(error.status)
-      })
-  })
-  return promise
-}
+
 export function getCompanyRoles(): Promise<CompanyRole[]> {
   const token = UserService.getToken()
   const u = `${getApiBase()}/api/registration/companyRoles`
