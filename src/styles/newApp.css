@@ -692,3 +692,11 @@ width: 100%;
   background-position: center center;
   cursor: pointer;
 }
+
+.agreement-li{
+  list-style: none;
+}
+
+.agreement-check{
+  margin: 5px;
+}

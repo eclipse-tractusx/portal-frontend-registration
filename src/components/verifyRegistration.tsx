@@ -2,14 +2,18 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
+import { fetchRegistrationData } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
+import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
 
 interface VerifyRegistrationProps {
   currentActiveStep: number
@@ -24,8 +28,21 @@ export const VerifyRegistration = ({
 }: VerifyRegistrationProps) => {
   const { t } = useTranslation()
 
-  const { companyDetails } = useSelector(applicationSelector)
-  console.log('companyDetails', companyDetails)
+  const dispatch = useDispatch()
+
+  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const { registrationData, loading } = useSelector(stateSelector)
+  console.log('registrationData', registrationData)
+  
+  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId'];
+  if (error) {
+    toast.error(error)
+  }
+
+  useEffect(() => {
+    dispatch(fetchRegistrationData(applicationId));
+  }, [dispatch])
 
   const editClick = (n) => {
     // setcurrentActiveStep(n);
@@ -93,7 +110,7 @@ export const VerifyRegistration = ({
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.bpn')}</span>
-                  <span className="col-6">{companyDetails?.bpn}</span>
+                  <span className="col-6">{registrationData?.bpn}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -102,7 +119,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.legalEntity')}
                   </span>
                   <span className="col-6">
-                    {companyDetails?.name}
+                    {registrationData?.name}
                   </span>
                 </Row>
               </li>
@@ -112,7 +129,7 @@ export const VerifyRegistration = ({
                     {t('verifyRegistration.registeredName')}
                   </span>
                   <span className="col-6">
-                    {companyDetails?.shortName}
+                    {registrationData?.name}
                   </span>
                 </Row>
               </li>
@@ -121,13 +138,13 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{companyDetails?.streetName}</span>
+                  <span className="col-6">{registrationData?.streetName}{' '}{registrationData?.streetNumber}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.city')}</span>
-                  <span className="col-6">{companyDetails?.city}</span>
+                  <span className="col-6">{registrationData?.zipCode}{' '}{registrationData?.city}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -135,7 +152,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.country')}
                   </span>
-                  <span className="col-6">{companyDetails?.countryAlpha2Code}</span>
+                  <span className="col-6">{registrationData?.countryDe}</span>
                 </Row>
               </li>
             </ul>
@@ -152,13 +169,17 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              <li className="list-group-item-cax">
-                <Row>
-                  <span className="col-12">
-                    {t('verifyRegistration.ActiveParticipant')}
-                  </span>
-                </Row>
-              </li>
+              {registrationData.companyRoles.map((role, index) => {
+                return (
+                  <li key={index} className="list-group-item-cax">
+                    <Row>
+                      <span className="col-12">
+                        { role }
+                      </span>
+                    </Row>
+                  </li>
+                )
+              })}
             </ul>
           </Row>
           <Row>
@@ -173,11 +194,13 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              {fileNames.map((file, index) => {
+              {registrationData.documents.map((file, index) => {
                 return (
                   <li key={index} className="list-group-item-cax">
                     <Row>
-                      <span className="col-12">{file}</span>
+                      <span className="col-12">
+                        { file.documentName }
+                      </span>
                     </Row>
                   </li>
                 )
