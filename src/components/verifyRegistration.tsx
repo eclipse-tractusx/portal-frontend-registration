@@ -8,10 +8,7 @@ import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
-import { useHistory } from 'react-router-dom'
-import { DataErrorCodes } from '../helpers/DataError'
-import { ToastContainer, toast } from 'react-toastify'
-import { submitCustodianWallet } from '../helpers/utils'
+import { ToastContainer } from 'react-toastify'
 import { applicationSelector } from '../state/features/application/slice'
 
 interface VerifyRegistrationProps {
@@ -26,7 +23,6 @@ export const VerifyRegistration = ({
   fileNames,
 }: VerifyRegistrationProps) => {
   const { t } = useTranslation()
-  const history = useHistory()
 
   const { companyDetails } = useSelector(applicationSelector)
   console.log('companyDetails', companyDetails)
@@ -41,22 +37,9 @@ export const VerifyRegistration = ({
   }
 
   const nextClick = () => {
-    const data = {
-      bpn: companyDetails?.bpn || '',
-      name: companyDetails?.shortName || '',
-    }
-    const fetchData = async () => {
-      const custodianWallet = await submitCustodianWallet(data)
-      toast.success(custodianWallet)
-      history.push('/finish')
-    }
-    fetchData().catch((errorCode: number) => {
-      const message = DataErrorCodes.includes(errorCode)
-        ? t(`ErrorMessage.${errorCode}`)
-        : t(`ErrorMessage.default`)
-      toast.error(message)
-    })
+    console.log("next click")
   }
+
   const getTooltip = () => {
     if (!hasCompanyData()) {
       return t('ErrorMessage.error1')
