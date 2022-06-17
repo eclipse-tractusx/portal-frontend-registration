@@ -9,7 +9,7 @@ import BulletList from './bulletList'
 import Header from './cax-header'
 import Button from './button'
 import { fetchId, updateStatus } from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice' 
+import { applicationSelector } from '../state/features/application/slice'
 import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
 
 export const Landing = () => {
@@ -24,6 +24,12 @@ export const Landing = () => {
   }
 
   useEffect(() => {
+    if (status && status[0] && (status[0]['applicationStatus'] === "approved" || status[0]['applicationStatus'] === "submitted" || status[0]['applicationStatus'] === "declined")) {
+      history.push('/registration-closed')
+    }
+  }, [status])
+
+  useEffect(() => {
     dispatch(fetchId())
   },[dispatch]);
 
@@ -35,7 +41,7 @@ export const Landing = () => {
     }
     history.push('/form')
   }
-  
+
   return (
     <Container>
       <Header />
