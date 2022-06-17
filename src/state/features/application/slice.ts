@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { fetchId, updateInvitation, updateStatus, getCompanyDetailsWithAddress } from './actions'
+import { fetchId, updateInvitation, getCompanyDetailsWithAddress } from './actions'
 import { ApplicationState, InitialCompanyDetail } from './types'
 
 const initialState: ApplicationState = {
