@@ -6,11 +6,10 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
-import { ToastContainer } from 'react-toastify'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import { fetchRegistrationData, saveRegistration } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
@@ -31,7 +30,7 @@ export const VerifyRegistration = ({
   const dispatch = useDispatch()
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
-  const { registrationData, loading } = useSelector(stateSelector)
+  const { registrationData } = useSelector(stateSelector)
   console.log('registrationData', registrationData)
   
   const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
@@ -59,15 +58,15 @@ export const VerifyRegistration = ({
   }
 
   const getTooltip = () => {
-    // if (!hasCompanyData()) {
-    //   return t('ErrorMessage.error1')
-    // }
-    // if (!hasRoles()) {
-    //   return t('ErrorMessage.error2')
-    // }
-    // if (!hasDocuments()) {
-    //   return t('ErrorMessage.error3')
-    // }
+    if (!hasCompanyData()) {
+      return t('ErrorMessage.error1')
+    }
+    if (!hasRoles()) {
+      return t('ErrorMessage.error2')
+    }
+    if (!hasDocuments()) {
+      return t('ErrorMessage.error3')
+    }
     return null
   }
   const hasCompanyData = () => {
