@@ -48,21 +48,6 @@ const applicationSlice = createSlice({
       loading: false,
       error: action.error.message as string,
     }))
-    builder.addCase(updateStatus.pending, (state) => ({
-      ...state,
-      loading: true,
-      error: null,
-    }))
-    builder.addCase(updateStatus.fulfilled, (state) => ({
-      ...state,
-      loading: false,
-      error: null,
-    }))
-    builder.addCase(updateStatus.rejected, (state, action) => ({
-      ...state,
-      loading: false,
-      error: action.error.message as string,
-    }))
     builder.addCase(getCompanyDetailsWithAddress.pending, (state) => ({
       ...state,
       companyDetails: InitialCompanyDetail,
