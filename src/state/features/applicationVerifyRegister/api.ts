@@ -29,4 +29,16 @@ export class ApplicationApi extends HttpClient {
     )
   }
 
+  public submitRegistration = () => {
+    return this.instance.post<string>(
+      `/api/registration/submitRegistration`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
 }

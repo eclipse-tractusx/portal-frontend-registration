@@ -11,7 +11,7 @@ import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify'
-import { fetchRegistrationData } from '../state/features/applicationVerifyRegister/actions'
+import { fetchRegistrationData, saveRegistration } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
 
@@ -54,19 +54,20 @@ export const VerifyRegistration = ({
   }
 
   const nextClick = () => {
+    dispatch(saveRegistration())
     console.log("next click")
   }
 
   const getTooltip = () => {
-    if (!hasCompanyData()) {
-      return t('ErrorMessage.error1')
-    }
-    if (!hasRoles()) {
-      return t('ErrorMessage.error2')
-    }
-    if (!hasDocuments()) {
-      return t('ErrorMessage.error3')
-    }
+    // if (!hasCompanyData()) {
+    //   return t('ErrorMessage.error1')
+    // }
+    // if (!hasRoles()) {
+    //   return t('ErrorMessage.error2')
+    // }
+    // if (!hasDocuments()) {
+    //   return t('ErrorMessage.error3')
+    // }
     return null
   }
   const hasCompanyData = () => {

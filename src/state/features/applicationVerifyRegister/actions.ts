@@ -13,4 +13,16 @@ const fetchRegistrationData = createAsyncThunk(
   }
 )
 
-export { fetchRegistrationData }
+const saveRegistration = createAsyncThunk(
+  'registration/application/saveRegistration',
+  async () => {
+    try {
+      return await ApplicationApi.getInstance().submitRegistration()
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('There is some error while saving registration data. Please contact the administrator.')
+    }
+  }
+)
+
+export { fetchRegistrationData, saveRegistration }

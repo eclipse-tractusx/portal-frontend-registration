@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { fetchRegistrationData } from './actions'
+import { fetchRegistrationData, saveRegistration } from './actions'
 import { RegistrationState, InitialRegistrationValue } from './types'
 
 const initialState: RegistrationState = {
@@ -29,6 +29,21 @@ const applicationSlice = createSlice({
     builder.addCase(fetchRegistrationData.rejected, (state, action) => ({
       ...state,
       registrationData: InitialRegistrationValue,
+      loading: false,
+      error: action.error.message as string,
+    }))
+    builder.addCase(saveRegistration.pending, (state) => ({
+      ...state,
+      loading: true,
+      error: null,
+    }))
+    builder.addCase(saveRegistration.fulfilled, (state) => ({
+      ...state,
+      loading: false,
+      error: null,
+    }))
+    builder.addCase(saveRegistration.rejected, (state, action) => ({
+      ...state,
       loading: false,
       error: action.error.message as string,
     }))
