@@ -10,7 +10,7 @@ import Header from './cax-header'
 import Button from './button'
 import { fetchId, updateStatus } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { ADD_COMPANY_DATA, CONFIRMED, CREATED, DECLINED, SUBMITTED } from '../state/features/application/types'
+import { ADD_COMPANY_DATA, CREATED, SUBMITTED, CONFIRMED, DECLINED } from '../state/features/application/types'
 
 export const Landing = () => {
   const { t } = useTranslation()
@@ -18,13 +18,13 @@ export const Landing = () => {
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  
+
   if (error) {
     toast.error(error)
   }
 
   useEffect(() => {
-    if (status && status[0] && (status[0]['applicationStatus'] === CONFIRMED || status[0]['applicationStatus'] === SUBMITTED || status[0]['applicationStatus'] === DECLINED)) {
+    if (status && status[0] && (status[0]['applicationStatus'] === SUBMITTED || status[0]['applicationStatus'] === CONFIRMED || status[0]['applicationStatus'] === DECLINED)) {
       history.push('/registration-closed')
     }
   }, [status])
