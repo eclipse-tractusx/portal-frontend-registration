@@ -451,7 +451,9 @@ textarea {
 .list-group-item-status {
   text-align: right;
   font-size: 14px;
-  color: #888888;
+  color: #5C8D45;
+  font-weight: 500;
+  line-height: 20px;
   font-family: 'LibreFranklin-bold', sans-serif;
 }
 
@@ -461,22 +463,24 @@ textarea {
   font-family: 'Libre Franklin 400', sans-serif;
 }
 
-.badge-cax {
-  display: inline-block;
-  padding: 0.35em 0.65em;
-  font-size: 0.75em;
-  font-weight: 700;
-  line-height: 1;
-  color: #3f527e;
-  text-align: center;
+.list-group-item-role {
+  display: flex;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 700; 
+  line-height: 20px;
+  color: #676BC6;
+  text-align: left;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0.25rem;
+  border-radius: 4px;
+  background: #F2F3FB;
+  height: 32px;
+  width: max-content;
 }
 
-.bg-list-group-cax {
-  background: #e1f1ff;
-  border-radius: 2px;
+.list-group-item-role:not(:last-child){
+  margin-bottom: 0.25rem!important;
 }
 
 .button {
