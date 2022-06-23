@@ -483,6 +483,10 @@ textarea {
   margin-bottom: 0.25rem!important;
 }
 
+.pending-status{
+  color: #888888;
+}
+
 .button {
   display: inline-block;
   font-weight: 400;

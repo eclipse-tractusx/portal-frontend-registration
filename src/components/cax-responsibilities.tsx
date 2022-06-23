@@ -214,9 +214,9 @@ export const ResponsibilitiesCax = ({
                                 {d.invitedUserRoles}
                               </span>
                             }
-                          </span>
+                          </span>                         
                           <span className="col-2 list-group-item-status">
-                            {d.invitationStatus || 'PENDING'}
+                            {d.invitationStatus || <span className="pending-status">{'PENDING'}</span>}
                           </span>
                         </Row>
                       </li>
