@@ -631,3 +631,64 @@ textarea {
   width: 23em;
   word-break: break-word;
 }
+
+.dropzone-overview-files {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.dropzone-overview-file {
+  width: 90%;
+  padding: 10px 0px 10px 65px;
+  background-image: url("data:image/svg+xml,%3Csvg width=%2748%27 height=%2758%27 viewBox=%270 0 48 58%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M28 13V15H39V13H28Z%27 fill=%27%23939393%27/%3E%3Cpath d=%27M28 23H39V25H28V23Z%27 fill=%27%23939393%27/%3E%3Cpath d=%27M9 33V35H39V33H9Z%27 fill=%27%23939393%27/%3E%3Cpath d=%27M9 43H39V45H9V43Z%27 fill=%27%23939393%27/%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M9 12V26H23V12H9ZM11 24V14H21V24H11Z%27 fill=%27%23939393%27/%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M3 0C1.34315 0 0 1.34314 0 3V55C0 56.6569 1.34314 58 3 58H45C46.6569 58 48 56.6569 48 55V3C48 1.34315 46.6569 0 45 0H3ZM2 3C2 2.44771 2.44771 2 3 2H45C45.5523 2 46 2.44771 46 3V55C46 55.5523 45.5523 56 45 56H3C2.44772 56 2 55.5523 2 55V3Z%27 fill=%27%23939393%27/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat no-repeat;
+  background-position: left 14px center;
+  background-size: 40px auto;
+}
+
+.dropzone-overview-file-name {
+  width: max-content;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dropzone-overview-file-status {
+  width: max-content;
+  font-size: 10px; 
+}
+
+.progress {
+  display: flex;
+  margin-top: 10px;
+  height: 4px !important;
+  overflow: hidden;
+  font-size: .75rem;
+  background-color: #e9ecef;
+  border-radius: .25rem;
+}
+
+.progress-bar {
+width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #0d6efd;
+  transition: width .6s ease;
+}
+
+.bg-success {
+  background-color: rgba(25,135,84,1) !important;
+}
+.dropzone-overview-remove {
+  width: 10%;
+  padding-top: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg width=%2714%27 height=%2718%27 viewBox=%270 0 14 18%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM3 6H11V16H3V6ZM10.5 1L9.5 0H4.5L3.5 1H0V3H14V1H10.5Z%27 fill=%27%23939393%27/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}

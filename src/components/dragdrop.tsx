@@ -2,15 +2,18 @@ import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect } from 'react-redux'
+import { useEffect } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep, addFileNames } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
-import { uploadDocument } from '../helpers/utils'
 import { toast } from 'react-toastify'
-import { DataErrorCodes } from '../helpers/DataError'
 import { DragdropFiles } from './dragdropFiles'
+import { applicationSelector } from '../state/features/application/slice'
+import { stateSelector } from '../state/features/applicationDocuments/slice'
+import { fetchDocuments, saveDocument } from '../state/features/applicationDocuments/actions'
+import '../styles/newApp.css'
 
 interface DragDropProps {
   currentActiveStep: number
@@ -21,13 +24,26 @@ interface DragDropProps {
 export const DragDrop = ({
   currentActiveStep,
   addCurrentStep,
-  addFileNames,
 }: DragDropProps) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const { status, error } = useSelector(applicationSelector)
+  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId'];
+  if (error) {
+    toast.error(error)
+  }
+
+  const { documents } = useSelector(stateSelector)
+
+  useEffect(() => {
+    dispatch(fetchDocuments(applicationId));
+  }, [dispatch])
 
   // Return the current status of files being uploaded
-  const handleChangeStatus = ({ meta, file }, status) => {
-    console.log(status, meta, file)
+  const handleChangeStatus = ({ meta, file }, stats) => {
+    console.log(stats, meta, file)
   }
 
   // Return array of uploaded files after submit button is clicked
@@ -36,29 +52,8 @@ export const DragDrop = ({
       toast.error('Cannot upload more than two files')
       return
     }
-    console.log(files.map((f) => f.meta))
-    const uploadRequests = files.map(async (file) => await uploadDocument(file))
-    try {
-      const values = await Promise.all<Response>(uploadRequests)
-      if (values.every((value) => value.ok)) {
-        toast.success('All files uploaded')
-        addFileNames(files.map((file) => file.file.name))
-      } else {
-        if (values.every((val) => val.status === values[0].status)) {
-          const errorCode = values[0].status
-          const message = DataErrorCodes.includes(errorCode)
-            ? t(`ErrorMessage.${errorCode}`)
-            : t(`ErrorMessage.default`)
-
-          toast.error(message)
-        } else {
-          toast.error('Failed to upload files')
-        }
-      }
-    } catch (ex) {
-      console.log(ex)
-      toast.error('Failed to upload files')
-    }
+    files.forEach((document) => dispatch(saveDocument({applicationId, document})))
+    toast.success('All files uploaded')
   }
 
   const backClick = () => {
@@ -94,6 +89,21 @@ export const DragDrop = ({
             maxFiles={3}
             PreviewComponent={props => <DragdropFiles props={props} />}
           />
+        </div>
+        <div className="documents-data mx-auto col-9 mt-4">
+          {
+            documents.map((document: any, index) => 
+              <div className="dropzone-overview-files" key={index}>
+                <div className="dropzone-overview-file">
+                    <div className="dropzone-overview-file-name">{document.documentName}</div>
+                    <div className="dropzone-overview-file-status">Completed</div>
+                    <div className="dropzone-overview-file-progress progress">
+                    <div role="progressbar" className="progress-bar bg-success"></div></div>
+                </div>
+                <div className="dropzone-overview-remove"></div>
+              </div>
+            )
+          }
         </div>
       </div>
       <FooterButton
