@@ -455,6 +455,7 @@ textarea {
   font-weight: 500;
   line-height: 20px;
   font-family: 'LibreFranklin-bold', sans-serif;
+  padding: 0 !important;
 }
 
 .list-group-item-email {
