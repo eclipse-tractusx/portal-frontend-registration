@@ -1,7 +1,6 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
-import UserService from '../../../services/UserService'
 
 export class Api extends HttpClient {
   private static classInstance?: Api
