@@ -14,6 +14,7 @@ import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationDocuments/slice'
 import { fetchDocuments, saveDocument } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
+import { DocumentData } from '../state/features/applicationDocuments/types'
 
 interface DragDropProps {
   currentActiveStep: number
@@ -36,6 +37,8 @@ export const DragDrop = ({
   }
 
   const { documents } = useSelector(stateSelector)
+
+  console.log('documents', documents)
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId));
@@ -90,9 +93,9 @@ export const DragDrop = ({
             PreviewComponent={props => <DragdropFiles props={props} />}
           />
         </div>
-        <div className="documents-data mx-auto col-9 mt-4">
+        <div className="documentsData mx-auto col-9 mt-4">
           {
-            documents.map((document: any, index) => 
+            documents.map((document: DocumentData, index) => 
               <div className="dropzone-overview-files" key={index}>
                 <div className="dropzone-overview-file">
                     <div className="dropzone-overview-file-name">{document.documentName}</div>

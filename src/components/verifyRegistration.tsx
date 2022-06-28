@@ -31,9 +31,8 @@ export const VerifyRegistration = ({
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
-  console.log('registrationData', registrationData)
   
-  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const obj = status[status.length-1]
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
@@ -54,7 +53,6 @@ export const VerifyRegistration = ({
 
   const nextClick = () => {
     dispatch(saveRegistration())
-    console.log("next click")
   }
 
   const getTooltip = () => {
@@ -138,13 +136,13 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{registrationData?.streetName}{' '}{registrationData?.streetNumber}</span>
+                  <span className="col-6">{registrationData?.streetName} {registrationData?.streetNumber}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.city')}</span>
-                  <span className="col-6">{registrationData?.zipCode}{' '}{registrationData?.city}</span>
+                  <span className="col-6">{registrationData?.zipCode} {registrationData?.city}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -169,8 +167,7 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              {registrationData.companyRoles.map((role, index) => {
-                return (
+              {registrationData.companyRoles.map((role, index) => 
                   <li key={index} className="list-group-item-cax">
                     <Row>
                       <span className="col-12">
@@ -178,8 +175,7 @@ export const VerifyRegistration = ({
                       </span>
                     </Row>
                   </li>
-                )
-              })}
+              )}
             </ul>
           </Row>
           <Row>

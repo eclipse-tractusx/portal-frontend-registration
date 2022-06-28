@@ -28,9 +28,7 @@ export class Api extends HttpClient {
     formdata.append('document', file)
     return fetch(`${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`, {
       method: 'POST',
-      headers: {
-        authorization: `Bearer ${UserService.getToken()}`,
-      },
+      headers: RequestService.getHeaders().headers,
       body: formdata,
     })
   }

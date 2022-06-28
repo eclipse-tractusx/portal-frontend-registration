@@ -1,7 +1,7 @@
 import { HttpClient } from '../../../helpers/HttpClient'
-import UserService from '../../../services/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
 import { RegistrationDetails } from './types'
+import RequestService from '../../../services/RequestService'
 
 export class ApplicationApi extends HttpClient {
   private static classInstance?: ApplicationApi
@@ -21,11 +21,7 @@ export class ApplicationApi extends HttpClient {
   public getRegistrationData = (applicationId: string) => {
     return this.instance.get<RegistrationDetails>(
       `/api/registration/application/${applicationId}/registrationData`,
-      {
-        headers: {
-          authorization: `Bearer ${UserService.getToken()}`,
-        },
-      }
+      RequestService.getHeaders()
     )
   }
 
@@ -33,11 +29,7 @@ export class ApplicationApi extends HttpClient {
     return this.instance.post<string>(
       `/api/registration/submitRegistration`,
       {},
-      {
-        headers: {
-          authorization: `Bearer ${UserService.getToken()}`,
-        },
-      }
+      RequestService.getHeaders()
     )
   }
 
