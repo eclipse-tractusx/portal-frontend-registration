@@ -148,7 +148,7 @@ export const CompanyRoleCax = ({
                       <ul>
                         {
                           role.agreementIds.map((id, key) => (
-                            <li key={key}>
+                            <li key={key} style={{listStyle: 'none'}}>
                               <input
                                 type="checkbox"
                                 name={id}
