@@ -18,6 +18,7 @@ import Finish from './components/finish'
 import Authinfo from './components/authinfo'
 import ProtectedRoute from './helpers/authorisation/ProtectedRoute'
 import UnauthorisedPage from './components/unauthorised'
+import RegistrationClosed from './components/registrationClosed'
 
 createBrowserHistory()
 
@@ -49,6 +50,7 @@ const App = () => {
         />
         <Route path="/authinfo" component={() => <Authinfo />} />
         <Route path="/403" component={() => <UnauthorisedPage />} />
+        <Route path="/registration-closed" component={() => <RegistrationClosed />} />
       </Switch>
     </BrowserRouter>
   )

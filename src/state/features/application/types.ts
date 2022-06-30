@@ -56,3 +56,6 @@ export const InitialCompanyDetail = {
 
 export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';
 export const CREATED = 'CREATED';
+export const SUBMITTED = 'SUBMITTED';
+export const CONFIRMED = 'CONFIRMED';
+export const DECLINED = 'DECLINED';
