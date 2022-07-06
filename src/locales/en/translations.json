@@ -151,6 +151,11 @@
       "link6": "Cookie Policy",
       "link7": "Third Party License Notes",
       "copyright": "Copyright © by Catena-X Automotive Network."
+    },
+    "registrationClosed":{
+      "heading1": "Your registration has already been submitted and closed. We are now reviewing the application.",
+      "heading2": "As soon as this is finished you will receive an email with the access to the Catena-X Portal.",
+      "close": "Close"
     }
   }
 }
