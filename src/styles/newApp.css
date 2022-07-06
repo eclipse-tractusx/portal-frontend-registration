@@ -655,7 +655,7 @@ textarea {
 
 .dropzone-overview-file-status {
   width: max-content;
-  font-size: 10px; 
+  font-size: 10px;
 }
 
 .progress {
@@ -669,7 +669,7 @@ textarea {
 }
 
 .progress-bar {
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -691,4 +691,8 @@ width: 100%;
   background-repeat: no-repeat no-repeat;
   background-position: center center;
   cursor: pointer;
+}
+
+.footer-content {
+  min-height: 400px;
 }
