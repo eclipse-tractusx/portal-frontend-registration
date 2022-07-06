@@ -632,6 +632,17 @@ textarea {
   word-break: break-word;
 }
 
+
+.registration-close-content {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px 50px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 5px 5px 10px 0px rgb(0 0 0 / 20%);
+}
+
 .dropzone-overview-files {
   display: flex;
   width: 100%;
@@ -695,4 +706,12 @@ textarea {
 
 .footer-content {
   min-height: 400px;
+}
+
+.agreement-li{
+  list-style: none;
+}
+
+.agreement-check{
+  margin: 5px;
 }

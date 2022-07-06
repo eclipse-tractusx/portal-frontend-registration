@@ -6,7 +6,7 @@ export type DocumentData = {
 }
 
 export type DocumentsState = {
-  documents: string[]
+  documents: DocumentData[]
   request: RequestState
   uploadRequest: string
   error: string

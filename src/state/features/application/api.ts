@@ -29,6 +29,18 @@ export class ApplicationApi extends HttpClient {
     )
   }
 
+  public putInvitation = () => {
+    return this.instance.put<string>(
+      `/api/registration/invitation/status`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
   public putStatus = (status: ApplicationStatus) => {
     return this.instance.put<string>(
       `/api/registration/application/${status.id}/status?status=${status.status}`,

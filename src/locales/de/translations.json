@@ -168,6 +168,11 @@
     },
     "footerPages": {
       "Back": "Back"
+    },
+    "registrationClosed":{
+      "heading1": "Ihre Registrierung wurde bereits übermittelt und abgeschlossen. Wir prüfen jetzt den Antrag.",
+      "heading2": "Sobald dies abgeschlossen ist, erhalten Sie eine E-Mail mit dem Zugang zum Catena-X Portal.",
+      "close": "Nah dran"
     }
   }
 }

@@ -14,6 +14,18 @@ const fetchId = createAsyncThunk(
   }
 )
 
+const updateInvitation = createAsyncThunk(
+  'registration/application/updateInvitation',
+  async () => {
+    try {
+      return await ApplicationApi.getInstance().putInvitation()
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('Something went wrong. Please contact the administrator.')
+    }
+  }
+)
+
 const updateStatus = createAsyncThunk(
   'registration/application/updateStatus',
   async (status: ApplicationStatus) => {
@@ -50,4 +62,4 @@ const saveCompanyDetailsWithAddress = createAsyncThunk(
   }
 )
 
-export { fetchId, updateStatus, getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress }
+export { fetchId, updateInvitation, updateStatus, getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress }

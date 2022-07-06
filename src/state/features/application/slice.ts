@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { fetchId, updateStatus, getCompanyDetailsWithAddress } from './actions'
+import { fetchId, updateInvitation, getCompanyDetailsWithAddress } from './actions'
 import { ApplicationState, InitialCompanyDetail } from './types'
 
 const initialState: ApplicationState = {
@@ -33,17 +33,17 @@ const applicationSlice = createSlice({
       loading: false,
       error: action.error.message as string,
     }))
-    builder.addCase(updateStatus.pending, (state) => ({
+    builder.addCase(updateInvitation.pending, (state) => ({
       ...state,
       loading: true,
       error: null,
     }))
-    builder.addCase(updateStatus.fulfilled, (state) => ({
+    builder.addCase(updateInvitation.fulfilled, (state) => ({
       ...state,
       loading: false,
       error: null,
     }))
-    builder.addCase(updateStatus.rejected, (state, action) => ({
+    builder.addCase(updateInvitation.rejected, (state, action) => ({
       ...state,
       loading: false,
       error: action.error.message as string,
