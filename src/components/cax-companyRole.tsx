@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from '../state/features/applicationCompanyRole/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
+import '../styles/newApp.css'
 
 interface CompanyRoleProps {
   currentActiveStep: number
@@ -148,11 +149,11 @@ export const CompanyRoleCax = ({
                       <ul>
                         {
                           role.agreementIds.map((id, key) => (
-                            <li key={key} style={{listStyle: 'none'}}>
+                            <li key={key} className="agreement-li">
                               <input
                                 type="checkbox"
                                 name={id}
-                                className="regular-checkbox"
+                                className="regular-checkbox agreement-check"
                                 onChange={() => handleAgreementCheck(id)}
                                 checked={agreementChecked[id]}
                               />
