@@ -207,11 +207,11 @@ export const ResponsibilitiesCax = ({
                           <span className="col-5 list-group-item-email">
                             {d.emailId}
                           </span>
-                          <span className="badge-cax bg-list-group-cax col-4">
-                            {d.invitationStatus || 'PENDING'}
-                          </span>
+                          <span className="col-4 p-0">
+                            {d.invitedUserRoles.map(role => <span className="list-group-item-role" key={role}>{role}</span>)}
+                          </span>                         
                           <span className="col-2 list-group-item-status">
-                            {d.invitedUserRoles}
+                            {d.invitationStatus || <span className="pending-status">{'PENDING'}</span>}
                           </span>
                         </Row>
                       </li>

@@ -8,7 +8,7 @@ import Footer from './footer'
 import BulletList from './bulletList'
 import Header from './cax-header'
 import Button from './button'
-import { fetchId, updateStatus } from '../state/features/application/actions'
+import { fetchId, updateStatus, updateInvitation } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { ADD_COMPANY_DATA, CREATED, SUBMITTED, CONFIRMED, DECLINED } from '../state/features/application/types'
 
@@ -30,6 +30,7 @@ export const Landing = () => {
   }, [status])
 
   useEffect(() => {
+    dispatch(updateInvitation())
     dispatch(fetchId())
   },[dispatch]);
 
