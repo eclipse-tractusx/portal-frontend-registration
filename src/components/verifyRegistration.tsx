@@ -43,6 +43,7 @@ export const VerifyRegistration = ({
   }, [dispatch])
 
   const editClick = (n) => {
+    console.log('n', n)
     // setcurrentActiveStep(n);
   }
   // const companyRoleChecked =  new Map();
