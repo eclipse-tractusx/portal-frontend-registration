@@ -19,13 +19,11 @@ import { DocumentData } from '../state/features/applicationDocuments/types'
 interface DragDropProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  addFileNames: (fileNames: string[]) => void
 }
 
 export const DragDrop = ({
   currentActiveStep,
-  addCurrentStep,
-  addFileNames
+  addCurrentStep
 }: DragDropProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -48,14 +46,14 @@ export const DragDrop = ({
   // Return the current status of files being uploaded
   const handleChangeStatus = ({ meta, file }, stats) => {
     console.log(stats, meta, file)
-    stats === 'done' &&
+    stats === 'done' ? 
     (
       file.type !== 'application/pdf' 
       ?
       toast.error('Only .pdf files are allowed') 
       : ''
     )
-    return;
+    : ''
   }
 
   // Return array of uploaded files after submit button is clicked
@@ -66,7 +64,7 @@ export const DragDrop = ({
       return
     }
     files.forEach((document) => dispatch(saveDocument({applicationId, document})))
-    addFileNames(files.map((file) => file.file.name))
+    dispatch(addFileNames(files.map((file) => file.file.name)))
     toast.success('All files uploaded')
   }
 
@@ -133,11 +131,7 @@ export const DragDrop = ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addCurrentStep: (step: number) => {
     dispatch(addCurrentStep(step))
-  },
-
-  addFileNames: (fileNames: string[]) => {
-    dispatch(addFileNames(fileNames))
-  },
+  }
 })
 
 export default withRouter(
