@@ -7,7 +7,6 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep, addFileNames } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
-import { Dispatch } from 'redux'
 import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
 import { applicationSelector } from '../state/features/application/slice'
@@ -18,12 +17,10 @@ import { DocumentData } from '../state/features/applicationDocuments/types'
 
 interface DragDropProps {
   currentActiveStep: number
-  addCurrentStep: (step: number) => void
 }
 
 export const DragDrop = ({
-  currentActiveStep,
-  addCurrentStep
+  currentActiveStep
 }: DragDropProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -69,11 +66,11 @@ export const DragDrop = ({
   }
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
   const nextClick = () => {
-    addCurrentStep(currentActiveStep + 1)
+    dispatch(addCurrentStep(currentActiveStep + 1))
   }
 
   return (
@@ -128,17 +125,10 @@ export const DragDrop = ({
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  }
-})
-
 export default withRouter(
   connect(
     (state: IState) => ({
       currentActiveStep: state.user.currentStep,
-    }),
-    mapDispatchToProps
+    })
   )(DragDrop)
 )
