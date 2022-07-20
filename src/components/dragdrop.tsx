@@ -43,14 +43,8 @@ export const DragDrop = ({
   // Return the current status of files being uploaded
   const handleChangeStatus = ({ meta, file }, stats) => {
     console.log(stats, meta, file)
-    stats === 'done' ? 
-    (
-      file.type !== 'application/pdf' 
-      ?
-      toast.error('Only .pdf files are allowed') 
-      : ''
-    )
-    : ''
+    if (stats === 'done' && file.type !== 'application/pdf')
+      toast.error('...')
   }
 
   // Return array of uploaded files after submit button is clicked
