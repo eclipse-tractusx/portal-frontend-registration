@@ -12,8 +12,8 @@ export enum FileUploadVariant {
 }
 
 export enum RequestState {
-  NONE,
-  SUBMIT,
-  OK,
-  ERROR,
+  NONE = 'none',
+  SUBMIT = 'submit',
+  OK = 'ok',
+  ERROR = 'error',
 }

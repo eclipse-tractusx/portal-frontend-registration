@@ -2,7 +2,7 @@ import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep, addFileNames } from '../state/features/user/action'
@@ -14,6 +14,7 @@ import { stateSelector } from '../state/features/applicationDocuments/slice'
 import { fetchDocuments, saveDocument } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
+import { RequestState } from '../types/MainTypes'
 
 interface DragDropProps {
   currentActiveStep: number
@@ -26,37 +27,40 @@ export const DragDrop = ({
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
+  const [ files, setFiles ] = useState([]);
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
   }
 
-  const { documents } = useSelector(stateSelector)
+  const { documents, uploadRequest, error:documentError } = useSelector(stateSelector)
 
-  console.log('documents', documents)
+  if(uploadRequest === RequestState.OK && !documentError){
+    dispatch(addFileNames(files.map((file) => file.file.name)))
+    toast.success(t('documentUpload.uploadSuccessMsg'))
+  }
+  else if(uploadRequest === RequestState.ERROR && documentError)
+    toast.error(t('documentUpload.onlyPDFError'))
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId));
   }, [dispatch])
 
   // Return the current status of files being uploaded
-  const handleChangeStatus = ({ meta, file }, stats) => {
-    console.log(stats, meta, file)
+  const handleChangeStatus = ({ file }, stats) => {
     if (stats === 'done' && file.type !== 'application/pdf')
-      toast.error('Only .pdf files are allowed')
+      toast.error(t('documentUpload.onlyPDFError'))
   }
 
   // Return array of uploaded files after submit button is clicked
-  const handleSubmit = async (files: IFileWithMeta[], allFiles) => {
-    console.log('allFiles', allFiles)
+  const handleSubmit = async (files: IFileWithMeta[]) => {
+    setFiles(files);
     if (files.length > 2) {
       toast.error('Cannot upload more than two files')
       return
     }
     files.forEach((document) => dispatch(saveDocument({ applicationId, document })))
-    dispatch(addFileNames(files.map((file) => file.file.name)))
-    toast.success('All files uploaded')
   }
 
   const backClick = () => {

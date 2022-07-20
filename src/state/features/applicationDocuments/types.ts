@@ -8,7 +8,7 @@ export type DocumentData = {
 export type DocumentsState = {
   documents: DocumentData[]
   request: RequestState
-  uploadRequest: string
+  uploadRequest: RequestState
   error: string
 }
 

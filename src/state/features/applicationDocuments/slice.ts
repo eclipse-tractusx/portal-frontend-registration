@@ -7,48 +7,51 @@ import { DocumentsState } from './types'
 const initialState: DocumentsState = {
   documents: [],
   request: RequestState.NONE,
-  uploadRequest: null,
+  uploadRequest: RequestState.NONE,
   error: null,
 }
 
-const inviteSlice = createSlice({
+const documentSlice = createSlice({
   name: 'registration/application/user',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
 
-    // fetch roles
+    // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
       documents: [],
       request: RequestState.SUBMIT,
+      uploadRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchDocuments.fulfilled, (state, { payload }) => ({
       ...state,
       documents: payload || [],
       request: RequestState.OK,
+      uploadRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchDocuments.rejected, (state, action) => ({
       ...state,
       documents: [],
       request: RequestState.ERROR,
+      uploadRequest: RequestState.NONE,
       error: action.error.message as string,
     }))
     builder.addCase(saveDocument.pending, (state) => ({
       ...state,
-      uploadRequest: 'submit',
+      uploadRequest: RequestState.SUBMIT,
       error: '',
     }))
     builder.addCase(saveDocument.fulfilled, (state) => ({
       ...state,
-      uploadRequest: 'true',
+      uploadRequest: RequestState.OK,
       error: '',
     }))
     builder.addCase(saveDocument.rejected, (state, action) => ({
       ...state,
-      uploadRequest: 'false',
+      uploadRequest: RequestState.ERROR,
       error: action.error.message as string,
     }))
   },
@@ -57,4 +60,4 @@ const inviteSlice = createSlice({
 export const stateSelector = (state: RootState): DocumentsState =>
   state.document
 
-export default inviteSlice
+export default documentSlice
