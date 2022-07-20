@@ -26,7 +26,7 @@ export const DragDrop = ({
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
@@ -44,7 +44,7 @@ export const DragDrop = ({
   const handleChangeStatus = ({ meta, file }, stats) => {
     console.log(stats, meta, file)
     if (stats === 'done' && file.type !== 'application/pdf')
-      toast.error('...')
+      toast.error('Only .pdf files are allowed')
   }
 
   // Return array of uploaded files after submit button is clicked
@@ -54,7 +54,7 @@ export const DragDrop = ({
       toast.error('Cannot upload more than two files')
       return
     }
-    files.forEach((document) => dispatch(saveDocument({applicationId, document})))
+    files.forEach((document) => dispatch(saveDocument({ applicationId, document })))
     dispatch(addFileNames(files.map((file) => file.file.name)))
     toast.success('All files uploaded')
   }
@@ -95,12 +95,12 @@ export const DragDrop = ({
         </div>
         <div className="documentsData mx-auto col-9 mt-4">
           {
-            documents.map((document: DocumentData, index) => 
+            documents.map((document: DocumentData, index) =>
               <div className="dropzone-overview-files" key={index}>
                 <div className="dropzone-overview-file">
-                    <div className="dropzone-overview-file-name">{document.documentName}</div>
-                    <div className="dropzone-overview-file-status">Completed</div>
-                    <div className="dropzone-overview-file-progress progress">
+                  <div className="dropzone-overview-file-name">{document.documentName}</div>
+                  <div className="dropzone-overview-file-status">Completed</div>
+                  <div className="dropzone-overview-file-progress progress">
                     <div role="progressbar" className="progress-bar bg-success"></div></div>
                 </div>
                 <div className="dropzone-overview-remove"></div>
