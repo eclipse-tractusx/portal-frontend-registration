@@ -27,8 +27,8 @@ export const DragDrop = ({
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const [ files, setFiles ] = useState([]);
-  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const [ allFiles, setFiles ] = useState([]);
+  const obj = status[status.length - 1]
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
@@ -37,7 +37,7 @@ export const DragDrop = ({
   const { documents, uploadRequest, error:documentError } = useSelector(stateSelector)
 
   if(uploadRequest === RequestState.OK && !documentError){
-    dispatch(addFileNames(files.map((file) => file.file.name)))
+    dispatch(addFileNames(allFiles.map((file) => file.file.name)))
     toast.success(t('documentUpload.uploadSuccessMsg'))
   }
   else if(uploadRequest === RequestState.ERROR && documentError)

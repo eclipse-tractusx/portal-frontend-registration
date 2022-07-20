@@ -26,12 +26,6 @@ export class Api extends HttpClient {
   public postDocument = async(applicationId: string, documentTypeId: string, file: any) =>{
     const formdata = new FormData()
     formdata.append('document', file)
-    // return fetch(`${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`, {
-    //   method: 'POST',
-    //   headers: RequestService.getHeaders().headers,
-    //   body: formdata,
-    // })
-
     try {
       await axios({
         method: "post",
@@ -40,7 +34,6 @@ export class Api extends HttpClient {
         headers: RequestService.getHeaders().headers,
       });
     } catch(error) {
-      console.log(error)
       throw Error(error.message)
     }
     
