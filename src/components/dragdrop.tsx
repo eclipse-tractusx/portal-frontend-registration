@@ -38,7 +38,6 @@ export const DragDrop = ({
 
   if(uploadRequest === RequestState.OK && !documentError){
     dispatch(addFileNames(allFiles.map((file) => file.file.name)))
-    toast.success(t('documentUpload.uploadSuccessMsg'))
   }
   else if(uploadRequest === RequestState.ERROR && documentError)
     toast.error(t('documentUpload.onlyPDFError'))
