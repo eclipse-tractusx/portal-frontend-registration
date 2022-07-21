@@ -42,11 +42,6 @@ export const VerifyRegistration = ({
     dispatch(fetchRegistrationData(applicationId));
   }, [dispatch])
 
-  const editClick = (n) => {
-    // setcurrentActiveStep(n);
-  }
-  // const companyRoleChecked =  new Map();
-
   const backClick = () => {
     addCurrentStep(currentActiveStep - 1)
   }
@@ -100,7 +95,7 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.heading1')}
                   </span>
-                  <span className="col-1" onClick={() => editClick(1)}>
+                  <span className="col-1">
                     <FaEdit className="editIcon" />
                   </span>
                 </Row>
@@ -162,7 +157,7 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.ActiveRole')}
                   </span>
-                  <span className="col-1" onClick={() => editClick(2)}>
+                  <span className="col-1">
                     <FaEdit className="editIcon" />
                   </span>
                 </Row>
@@ -185,7 +180,7 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.UploadedCertificates')}
                   </span>
-                  <span className="col-1" onClick={() => editClick(3)}>
+                  <span className="col-1">
                     <FaEdit className="editIcon" />
                   </span>
                 </Row>
