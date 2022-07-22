@@ -28,7 +28,7 @@ export const Help = () => {
     const [visibleSection, setVisibleSection] = useState(sectionRefs[0].section);
 
     const onSearchChange = (value: string) => {
-        console.log('value', value)
+        setSearch(value)
     }
 
     const scrollTo = (e: any) => {
