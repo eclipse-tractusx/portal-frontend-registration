@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
@@ -22,13 +23,19 @@ export class Api extends HttpClient {
       RequestService.getHeaders()
     )
 
-  public postDocument = (applicationId: string, documentTypeId: string, file: any) =>{
+  public postDocument = async(applicationId: string, documentTypeId: string, file: any) =>{
     const formdata = new FormData()
     formdata.append('document', file)
-    return fetch(`${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`, {
-      method: 'POST',
-      headers: RequestService.getHeaders().headers,
-      body: formdata,
-    })
+    try {
+      await axios({
+        method: "post",
+        url: `${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`,
+        data: formdata,
+        headers: RequestService.getHeaders().headers,
+      });
+    } catch(error) {
+      throw Error(error.message)
+    }
+    
   }
 }

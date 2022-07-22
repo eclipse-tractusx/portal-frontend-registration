@@ -70,7 +70,9 @@
     "upload": "Hochladen",
     "uploadStatusDone": "Done",
     "uploadStatusUploading": "Uploading",
-    "uploadStatusError": "Fehler"
+    "uploadStatusError": "Fehler",
+    "onlyPDFError": "Only .pdf files are allowed",
+    "uploadSuccessMsg": "All files uploaded"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",

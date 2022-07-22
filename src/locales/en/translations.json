@@ -89,7 +89,9 @@
     "upload": "Upload",
     "uploadStatusDone": "Done",
     "uploadStatusUploading": "Uploading",
-    "uploadStatusError": "Error"
+    "uploadStatusError": "Error",
+    "onlyPDFError": "Only .pdf files are allowed",
+    "uploadSuccessMsg": "All files uploaded"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",
