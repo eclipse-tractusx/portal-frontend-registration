@@ -2,12 +2,11 @@ import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep, addFileNames } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
-import { Dispatch } from 'redux'
 import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
 import { applicationSelector } from '../state/features/application/slice'
@@ -15,56 +14,60 @@ import { stateSelector } from '../state/features/applicationDocuments/slice'
 import { fetchDocuments, saveDocument } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
+import { RequestState } from '../types/MainTypes'
 
 interface DragDropProps {
   currentActiveStep: number
-  addCurrentStep: (step: number) => void
-  addFileNames: (fileNames: string[]) => void
 }
 
 export const DragDrop = ({
-  currentActiveStep,
-  addCurrentStep,
+  currentActiveStep
 }: DragDropProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
+  const [ allFiles, setFiles ] = useState([]);
+  const obj = status[status.length - 1]
   const applicationId = obj['applicationId'];
   if (error) {
     toast.error(error)
   }
 
-  const { documents } = useSelector(stateSelector)
+  const { documents, uploadRequest, error:documentError } = useSelector(stateSelector)
 
-  console.log('documents', documents)
+  if(uploadRequest === RequestState.OK && !documentError){
+    dispatch(addFileNames(allFiles.map((file) => file.file.name)))
+  }
+  else if(uploadRequest === RequestState.ERROR && documentError)
+    toast.error(t('documentUpload.onlyPDFError'))
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId));
   }, [dispatch])
 
   // Return the current status of files being uploaded
-  const handleChangeStatus = ({ meta, file }, stats) => {
-    console.log(stats, meta, file)
+  const handleChangeStatus = ({ file }, stats) => {
+    if (stats === 'done' && file.type !== 'application/pdf')
+      toast.error(t('documentUpload.onlyPDFError'))
   }
 
   // Return array of uploaded files after submit button is clicked
-  const handleSubmit = async (files: IFileWithMeta[], allFiles) => {
+  const handleSubmit = async (files: IFileWithMeta[]) => {
+    setFiles(files);
     if (files.length > 2) {
       toast.error('Cannot upload more than two files')
       return
     }
-    files.forEach((document) => dispatch(saveDocument({applicationId, document})))
-    toast.success('All files uploaded')
+    files.forEach((document) => dispatch(saveDocument({ applicationId, document })))
   }
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
   const nextClick = () => {
-    addCurrentStep(currentActiveStep + 1)
+    dispatch(addCurrentStep(currentActiveStep + 1))
   }
 
   return (
@@ -95,12 +98,12 @@ export const DragDrop = ({
         </div>
         <div className="documentsData mx-auto col-9 mt-4">
           {
-            documents.map((document: DocumentData, index) => 
+            documents.map((document: DocumentData, index) =>
               <div className="dropzone-overview-files" key={index}>
                 <div className="dropzone-overview-file">
-                    <div className="dropzone-overview-file-name">{document.documentName}</div>
-                    <div className="dropzone-overview-file-status">Completed</div>
-                    <div className="dropzone-overview-file-progress progress">
+                  <div className="dropzone-overview-file-name">{document.documentName}</div>
+                  <div className="dropzone-overview-file-status">Completed</div>
+                  <div className="dropzone-overview-file-progress progress">
                     <div role="progressbar" className="progress-bar bg-success"></div></div>
                 </div>
                 <div className="dropzone-overview-remove"></div>
@@ -119,21 +122,10 @@ export const DragDrop = ({
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  },
-
-  addFileNames: (fileNames: string[]) => {
-    dispatch(addFileNames(fileNames))
-  },
-})
-
 export default withRouter(
   connect(
     (state: IState) => ({
       currentActiveStep: state.user.currentStep,
-    }),
-    mapDispatchToProps
+    })
   )(DragDrop)
 )

@@ -1,161 +1,194 @@
 {
-  "translation": {
-    "button": {
-      "next": "Next",
-      "confirm": "Confirm",
-      "submit": "Submit",
-      "back": "Back"
-    },
-    "header": {
-      "logout": "Logout",
-      "help": "Help"
-    },
-    "landing": {
-      "greetingMsg": "Welcome to Catena-X - The Automotive Network",
-      "heading1": "Please finish the following application form to complete the registration of your company for Catena-X",
-      "point1": "The registration form consists of 5 steps and will take approximately 5-10 minutes of your time",
-      "point2": "To finish the registration in one run, we propose to ensure that you have the commercial register form of your company handy. If you dont have the form, you can invite the right person in your company to support the registration and upload the form.",
-      "point3": "You can pause the registration at any time. Re-connect to your registration status by using the login data which you received via e-mail.",
-      "buttonText1": "Lets get started",
-      "footerText1": "More information can get found in the ",
-      "footerText2": "help section"
-    },
-    "registration": {
-      "greetMessage": "Welcome to Catena-X",
-      "subHeading": "Please finish the company onboarding by finishing the following tasks to join Catena-X - Automotive Network Portal.",
-      "registration": "Registration",
-      "regiStep": "Register to Catena-X by entering all information requested in the following 5 Steps",
-      "regiSubHeading": "Please finish the company onboarding by finishing the following tasks to actively participate and use all functions in the Catena-X Automotive Network Portal.",
-      "companyData": "Company Data",
-      "responsAdmin": "Add Users",
-      "companyRole": "Company Role",
-      "uploadDocument": "Documents",
-      "verifyEntries": "Verify & Submit"
-    },
-    "registrationStepOne": {
-      "verifyCompayDataHeading": "Add your company data",
-      "verifyCompayDataSubHeading": "Please add below your legal entity company data. For a quick and easy data entering, use your company BPN Number to automatically retrieve all necessary information. If you dont have the BPN, you can use the legal entity nam as well or your enter the company data manually.",
-      "seachDatabase": "Search for your company data by BPN or Company Name to autofill the relevant data fields",
-      "enterManualText": "or enter your data manually:",
-      "bpn": "BPN",
-      "legalEntity": "Legal Entity Name",
-      "helperText": "Business-Partner-Number",
-      "registeredName": "Registered name",
-      "organizationAdd": "Organization Address",
-      "streetHouseNumber": "Street with House Number",
-      "postalCode": "Postal Code",
-      "city": "City",
-      "country": "Country",
-      "businessStatus": "Business status",
-      "stateOfActivity": "State of activity /operation",
-      "validFrom": "Valid from",
-      "validUntil": "Valid until",
-      "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
-      "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
-    },
-    "finish": {
-      "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
-      "heading1": "What happens next?",
-      "point1": "You, as well as added Legal Managers, will receive a e-mail with all the details of your registration form",
-      "point2": "We will validate your registration request. As soon as your registration is approved (usually within 2 working days), you will receive a e-mail confirmation",
-      "point3": "As soon as you received the confirmation e-mail, you will be able to connect to the portal and procceed with the technical onboarding"
-    },
-    "companyRole": {
-      "companyRoleStep": "3",
-      "title": "The role of your company",
-      "subTitle": "Please select one or more roles for your company to participant in Catena-X. The company role can always get updated/changed later. Depending on the selected role, the offered portal services might differ.",
-      "role1Label": "Active participant (OEM, supplier, KMU/SME)",
-      "role1": "The role of the 'Active participant' is relevant if you want to:",
-      "role1li1": "provide and /or consume business data (e.g. parts master data)",
-      "role1li2": "use the offered portal business applications",
-      "role2Label": "App provider",
-      "role2": "The role of the 'App Provider' is relevant if you want to:",
-      "role2li1": "provide apps/services within the Catena-X ecosystem",
-      "role3Label": "Operation and infrastructure provider",
-      "role3": "The role of the 'App Provider' is relevant if you:",
-      "role3li1": " provide operations and /or infrastructure services within the Catena-X network",
-      "TermsAndCond": "Please check and agree to the items listed below:",
-      "TermsAndCondSpan1": "Yes, I agree to the",
-      "TermsAndCondSpan2": "terms and conditions",
-      "TermsAndCondSpan3": "of the selected role.",
-      "TermsAndCond2Span1": "Yes, I agree to the",
-      "TermsAndCond2Span2": "security regulations",
-      "TermsAndCond2Span3": "of the selected role."
-    },
-    "documentUpload": {
-      "title": "Upload documents",
-      "step": "4",
-      "subTitle": "Please upload your legal company commercial register document.",
-      "dragDropMessage": "Drag and drop files here, or click to select files",
-      "upload": "Upload",
-      "uploadStatusDone": "Done",
-      "uploadStatusUploading": "Uploading",
-      "uploadStatusError": "Error"
-    },
-    "Responsibility": {
-      "responsAndAdmin": "Responsibility & admin account",
-      "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-      "email": "E-mail address",
-      "emailErrorMessage": "Please enter a valid email address",
-      "role": "User role",
-      "note": "Personal note",
-      "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
-      "titleInvite": "Users Invited",
-      "userInvite": "Users invited",
-      "userInviteSubHeading": "No users defined, please use the form below to add users:",
-      "sentInvite": "Send Invite"
-    },
-    "verifyRegistration": {
-      "title": "Verify your registration data",
-      "subtitle": "Lorem ipsum sapientem ne neque dolor erat,eros solet invidunt duo Quisque aliquid leo. Pretium patrioque sociis eu nihil Cum enim ad.",
-      "heading1": "Company Data",
-      "bpn": "BPN",
-      "legalEntity": "Legal Entity Name",
-      "registeredName": "Registered name",
-      "street": "Street",
-      "city": "PLZ / City",
-      "country": "Country",
-      "stateOfActivity": "State of activity /operation",
-      "validFrom": "Valid from",
-      "validUntil": "Valid until",
-      "ActiveRole": "Active Role",
-      "ActiveParticipant": "Active participant",
-      "UploadedCertificates": "Uploaded certificates"
-    },
-    "ErrorMessage": {
-      "400": "Input value is invalid",
-      "401": "User role load failed. Please contact your administrator.",
-      "403": "User role load failed. Please contact your administrator.",
-      "404": "Service error. Please contact your administrator.",
-      "405": "Method not supported. Please contact your administrator.",
-      "409": "Service error. Please contact your administrator.",
-      "415": "Service error. Please contact your administrator.",
-      "500": "This Page isn't working. Server Error.",
-      "default": "This Page isn't working.",
-      "error1": "Registration form cant get submitted, since company data are missing. Please fill out all company data in Step 1.",
-      "error2": "Registration form cant get submitted. CX Terms and Conditions need to get accepted. Please accept the Terms and Conditions under Step 3 to proceed.",
-      "error3": "Registration form cant get submitted. Please upload your company document under Step 4."
-    },
-    "FooterContent": {
-      "Footer1": "Please enter all the required information before proceeding.",
-      "Footer2": "More information in our",
-      "FooterLink": "help section",
-      "Footer3": "."
-    },
-    "FooterLink": {
-      "link1": "Help",
-      "link2": "Contact",
-      "link3": "Imprint",
-      "link4": "Privacy",
-      "link5": "Terms of Service",
-      "link6": "Cookie Policy",
-      "link7": "Third Party License Notes",
-      "copyright": "Copyright © by Catena-X Automotive Network."
-    },
-    "registrationClosed":{
-      "heading1": "Your registration has already been submitted and closed. We are now reviewing the application.",
-      "heading2": "As soon as this is finished you will receive an email with the access to the Catena-X Portal.",
-      "close": "Close"
-    }
+  "button": {
+    "next": "Next",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "back": "Back"
+  },
+  "header": {
+    "logout": "Logout",
+    "help": "Help"
+  },
+  "landing": {
+    "greetingMsg": "Welcome to Catena-X - The Automotive Network",
+    "heading1": "Please finish the following application form to complete the registration of your company for Catena-X",
+    "point1": "The registration form consists of 5 steps and will take approximately 5-10 minutes of your time",
+    "point2": "To finish the registration in one run, we propose to ensure that you have the commercial register form of your company handy. If you dont have the form, you can invite the right person in your company to support the registration and upload the form.",
+    "point3": "You can pause the registration at any time. Re-connect to your registration status by using the login data which you received via e-mail.",
+    "buttonText1": "Lets get started",
+    "footerText1": "More information can get found in the ",
+    "footerText2": "help section"
+  },
+  "registration": {
+    "greetMessage": "Welcome to Catena-X",
+    "subHeading": "Please finish the company onboarding by finishing the following tasks to join Catena-X - Automotive Network Portal.",
+    "registration": "Registration",
+    "regiStep": "Register to Catena-X by entering all information requested in the following 5 steps",
+    "regiSubHeading": "Please finish the company onboarding by finishing the following tasks to actively participate and use all functions in the Catena-X Automotive Network Portal.",
+    "companyData": "Company Data",
+    "responsAdmin": "Add Users",
+    "companyRole": "Company Role",
+    "uploadDocument": "Documents",
+    "verifyEntries": "Verify & Submit"
+  },
+  "registrationStepOne": {
+    "verifyCompayDataHeading": "Add your company data",
+    "verifyCompayDataSubHeading": "Please add below your legal entity company data. For a quick and easy data entering, use your company BPN Number to automatically retrieve all necessary information. If you dont have the BPN, you can use the legal entity nam as well or your enter the company data manually.",
+    "seachDatabase": "Search for your company data by BPN or Company Name to autofill the relevant data fields",
+    "enterManualText": "or enter your data manually:",
+    "bpn": "BPN",
+    "legalEntity": "Legal Entity Name",
+    "helperText": "Business-Partner-Number",
+    "registeredName": "Registered name",
+    "organizationAdd": "Organization Address",
+    "streetHouseNumber": "Street with House Number",
+    "postalCode": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "businessStatus": "Business status",
+    "stateOfActivity": "State of activity /operation",
+    "validFrom": "Valid from",
+    "validUntil": "Valid until",
+    "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
+    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
+  },
+  "finish": {
+    "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
+    "heading1": "What happens next?",
+    "point1": "You, as well as added Legal Managers, will receive a e-mail with all the details of your registration form",
+    "point2": "We will validate your registration request. As soon as your registration is approved (usually within 2 working days), you will receive a e-mail confirmation",
+    "point3": "As soon as you received the confirmation e-mail, you will be able to connect to the portal and procceed with the technical onboarding"
+  },
+  "companyRole": {
+    "companyRoleStep": "3",
+    "title": "The role of your company",
+    "subTitle": "Please select one or more roles for your company to participant in Catena-X. The company role can always get updated/changed later. Depending on the selected role, the offered portal services might differ.",
+    "role1Label": "Active participant (OEM, supplier, KMU/SME)",
+    "role1": "The role of the 'Active participant' is relevant if you want to:",
+    "role1li1": "provide and /or consume business data (e.g. parts master data)",
+    "role1li2": "use the offered portal business applications",
+    "role2Label": "App provider",
+    "role2": "The role of the 'App Provider' is relevant if you want to:",
+    "role2li1": "provide apps/services within the Catena-X ecosystem",
+    "role3Label": "Operation and infrastructure provider",
+    "role3": "The role of the 'App Provider' is relevant if you:",
+    "role3li1": " provide operations and /or infrastructure services within the Catena-X network",
+    "TermsAndCond": "Please check and agree to the items listed below:",
+    "TermsAndCondSpan1": "Yes, I agree to the",
+    "TermsAndCondSpan2": "terms and conditions",
+    "TermsAndCondSpan3": "of the selected role.",
+    "TermsAndCond2Span1": "Yes, I agree to the",
+    "TermsAndCond2Span2": "security regulations",
+    "TermsAndCond2Span3": "of the selected role."
+  },
+  "documentUpload": {
+    "title": "Upload documents",
+    "step": "4",
+    "subTitle": "Please upload your legal company commercial register document.",
+    "dragDropMessage": "Drag and drop files here, or click to select files",
+    "upload": "Upload",
+    "uploadStatusDone": "Done",
+    "uploadStatusUploading": "Uploading",
+    "uploadStatusError": "Error",
+    "onlyPDFError": "Only .pdf files are allowed",
+    "uploadSuccessMsg": "All files uploaded"
+  },
+  "Responsibility": {
+    "responsAndAdmin": "Responsibility & admin account",
+    "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    "email": "E-mail address",
+    "emailErrorMessage": "Please enter a valid email address",
+    "role": "User role",
+    "note": "Personal note",
+    "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
+    "titleInvite": "Users Invited",
+    "userInvite": "Users invited",
+    "userInviteSubHeading": "No users defined, please use the form below to add users:",
+    "sentInvite": "Send Invite"
+  },
+  "verifyRegistration": {
+    "title": "Verify your registration data",
+    "subtitle": "Lorem ipsum sapientem ne neque dolor erat,eros solet invidunt duo Quisque aliquid leo. Pretium patrioque sociis eu nihil Cum enim ad.",
+    "heading1": "Company Data",
+    "bpn": "BPN",
+    "legalEntity": "Legal Entity Name",
+    "registeredName": "Registered name",
+    "street": "Street",
+    "city": "PLZ / City",
+    "country": "Country",
+    "stateOfActivity": "State of activity /operation",
+    "validFrom": "Valid from",
+    "validUntil": "Valid until",
+    "ActiveRole": "Active Role",
+    "ActiveParticipant": "Active participant",
+    "UploadedCertificates": "Uploaded certificates"
+  },
+  "ErrorMessage": {
+    "400": "Input value is invalid",
+    "401": "User role load failed. Please contact your administrator.",
+    "403": "User role load failed. Please contact your administrator.",
+    "404": "Service error. Please contact your administrator.",
+    "405": "Method not supported. Please contact your administrator.",
+    "409": "Service error. Please contact your administrator.",
+    "415": "Service error. Please contact your administrator.",
+    "500": "This Page isn't working. Server Error.",
+    "default": "This Page isn't working.",
+    "error1": "Registration form cant get submitted, since company data are missing. Please fill out all company data in Step 1.",
+    "error2": "Registration form cant get submitted. CX Terms and Conditions need to get accepted. Please accept the Terms and Conditions under Step 3 to proceed.",
+    "error3": "Registration form cant get submitted. Please upload your company document under Step 4."
+  },
+  "FooterContent": {
+    "Footer1": "Please enter all the required information before proceeding.",
+    "Footer2": "More information in our",
+    "FooterLink": "help section",
+    "Footer3": "."
+  },
+  "FooterLink": {
+    "link1": "Help",
+    "link2": "Contact",
+    "link3": "Imprint",
+    "link4": "Privacy",
+    "link5": "Terms of Service",
+    "link6": "Cookie Policy",
+    "link7": "Third Party License Notes",
+    "copyright": "Copyright © by Catena-X Automotive Network."
+  },
+  "contact": {
+    "title": "Contact",
+    "contactText1": "Content to be added - this is only a test content",
+    "contactText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "imprint": {
+    "title": "Imprint",
+    "imprintText1": "Content to be added - this is only a test content",
+    "imprintText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "privacyText1": "Content to be added - this is only a test content",
+    "privacyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "termsOfServiceText1": "Content to be added - this is only a test content",
+    "termsOfServiceText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "cookiePolicyText1": "Content to be added - this is only a test content",
+    "cookiePolicyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "thirdPartyLicenseNotes": {
+    "title": "Third Party License Notes",
+    "thirdPartyLicenseNotesText1": "Content to be added - this is only a test content",
+    "thirdPartyLicenseNotesText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "footerPages": {
+    "Back": "Back"
+  },
+  "registrationClosed": {
+    "heading1": "Your registration has already been submitted and closed. We are now reviewing the application.",
+    "heading2": "As soon as this is finished you will receive an email with the access to the Catena-X Portal.",
+    "close": "Close"
   }
 }

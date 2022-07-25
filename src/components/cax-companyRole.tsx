@@ -32,40 +32,30 @@ export const CompanyRoleCax = ({
     toast.error(error)
   }
 
-  console.log('allConsentData', allConsentData)
-  console.log('consentData', consentData)
-
-  const checkIfAgreementEnabled = (id) => 
-    allConsentData.agreements.filter((agreement: any) => 
-      agreement.agreementId === id 
+  const checkIfAgreementEnabled = (id) =>
+    allConsentData.agreements.filter((agreement: any) =>
+      agreement.agreementId === id
     )
-    .length >= 0
+      .length >= 0
 
-  const checkIfRoleEnabled = (item) => 
-    consentData.companyRoles.filter((role) => 
-      role === item 
+  const checkIfRoleEnabled = (item) =>
+    consentData.companyRoles.filter((role) =>
+      role === item
     )
-    .length >= 0
+      .length >= 0
 
   const agreementMap = new Map();
-  consentData.agreements.length && consentData.agreements.map((item: any) => 
+  consentData.agreements.length && consentData.agreements.map((item: any) =>
     agreementMap[item.agreementId] = checkIfAgreementEnabled(item.agreementId)
   )
 
-  console.log('agreementMap', agreementMap)
-
   const roleMap = new Map();
-  consentData.companyRoles.length && consentData.companyRoles.map((item: any) => 
+  consentData.companyRoles.length && consentData.companyRoles.map((item: any) =>
     roleMap[item] = checkIfRoleEnabled(item)
   )
 
-  console.log('roleMap', roleMap)
-  
-  const [companyRoleChecked, setCompanyRoleChecked] = useState(roleMap) 
+  const [companyRoleChecked, setCompanyRoleChecked] = useState(roleMap)
   const [agreementChecked, setAgreementChecked] = useState(agreementMap)
-
-  console.log('companyRoleChecked', companyRoleChecked)
-  console.log('agreementChecked', agreementChecked)
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
@@ -75,7 +65,7 @@ export const CompanyRoleCax = ({
   useEffect(() => {
     dispatch(fetchAgreementData())
     dispatch(fetchAgreementConsents(applicationId))
-  },[dispatch]);
+  }, [dispatch]);
 
   // const companyRoleChecked =  new Map();
 
@@ -86,33 +76,55 @@ export const CompanyRoleCax = ({
   const nextClick = () => {
     const companyRoles = Object.keys(companyRoleChecked).filter(item => companyRoleChecked[item]);
     const agreements = Object.keys(agreementChecked)
-                      .map((agreementId) => {
-                        return {
-                          "agreementId": agreementId,
-                          "consentStatus": agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE'
-                        }
-                      })
-    
+      .map((agreementId) => {
+        return {
+          "agreementId": agreementId,
+          "consentStatus": agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE'
+        }
+      })
+
     const data = {
       "companyRoles": companyRoles,
       "agreements": agreements
     }
 
-    console.log('data', data)
-    dispatch(updateAgreementConsents({applicationId, data}))
+    dispatch(updateAgreementConsents({ applicationId, data }))
     addCurrentStep(currentActiveStep + 1)
   }
 
   const handleAgreementCheck = (id) => {
-    const updatedMap = {...agreementChecked}
+    const updatedMap = { ...agreementChecked }
     updatedMap[id] = !updatedMap[id]
     setAgreementChecked(updatedMap)
   }
 
   const handleCompanyRoleCheck = (id) => {
-    const updatedMap = {...companyRoleChecked}
+    const updatedMap = { ...companyRoleChecked }
     updatedMap[id] = !updatedMap[id]
     setCompanyRoleChecked(updatedMap)
+  }
+
+  const renderTermsSection = (role) => {
+    return (
+      <div>
+        <ul>
+          {
+            role.agreementIds.map((id, key) => (
+              <li key={key} className="agreement-li">
+                <input
+                  type="checkbox"
+                  name={id}
+                  className="regular-checkbox agreement-check"
+                  onChange={() => handleAgreementCheck(id)}
+                  checked={agreementChecked[id]}
+                />
+                {allConsentData.agreements.map((agreement: any) => { if (agreement.agreementId == id) return agreement.name })}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    )
   }
 
   return (
@@ -145,24 +157,42 @@ export const CompanyRoleCax = ({
                   </div>
                   <div className="col-11">
                     <label>{role.descriptions.en}</label>
-                    <div>
-                      <ul>
-                        {
-                          role.agreementIds.map((id, key) => (
-                            <li key={key} className="agreement-li">
-                              <input
-                                type="checkbox"
-                                name={id}
-                                className="regular-checkbox agreement-check"
-                                onChange={() => handleAgreementCheck(id)}
-                                checked={agreementChecked[id]}
-                              />
-                              {allConsentData.agreements.map((agreement: any) => { if(agreement.agreementId == id) return agreement.name} )}
+                    {role.companyRole === 'ACTIVE_PARTICIPANT' &&
+                      (companyRoleChecked['ACTIVE_PARTICIPANT'] ?
+                        renderTermsSection(role)
+                        :
+                        <>
+                          <ul>
+                            <li>
+                              provides and /or consumes business data (e.g. parts master data)
                             </li>
-                          ))
-                          }
-                      </ul>
-                    </div>
+                            <li>
+                              actively participates in one or more use cases
+                            </li>
+                          </ul>
+                          <p className="mb-0">We differentiate in two types:</p>
+                          <ul>
+                            <li>
+                              self-managed (e.g. own IdP)
+                            </li>
+                            <li>
+                              Catena-X managed (e.g. IdP-Integration)
+                            </li>
+                          </ul>
+                        </>
+                      )
+                    }
+                    {
+                      role.companyRole === 'APP_PROVIDER' &&
+                      (companyRoleChecked['APP_PROVIDER'] ?
+                        renderTermsSection(role)
+                        :
+                        <ul>
+                          <li>
+                            provides apps (or other software services) within the Catena-X ecosystem including pricing, billing, provisioning or similar
+                          </li>
+                        </ul>)
+                    }
                   </div>
                 </Row>
               </div>
