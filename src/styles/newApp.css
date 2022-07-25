@@ -723,3 +723,52 @@ textarea {
 .agreement-check{
   margin: 5px;
 }
+
+.input-search {
+  margin: 50px 0px !important;
+  position: relative;
+}
+
+.input-search::before {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAQJJREFUKBWVkr2uQUEUhf3ET6GRaC5aFRoJKrf1BKpb8SwqovYGXkCj00k0QnRKEYkILYobvpUYmeMMyVnJl7P3mjN7Zu9zwiGv2qRFyMMSRrAFp6JPN8XzBj+wgDkUYAg7WINTYdwpDECxrRLJHeq2accdkgm8bzTvNAg2EDOGeUYI1KNO1gkuzTA1g8T7ojbn4ONQWPuHPWgeHmnzCqoe15tkSNPgPEAn68oVcOmA2XMtGK9FoE/VhOTTVNExqLCGZnxCv2pYauEC6lF0oQxX6IOvb7yX9NPEQafan+aPXDdQC18LsO6Tip5BBY6gIQaSbnMCFRCBZRcIvFkbsvCr4AFGOCxQy+JdGQAAAABJRU5ErkJggg==);
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  opacity: 0.6;
+}
+
+.input-search>input {
+  padding: 0px 10px 0px 30px;
+}
+
+.data-section {
+  margin-top: -14% !important;
+}
+
+.help-section {
+  height: 600px;
+  overflow: auto;
+  padding: 50px 50px 0px 30px !important;
+  border-radius: 24px;
+}
+
+.help-menu {
+  padding: 0 !important;
+  text-decoration: none !important;
+  font-size: 16px;
+}
+
+.help-menu:before {
+  content: "\2B9A";
+  font-size: 16px;
+  padding-right: 10px;
+}
+
+.selected {
+  font-weight: bold;
+  color: white;
+}
+
+.answer {
+  padding: 10px 0px 40px 0px;
+}

@@ -1,180 +1,173 @@
 {
-  "translation": {
-    "button": {
-      "next": "Weiter",
-      "confirm": "Bestätigen",
-      "submit": "Senden",
-      "back": "zurück"
-    },
-    "header": {
-      "logout": "Ausloggen",
-      "help": "Hilfe"
-    },
-    "landing": {
-      "greetingMsg": "Willkommen bei Catena-X – The Automotive Network",
-      "heading1": "Bitte füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens für Catena-X abzuschließen.",
-      "point1": "Das Anmeldeformular besteht aus 5 Schritten, für welche Sie circa 5-10 Minuten benötigen werden.",
-      "point2": "Um die Registrierung direkt abschließen zu können, wird das Handelsregister benötigt sowie eine Bestätigung der Catena-X Terms & Conditions.",
-      "point3": "Die Registrierung kann zu jedem Zeitpunkt pausiert werden. Mit ihren Login Daten können Sie zu einem späteren Zeitpunkt zum letzten Status der Registrierung zurückkehren und fortfahren.",
-      "buttonText1": "Registrierung starten",
-      "footerText1": "Weitere Informationen finden Sie unter ",
-      "footerText2": "Hilfe"
-    },
-    "registration": {
-      "greetMessage": "Willkommen bei Catena-X – das Automotive Network",
-      "subHeading": "Füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens abzuschließen und Teil von Catena-X zu werden.",
-      "registration": "Registration",
-      "regiStep": "Füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens abzuschließen und Teil von Catena-X zu werden.",
-      "regiSubHeading": "",
-      "companyData": "Rechtsträger",
-      "responsAdmin": "Benutzer hinzufügen",
-      "companyRole": "Unternehmensrolle",
-      "uploadDocument": "Dokumente",
-      "verifyEntries": "Prüfen & Senden"
-    },
-    "registrationStepOne": {
-      "verifyCompayDataHeading": "Unternehmensdaten",
-      "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der BPN Nummer. Sollten Sie die BPN nicht zur Hand haben, dann können sie auch mit dem Namen ihres Unternehmens suchen.",
-      "seachDatabase": "Suche (mit Hilfe der BPN oder dem Unternehmensnamen)",
-      "enterManualText": "oder füllen Sie die relevanten Felder manuell aus:",
-      "bpn": "BPN",
-      "legalEntity": "Rechtsträger",
-      "helperText": "Business-Partner-Nummer",
-      "registeredName": "Eingetragener Unternehmensname",
-      "organizationAdd": "Organisationsadresse",
-      "streetHouseNumber": "Straße und Hausnummer",
-      "postalCode": "Postleitzahl",
-      "city": "Stadt",
-      "country": "Land",
-      "businessStatus": "Geschäftsstatus",
-      "stateOfActivity": "State of activity /operation",
-      "validFrom": "Gültig ab",
-      "validUntil": "Gültig bis",
-      "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
-      "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
-    },
-    "finish": {
-      "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
-      "heading1": "Nächste Schritte",
-      "point1": "Alle Registrierungsteilnehmer ihrer Firma erhalten eine E-Mail mit der Bestätigung und den nächsten Schritten",
-      "point2": "Catena-X prüft in der Zwischenzeit ihren Registrierungsanfrage. Sobald die Prüfung erfolgreich beendet ist, werden wir Ihnen eine Email mit dem direkten Zugang zum Netwzrk senden.",
-      "point3": "Sobald Sie diese E-Mail erhalten haben können Sie sich im Portal anmelden und die technische ntegration starten."
-    },
-    "companyRole": {
-      "title": "Rolle des Unternehmens",
-      "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen."
-    },
-    "documentUpload": {
-      "title": "Dokumente hochladen",
-      "subTitle": "Bitte laden Sie Ihren rechtsgültigen Handelsregisterauszug hoch.",
-      "dragDropMessage": "Ziehen Sie Dateien hierher und legen Sie sie dort ab, oder klicken Sie, um Dateien auszuwählen",
-      "upload": "Hochladen",
-      "uploadStatusDone": "Done",
-      "uploadStatusUploading": "Uploading",
-      "uploadStatusError": "Fehler",
-      "onlyPDFError": "Only .pdf files are allowed",
-      "uploadSuccessMsg": "All files uploaded"
-    },
-    "Responsibility": {
-      "responsAndAdmin": "Responsibility & admin account",
-      "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-      "email": "E-mail address",
-      "emailErrorMessage": "Please enter a valid email address",
-      "role": "User role",
-      "note": "Personal note",
-      "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
-      "titleInvite": "Users Invited",
-      "userInvite": "Users invited",
-      "userInviteSubHeading": "No users defined, please use the form below to add users:",
-      "sentInvite": "Send Invite"
-    },
-    "verifyRegistration": {
-      "title": "Verify your registration data",
-      "subtitle": "Lorem ipsum sapientem ne neque dolor erat,eros solet invidunt duo Quisque aliquid leo. Pretium patrioque sociis eu nihil Cum enim ad.",
-      "heading1": "Company Data",
-      "bpn": "BPN",
-      "legalEntity": "Rechtsträger",
-      "registeredName": "Eingetragener Unternehmensname",
-      "street": "Straße",
-      "city": "Stadt",
-      "country": "Land",
-      "businessStatus": "Geschäftsstatus",
-      "stateOfActivity": "State of activity /operation",
-      "validFrom": "Gültig ab",
-      "validUntil": "Gültig bis"
-    },
-    "ErrorMessage": {
-      "400": "Input value is invalid",
-      "401": "User role load failed. Please contact your administrator.",
-      "403": "User role load failed. Please contact your administrator.",
-      "404": "Service error. Please contact your administrator.",
-      "405": "Method not supported. Please contact your administrator.",
-      "409": "Service error. Please contact your administrator.",
-      "415": "Service error. Please contact your administrator.",
-      "500": "This Page isn't working. Server Error.",
-      "default": "This Page isn't working.",
-      "error1": "Registration form cant get submitted, since company data are missing. Please fill out all company data in Step 1.",
-      "error2": "Registration form cant get submitted. CX Terms and Conditions need to get accepted. Please accept the Terms and Conditions under Step 3 to proceed.",
-      "error3": "Registration form cant get submitted. Please upload your company document under Step 4."
-    },
-    "FooterContent": {
-      "Footer1": "Please enter all the required information before proceeding.",
-      "Footer2": "More information in our",
-      "FooterLink": "help section",
-      "Footer3": "."
-    },
-    "FooterLink": {
-      "link1": "Help",
-      "link2": "Contact",
-      "link3": "Imprint",
-      "link4": "Privacy",
-      "link5": "Terms of Service",
-      "link6": "Cookie Policy",
-      "link7": "Third Party License Notes",
-      "copyright": "Copyright © by Catena-X Automotive Network."
-    },
-    "help": {
-      "title": "Help",
-      "helpText1": "Content to be added - this is only a test content",
-      "helpText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "contact": {
-      "title": "Contact",
-      "contactText1": "Content to be added - this is only a test content",
-      "contactText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "imprint": {
-      "title": "Imprint",
-      "imprintText1": "Content to be added - this is only a test content",
-      "imprintText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "privacy": {
-      "title": "Privacy",
-      "privacyText1": "Content to be added - this is only a test content",
-      "privacyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "termsOfService": {
-      "title": "Terms of Service",
-      "termsOfServiceText1": "Content to be added - this is only a test content",
-      "termsOfServiceText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "cookiePolicy": {
-      "title": "Cookie Policy",
-      "cookiePolicyText1": "Content to be added - this is only a test content",
-      "cookiePolicyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "thirdPartyLicenseNotes": {
-      "title": "Third Party License Notes",
-      "thirdPartyLicenseNotesText1": "Content to be added - this is only a test content",
-      "thirdPartyLicenseNotesText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    "footerPages": {
-      "Back": "Back"
-    },
-    "registrationClosed":{
-      "heading1": "Ihre Registrierung wurde bereits übermittelt und abgeschlossen. Wir prüfen jetzt den Antrag.",
-      "heading2": "Sobald dies abgeschlossen ist, erhalten Sie eine E-Mail mit dem Zugang zum Catena-X Portal.",
-      "close": "Nah dran"
-    }
+  "button": {
+    "next": "Weiter",
+    "confirm": "Bestätigen",
+    "submit": "Senden",
+    "back": "zurück"
+  },
+  "header": {
+    "logout": "Ausloggen",
+    "help": "Hilfe"
+  },
+  "landing": {
+    "greetingMsg": "Willkommen bei Catena-X – The Automotive Network",
+    "heading1": "Bitte füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens für Catena-X abzuschließen.",
+    "point1": "Das Anmeldeformular besteht aus 5 Schritten, für welche Sie circa 5-10 Minuten benötigen werden.",
+    "point2": "Um die Registrierung direkt abschließen zu können, wird das Handelsregister benötigt sowie eine Bestätigung der Catena-X Terms & Conditions.",
+    "point3": "Die Registrierung kann zu jedem Zeitpunkt pausiert werden. Mit ihren Login Daten können Sie zu einem späteren Zeitpunkt zum letzten Status der Registrierung zurückkehren und fortfahren.",
+    "buttonText1": "Registrierung starten",
+    "footerText1": "Weitere Informationen finden Sie unter ",
+    "footerText2": "Hilfe"
+  },
+  "registration": {
+    "greetMessage": "Willkommen bei Catena-X – das Automotive Network",
+    "subHeading": "Füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens abzuschließen und Teil von Catena-X zu werden.",
+    "registration": "Registration",
+    "regiStep": "Füllen Sie das folgende Antragsformular aus, um die Registrierung Ihres Unternehmens abzuschließen und Teil von Catena-X zu werden.",
+    "regiSubHeading": "",
+    "companyData": "Rechtsträger",
+    "responsAdmin": "Benutzer hinzufügen",
+    "companyRole": "Unternehmensrolle",
+    "uploadDocument": "Dokumente",
+    "verifyEntries": "Prüfen & Senden"
+  },
+  "registrationStepOne": {
+    "verifyCompayDataHeading": "Unternehmensdaten",
+    "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der BPN Nummer. Sollten Sie die BPN nicht zur Hand haben, dann können sie auch mit dem Namen ihres Unternehmens suchen.",
+    "seachDatabase": "Suche (mit Hilfe der BPN oder dem Unternehmensnamen)",
+    "enterManualText": "oder füllen Sie die relevanten Felder manuell aus:",
+    "bpn": "BPN",
+    "legalEntity": "Rechtsträger",
+    "helperText": "Business-Partner-Nummer",
+    "registeredName": "Eingetragener Unternehmensname",
+    "organizationAdd": "Organisationsadresse",
+    "streetHouseNumber": "Straße und Hausnummer",
+    "postalCode": "Postleitzahl",
+    "city": "Stadt",
+    "country": "Land",
+    "businessStatus": "Geschäftsstatus",
+    "stateOfActivity": "State of activity /operation",
+    "validFrom": "Gültig ab",
+    "validUntil": "Gültig bis",
+    "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
+    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
+  },
+  "finish": {
+    "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
+    "heading1": "Nächste Schritte",
+    "point1": "Alle Registrierungsteilnehmer ihrer Firma erhalten eine E-Mail mit der Bestätigung und den nächsten Schritten",
+    "point2": "Catena-X prüft in der Zwischenzeit ihren Registrierungsanfrage. Sobald die Prüfung erfolgreich beendet ist, werden wir Ihnen eine Email mit dem direkten Zugang zum Netwzrk senden.",
+    "point3": "Sobald Sie diese E-Mail erhalten haben können Sie sich im Portal anmelden und die technische ntegration starten."
+  },
+  "companyRole": {
+    "title": "Rolle des Unternehmens",
+    "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen."
+  },
+  "documentUpload": {
+    "title": "Dokumente hochladen",
+    "subTitle": "Bitte laden Sie Ihren rechtsgültigen Handelsregisterauszug hoch.",
+    "dragDropMessage": "Ziehen Sie Dateien hierher und legen Sie sie dort ab, oder klicken Sie, um Dateien auszuwählen",
+    "upload": "Hochladen",
+    "uploadStatusDone": "Done",
+    "uploadStatusUploading": "Uploading",
+    "uploadStatusError": "Fehler",
+    "onlyPDFError": "Only .pdf files are allowed",
+    "uploadSuccessMsg": "All files uploaded"
+  },
+  "Responsibility": {
+    "responsAndAdmin": "Responsibility & admin account",
+    "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    "email": "E-mail address",
+    "emailErrorMessage": "Please enter a valid email address",
+    "role": "User role",
+    "note": "Personal note",
+    "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
+    "titleInvite": "Users Invited",
+    "userInvite": "Users invited",
+    "userInviteSubHeading": "No users defined, please use the form below to add users:",
+    "sentInvite": "Send Invite"
+  },
+  "verifyRegistration": {
+    "title": "Verify your registration data",
+    "subtitle": "Lorem ipsum sapientem ne neque dolor erat,eros solet invidunt duo Quisque aliquid leo. Pretium patrioque sociis eu nihil Cum enim ad.",
+    "heading1": "Company Data",
+    "bpn": "BPN",
+    "legalEntity": "Rechtsträger",
+    "registeredName": "Eingetragener Unternehmensname",
+    "street": "Straße",
+    "city": "Stadt",
+    "country": "Land",
+    "businessStatus": "Geschäftsstatus",
+    "stateOfActivity": "State of activity /operation",
+    "validFrom": "Gültig ab",
+    "validUntil": "Gültig bis"
+  },
+  "ErrorMessage": {
+    "400": "Input value is invalid",
+    "401": "User role load failed. Please contact your administrator.",
+    "403": "User role load failed. Please contact your administrator.",
+    "404": "Service error. Please contact your administrator.",
+    "405": "Method not supported. Please contact your administrator.",
+    "409": "Service error. Please contact your administrator.",
+    "415": "Service error. Please contact your administrator.",
+    "500": "This Page isn't working. Server Error.",
+    "default": "This Page isn't working.",
+    "error1": "Registration form cant get submitted, since company data are missing. Please fill out all company data in Step 1.",
+    "error2": "Registration form cant get submitted. CX Terms and Conditions need to get accepted. Please accept the Terms and Conditions under Step 3 to proceed.",
+    "error3": "Registration form cant get submitted. Please upload your company document under Step 4."
+  },
+  "FooterContent": {
+    "Footer1": "Please enter all the required information before proceeding.",
+    "Footer2": "More information in our",
+    "FooterLink": "help section",
+    "Footer3": "."
+  },
+  "FooterLink": {
+    "link1": "Help",
+    "link2": "Contact",
+    "link3": "Imprint",
+    "link4": "Privacy",
+    "link5": "Terms of Service",
+    "link6": "Cookie Policy",
+    "link7": "Third Party License Notes",
+    "copyright": "Copyright © by Catena-X Automotive Network."
+  },
+  "contact": {
+    "title": "Contact",
+    "contactText1": "Content to be added - this is only a test content",
+    "contactText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "imprint": {
+    "title": "Imprint",
+    "imprintText1": "Content to be added - this is only a test content",
+    "imprintText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "privacyText1": "Content to be added - this is only a test content",
+    "privacyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "termsOfServiceText1": "Content to be added - this is only a test content",
+    "termsOfServiceText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "cookiePolicyText1": "Content to be added - this is only a test content",
+    "cookiePolicyText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "thirdPartyLicenseNotes": {
+    "title": "Third Party License Notes",
+    "thirdPartyLicenseNotesText1": "Content to be added - this is only a test content",
+    "thirdPartyLicenseNotesText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  },
+  "footerPages": {
+    "Back": "Back"
+  },
+  "registrationClosed": {
+    "heading1": "Ihre Registrierung wurde bereits übermittelt und abgeschlossen. Wir prüfen jetzt den Antrag.",
+    "heading2": "Sobald dies abgeschlossen ist, erhalten Sie eine E-Mail mit dem Zugang zum Catena-X Portal.",
+    "close": "Nah dran"
   }
 }
