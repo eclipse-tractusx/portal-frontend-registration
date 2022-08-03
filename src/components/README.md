@@ -1,20 +1,9 @@
-# Overview
+# Content Overview
 
-### alertdialog
-
-Question: is this the alert component? If so, we should also put this into a own folder for design components
 
 ### authinfo
 
 tbd
-
-### bulletList
-
-Question: is this the bulletlist component? If so, we should also put this into a own folder for design components
-
-### button
-
-Question: is this the button component? If so, we should also put this into a own folder for design components
 
 ### cax-companyData
 
@@ -38,77 +27,75 @@ Registration Service Step "Revisite your data"
 Registration Service Step "Invite Users for the Registration"
 TASK: multi language implementation still missing for a number of tags
 
-### certificate
-
-TASK: Functional check needed, not visible whats behind that
-
-### companyrole
-
-TASK: Old Development, can get deleted
-
 ### dragdrop
 
 TASK: rename to "Registration Step Document Upload"
-
-### emailregister
-
-This function is not used anymore - in future we plan to over the own registration to CX, but thats not in scope for 2022. Due to that, I suggest we delete this section. There isnt much code loss
 
 ### finish
 
 TASK: Rename to Registration Closure
 
-### fother
-
-This is the static footer of the Registration pages.
-TASK: Keep, but commenting to be adjusted / enhanced
-
-### header
-
-TASK: Old Development, can get deleted
-
-### home
-
-TASK: Old Development, can get deleted
-
-### indentity
-
-TASK: Old Development, can get deleted. However we will need a similar choice in the portal - we should see if we can easily move this.
-
 ### landing
 
-TASK: Rename to Registration Intro
+Registration Intro Page
 
-### login
+### landingtest
 
-Question: what is that? I dont remeber that we have such a login screen
+test file for the landing page
 
-### logo
+### registrationClosed
 
-TASK: Logo needs to get added to a png / picture component area - not in the middle of the developments
+Registration "Closed" Status screen for companies where the registration is already submitted for validation.
 
-### onboarding
+### unauthorized
 
-TASK: Old Development, can get deleted
+Error page if user is unaothrized for the page/service
 
-### onboardingsubmit
+### verifyRegistration
 
-TASK: Old Development, can get deleted
+Registration error handling for Step 5
 
-### registration
 
-TASK: recheck if this is still used - I guess we can delete it.
 
-### registrationoneid
+# Components
 
-This is the business partner invite. Triggered by the Company Admin.
-TASK: Rename to "Invite_Business_Partner"
-TASK: Keep, will get redesigned and new implemented, but function and content to be kept
+#### bulletList
 
-### responsibilities
+Question: is this the bulletlist component? If so, we should also put this into a own folder for design components
 
-TASK: Old Development, can get deleted
+#### button
 
-### termsnconditions
+Question: is this the button component? If so, we should also put this into a own folder for design components
 
-TASK: recheck if this is still used - I guess we can delete it.
+#### dragdropFiles
+
+Drag & Drop File function
+
+#### stepper
+
+Stepper component
+
+#### footerButton
+
+Registration Overlay Button config for "Next", "Submit" and "Back"
+
+
+
+# Footer Page
+
+## Description
+
+The footer pages and content are managed in single files. Each file is handling a footer sub-page. Below the different page files are listed
+
+<img width="721" alt="image" src="https://user-images.githubusercontent.com/94133633/182540141-e178c22d-3df9-4a7a-b819-c2ad2a32ab21.png">
+
+* __footer:__ Footer component and navigation links
+
+* __termsOfService:__ Content page "Terms of Service"
+* __thirdPartyLicenseNotes:__ Content page "3rd Party License Notes"
+* __privacy:__ Content page "privacy"
+* __imprint:__ Content page "imprint"
+* __cookiePolicy:__ Content page "Cookie Policy"
+* __help:__ Content page "Help"
+* __contact:__ Content page "Contact"
+
