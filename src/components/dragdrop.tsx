@@ -15,6 +15,8 @@ import { fetchDocuments, saveDocument } from '../state/features/applicationDocum
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
 import { RequestState } from '../types/MainTypes'
+import { VERIFY } from '../state/features/application/types'
+import { updateStatus } from '../state/features/application/actions'
 
 interface DragDropProps {
   currentActiveStep: number
@@ -67,6 +69,10 @@ export const DragDrop = ({
   }
 
   const nextClick = () => {
+    if (obj) {
+      const statusData = { id: obj['applicationId'], status: VERIFY };
+      dispatch(updateStatus(statusData));
+    }
     dispatch(addCurrentStep(currentActiveStep + 1))
   }
 

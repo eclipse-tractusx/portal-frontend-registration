@@ -59,3 +59,4 @@ export const CREATED = 'CREATED';
 export const SUBMITTED = 'SUBMITTED';
 export const CONFIRMED = 'CONFIRMED';
 export const DECLINED = 'DECLINED';
+export const VERIFY = 'VERIFY';
