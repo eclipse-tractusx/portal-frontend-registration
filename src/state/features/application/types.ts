@@ -13,7 +13,7 @@ export type CompanyDetails = {
   streetAdditional: string
   streetName: string
   streetNumber: string
-  zipCode: number
+  zipCode: string
   countryAlpha2Code: string
   countryDe: string
   taxId: string
@@ -48,7 +48,7 @@ export const InitialCompanyDetail = {
   streetAdditional: '',
   streetName: '',
   streetNumber: '',
-  zipCode: 0,
+  zipCode: '',
   countryAlpha2Code: '',
   countryDe: '',
   taxId: '',
