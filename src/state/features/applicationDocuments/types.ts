@@ -1,4 +1,4 @@
-import { RequestState } from "../../../types/MainTypes"
+import { RequestState } from '../../../types/MainTypes'
 
 export type DocumentData = {
   documentId: string
@@ -9,10 +9,11 @@ export type DocumentsState = {
   documents: DocumentData[]
   request: RequestState
   uploadRequest: RequestState
+  deleteRequest: RequestState
   error: string
 }
 
 export const DocumentDataValue = {
   documentId: '',
-  documentName: ''
+  documentName: '',
 }

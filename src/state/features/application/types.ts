@@ -54,9 +54,9 @@ export const InitialCompanyDetail = {
   taxId: '',
 }
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';
-export const CREATED = 'CREATED';
-export const SUBMITTED = 'SUBMITTED';
-export const CONFIRMED = 'CONFIRMED';
-export const DECLINED = 'DECLINED';
-export const VERIFY = 'VERIFY';
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
+export const CREATED = 'CREATED'
+export const SUBMITTED = 'SUBMITTED'
+export const CONFIRMED = 'CONFIRMED'
+export const DECLINED = 'DECLINED'
+export const VERIFY = 'VERIFY'

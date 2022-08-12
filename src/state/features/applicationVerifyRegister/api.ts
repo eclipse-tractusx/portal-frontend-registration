@@ -32,5 +32,4 @@ export class ApplicationApi extends HttpClient {
       RequestService.getHeaders()
     )
   }
-
 }

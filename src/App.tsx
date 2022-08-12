@@ -63,8 +63,14 @@ const App = () => {
         <Route path="/privacy" component={() => <Privacy />} />
         <Route path="/termsOfService" component={() => <TermsOfService />} />
         <Route path="/cookiePolicy" component={() => <CookiePolicy />} />
-        <Route path="/thirdPartyLicenseNotes" component={() => <ThirdPartyLicenseNotes />} />
-        <Route path="/registration-closed" component={() => <RegistrationClosed />} />
+        <Route
+          path="/thirdPartyLicenseNotes"
+          component={() => <ThirdPartyLicenseNotes />}
+        />
+        <Route
+          path="/registration-closed"
+          component={() => <RegistrationClosed />}
+        />
       </Switch>
     </BrowserRouter>
   )

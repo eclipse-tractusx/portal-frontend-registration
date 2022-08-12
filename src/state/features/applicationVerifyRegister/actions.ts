@@ -5,10 +5,14 @@ const fetchRegistrationData = createAsyncThunk(
   'registration/application/registrationData',
   async (applicationId: string) => {
     try {
-      return await ApplicationApi.getInstance().getRegistrationData(applicationId)
+      return await ApplicationApi.getInstance().getRegistrationData(
+        applicationId
+      )
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('Application ID not existing. Please contact the administrator.')
+      throw Error(
+        'Application ID not existing. Please contact the administrator.'
+      )
     }
   }
 )
@@ -20,7 +24,9 @@ const saveRegistration = createAsyncThunk(
       return await ApplicationApi.getInstance().submitRegistration()
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('There is some error while saving registration data. Please contact the administrator.')
+      throw Error(
+        'There is some error while saving registration data. Please contact the administrator.'
+      )
     }
   }
 )

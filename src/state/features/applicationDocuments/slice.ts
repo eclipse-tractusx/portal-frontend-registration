@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchDocuments, saveDocument } from './actions'
+import { fetchDocuments, saveDocument, deleteDocument } from './actions'
 import { DocumentsState } from './types'
 
 const initialState: DocumentsState = {
   documents: [],
   request: RequestState.NONE,
   uploadRequest: RequestState.NONE,
+  deleteRequest: RequestState.NONE,
   error: null,
 }
 
@@ -16,7 +17,6 @@ const documentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
@@ -52,6 +52,21 @@ const documentSlice = createSlice({
     builder.addCase(saveDocument.rejected, (state, action) => ({
       ...state,
       uploadRequest: RequestState.ERROR,
+      error: action.error.message as string,
+    }))
+    builder.addCase(deleteDocument.pending, (state) => ({
+      ...state,
+      deleteRequest: RequestState.SUBMIT,
+      error: '',
+    }))
+    builder.addCase(deleteDocument.fulfilled, (state) => ({
+      ...state,
+      deleteRequest: RequestState.OK,
+      error: '',
+    }))
+    builder.addCase(deleteDocument.rejected, (state, action) => ({
+      ...state,
+      deleteRequest: RequestState.ERROR,
       error: action.error.message as string,
     }))
   },

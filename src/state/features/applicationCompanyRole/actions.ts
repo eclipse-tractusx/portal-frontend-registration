@@ -27,18 +27,14 @@ const fetchAgreementConsents = createAsyncThunk(
 
 const updateAgreementConsents = createAsyncThunk(
   'registration/application/user/updateAgreementConsents',
-  async ({
-    applicationId,
-    data,
-  }: {
-    applicationId: string
-    data: any
-  }) => {
+  async ({ applicationId, data }: { applicationId: string; data: any }) => {
     try {
       return await API.getInstance().putAgreementConsent(applicationId, data)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('Application ID not existing. Please contact the administrator.')
+      throw Error(
+        'Application ID not existing. Please contact the administrator.'
+      )
     }
   }
 )
