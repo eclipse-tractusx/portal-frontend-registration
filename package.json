@@ -1,6 +1,6 @@
 {
   "name": "product-portal-frontend-registration",
-  "version": "0.4.5",
+  "version": "0.5.2",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
@@ -17,7 +17,6 @@
     "deploy": "export CAX_ENV=${CAX_ENV:-dev003} && az webapp deployment source config-zip --resource-group catenax-${CAX_ENV}-rg --name catenax-${CAX_ENV}-app-onboarding --src ./dist/build.zip"
   },
   "dependencies": {
-    "@fluentui/react": "^8.67.1",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/react-redux": "^7.1.22",
     "@types/redux-actions": "^2.6.2",
