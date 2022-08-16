@@ -69,7 +69,7 @@ export const CompanyDataCax = ({
     setStreetHouseNumber(
       details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
     )
-    setPostalCode(parseInt(details?.[0]?.addresses?.[0]?.postCodes[0]?.value))
+    setPostalCode(details?.[0]?.addresses?.[0]?.postCodes[0]?.value)
     setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
     setCountry(details?.[0]?.addresses?.[0]?.country?.name)
   }
@@ -225,7 +225,7 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => setPostalCode(parseInt(e.target.value))}
+                onChange={(e) => setPostalCode(e.target.value)}
               />
             </div>
 
