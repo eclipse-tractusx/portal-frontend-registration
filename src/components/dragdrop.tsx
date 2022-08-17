@@ -44,20 +44,14 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     error: documentError,
     deleteRequest,
   } = useSelector(stateSelector)
-  console.log('documents', documents)
-  console.log('uploadRequest', uploadRequest)
-  console.log('documentError', documentError)
-  console.log('deleteRequest', deleteRequest)
 
-  if (deleteRequest === RequestState.OK){
+  if (deleteRequest === RequestState.OK)
     toast.success(t('documentUpload.deleteSuccess'))
-  }
   else if (deleteRequest === RequestState.ERROR)
     toast.error(t('documentUpload.deleteError'))
 
-  if (uploadRequest === RequestState.OK && !documentError){
+  if (uploadRequest === RequestState.OK && !documentError)
     dispatch(addFileNames(allFiles.map((file) => file.file.name)))
-  }
   else if (uploadRequest === RequestState.ERROR && documentError)
     toast.error(t('documentUpload.onlyPDFError'))
 
