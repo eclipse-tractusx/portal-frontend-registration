@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Api } from './api'
+import { DocumentType } from './types'
 
 const fetchDocuments = createAsyncThunk(
   'registration/application/user/fetchDocuments',
@@ -7,7 +8,7 @@ const fetchDocuments = createAsyncThunk(
     try {
       return await Api.getInstance().getDocuments(
         applicationId,
-        'CX_FRAME_CONTRACT'
+        DocumentType.COMMERCIAL_REGISTER_EXTRACT,
       )
     } catch (error: unknown) {
       console.error('api call error:', error)
@@ -28,7 +29,7 @@ const saveDocument = createAsyncThunk(
     try {
       return await Api.getInstance().postDocument(
         applicationId,
-        'CX_FRAME_CONTRACT',
+        DocumentType.COMMERCIAL_REGISTER_EXTRACT,
         document.file
       )
     } catch (error: unknown) {
