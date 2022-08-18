@@ -16,7 +16,6 @@ const documentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
@@ -39,21 +38,52 @@ const documentSlice = createSlice({
       uploadRequest: RequestState.NONE,
       error: action.error.message as string,
     }))
-    builder.addCase(saveDocument.pending, (state) => ({
-      ...state,
-      uploadRequest: RequestState.SUBMIT,
-      error: '',
-    }))
-    builder.addCase(saveDocument.fulfilled, (state) => ({
+    builder.addCase(saveDocument.pending, (state, action) => {
+      return {
+        ...state,
+        uploadRequest: RequestState.SUBMIT,
+        error: '',
+        documents: [
+          {
+            status: 'pending',
+            documentId: '',
+            documentName: action.meta.arg.document.name,
+            temporaryId: action.meta.arg.temporaryId,
+          },
+          ...state.documents,
+        ],
+      }
+    })
+    builder.addCase(saveDocument.fulfilled, (state, action) => ({
       ...state,
       uploadRequest: RequestState.OK,
       error: '',
+      documents: state.documents.map((doc) => {
+        if (doc?.temporaryId === action.meta.arg.temporaryId) {
+          return {
+            ...doc,
+            status: 'success',
+          }
+        }
+        return doc
+      }),
     }))
-    builder.addCase(saveDocument.rejected, (state, action) => ({
-      ...state,
-      uploadRequest: RequestState.ERROR,
-      error: action.error.message as string,
-    }))
+    builder.addCase(saveDocument.rejected, (state, action) => {
+      return {
+        ...state,
+        uploadRequest: RequestState.ERROR,
+        error: action.error.message as string,
+        documents: state.documents.map((doc) => {
+          if (doc?.temporaryId === action.meta.arg.temporaryId) {
+            return {
+              ...doc,
+              status: 'error',
+            }
+          }
+          return doc
+        }),
+      }
+    })
   },
 })
 

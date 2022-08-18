@@ -1,8 +1,10 @@
-import { RequestState } from "../../../types/MainTypes"
+import { RequestState } from '../../../types/MainTypes'
 
 export type DocumentData = {
   documentId: string
   documentName: string
+  temporaryId?: string
+  status?: string
 }
 
 export type DocumentsState = {
@@ -14,5 +16,5 @@ export type DocumentsState = {
 
 export const DocumentDataValue = {
   documentId: '',
-  documentName: ''
+  documentName: '',
 }

@@ -1,3 +1,5 @@
+import { IFileWithMeta } from 'react-dropzone-uploader'
+
 export enum FileUploadStatus {
   DONE = 'done',
   UPLOADING = 'uploading',
@@ -17,3 +19,8 @@ export enum RequestState {
   OK = 'ok',
   ERROR = 'error',
 }
+
+export type FileStatus =
+  | { stats: 'done'; file: IFileWithMeta }
+  | { stats: 'rejected_file_type'; remove?: () => void }
+  | { stats: 'error_file_size'; remove: () => void }
