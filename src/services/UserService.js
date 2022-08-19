@@ -63,8 +63,8 @@ const isLoggedIn = () => !!_kc.token
 const updateToken = (successCallback) =>
   _kc.updateToken(5).then(successCallback).catch(doLogin)
 
-
-const getUsername = () => `${_kc.tokenParsed?.given_name} ${_kc.tokenParsed?.family_name}`
+const getUsername = () =>
+  `${_kc.tokenParsed?.given_name} ${_kc.tokenParsed?.family_name}`
 const getTenant = () => _kc.tokenParsed?.tenant
 
 const getInitials = () =>

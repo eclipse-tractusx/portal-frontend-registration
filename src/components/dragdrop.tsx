@@ -11,7 +11,11 @@ import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationDocuments/slice'
-import { fetchDocuments, saveDocument } from '../state/features/applicationDocuments/actions'
+import {
+  fetchDocuments,
+  saveDocument,
+  deleteDocument,
+} from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
 import { RequestState } from '../types/MainTypes'
@@ -22,31 +26,38 @@ interface DragDropProps {
   currentActiveStep: number
 }
 
-export const DragDrop = ({
-  currentActiveStep
-}: DragDropProps) => {
+export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const [ allFiles, setFiles ] = useState([]);
+  const [allFiles, setFiles] = useState([])
   const obj = status[status.length - 1]
-  const applicationId = obj['applicationId'];
+  const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
 
-  const { documents, uploadRequest, error:documentError } = useSelector(stateSelector)
+  const {
+    documents,
+    uploadRequest,
+    error: documentError,
+    deleteRequest,
+  } = useSelector(stateSelector)
 
-  if(allFiles && allFiles.length && uploadRequest === RequestState.OK && !documentError){
+  if (deleteRequest === RequestState.OK)
+    toast.success(t('documentUpload.deleteSuccess'))
+  else if (deleteRequest === RequestState.ERROR)
+    toast.error(t('documentUpload.deleteError'))
+
+  if(allFiles && allFiles.length && uploadRequest === RequestState.OK && !documentError)
     dispatch(addFileNames(allFiles.map((file) => file.file.name)))
-  }
-  else if(uploadRequest === RequestState.ERROR && documentError)
+  else if (uploadRequest === RequestState.ERROR && documentError)
     toast.error(t('documentUpload.onlyPDFError'))
 
   useEffect(() => {
-    dispatch(fetchDocuments(applicationId));
-  }, [dispatch])
+    dispatch(fetchDocuments(applicationId))
+  }, [dispatch, deleteRequest, uploadRequest])
 
   // Return the current status of files being uploaded
   const handleChangeStatus = ({ file }, stats) => {
@@ -56,12 +67,14 @@ export const DragDrop = ({
 
   // Return array of uploaded files after submit button is clicked
   const handleSubmit = async (files: IFileWithMeta[]) => {
-    setFiles(files);
+    setFiles(files)
     if (files.length > 2) {
       toast.error('Cannot upload more than two files')
       return
     }
-    files.forEach((document) => dispatch(saveDocument({ applicationId, document })))
+    files.forEach((document) =>
+      dispatch(saveDocument({ applicationId, document }))
+    )
   }
 
   const backClick = () => {
@@ -70,10 +83,14 @@ export const DragDrop = ({
 
   const nextClick = () => {
     if (obj) {
-      const statusData = { id: obj['applicationId'], status: VERIFY };
-      dispatch(updateStatus(statusData));
+      const statusData = { id: obj['applicationId'], status: VERIFY }
+      dispatch(updateStatus(statusData))
     }
     dispatch(addCurrentStep(currentActiveStep + 1))
+  }
+
+  const deleteDocumentFn = (documentId) => {
+    dispatch(deleteDocument(documentId))
   }
 
   return (
@@ -99,23 +116,30 @@ export const DragDrop = ({
             inputWithFilesContent={t('documentUpload.title')}
             submitButtonContent={t('documentUpload.upload')}
             maxFiles={3}
-            PreviewComponent={props => <DragdropFiles props={props} />}
+            PreviewComponent={(props) => <DragdropFiles props={props} />}
           />
         </div>
         <div className="documentsData mx-auto col-9 mt-4">
-          {
-            documents.map((document: DocumentData, index) =>
-              <div className="dropzone-overview-files" key={index}>
-                <div className="dropzone-overview-file">
-                  <div className="dropzone-overview-file-name">{document.documentName}</div>
-                  <div className="dropzone-overview-file-status">Completed</div>
-                  <div className="dropzone-overview-file-progress progress">
-                    <div role="progressbar" className="progress-bar bg-success"></div></div>
+          {documents.map((document: DocumentData) => (
+            <div className="dropzone-overview-files" key={document.documentId}>
+              <div className="dropzone-overview-file">
+                <div className="dropzone-overview-file-name">
+                  {document.documentName}
                 </div>
-                <div className="dropzone-overview-remove"></div>
+                <div className="dropzone-overview-file-status">Completed</div>
+                <div className="dropzone-overview-file-progress progress">
+                  <div
+                    role="progressbar"
+                    className="progress-bar bg-success"
+                  ></div>
+                </div>
               </div>
-            )
-          }
+              <div
+                className="dropzone-overview-remove"
+                onClick={() => deleteDocumentFn(document.documentId)}
+              ></div>
+            </div>
+          ))}
         </div>
       </div>
       <FooterButton
@@ -129,9 +153,7 @@ export const DragDrop = ({
 }
 
 export default withRouter(
-  connect(
-    (state: IState) => ({
-      currentActiveStep: state.user.currentStep,
-    })
-  )(DragDrop)
+  connect((state: IState) => ({
+    currentActiveStep: state.user.currentStep,
+  }))(DragDrop)
 )

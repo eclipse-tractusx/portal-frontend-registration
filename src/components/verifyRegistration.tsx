@@ -10,7 +10,10 @@ import { useEffect } from 'react'
 import { Dispatch } from 'redux'
 import { FaEdit } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
-import { fetchRegistrationData, saveRegistration } from '../state/features/applicationVerifyRegister/actions'
+import {
+  fetchRegistrationData,
+  saveRegistration,
+} from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
 import { fileNamesSelector } from '../state/features/user/slice'
@@ -31,15 +34,15 @@ export const VerifyRegistration = ({
   const { status, error, companyDetails } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
   const { fileNames } = useSelector(fileNamesSelector)
-  
-  const obj = status[status.length-1]
-  const applicationId = obj['applicationId'];
+
+  const obj = status[status.length - 1]
+  const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
 
   useEffect(() => {
-    dispatch(fetchRegistrationData(applicationId));
+    dispatch(fetchRegistrationData(applicationId))
   }, [dispatch])
 
   const backClick = () => {
@@ -111,9 +114,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.legalEntity')}
                   </span>
-                  <span className="col-6">
-                    {registrationData?.name}
-                  </span>
+                  <span className="col-6">{registrationData?.name}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -121,9 +122,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.registeredName')}
                   </span>
-                  <span className="col-6">
-                    {registrationData?.name}
-                  </span>
+                  <span className="col-6">{registrationData?.name}</span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -131,13 +130,18 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.street')}
                   </span>
-                  <span className="col-6">{registrationData?.streetName} {registrationData?.streetNumber}</span>
+                  <span className="col-6">
+                    {registrationData?.streetName}{' '}
+                    {registrationData?.streetNumber}
+                  </span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">{t('verifyRegistration.city')}</span>
-                  <span className="col-6">{registrationData?.zipCode} {registrationData?.city}</span>
+                  <span className="col-6">
+                    {registrationData?.zipCode} {registrationData?.city}
+                  </span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -162,15 +166,13 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              {registrationData.companyRoles.map((role, index) => 
-                  <li key={index} className="list-group-item-cax">
-                    <Row>
-                      <span className="col-12">
-                        { role }
-                      </span>
-                    </Row>
-                  </li>
-              )}
+              {registrationData.companyRoles.map((role, index) => (
+                <li key={index} className="list-group-item-cax">
+                  <Row>
+                    <span className="col-12">{role}</span>
+                  </Row>
+                </li>
+              ))}
             </ul>
           </Row>
           <Row>
@@ -189,9 +191,7 @@ export const VerifyRegistration = ({
                 return (
                   <li key={index} className="list-group-item-cax">
                     <Row>
-                      <span className="col-12">
-                        { file.documentName }
-                      </span>
+                      <span className="col-12">{file.documentName}</span>
                     </Row>
                   </li>
                 )
