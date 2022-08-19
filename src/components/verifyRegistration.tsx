@@ -13,17 +13,16 @@ import { ToastContainer, toast } from 'react-toastify'
 import { fetchRegistrationData, saveRegistration } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
+import { fileNamesSelector } from '../state/features/user/slice'
 
 interface VerifyRegistrationProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
-  fileNames: string[]
 }
 
 export const VerifyRegistration = ({
   currentActiveStep,
   addCurrentStep,
-  fileNames,
 }: VerifyRegistrationProps) => {
   const { t } = useTranslation()
 
@@ -31,6 +30,7 @@ export const VerifyRegistration = ({
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
+  const { fileNames } = useSelector(fileNamesSelector)
   
   const obj = status[status.length-1]
   const applicationId = obj['applicationId'];
@@ -222,8 +222,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default withRouter(
   connect(
     (state: IState) => ({
-      currentActiveStep: state.user.currentStep,
-      fileNames: state.user.fileNames,
+      currentActiveStep: state.user.currentStep
     }),
     mapDispatchToProps
   )(VerifyRegistration)

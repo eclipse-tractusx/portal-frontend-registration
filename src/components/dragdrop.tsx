@@ -38,7 +38,7 @@ export const DragDrop = ({
 
   const { documents, uploadRequest, error:documentError } = useSelector(stateSelector)
 
-  if(uploadRequest === RequestState.OK && !documentError){
+  if(allFiles && allFiles.length && uploadRequest === RequestState.OK && !documentError){
     dispatch(addFileNames(allFiles.map((file) => file.file.name)))
   }
   else if(uploadRequest === RequestState.ERROR && documentError)
