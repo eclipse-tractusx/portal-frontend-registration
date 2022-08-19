@@ -22,7 +22,6 @@ const inviteSlice = createSlice({
     }),
   },
   extraReducers: (builder) => {
-
     // fetch roles
     builder.addCase(fetchRolesComposite.pending, (state) => ({
       ...state,
@@ -42,7 +41,7 @@ const inviteSlice = createSlice({
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))
-    
+
     // fetch invited
     builder.addCase(fetchInvited.pending, (state) => ({
       ...state,
@@ -70,11 +69,14 @@ const inviteSlice = createSlice({
     }))
     builder.addCase(sendInvite.fulfilled, (state) => ({
       ...state,
-      invitedUsers: [...state.invitedUsers, {
-        invitationStatus: 'PENDING',
-        emailId: state.newUser.email,
-        invitedUserRoles: state.newUser.roles
-      }],
+      invitedUsers: [
+        ...state.invitedUsers,
+        {
+          invitationStatus: 'PENDING',
+          emailId: state.newUser.email,
+          invitedUserRoles: state.newUser.roles,
+        },
+      ],
       newUser: null,
       request: RequestState.OK,
       error: '',
@@ -87,13 +89,11 @@ const inviteSlice = createSlice({
   },
 })
 
-export const stateSelector = (state: RootState): InviteUserState =>
-  state.invite
+export const stateSelector = (state: RootState): InviteUserState => state.invite
 
-export const rolesSelector = (state: RootState): string[] => 
-  state.invite.roles
+export const rolesSelector = (state: RootState): string[] => state.invite.roles
 
-export const invitedUserSelector = (state: RootState): InvitedUser[] => 
+export const invitedUserSelector = (state: RootState): InvitedUser[] =>
   state.invite.invitedUsers
 
 export default inviteSlice

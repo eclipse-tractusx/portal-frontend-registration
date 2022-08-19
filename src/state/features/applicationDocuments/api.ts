@@ -23,19 +23,28 @@ export class Api extends HttpClient {
       RequestService.getHeaders()
     )
 
-  public postDocument = async(applicationId: string, documentTypeId: string, file: any) =>{
+  public postDocument = async (
+    applicationId: string,
+    documentTypeId: string,
+    file: any
+  ) => {
     const formdata = new FormData()
     formdata.append('document', file)
     try {
       await axios({
-        method: "post",
+        method: 'post',
         url: `${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`,
         data: formdata,
         headers: RequestService.getHeaders().headers,
-      });
-    } catch(error) {
+      })
+    } catch (error) {
       throw Error(error.message)
     }
-    
   }
+
+  public deleteDocument = (documentId: string) =>
+    this.instance.delete<string>(
+      `/api/administration/Documents/${documentId}`,
+      RequestService.getHeaders()
+    )
 }

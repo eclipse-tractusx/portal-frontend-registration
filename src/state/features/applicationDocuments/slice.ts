@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchDocuments, saveDocument } from './actions'
+import { fetchDocuments, saveDocument, deleteDocument } from './actions'
 import { DocumentsState } from './types'
 
 const initialState: DocumentsState = {
   documents: [],
   request: RequestState.NONE,
   uploadRequest: RequestState.NONE,
+  deleteRequest: RequestState.NONE,
   error: null,
 }
 
@@ -16,13 +17,13 @@ const documentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
       documents: [],
       request: RequestState.SUBMIT,
       uploadRequest: RequestState.NONE,
+      deleteRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchDocuments.fulfilled, (state, { payload }) => ({
@@ -30,6 +31,7 @@ const documentSlice = createSlice({
       documents: payload || [],
       request: RequestState.OK,
       uploadRequest: RequestState.NONE,
+      deleteRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchDocuments.rejected, (state, action) => ({
@@ -37,21 +39,40 @@ const documentSlice = createSlice({
       documents: [],
       request: RequestState.ERROR,
       uploadRequest: RequestState.NONE,
+      deleteRequest: RequestState.NONE,
       error: action.error.message as string,
     }))
     builder.addCase(saveDocument.pending, (state) => ({
       ...state,
       uploadRequest: RequestState.SUBMIT,
+      deleteRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(saveDocument.fulfilled, (state) => ({
       ...state,
       uploadRequest: RequestState.OK,
+      deleteRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(saveDocument.rejected, (state, action) => ({
       ...state,
       uploadRequest: RequestState.ERROR,
+      deleteRequest: RequestState.NONE,
+      error: action.error.message as string,
+    }))
+    builder.addCase(deleteDocument.pending, (state) => ({
+      ...state,
+      deleteRequest: RequestState.SUBMIT,
+      error: '',
+    }))
+    builder.addCase(deleteDocument.fulfilled, (state) => ({
+      ...state,
+      deleteRequest: RequestState.OK,
+      error: '',
+    }))
+    builder.addCase(deleteDocument.rejected, (state, action) => ({
+      ...state,
+      deleteRequest: RequestState.ERROR,
       error: action.error.message as string,
     }))
   },

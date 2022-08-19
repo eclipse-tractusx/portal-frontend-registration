@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
-import { fetchAgreementData, fetchAgreementConsents, updateAgreementConsents } from './actions'
+import {
+  fetchAgreementData,
+  fetchAgreementConsents,
+  updateAgreementConsents,
+} from './actions'
 import { agreementDataValue, roleAggrementState } from './types'
 
 const initialState: roleAggrementState = {
@@ -30,7 +34,7 @@ const roleSlice = createSlice({
     }))
     builder.addCase(fetchAgreementData.fulfilled, (state, { payload }) => ({
       ...state,
-      allConsentData: payload ||agreementDataValue,
+      allConsentData: payload || agreementDataValue,
       request: RequestState.OK,
       error: '',
     }))
