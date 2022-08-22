@@ -1,4 +1,4 @@
-import Dropzone, { IFileWithMeta, StatusValue } from 'react-dropzone-uploader'
+import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
