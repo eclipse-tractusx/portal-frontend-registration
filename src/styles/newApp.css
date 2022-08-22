@@ -772,3 +772,13 @@ textarea {
 .answer {
   padding: 10px 0px 40px 0px;
 }
+
+.dragdrop-subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+}
+
+.dragdrop-subtitle span {
+  color: #0f71cb;
+  text-decoration: underline;
+}

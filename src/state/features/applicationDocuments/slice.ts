@@ -15,12 +15,21 @@ const initialState: DocumentsState = {
 const documentSlice = createSlice({
   name: 'registration/application/user',
   initialState,
-  reducers: {},
+  reducers: {
+    updateProgressBar: (state, { payload }) => {
+      const { percentageProgress, temporaryId } = payload
+
+      const index = state.documents.findIndex(
+        (doc) => doc.temporaryId === temporaryId
+      )
+
+      state.documents[index].progress = percentageProgress
+    },
+  },
   extraReducers: (builder) => {
     // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
-      documents: [],
       request: RequestState.SUBMIT,
       uploadRequest: RequestState.NONE,
       deleteRequest: RequestState.NONE,
@@ -42,24 +51,56 @@ const documentSlice = createSlice({
       deleteRequest: RequestState.NONE,
       error: action.error.message as string,
     }))
-    builder.addCase(saveDocument.pending, (state) => ({
-      ...state,
-      uploadRequest: RequestState.SUBMIT,
-      deleteRequest: RequestState.NONE,
-      error: '',
-    }))
-    builder.addCase(saveDocument.fulfilled, (state) => ({
+    builder.addCase(saveDocument.pending, (state, action) => {
+      return {
+        ...state,
+        uploadRequest: RequestState.SUBMIT,
+        error: '',
+        documents: [
+          {
+            status: 'pending',
+            documentId: '',
+            progress: 0,
+            documentName: action.meta.arg.document.name,
+            temporaryId: action.meta.arg.temporaryId,
+          },
+          ...state.documents,
+        ],
+      }
+    })
+    builder.addCase(saveDocument.fulfilled, (state, action) => ({
       ...state,
       uploadRequest: RequestState.OK,
       deleteRequest: RequestState.NONE,
       error: '',
+      documents: state.documents.map((doc) => {
+        if (doc?.temporaryId === action.meta.arg.temporaryId) {
+          return {
+            ...doc,
+            status: 'success',
+            progress: 100,
+          }
+        }
+        return doc
+      }),
     }))
-    builder.addCase(saveDocument.rejected, (state, action) => ({
-      ...state,
-      uploadRequest: RequestState.ERROR,
-      deleteRequest: RequestState.NONE,
-      error: action.error.message as string,
-    }))
+    builder.addCase(saveDocument.rejected, (state, action) => {
+      return {
+        ...state,
+        uploadRequest: RequestState.ERROR,
+        error: action.error.message as string,
+        documents: state.documents.map((doc) => {
+          if (doc?.temporaryId === action.meta.arg.temporaryId) {
+            return {
+              ...doc,
+              status: 'error',
+              progress: 100,
+            }
+          }
+          return doc
+        }),
+      }
+    })
     builder.addCase(deleteDocument.pending, (state) => ({
       ...state,
       deleteRequest: RequestState.SUBMIT,

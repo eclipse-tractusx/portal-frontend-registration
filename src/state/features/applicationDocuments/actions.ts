@@ -1,6 +1,19 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, Dispatch } from '@reduxjs/toolkit'
+import documentSlice from './slice'
 import { Api } from './api'
-import { DocumentType } from './types'
+import { ProgressType } from '../../../types/MainTypes'
+
+const handleUpdateProgress = (
+  progress: ProgressType,
+  dispatch: Dispatch,
+  temporaryId: string
+) => {
+  const { loaded, total } = progress
+  const percentageProgress = Math.floor((loaded / total) * 100)
+  dispatch(
+    documentSlice.actions.updateProgressBar({ temporaryId, percentageProgress })
+  )
+}
 
 const fetchDocuments = createAsyncThunk(
   'registration/application/user/fetchDocuments',
@@ -8,7 +21,7 @@ const fetchDocuments = createAsyncThunk(
     try {
       return await Api.getInstance().getDocuments(
         applicationId,
-        DocumentType.COMMERCIAL_REGISTER_EXTRACT,
+        'CX_FRAME_CONTRACT'
       )
     } catch (error: unknown) {
       console.error('api call error:', error)
@@ -19,19 +32,27 @@ const fetchDocuments = createAsyncThunk(
 
 const saveDocument = createAsyncThunk(
   `registration/application/companyDetailsWithAddress/save`,
-  async ({
-    applicationId,
-    document,
-  }: {
-    applicationId: string
-    document: any
-  }) => {
+  async (
+    {
+      applicationId,
+      document,
+      temporaryId,
+    }: {
+      applicationId: string
+      document: File
+      temporaryId: string
+    },
+    { dispatch }
+  ) => {
     try {
-      return await Api.getInstance().postDocument(
+      return await Api.getInstance().postDocument({
         applicationId,
-        DocumentType.COMMERCIAL_REGISTER_EXTRACT,
-        document.file
-      )
+        documentTypeId: 'CX_FRAME_CONTRACT',
+        file: document,
+        handleUpdateProgress,
+        dispatch,
+        temporaryId,
+      })
     } catch (error: unknown) {
       console.error('api call error:', error)
       throw Error('Unable to save documents. Please contact the administrator.')
