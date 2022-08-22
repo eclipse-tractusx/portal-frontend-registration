@@ -5,6 +5,7 @@ export type DocumentData = {
   documentName: string
   temporaryId?: string
   status?: string
+  progress?: number
 }
 
 export type DocumentsState = {

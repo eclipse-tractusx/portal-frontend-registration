@@ -14,7 +14,17 @@ const initialState: DocumentsState = {
 const documentSlice = createSlice({
   name: 'registration/application/user',
   initialState,
-  reducers: {},
+  reducers: {
+    updateProgressBar: (state, { payload }) => {
+      const { percentageProgress, temporaryId } = payload
+
+      const index = state.documents.findIndex(
+        (doc) => doc.temporaryId === temporaryId
+      )
+
+      state.documents[index].progress = percentageProgress
+    },
+  },
   extraReducers: (builder) => {
     // fetch documents
     builder.addCase(fetchDocuments.pending, (state) => ({
@@ -47,6 +57,7 @@ const documentSlice = createSlice({
           {
             status: 'pending',
             documentId: '',
+            progress: 0,
             documentName: action.meta.arg.document.name,
             temporaryId: action.meta.arg.temporaryId,
           },
@@ -63,6 +74,7 @@ const documentSlice = createSlice({
           return {
             ...doc,
             status: 'success',
+            progress: 100,
           }
         }
         return doc
@@ -78,6 +90,7 @@ const documentSlice = createSlice({
             return {
               ...doc,
               status: 'error',
+              progress: 100,
             }
           }
           return doc

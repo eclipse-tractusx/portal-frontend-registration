@@ -1,11 +1,11 @@
-import Dropzone from 'react-dropzone-uploader'
+import Dropzone, { IFileWithMeta, StatusValue } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
 import { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep, addFileNames } from '../state/features/user/action'
+import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
@@ -20,7 +20,7 @@ import {
 } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
-import { FileStatus, RequestState } from '../types/MainTypes'
+import { FileStatus, FileStatusValue } from '../types/MainTypes'
 import { VERIFY } from '../state/features/application/types'
 import { updateStatus } from '../state/features/application/actions'
 import { v4 as uuidv4 } from 'uuid'
@@ -57,7 +57,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
 
   const { status, error } = useSelector(applicationSelector)
   const [fileError, setFileError] = useState(false)
-  const [allFiles, setFiles] = useState([])
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
@@ -65,15 +64,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     toast.error(error)
   }
 
-  const {
-    documents,
-    uploadRequest,
-    error: documentError,
-  } = useSelector(stateSelector)
-
-  if (uploadRequest === RequestState.OK && !documentError) {
-    dispatch(addFileNames(allFiles.map((file) => file.file.name)))
-  }
+  const { documents } = useSelector(stateSelector)
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId))
@@ -82,6 +73,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   const manageFileStatus = (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
       case 'done':
+        setFileError(false)
         dispatch(
           saveDocument({
             applicationId,
@@ -89,7 +81,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
             temporaryId: uuidv4(),
           })
         )
-        setFileError(false)
         break
       case 'rejected_file_type':
       case 'error_file_size':
@@ -102,7 +93,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   }
 
   // Return the current status of files being uploaded
-  const handleChangeStatus = ({ file, remove }, stats) => {
+  const handleChangeStatus = (
+    { file, remove }: IFileWithMeta,
+    stats: FileStatusValue
+  ) => {
     manageFileStatus({ stats, file, remove })
   }
 
@@ -149,21 +143,29 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
           />
         </div>
         <div className="documentsData mx-auto col-9 mt-4">
-          {documents.map((document: DocumentData, index) => (
-            <div className="dropzone-overview-files" key={index}>
+          {documents.map((document: DocumentData) => (
+            <div className="dropzone-overview-files" key={uuidv4()}>
               <div className="dropzone-overview-file">
                 <div className="dropzone-overview-file-name">
                   {document.documentName}
                 </div>
                 <div className="dropzone-overview-file-status">
-                  {getStatusText(document.status)}
+                  {`${getStatusText(document.status)} ${
+                    document.progress && document?.progress !== 100
+                      ? document?.progress
+                      : ''
+                  }`}
                 </div>
-                <div className="dropzone-overview-file-progress progress">
+                <div className="progress">
                   <div
                     role="progressbar"
                     className={`progress-bar bg-${getClassNameByStatus(
                       document.status
                     )}`}
+                    style={{
+                      width: `${document?.progress}%`,
+                      animationDirection: 'reverse',
+                    }}
                   ></div>
                 </div>
               </div>
