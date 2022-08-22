@@ -87,7 +87,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
             temporaryId: uuidv4(),
           })
         )
-        dispatch(fetchDocuments(applicationId))
         break
       case 'rejected_file_type':
       case 'error_file_size':
