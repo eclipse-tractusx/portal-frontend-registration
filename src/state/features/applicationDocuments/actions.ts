@@ -60,4 +60,18 @@ const saveDocument = createAsyncThunk(
   }
 )
 
-export { fetchDocuments, saveDocument }
+const deleteDocument = createAsyncThunk(
+  `registration/application/document/delete`,
+  async (documentId: string) => {
+    try {
+      return await Api.getInstance().deleteDocument(documentId)
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error(
+        'Unable to delete documents. Please contact the administrator.'
+      )
+    }
+  }
+)
+
+export { fetchDocuments, saveDocument, deleteDocument }

@@ -5,30 +5,30 @@ export interface RegistrationState {
 }
 
 export type AgreementData = {
-  "agreementId": "string",
-  "consentStatus": "string"
+  agreementId: 'string'
+  consentStatus: 'string'
 }
 
 export type DocumentData = {
-  "documentName": "string"
+  documentName: 'string'
 }
 
 export type RegistrationDetails = {
-  companyId: string,
-  bpn: string,
-  name: string,
-  shortName: string,
-  city: string,
-  region: string,
-  streetAdditional: string,
-  streetName: string,
-  streetNumber: string,
-  zipCode: string,
-  countryAlpha2Code: string,
-  countryDe: string,
-  taxId: string,
-  companyRoles: Array<string>,
-  agreements: Array<AgreementData>,
+  companyId: string
+  bpn: string
+  name: string
+  shortName: string
+  city: string
+  region: string
+  streetAdditional: string
+  streetName: string
+  streetNumber: string
+  zipCode: string
+  countryAlpha2Code: string
+  countryDe: string
+  taxId: string
+  companyRoles: Array<string>
+  agreements: Array<AgreementData>
   documents: Array<DocumentData>
 }
 
@@ -48,8 +48,8 @@ export const InitialRegistrationValue = {
   taxId: '',
   companyRoles: [],
   agreements: [],
-  documents: []
+  documents: [],
 }
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';
-export const CREATED = 'CREATED';
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
+export const CREATED = 'CREATED'

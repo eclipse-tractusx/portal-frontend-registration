@@ -48,4 +48,10 @@ export class Api extends HttpClient {
       throw Error(error.message)
     }
   }
+
+  public deleteDocument = (documentId: string) =>
+    this.instance.delete<string>(
+      `/api/administration/Documents/${documentId}`,
+      RequestService.getHeaders()
+    )
 }

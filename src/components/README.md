@@ -1,6 +1,5 @@
 # Content Overview
 
-
 ### authinfo
 
 tbd
@@ -55,8 +54,6 @@ Error page if user is unaothrized for the page/service
 
 Registration error handling for Step 5
 
-
-
 # Components
 
 #### bulletList
@@ -79,8 +76,6 @@ Stepper component
 
 Registration Overlay Button config for "Next", "Submit" and "Back"
 
-
-
 # Footer Page
 
 ## Description
@@ -89,13 +84,12 @@ The footer pages and content are managed in single files. Each file is handling 
 
 <img width="721" alt="image" src="https://user-images.githubusercontent.com/94133633/182540141-e178c22d-3df9-4a7a-b819-c2ad2a32ab21.png">
 
-* __footer:__ Footer component and navigation links
+- **footer:** Footer component and navigation links
 
-* __termsOfService:__ Content page "Terms of Service"
-* __thirdPartyLicenseNotes:__ Content page "3rd Party License Notes"
-* __privacy:__ Content page "privacy"
-* __imprint:__ Content page "imprint"
-* __cookiePolicy:__ Content page "Cookie Policy"
-* __help:__ Content page "Help"
-* __contact:__ Content page "Contact"
-
+- **termsOfService:** Content page "Terms of Service"
+- **thirdPartyLicenseNotes:** Content page "3rd Party License Notes"
+- **privacy:** Content page "privacy"
+- **imprint:** Content page "imprint"
+- **cookiePolicy:** Content page "Cookie Policy"
+- **help:** Content page "Help"
+- **contact:** Content page "Contact"

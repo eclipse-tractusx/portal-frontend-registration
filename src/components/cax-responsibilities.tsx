@@ -91,7 +91,7 @@ export const ResponsibilitiesCax = ({
       }
       dispatch(setUserToInvite(user))
       dispatch(
-        sendInvite(      {
+        sendInvite({
           applicationId,
           user,
         })
@@ -208,10 +208,18 @@ export const ResponsibilitiesCax = ({
                             {d.emailId}
                           </span>
                           <span className="col-4 p-0">
-                            {d.invitedUserRoles.map(role => <span className="list-group-item-role" key={role}>{role}</span>)}
-                          </span>                         
+                            {d.invitedUserRoles.map((role) => (
+                              <span className="list-group-item-role" key={role}>
+                                {role}
+                              </span>
+                            ))}
+                          </span>
                           <span className="col-2 list-group-item-status">
-                            {d.invitationStatus || <span className="pending-status">{'PENDING'}</span>}
+                            {d.invitationStatus || (
+                              <span className="pending-status">
+                                {'PENDING'}
+                              </span>
+                            )}
                           </span>
                         </Row>
                       </li>
@@ -221,7 +229,6 @@ export const ResponsibilitiesCax = ({
               </Row>
             </Row>
           )}
-
         </div>
       </div>
       <FooterButton

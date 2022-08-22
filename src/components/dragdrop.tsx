@@ -17,10 +17,11 @@ import { stateSelector } from '../state/features/applicationDocuments/slice'
 import {
   fetchDocuments,
   saveDocument,
+  deleteDocument,
 } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
-import { FileStatus, FileStatusValue } from '../types/MainTypes'
+import { FileStatus, FileStatusValue, RequestState } from '../types/MainTypes'
 import { VERIFY } from '../state/features/application/types'
 import { updateStatus } from '../state/features/application/actions'
 import { v4 as uuidv4 } from 'uuid'
@@ -64,11 +65,16 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     toast.error(error)
   }
 
-  const { documents } = useSelector(stateSelector)
+  const { documents, uploadRequest, deleteRequest } = useSelector(stateSelector)
+
+  if (deleteRequest === RequestState.OK)
+    toast.success(t('documentUpload.deleteSuccess'))
+  else if (deleteRequest === RequestState.ERROR)
+    toast.error(t('documentUpload.deleteError'))
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId))
-  }, [dispatch])
+  }, [dispatch, deleteRequest, uploadRequest])
 
   const manageFileStatus = (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
@@ -81,6 +87,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
             temporaryId: uuidv4(),
           })
         )
+        dispatch(fetchDocuments(applicationId))
         break
       case 'rejected_file_type':
       case 'error_file_size':
@@ -110,6 +117,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
       dispatch(updateStatus(statusData))
     }
     dispatch(addCurrentStep(currentActiveStep + 1))
+  }
+
+  const deleteDocumentFn = (documentId) => {
+    dispatch(deleteDocument(documentId))
   }
 
   return (
@@ -169,7 +180,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
                   ></div>
                 </div>
               </div>
-              <div className="dropzone-overview-remove"></div>
+              <div
+                className="dropzone-overview-remove"
+                onClick={() => deleteDocumentFn(document.documentId)}
+              ></div>
             </div>
           ))}
         </div>

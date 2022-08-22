@@ -95,7 +95,9 @@
     "uploadStatusUploading": "Uploading",
     "uploadStatusError": "Error",
     "onlyPDFError": "Only .pdf files are allowed",
-    "uploadSuccessMsg": "All files uploaded"
+    "uploadSuccessMsg": "All files uploaded",
+    "deleteSuccess": "Document got deleted",
+    "deleteError": "Request was unsuccessful"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",

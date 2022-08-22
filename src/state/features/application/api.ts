@@ -64,7 +64,10 @@ export class ApplicationApi extends HttpClient {
     )
   }
 
-  public saveCompanyDetailsWithAddress = (applicationId: string, companyData: CompanyDetails) => {
+  public saveCompanyDetailsWithAddress = (
+    applicationId: string,
+    companyData: CompanyDetails
+  ) => {
     return this.instance.post<string>(
       `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
       companyData,
@@ -75,5 +78,4 @@ export class ApplicationApi extends HttpClient {
       }
     )
   }
-
 }

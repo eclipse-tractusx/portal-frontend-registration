@@ -15,7 +15,7 @@ export const RegistrationClosed = () => {
       <Row>
         <Col>
           <div className="mx-auto container-body registration-close-content">
-            <h6 className='mb-4'>{t('registrationClosed.heading1')}</h6>
+            <h6 className="mb-4">{t('registrationClosed.heading1')}</h6>
             <h6>{t('registrationClosed.heading2')}</h6>
             <Row className="content">
               <Col>
