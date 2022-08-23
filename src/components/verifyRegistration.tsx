@@ -16,7 +16,7 @@ import {
 } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
-import { fileNamesSelector } from '../state/features/user/slice'
+import { stateSelector as documentSelector } from '../state/features/applicationDocuments/slice'
 
 interface VerifyRegistrationProps {
   currentActiveStep: number
@@ -33,7 +33,7 @@ export const VerifyRegistration = ({
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
-  const { fileNames } = useSelector(fileNamesSelector)
+  const { documents } = useSelector(documentSelector)
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
@@ -73,7 +73,7 @@ export const VerifyRegistration = ({
     return true
   }
   const hasDocuments = () => {
-    return fileNames && fileNames.length > 0 ? true : false
+    return documents && documents.length > 0 ? true : false
   }
 
   return (

@@ -2,10 +2,10 @@ import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep, addFileNames } from '../state/features/user/action'
+import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
@@ -31,7 +31,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const [allFiles, setFiles] = useState([])
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
   if (error) {
@@ -45,14 +44,13 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     deleteRequest,
   } = useSelector(stateSelector)
 
-  if (deleteRequest === RequestState.OK)
+  if (deleteRequest === RequestState.OK){
     toast.success(t('documentUpload.deleteSuccess'))
+  }
   else if (deleteRequest === RequestState.ERROR)
     toast.error(t('documentUpload.deleteError'))
 
-  if(allFiles && allFiles.length && uploadRequest === RequestState.OK && !documentError)
-    dispatch(addFileNames(allFiles.map((file) => file.file.name)))
-  else if (uploadRequest === RequestState.ERROR && documentError)
+  if (uploadRequest === RequestState.ERROR && documentError)
     toast.error(t('documentUpload.onlyPDFError'))
 
   useEffect(() => {
@@ -67,7 +65,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
 
   // Return array of uploaded files after submit button is clicked
   const handleSubmit = async (files: IFileWithMeta[]) => {
-    setFiles(files)
     if (files.length > 2) {
       toast.error('Cannot upload more than two files')
       return

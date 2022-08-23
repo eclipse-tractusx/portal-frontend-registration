@@ -1,4 +1,3 @@
-import { createAction } from '@reduxjs/toolkit'
 import { createAction as action } from 'redux-actions'
 import { CompanyDetails } from '../application/types'
 import { IUserItem } from './types'
@@ -8,8 +7,7 @@ export enum UserActions {
   REMOVE_FROM_INVITE_LIST = 'USER/REMOVE_FROM_INVITE_LIST',
   ADD_CURRENT_STEP = 'USER/ADD_CURRENT_STEP',
   ADD_COMPANY_DATA = 'USER/ADD_COMPANY_DATA',
-  ADD_ROLES_COMPOSITE = 'USER/ADD_ROLES_COMPOSITE',
-  ADD_FILE_NAMES = 'USER/ADD_FILE_NAMES',
+  ADD_ROLES_COMPOSITE = 'USER/ADD_ROLES_COMPOSITE'
 }
 
 export const addToInviteList = action(
@@ -33,13 +31,10 @@ export const addrolesComposite = action(
   (roleComposite: string[]) => roleComposite
 )
 
-export const addFileNames = createAction<string[]>('userData/addFileNames')
-
 export type addToInviteListAction = ReturnType<typeof addToInviteList>
 export type removeFromInviteListAction = ReturnType<typeof removeFromInviteList>
 export type addCurrentStepAction = ReturnType<typeof addCurrentStep>
 export type addCompanyDataAction = ReturnType<typeof addCompanyData>
 export type addrolesCompositeAction = ReturnType<typeof addrolesComposite>
-export type addFileNamesAction = ReturnType<typeof addFileNames>
 
 export default UserActions
