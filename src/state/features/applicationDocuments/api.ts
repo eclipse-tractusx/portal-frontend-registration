@@ -2,6 +2,7 @@ import axios from 'axios'
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
+import { PostDocumentType } from '../../../types/MainTypes'
 
 export class Api extends HttpClient {
   private static classInstance?: Api
@@ -23,11 +24,15 @@ export class Api extends HttpClient {
       RequestService.getHeaders()
     )
 
-  public postDocument = async (
-    applicationId: string,
-    documentTypeId: string,
-    file: any
-  ) => {
+  public postDocument = async (args: PostDocumentType) => {
+    const {
+      applicationId,
+      documentTypeId,
+      file,
+      handleUpdateProgress,
+      dispatch,
+      temporaryId,
+    } = args
     const formdata = new FormData()
     formdata.append('document', file)
     try {
@@ -36,6 +41,8 @@ export class Api extends HttpClient {
         url: `${getApiBase()}/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`,
         data: formdata,
         headers: RequestService.getHeaders().headers,
+        onUploadProgress: (progress) =>
+          handleUpdateProgress(progress, dispatch, temporaryId),
       })
     } catch (error) {
       throw Error(error.message)

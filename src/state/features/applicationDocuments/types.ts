@@ -10,6 +10,9 @@ export const DocumentType = {
 export type DocumentData = {
   documentId: string
   documentName: string
+  temporaryId?: string
+  status?: string
+  progress?: number
 }
 
 export type DocumentsState = {
