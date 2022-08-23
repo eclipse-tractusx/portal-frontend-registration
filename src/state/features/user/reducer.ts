@@ -6,7 +6,6 @@ import userActions, {
   removeFromInviteListAction,
   addCompanyDataAction,
   addrolesCompositeAction,
-  addFileNamesAction,
 } from './action'
 import { IUserData } from './types'
 
@@ -58,14 +57,7 @@ export default handleActions<IUserData, any>(
         ...state,
         roleComposite: action.payload,
       })
-    ),
-
-    [userActions.ADD_FILE_NAMES]: produce(
-      (state: IUserData, action: addFileNamesAction) => ({
-        ...state,
-        fileNames: action.payload,
-      })
-    ),
+    )
   },
   initialState
 )

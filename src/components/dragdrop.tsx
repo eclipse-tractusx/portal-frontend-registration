@@ -64,11 +64,17 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   if (error) {
     toast.error(error)
   }
+  
+  const {
+    documents,
+    uploadRequest,
+    error: documentError,
+    deleteRequest,
+  } = useSelector(stateSelector)
 
-  const { documents, uploadRequest, deleteRequest } = useSelector(stateSelector)
-
-  if (deleteRequest === RequestState.OK)
+  if (deleteRequest === RequestState.OK){
     toast.success(t('documentUpload.deleteSuccess'))
+  }
   else if (deleteRequest === RequestState.ERROR)
     toast.error(t('documentUpload.deleteError'))
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk, Dispatch } from '@reduxjs/toolkit'
 import documentSlice from './slice'
 import { Api } from './api'
+import { DocumentType } from './types'
 import { ProgressType } from '../../../types/MainTypes'
 
 const handleUpdateProgress = (
@@ -21,7 +22,7 @@ const fetchDocuments = createAsyncThunk(
     try {
       return await Api.getInstance().getDocuments(
         applicationId,
-        'CX_FRAME_CONTRACT'
+        DocumentType.COMMERCIAL_REGISTER_EXTRACT
       )
     } catch (error: unknown) {
       console.error('api call error:', error)
@@ -47,7 +48,7 @@ const saveDocument = createAsyncThunk(
     try {
       return await Api.getInstance().postDocument({
         applicationId,
-        documentTypeId: 'CX_FRAME_CONTRACT',
+        documentTypeId: DocumentType.COMMERCIAL_REGISTER_EXTRACT,
         file: document,
         handleUpdateProgress,
         dispatch,
