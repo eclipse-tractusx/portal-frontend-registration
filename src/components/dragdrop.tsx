@@ -68,7 +68,6 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   const {
     documents,
     uploadRequest,
-    error: documentError,
     deleteRequest,
   } = useSelector(stateSelector)
 
