@@ -3,6 +3,7 @@ import axios, {
   AxiosInstance,
   AxiosRequestHeaders,
   AxiosResponse,
+  ResponseType,
 } from 'axios'
 
 // Tell to typescript, we can use any type of data as response data
@@ -24,12 +25,14 @@ export abstract class HttpClient {
     },
     timeout: number = Number.parseInt(
       `${process.env.REACT_APP_REQUEST_TIMEOUT || 30000}`
-    )
+    ),
+    responseType?: ResponseType
   ) {
     this.instance = axios.create({
       baseURL,
       headers,
       timeout,
+      responseType,
     })
 
     // Runs after every response from call

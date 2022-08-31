@@ -18,6 +18,7 @@ import {
   fetchDocuments,
   saveDocument,
   deleteDocument,
+  fetchDocumentByDocumentId,
 } from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
@@ -64,17 +65,12 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   if (error) {
     toast.error(error)
   }
-  
-  const {
-    documents,
-    uploadRequest,
-    deleteRequest,
-  } = useSelector(stateSelector)
 
-  if (deleteRequest === RequestState.OK){
+  const { documents, uploadRequest, deleteRequest } = useSelector(stateSelector)
+
+  if (deleteRequest === RequestState.OK) {
     toast.success(t('documentUpload.deleteSuccess'))
-  }
-  else if (deleteRequest === RequestState.ERROR)
+  } else if (deleteRequest === RequestState.ERROR)
     toast.error(t('documentUpload.deleteError'))
 
   useEffect(() => {
@@ -127,6 +123,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     dispatch(deleteDocument(documentId))
   }
 
+  const handleDownloadDocument = async (documentId: string) => {
+    dispatch(fetchDocumentByDocumentId(documentId))
+  }
+
   return (
     <>
       <div className="mx-auto col-9 container-registration">
@@ -161,7 +161,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
           {documents.map((document: DocumentData) => (
             <div className="dropzone-overview-files" key={uuidv4()}>
               <div className="dropzone-overview-file">
-                <div className="dropzone-overview-file-name">
+                <div
+                  onClick={() => handleDownloadDocument(document.documentId)}
+                  className="dropzone-overview-file-name"
+                >
                   {document.documentName}
                 </div>
                 <div className="dropzone-overview-file-status">

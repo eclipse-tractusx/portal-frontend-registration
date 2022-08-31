@@ -24,6 +24,12 @@ export class Api extends HttpClient {
       RequestService.getHeaders()
     )
 
+  public getDocumentByDocumentId = (documentId: string) =>
+    this.instance.get<string>(
+      `/api/registration/documents/${documentId}`,
+      RequestService.getBlobHeaders()
+    )
+
   public postDocument = async (args: PostDocumentType) => {
     const {
       applicationId,

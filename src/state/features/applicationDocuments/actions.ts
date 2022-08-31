@@ -3,6 +3,7 @@ import documentSlice from './slice'
 import { Api } from './api'
 import { DocumentType } from './types'
 import { ProgressType } from '../../../types/MainTypes'
+import { downloadDocument } from '../../../helpers/utils'
 
 const handleUpdateProgress = (
   progress: ProgressType,
@@ -24,6 +25,21 @@ const fetchDocuments = createAsyncThunk(
         applicationId,
         DocumentType.COMMERCIAL_REGISTER_EXTRACT
       )
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error('Unable to load documents. Please contact the administrator.')
+    }
+  }
+)
+
+const fetchDocumentByDocumentId = createAsyncThunk(
+  'registration/application/user/fetchDocumentByDocumentId',
+  async (documentId: string) => {
+    try {
+      const response = await Api.getInstance().getDocumentByDocumentId(
+        documentId
+      )
+      return downloadDocument(response)
     } catch (error: unknown) {
       console.error('api call error:', error)
       throw Error('Unable to load documents. Please contact the administrator.')
@@ -75,4 +91,9 @@ const deleteDocument = createAsyncThunk(
   }
 )
 
-export { fetchDocuments, saveDocument, deleteDocument }
+export {
+  fetchDocuments,
+  saveDocument,
+  deleteDocument,
+  fetchDocumentByDocumentId,
+}
