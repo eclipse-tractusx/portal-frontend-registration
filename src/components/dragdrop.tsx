@@ -123,8 +123,11 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     dispatch(deleteDocument(documentId))
   }
 
-  const handleDownloadDocument = async (documentId: string) => {
-    dispatch(fetchDocumentByDocumentId(documentId))
+  const handleDownloadDocument = async (
+    documentId: string,
+    documentName: string
+  ) => {
+    dispatch(fetchDocumentByDocumentId({ documentId, documentName }))
   }
 
   return (
@@ -162,7 +165,12 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
             <div className="dropzone-overview-files" key={uuidv4()}>
               <div className="dropzone-overview-file">
                 <div
-                  onClick={() => handleDownloadDocument(document.documentId)}
+                  onClick={() =>
+                    handleDownloadDocument(
+                      document.documentId,
+                      document.documentName
+                    )
+                  }
                   className="dropzone-overview-file-name"
                 >
                   {document.documentName}

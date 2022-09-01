@@ -37,7 +37,7 @@ const documentSlice = createSlice({
     }))
     builder.addCase(fetchDocuments.fulfilled, (state, { payload }) => ({
       ...state,
-      documents: payload || [],
+      documents: payload.data || [],
       request: RequestState.OK,
       uploadRequest: RequestState.NONE,
       deleteRequest: RequestState.NONE,

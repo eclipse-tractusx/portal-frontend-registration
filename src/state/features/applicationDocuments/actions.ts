@@ -34,15 +34,24 @@ const fetchDocuments = createAsyncThunk(
 
 const fetchDocumentByDocumentId = createAsyncThunk(
   'registration/application/user/fetchDocumentByDocumentId',
-  async (documentId: string) => {
+  async ({
+    documentId,
+    documentName,
+  }: {
+    documentId: string
+    documentName: string
+  }) => {
     try {
-      const response = await Api.getInstance().getDocumentByDocumentId(
+      const { data, headers } = await Api.getInstance().getDocumentByDocumentId(
         documentId
       )
-      return downloadDocument(response)
+
+      return downloadDocument(data, headers['content-type'], documentName)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error('Unable to load documents. Please contact the administrator.')
+      throw Error(
+        'Unable to download document. Please contact the administrator.'
+      )
     }
   }
 )

@@ -177,13 +177,17 @@ export function uploadDocument(file): Promise<any> {
   })
 }
 
-export const downloadDocument = (file) => {
+export const downloadDocument = (
+  file,
+  fileType = 'application/pdf',
+  fileName = `${new Date().toDateString()}.pdf`
+) => {
   const blobFile = new Blob([file], {
-    type: 'application/pdf',
+    type: fileType,
   })
   const url = URL.createObjectURL(blobFile)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'download.pdf'
+  a.download = fileName
   a.click()
 }
