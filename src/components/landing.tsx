@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { withRouter, useHistory, Link } from 'react-router-dom'
@@ -8,9 +8,19 @@ import Footer from './footer'
 import BulletList from './bulletList'
 import Header from './cax-header'
 import Button from './button'
-import { fetchId, updateStatus, updateInvitation } from '../state/features/application/actions'
+import {
+  fetchId,
+  updateStatus,
+  updateInvitation,
+} from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { ADD_COMPANY_DATA, CREATED, SUBMITTED, CONFIRMED, DECLINED } from '../state/features/application/types'
+import {
+  ADD_COMPANY_DATA,
+  CREATED,
+  SUBMITTED,
+  CONFIRMED,
+  DECLINED,
+} from '../state/features/application/types'
 
 export const Landing = () => {
   const { t } = useTranslation()
@@ -24,7 +34,13 @@ export const Landing = () => {
   }
 
   useEffect(() => {
-    if (status && status[0] && (status[0]['applicationStatus'] === SUBMITTED || status[0]['applicationStatus'] === CONFIRMED || status[0]['applicationStatus'] === DECLINED)) {
+    if (
+      status &&
+      status[0] &&
+      (status[0]['applicationStatus'] === SUBMITTED ||
+        status[0]['applicationStatus'] === CONFIRMED ||
+        status[0]['applicationStatus'] === DECLINED)
+    ) {
       history.push('/registration-closed')
     }
   }, [status])
@@ -32,13 +48,13 @@ export const Landing = () => {
   useEffect(() => {
     dispatch(updateInvitation())
     dispatch(fetchId())
-  },[dispatch]);
+  }, [dispatch])
 
   const onClick = () => {
-    const obj = status.find(o => o['applicationStatus'] === CREATED);
-    if(obj){
-      const statusData = {id: obj['applicationId'], status: ADD_COMPANY_DATA};
-      dispatch(updateStatus(statusData));
+    const obj = status.find((o) => o['applicationStatus'] === CREATED)
+    if (obj) {
+      const statusData = { id: obj['applicationId'], status: ADD_COMPANY_DATA }
+      dispatch(updateStatus(statusData))
     }
     history.push('/form')
   }

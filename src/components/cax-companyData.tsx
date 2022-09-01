@@ -12,7 +12,10 @@ import { withRouter } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
-import { getCompanyDetailsWithAddress, saveCompanyDetailsWithAddress } from '../state/features/application/actions'
+import {
+  getCompanyDetailsWithAddress,
+  saveCompanyDetailsWithAddress,
+} from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
 
@@ -31,20 +34,20 @@ export const CompanyDataCax = ({
 
   const { status, error, companyDetails } = useSelector(applicationSelector)
 
-  const obj = status[status.length-1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj['applicationId'];
+  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj['applicationId']
   if (error) {
     toast.error(error)
   }
 
   useEffect(() => {
-    dispatch(getCompanyDetailsWithAddress(applicationId));
+    dispatch(getCompanyDetailsWithAddress(applicationId))
   }, [dispatch])
 
   useEffect(() => {
     setBpn(companyDetails?.bpn)
     setLegalEntity(companyDetails?.shortName)
-    setRegisteredName(companyDetails?.name) 
+    setRegisteredName(companyDetails?.name)
     setStreetHouseNumber(companyDetails?.streetName)
     setPostalCode(companyDetails?.zipCode)
     setCity(companyDetails?.city)
@@ -56,7 +59,9 @@ export const CompanyDataCax = ({
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState(companyDetails.shortName)
   const [registeredName, setRegisteredName] = useState(companyDetails.name)
-  const [streetHouseNumber, setStreetHouseNumber] = useState(companyDetails.streetName)
+  const [streetHouseNumber, setStreetHouseNumber] = useState(
+    companyDetails.streetName
+  )
   const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
@@ -69,7 +74,7 @@ export const CompanyDataCax = ({
     setStreetHouseNumber(
       details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
     )
-    setPostalCode(parseInt(details?.[0]?.addresses?.[0]?.postCodes[0]?.value))
+    setPostalCode(details?.[0]?.addresses?.[0]?.postCodes[0]?.value)
     setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
     setCountry(details?.[0]?.addresses?.[0]?.country?.name)
   }
@@ -101,7 +106,7 @@ export const CompanyDataCax = ({
 
   const nextClick = () => {
     addCurrentStep(currentActiveStep + 1)
-    const companyData = {...companyDetails}
+    const companyData = { ...companyDetails }
     companyData.name = legalEntity
     companyData.shortName = registeredName
     companyData.streetName = streetHouseNumber
@@ -109,7 +114,7 @@ export const CompanyDataCax = ({
     companyData.zipCode = postalCode
     companyData.countryAlpha2Code = country
     //addCompanyData(companyData)
-    dispatch(saveCompanyDetailsWithAddress({applicationId, companyData}))
+    dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
   }
 
   return (
@@ -225,7 +230,7 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => setPostalCode(parseInt(e.target.value))}
+                onChange={(e) => setPostalCode(e.target.value)}
               />
             </div>
 

@@ -13,7 +13,7 @@ export type CompanyDetails = {
   streetAdditional: string
   streetName: string
   streetNumber: string
-  zipCode: number
+  zipCode: string
   countryAlpha2Code: string
   countryDe: string
   taxId: string
@@ -48,15 +48,15 @@ export const InitialCompanyDetail = {
   streetAdditional: '',
   streetName: '',
   streetNumber: '',
-  zipCode: 0,
+  zipCode: '',
   countryAlpha2Code: '',
   countryDe: '',
   taxId: '',
 }
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA';
-export const CREATED = 'CREATED';
-export const SUBMITTED = 'SUBMITTED';
-export const CONFIRMED = 'CONFIRMED';
-export const DECLINED = 'DECLINED';
-export const VERIFY = 'VERIFY';
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
+export const CREATED = 'CREATED'
+export const SUBMITTED = 'SUBMITTED'
+export const CONFIRMED = 'CONFIRMED'
+export const DECLINED = 'DECLINED'
+export const VERIFY = 'VERIFY'

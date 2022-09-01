@@ -86,12 +86,18 @@
     "step": "4",
     "subTitle": "Please upload your legal company commercial register document.",
     "dragDropMessage": "Drag and drop files here, or click to select files",
+    "dragDropCaption": "on your computer",
+    "dragDropSpanCaption": "browse files",
+    "dragDropErrorMessage": "Document not uploaded, only pdf documents are allowed with a maximum size of 8MB",
+    "or": "or",
     "upload": "Upload",
     "uploadStatusDone": "Done",
     "uploadStatusUploading": "Uploading",
     "uploadStatusError": "Error",
     "onlyPDFError": "Only .pdf files are allowed",
-    "uploadSuccessMsg": "All files uploaded"
+    "uploadSuccessMsg": "All files uploaded",
+    "deleteSuccess": "Document got deleted",
+    "deleteError": "Request was unsuccessful"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",

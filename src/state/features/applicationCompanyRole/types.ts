@@ -1,4 +1,4 @@
-import { RequestState } from "../../../types/MainTypes"
+import { RequestState } from '../../../types/MainTypes'
 
 export type agreementData = {
   companyRoles: Array<string>
@@ -12,7 +12,7 @@ export type roleData = {
 
 export const agreementDataValue = {
   companyRoles: [],
-  agreements: []
+  agreements: [],
 }
 
 export type roleAggrementState = {
@@ -20,7 +20,7 @@ export type roleAggrementState = {
   allConsentData: roleData
   request: RequestState
   error: string
-} 
+}
 
 export type AgreementType = {
   agreementId: string

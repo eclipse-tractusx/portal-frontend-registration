@@ -67,12 +67,18 @@
     "title": "Dokumente hochladen",
     "subTitle": "Bitte laden Sie Ihren rechtsgültigen Handelsregisterauszug hoch.",
     "dragDropMessage": "Ziehen Sie Dateien hierher und legen Sie sie dort ab, oder klicken Sie, um Dateien auszuwählen",
+    "dragDropCaption": "auf deinem Computer",
+    "dragDropSpanCaption": "Dateien durchsuchen",
+    "dragDropErrorMessage": "Dokument nicht hochgeladen, es sind nur PDF-Dokumente mit einer maximalen Größe von 8 MB zulässig",
+    "or": "oder",
     "upload": "Hochladen",
     "uploadStatusDone": "Done",
     "uploadStatusUploading": "Uploading",
     "uploadStatusError": "Fehler",
     "onlyPDFError": "Only .pdf files are allowed",
-    "uploadSuccessMsg": "All files uploaded"
+    "uploadSuccessMsg": "All files uploaded",
+    "deleteSuccess": "Document got deleted",
+    "deleteError": "Request was unsuccessful"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",

@@ -12,7 +12,7 @@ export const reducers = {
   invite: inviteSlice.reducer,
   document: documentSlice.reducer,
   registrationData: registrationData.reducer,
-  user,
+  user
 }
 
 const rootReducer = combineReducers(reducers)
