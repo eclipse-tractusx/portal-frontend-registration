@@ -70,8 +70,9 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
 
   if (deleteRequest === RequestState.OK) {
     toast.success(t('documentUpload.deleteSuccess'))
-  } else if (deleteRequest === RequestState.ERROR)
+  } else if (deleteRequest === RequestState.ERROR) {
     toast.error(t('documentUpload.deleteError'))
+  }
 
   useEffect(() => {
     dispatch(fetchDocuments(applicationId))
