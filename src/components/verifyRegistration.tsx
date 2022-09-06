@@ -8,7 +8,6 @@ import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Dispatch } from 'redux'
-import { FaEdit } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import {
   fetchRegistrationData,
@@ -98,9 +97,6 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.heading1')}
                   </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
-                  </span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -161,9 +157,6 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.ActiveRole')}
                   </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
-                  </span>
                 </Row>
               </li>
               {registrationData.companyRoles.map((role, index) => (
@@ -181,9 +174,6 @@ export const VerifyRegistration = ({
                 <Row>
                   <span className="col-11">
                     {t('verifyRegistration.UploadedCertificates')}
-                  </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
                   </span>
                 </Row>
               </li>
@@ -222,7 +212,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default withRouter(
   connect(
     (state: IState) => ({
-      currentActiveStep: state.user.currentStep
+      currentActiveStep: state.user.currentStep,
     }),
     mapDispatchToProps
   )(VerifyRegistration)
