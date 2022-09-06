@@ -617,12 +617,6 @@ textarea {
   cursor: pointer;
 }
 
-.editIcon {
-  color: var(--blue-color);
-  font-size: 20px;
-  cursor: pointer;
-}
-
 .registration-header {
   margin-bottom: 100px;
 }
