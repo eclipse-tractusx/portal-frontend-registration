@@ -664,6 +664,7 @@ textarea {
   width: max-content;
   font-size: 12px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .dropzone-overview-file-status {

@@ -3,6 +3,7 @@ import documentSlice from './slice'
 import { Api } from './api'
 import { DocumentType } from './types'
 import { ProgressType } from '../../../types/MainTypes'
+import { downloadDocument } from '../../../helpers/utils'
 
 const handleUpdateProgress = (
   progress: ProgressType,
@@ -27,6 +28,30 @@ const fetchDocuments = createAsyncThunk(
     } catch (error: unknown) {
       console.error('api call error:', error)
       throw Error('Unable to load documents. Please contact the administrator.')
+    }
+  }
+)
+
+const fetchDocumentByDocumentId = createAsyncThunk(
+  'registration/application/user/fetchDocumentByDocumentId',
+  async ({
+    documentId,
+    documentName,
+  }: {
+    documentId: string
+    documentName: string
+  }) => {
+    try {
+      const { data, headers } = await Api.getInstance().getDocumentByDocumentId(
+        documentId
+      )
+
+      return downloadDocument(data, headers['content-type'], documentName)
+    } catch (error: unknown) {
+      console.error('api call error:', error)
+      throw Error(
+        'Unable to download document. Please contact the administrator.'
+      )
     }
   }
 )
@@ -75,4 +100,9 @@ const deleteDocument = createAsyncThunk(
   }
 )
 
-export { fetchDocuments, saveDocument, deleteDocument }
+export {
+  fetchDocuments,
+  saveDocument,
+  deleteDocument,
+  fetchDocumentByDocumentId,
+}

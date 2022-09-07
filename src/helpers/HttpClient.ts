@@ -3,6 +3,7 @@ import axios, {
   AxiosInstance,
   AxiosRequestHeaders,
   AxiosResponse,
+  ResponseType,
 } from 'axios'
 
 // Tell to typescript, we can use any type of data as response data
@@ -19,30 +20,41 @@ export abstract class HttpClient {
 
   protected constructor(
     baseURL: string,
+    reponseSuccessInterceptor = undefined,
+    responseErrorInterceptor = undefined,
     headers: AxiosRequestHeaders = {
       'Content-Type': 'application/json',
     },
     timeout: number = Number.parseInt(
       `${process.env.REACT_APP_REQUEST_TIMEOUT || 30000}`
-    )
+    ),
+    responseType?: ResponseType
   ) {
     this.instance = axios.create({
       baseURL,
       headers,
       timeout,
+      responseType,
     })
 
     // Runs after every response from call
-    this._initializeResponseInterceptor()
+    this._initializeResponseInterceptor(
+      reponseSuccessInterceptor,
+      responseErrorInterceptor
+    )
   }
 
   // Handles two case in below:
   // _handleResponse : Successful response from call
   // _handleError: Error case of call
-  private _initializeResponseInterceptor = () => {
+  private _initializeResponseInterceptor = (
+    responseSuccessInterceptor: () => unknown,
+    responseFailureInterceptor: () => unknown
+  ) => {
+    //create axios instance with interceptors passed in arguments or use default if not passed
     this.instance.interceptors.response.use(
-      this._handleResponse,
-      this._handleError
+      responseSuccessInterceptor || this._handleResponse,
+      responseFailureInterceptor || this._handleError
     )
   }
 

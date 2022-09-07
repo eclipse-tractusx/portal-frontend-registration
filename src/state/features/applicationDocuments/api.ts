@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse, AxiosResponseHeaders } from 'axios'
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
@@ -8,7 +8,16 @@ export class Api extends HttpClient {
   private static classInstance?: Api
 
   public constructor() {
-    super(getApiBase())
+    //custom interceptor that recieve headers as well as data for this isntance
+    const successResponseInterceptorWithHeader = ({
+      data,
+      headers,
+    }: AxiosResponse) => ({
+      data,
+      headers,
+    })
+
+    super(getApiBase(), successResponseInterceptorWithHeader)
   }
 
   public static getInstance() {
@@ -22,6 +31,12 @@ export class Api extends HttpClient {
     this.instance.get<any>(
       `/api/registration/application/${applicationId}/documentType/${documentTypeId}/documents`,
       RequestService.getHeaders()
+    )
+
+  public getDocumentByDocumentId = async (documentId: string) =>
+    this.instance.get<{ data: string; headers: AxiosResponseHeaders }>(
+      `/api/registration/documents/${documentId}`,
+      RequestService.getBlobHeaders()
     )
 
   public postDocument = async (args: PostDocumentType) => {
