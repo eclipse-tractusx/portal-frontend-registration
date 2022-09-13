@@ -61,7 +61,14 @@
   },
   "companyRole": {
     "title": "Rolle des Unternehmens",
-    "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen."
+    "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen.",
+    "ACTIVE_PARTICIPANT": "Active participant (OEM, supplier, KMU/SME)",
+    "APP_PROVIDER": "App provider",
+    "SERVICE_PROVIDER": "Operation and infrastructure provider",
+    "NoRolesError1": "Ein Fehler ist aufgetreten. Keine Rollen gefunden.",
+    "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
+    "Please": "Bitte",
+    "Retry": "wiederholen"
   },
   "documentUpload": {
     "title": "Dokumente hochladen",
