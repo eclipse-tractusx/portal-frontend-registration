@@ -105,6 +105,11 @@ export const CompanyRoleCax = ({
     setCompanyRoleChecked(updatedMap)
   }
 
+  const retry = () => {
+    dispatch(fetchAgreementData())
+    dispatch(fetchAgreementConsents(applicationId))
+  }
+
   const renderTermsSection = (role) => {
     if (role.agreementIds.length === 0) return null
     return (
@@ -123,8 +128,9 @@ export const CompanyRoleCax = ({
                 if (agreement.agreementId == id)
                   return (
                     <p className="agreement-text">
-                      Yes, i agree to the <span>{agreement.name}</span> of the
-                      selected role.
+                      {t('companyRole.TermsAndCondSpan1')}{' '}
+                      <span>{agreement.name}</span>{' '}
+                      {t('companyRole.TermsAndCondSpan3')}
                     </p>
                   )
               })}
@@ -151,7 +157,7 @@ export const CompanyRoleCax = ({
         </div>
         <div className="companydata-form mx-auto col-9">
           {error ? (
-            <RolesError />
+            <RolesError retry={retry} />
           ) : (
             allConsentData.companyRoles.map((role: any, index) => (
               <div className="company-role-section" key={index}>

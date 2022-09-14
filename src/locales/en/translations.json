@@ -85,6 +85,7 @@
     "SERVICE_PROVIDER": "Operation and infrastructure provider",
     "NoRolesError1": "An error occured. No roles found.",
     "NoRolesError2": " or contact the system administrator.",
+    "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Please",
     "Retry": "retry"
   },
