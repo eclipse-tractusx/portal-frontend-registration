@@ -110,7 +110,8 @@
     "titleInvite": "Users Invited",
     "userInvite": "Users invited",
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
-    "sentInvite": "Send Invite"
+    "sentInvite": "Send Invite",
+    "personalNoteError": "Please enter a valid personal note"
   },
   "verifyRegistration": {
     "title": "Verify your registration data",

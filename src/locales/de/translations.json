@@ -91,7 +91,8 @@
     "titleInvite": "Users Invited",
     "userInvite": "Users invited",
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
-    "sentInvite": "Send Invite"
+    "sentInvite": "Send Invite",
+    "personalNoteError": "Bitte geben Sie eine gültige persönliche Notiz ein"
   },
   "verifyRegistration": {
     "title": "Verify your registration data",
