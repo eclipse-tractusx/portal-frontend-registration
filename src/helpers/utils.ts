@@ -194,11 +194,11 @@ export const downloadDocument = (
 
 export const PATTERNS = {
   legalEntityPattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,-_./:;=<>?[\]\\\\^]{2,50}$/i,
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
   registeredNamePattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,-_./:;=<>?[\]\\\\^]{2,60}$/i,
-  streetHouseNumberPattern: /^[a-zA-Z0-9][a-zA-Z0-9\s-]{2,60}$/i,
-  postalCodePattern: /^[a-zA-Z0-9]{0,10}$/i,
-  cityPattern: /^[A-Za-z]{3,20}$/i,
-  countryPattern: /^[a-zA-Z]{3,20}$/i,
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/,
+  postalCodePattern: /^[a-zA-Z0-9À-ÿ]{0,10}$/,
+  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
+  countryPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
 }
