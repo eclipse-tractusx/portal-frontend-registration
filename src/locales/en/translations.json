@@ -50,7 +50,13 @@
     "validFrom": "Valid from",
     "validUntil": "Valid until",
     "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
-    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
+    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
+    "legalEntityError": "Please enter a valid legal entity name",
+    "registerdNameError": "Please enter a valid registered name",
+    "streetHouseNumberError": "Please enter a valid street and house number",
+    "postalCodeError": "Please enter a valid postal code",
+    "cityError": "Please enter a valid city name",
+    "countryError": "Please enter a valid country name"
   },
   "finish": {
     "greetingMsg": "Congratulations! Your registration has been successfully submitted!",

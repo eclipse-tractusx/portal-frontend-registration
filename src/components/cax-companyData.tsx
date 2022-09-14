@@ -1,5 +1,5 @@
 import { Row } from 'react-bootstrap'
-import { getCompanyDetails } from '../helpers/utils'
+import { getCompanyDetails, PATTERNS } from '../helpers/utils'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
@@ -23,6 +23,15 @@ interface CompanyDataProps {
   currentActiveStep: number
   addCurrentStep: (step: number) => void
   addCompanyData: (companydata: CompanyDetails) => void
+}
+
+const initialErrors = {
+  legalEntity: '',
+  registeredName: '',
+  streetHouseNumber: '',
+  postalCode: '',
+  city: '',
+  country: '',
 }
 
 export const CompanyDataCax = ({
@@ -65,15 +74,14 @@ export const CompanyDataCax = ({
   const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
+  const [errors, setErrors] = useState(initialErrors)
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
     setBpn(details?.[0]?.bpn)
     setLegalEntity(details?.[0]?.names?.[0]?.value)
     setRegisteredName(details?.[0]?.names?.[0]?.value)
-    setStreetHouseNumber(
-      details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value
-    )
+    setStreetHouseNumber(details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value)
     setPostalCode(details?.[0]?.addresses?.[0]?.postCodes[0]?.value)
     setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
     setCountry(details?.[0]?.addresses?.[0]?.country?.name)
@@ -98,6 +106,84 @@ export const CompanyDataCax = ({
     } else {
       setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
     }
+  }
+
+  const validateLegalEntity = (value: string) => {
+    setLegalEntity(value)
+
+    if (!PATTERNS.legalEntityPattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        legalEntity: 'legalEntityError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, legalEntity: '' }))
+  }
+
+  const validateRegisteredName = (value: string) => {
+    setRegisteredName(value)
+
+    if (!PATTERNS.registeredNamePattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        registeredName: 'registerdNameError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, registeredName: '' }))
+  }
+
+  const validateStreetHouseNumber = (value: string) => {
+    setStreetHouseNumber(value)
+
+    if (!PATTERNS.streetHouseNumberPattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        streetHouseNumber: 'streetHouseNumberError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, streetHouseNumber: '' }))
+  }
+
+  const validatePostalCode = (value: string) => {
+    setPostalCode(value)
+
+    if (!PATTERNS.postalCodePattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        postalCode: 'postalCodeError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+  }
+
+  const validateCity = (value: string) => {
+    setCity(value)
+
+    if (!PATTERNS.cityPattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        city: 'cityError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, city: '' }))
+  }
+
+  const validateCountry = (value: string) => {
+    setCountry(value)
+
+    if (!PATTERNS.countryPattern.test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        country: 'countryError',
+      }))
+    }
+
+    return setErrors((prevState) => ({ ...prevState, country: '' }))
   }
 
   const backClick = () => {
@@ -143,6 +229,7 @@ export const CompanyDataCax = ({
               <label>{bpnErrorMsg}</label>
             </div>
           </Row>
+
           <Row className="col-9 mx-auto">
             <div className="section-divider">
               <span className="text-center">
@@ -150,6 +237,7 @@ export const CompanyDataCax = ({
               </span>
             </div>
           </Row>
+
           <Row className="mx-auto col-9">
             <div className="form-data">
               <label>
@@ -166,8 +254,9 @@ export const CompanyDataCax = ({
               </div>
             </div>
           </Row>
+
           <Row className="mx-auto col-9">
-            <div className="form-data">
+            <div className={`form-data ${errors.legalEntity && 'error'}`}>
               <label>
                 {' '}
                 {t('registrationStepOne.legalEntity')}{' '}
@@ -179,15 +268,16 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={legalEntity}
-                onChange={(e) => setLegalEntity(e.target.value)}
+                onChange={(e) => validateLegalEntity(e.target.value)}
               />
-              <div className="company-hint">
-                {t('registrationStepOne.helperText')}
-              </div>
+              {errors.legalEntity && (
+                <label>{t(`registrationStepOne.${errors.legalEntity}`)}</label>
+              )}
             </div>
           </Row>
+
           <Row className="mx-auto col-9">
-            <div className="form-data">
+            <div className={`form-data ${errors.registeredName && 'error'}`}>
               <label>
                 {' '}
                 {t('registrationStepOne.registeredName')}{' '}
@@ -199,11 +289,13 @@ export const CompanyDataCax = ({
               <input
                 type="text"
                 value={registeredName}
-                onChange={(e) => setRegisteredName(e.target.value)}
+                onChange={(e) => validateRegisteredName(e.target.value)}
               />
-              <div className="company-hint">
-                {t('registrationStepOne.helperText')}
-              </div>
+              {errors.registeredName && (
+                <label>
+                  {t(`registrationStepOne.${errors.registeredName}`)}
+                </label>
+              )}
             </div>
           </Row>
 
@@ -214,44 +306,58 @@ export const CompanyDataCax = ({
           </Row>
 
           <Row className="mx-auto col-9">
-            <div className="form-data">
+            <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
               <label> {t('registrationStepOne.streetHouseNumber')} </label>
               <input
                 type="text"
                 value={streetHouseNumber}
-                onChange={(e) => setStreetHouseNumber(e.target.value)}
+                onChange={(e) => validateStreetHouseNumber(e.target.value)}
               />
+              {errors.streetHouseNumber && (
+                <label>
+                  {t(`registrationStepOne.${errors.streetHouseNumber}`)}
+                </label>
+              )}
             </div>
           </Row>
 
           <Row className="mx-auto col-9">
-            <div className="col-4 form-data">
+            <div className={`col-4 form-data ${errors.postalCode && 'error'}`}>
               <label> {t('registrationStepOne.postalCode')} </label>
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
+                onChange={(e) => validatePostalCode(e.target.value)}
               />
+              {errors.postalCode && (
+                <label>{t(`registrationStepOne.${errors.postalCode}`)}</label>
+              )}
             </div>
 
-            <div className="col-8 form-data">
+            <div className={`col-8 form-data ${errors.city && 'error'}`}>
               <label>{t('registrationStepOne.city')}</label>
               <input
                 type="text"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => validateCity(e.target.value)}
               />
+              {errors.city && (
+                <label>{t(`registrationStepOne.${errors.city}`)}</label>
+              )}
             </div>
           </Row>
 
           <Row className="mx-auto col-9">
-            <div className="form-data">
+            <div className={`form-data ${errors.country && 'error'}`}>
               <label>{t('registrationStepOne.country')}</label>
               <input
                 type="text"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={(e) => validateCountry(e.target.value)}
               />
+              {errors.country && (
+                <label>{t(`registrationStepOne.${errors.country}`)}</label>
+              )}
             </div>
           </Row>
         </div>

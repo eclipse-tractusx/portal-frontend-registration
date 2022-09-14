@@ -191,3 +191,14 @@ export const downloadDocument = (
   a.download = fileName
   a.click()
 }
+
+export const PATTERNS = {
+  legalEntityPattern:
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,-_./:;=<>?[\]\\\\^]{2,50}$/i,
+  registeredNamePattern:
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,-_./:;=<>?[\]\\\\^]{2,60}$/i,
+  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/i,
+  postalCodePattern: /^[a-zA-Z0-9À-ÿ]{0,10}$/i,
+  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/i,
+  countryPattern: /^[A-Za-zÀ-ÿ]{3,20}$/i,
+}
