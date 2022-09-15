@@ -174,14 +174,7 @@ export const CompanyRoleCax = ({
                   <div className="col-11">
                     <h6>{t(`companyRole.${role.companyRole}`)}</h6>
                     <p>{role.descriptions[i18n.language]}</p>
-                    {role.companyRole === 'ACTIVE_PARTICIPANT' &&
-                      companyRoleChecked['ACTIVE_PARTICIPANT'] &&
-                      renderTermsSection(role)}
-                    {role.companyRole === 'APP_PROVIDER' &&
-                      companyRoleChecked['APP_PROVIDER'] &&
-                      renderTermsSection(role)}
-                    {role.companyRole === 'SERVICE_PROVIDER' &&
-                      companyRoleChecked['SERVICE_PROVIDER'] &&
+                    {companyRoleChecked[role.companyRole] &&
                       renderTermsSection(role)}
                   </div>
                 </Row>
