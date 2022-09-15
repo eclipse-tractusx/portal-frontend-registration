@@ -111,7 +111,8 @@
     "userInvite": "Users invited",
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
     "sentInvite": "Send Invite",
-    "personalNoteError": "Please enter a valid personal note"
+    "personalNoteError": "Please enter a valid personal note",
+    "emailRequired": "Email is required"
   },
   "verifyRegistration": {
     "title": "Verify your registration data",

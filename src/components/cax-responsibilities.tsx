@@ -109,7 +109,8 @@ export const ResponsibilitiesCax = ({
 
   const validateEmailOnChange = (email) => {
     setEmail(email)
-    if (email === '') setError({ ...appError, email: 'Email is required' })
+    if (email === '')
+      setError({ ...appError, email: t('Responsibility.emailRequired') })
     else if (!validateEmail(email))
       setError({
         ...appError,
