@@ -713,6 +713,7 @@ textarea {
 
 .agreement-li {
   list-style: none;
+  font-size: 1rem;
 }
 
 .agreement-check {
@@ -775,5 +776,31 @@ textarea {
 
 .dragdrop-subtitle span {
   color: #0f71cb;
+  text-decoration: underline;
+}
+
+.roles-error-container {
+  height: 100px;
+  margin: 15rem auto;
+  text-align: center;
+}
+
+.roles-error-container span {
+  color: #0f71cb;
+  cursor: pointer;
+}
+
+.agreement-check-list {
+  padding: 0px;
+}
+
+.agreement-text {
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.agreement-text span {
+  color: #0d6efd;
+  cursor: pointer;
   text-decoration: underline;
 }
