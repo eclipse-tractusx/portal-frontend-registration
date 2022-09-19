@@ -47,9 +47,14 @@ export const ResponsibilitiesCax = ({
   const [role, setRole] = useState<string | null>('')
   const [message, setMessage] = useState<string | null>('')
   const [availableUserRoles, setavailableUserRoles] = useState([])
-  const [appError, setError] = useState<{ email: string; role: string }>({
+  const [appError, setError] = useState<{
+    email: string
+    role: string
+    personalNote: string
+  }>({
     email: '',
     role: '',
+    personalNote: '',
   })
 
   const dispatch = useDispatch()
@@ -82,6 +87,9 @@ export const ResponsibilitiesCax = ({
     //eslint-disable-next-line
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
+  const validatePersonalNote = (note: string) =>
+    /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
+
   const handleSendInvite = () => {
     if (email && validateEmail(email)) {
       const user = {
@@ -102,13 +110,29 @@ export const ResponsibilitiesCax = ({
   const validateEmailOnChange = (email) => {
     setEmail(email)
     if (email === '')
-      setError({ email: 'Email is required', role: appError.role })
+      setError({ ...appError, email: t('Responsibility.emailRequired') })
     else if (!validateEmail(email))
       setError({
+        ...appError,
         email: t('Responsibility.emailErrorMessage'),
-        role: appError.role,
       })
-    else setError({ email: '', role: appError.role })
+    else setError({ ...appError, email: '' })
+  }
+
+  const validatePersonalNoteOnChange = (note: string) => {
+    setMessage(note)
+
+    if (note.length === 0)
+      return setError((prevState) => ({ ...prevState, personalNote: '' }))
+
+    if (!validatePersonalNote(note)) {
+      return setError((prevState) => ({
+        ...prevState,
+        personalNote: t('Responsibility.personalNoteError'),
+      }))
+    }
+
+    return setError((prevState) => ({ ...prevState, personalNote: '' }))
   }
 
   const backClick = () => {
@@ -169,13 +193,14 @@ export const ResponsibilitiesCax = ({
           </Row>
 
           <Row className="mx-auto col-9">
-            <div className="form-data">
+            <div className={`form-data ${appError.personalNote && 'error'}`}>
               <label>{t('Responsibility.note')}</label>
               <textarea
                 name="message"
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => validatePersonalNoteOnChange(e.target.value)}
               />
+              <div className="error-message">{appError.personalNote}</div>
               <div className="company-hint">{t('Responsibility.hint')}</div>
             </div>
           </Row>
