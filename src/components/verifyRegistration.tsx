@@ -1,3 +1,23 @@
+/********************************************************************************
+ * Copyright (c) 2021,2022 Microsoft and BMW Group AG
+ * Copyright (c) 2021,2022 Contributors to the CatenaX (ng) GitHub Organisation.
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +28,6 @@ import { addCurrentStep } from '../state/features/user/action'
 import { withRouter } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Dispatch } from 'redux'
-import { FaEdit } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import {
   fetchRegistrationData,
@@ -98,9 +117,6 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.heading1')}
                   </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
-                  </span>
                 </Row>
               </li>
               <li className="list-group-item-cax">
@@ -161,9 +177,6 @@ export const VerifyRegistration = ({
                   <span className="col-11">
                     {t('verifyRegistration.ActiveRole')}
                   </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
-                  </span>
                 </Row>
               </li>
               {registrationData.companyRoles.map((role, index) => (
@@ -181,9 +194,6 @@ export const VerifyRegistration = ({
                 <Row>
                   <span className="col-11">
                     {t('verifyRegistration.UploadedCertificates')}
-                  </span>
-                  <span className="col-1">
-                    <FaEdit className="editIcon" />
                   </span>
                 </Row>
               </li>
@@ -222,7 +232,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default withRouter(
   connect(
     (state: IState) => ({
-      currentActiveStep: state.user.currentStep
+      currentActiveStep: state.user.currentStep,
     }),
     mapDispatchToProps
   )(VerifyRegistration)

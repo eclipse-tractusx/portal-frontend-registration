@@ -1,3 +1,23 @@
+/********************************************************************************
+ * Copyright (c) 2021,2022 Microsoft and BMW Group AG
+ * Copyright (c) 2021,2022 Contributors to the CatenaX (ng) GitHub Organisation.
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ ********************************************************************************/
+
 import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
@@ -175,4 +195,30 @@ export function uploadDocument(file): Promise<any> {
     },
     body: formdata,
   })
+}
+
+export const downloadDocument = (
+  file,
+  fileType = 'application/pdf',
+  fileName = `${new Date().toDateString()}.pdf`
+) => {
+  const blobFile = new Blob([file], {
+    type: fileType,
+  })
+  const url = URL.createObjectURL(blobFile)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = fileName
+  a.click()
+}
+
+export const PATTERNS = {
+  legalEntityPattern:
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
+  registeredNamePattern:
+    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/,
+  postalCodePattern: /^[a-zA-Z0-9À-ÿ]{0,10}$/,
+  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
+  countryPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
 }

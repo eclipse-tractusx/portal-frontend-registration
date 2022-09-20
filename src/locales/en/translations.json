@@ -50,7 +50,13 @@
     "validFrom": "Valid from",
     "validUntil": "Valid until",
     "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
-    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
+    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
+    "legalEntityError": "Please enter a valid legal entity name",
+    "registerdNameError": "Please enter a valid registered name",
+    "streetHouseNumberError": "Please enter a valid street and house number",
+    "postalCodeError": "Please enter a valid postal code",
+    "cityError": "Please enter a valid city name",
+    "countryError": "Please enter a valid country name"
   },
   "finish": {
     "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
@@ -79,7 +85,15 @@
     "TermsAndCondSpan3": "of the selected role.",
     "TermsAndCond2Span1": "Yes, I agree to the",
     "TermsAndCond2Span2": "security regulations",
-    "TermsAndCond2Span3": "of the selected role."
+    "TermsAndCond2Span3": "of the selected role.",
+    "ACTIVE_PARTICIPANT": "Active participant (OEM, supplier, KMU/SME)",
+    "APP_PROVIDER": "App provider",
+    "SERVICE_PROVIDER": "Operation and infrastructure provider",
+    "NoRolesError1": "An error occured. No roles found.",
+    "NoRolesError2": " or contact the system administrator.",
+    "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
+    "Please": "Please",
+    "Retry": "retry"
   },
   "documentUpload": {
     "title": "Upload documents",
@@ -110,7 +124,9 @@
     "titleInvite": "Users Invited",
     "userInvite": "Users invited",
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
-    "sentInvite": "Send Invite"
+    "sentInvite": "Send Invite",
+    "personalNoteError": "Please enter a valid personal note",
+    "emailRequired": "Email is required"
   },
   "verifyRegistration": {
     "title": "Verify your registration data",

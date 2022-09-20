@@ -50,7 +50,13 @@
     "validFrom": "Gültig ab",
     "validUntil": "Gültig bis",
     "bpnInvalidError": "This is not a valid BPN, please enter a valid BPN or use the manual flow below.",
-    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below."
+    "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
+    "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein",
+    "registerdNameError": "Bitte geben Sie einen gültigen registrierten Namen ein",
+    "streetHouseNumberError": "Bitte geben Sie eine gültige Straße und Hausnummer ein",
+    "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein",
+    "cityError": "Bitte geben Sie einen gültigen Städtenamen ein",
+    "countryError": "Bitte geben Sie einen gültigen Ländernamen ein"
   },
   "finish": {
     "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
@@ -61,7 +67,14 @@
   },
   "companyRole": {
     "title": "Rolle des Unternehmens",
-    "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen."
+    "subTitle": "Bitte wählen Sie eine oder mehrere Rollen für Ihr Unternehmen aus, um an Catena-X teilzunehmen. Die Unternehmensrolle kann später jederzeit aktualisiert/geändert werden. Je nach gewählter Rolle können die angebotenen Portaldienste abweichen.",
+    "ACTIVE_PARTICIPANT": "Active participant (OEM, supplier, KMU/SME)",
+    "APP_PROVIDER": "App provider",
+    "SERVICE_PROVIDER": "Operation and infrastructure provider",
+    "NoRolesError1": "Ein Fehler ist aufgetreten. Keine Rollen gefunden.",
+    "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
+    "Please": "Bitte",
+    "Retry": "wiederholen"
   },
   "documentUpload": {
     "title": "Dokumente hochladen",
@@ -84,14 +97,16 @@
     "responsAndAdmin": "Responsibility & admin account",
     "subTitle": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
     "email": "E-mail address",
-    "emailErrorMessage": "Please enter a valid email address",
+    "emailErrorMessage": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
     "role": "User role",
     "note": "Personal note",
     "hint": "Optional message in the invitation e-mail. Lorem Ipsum",
     "titleInvite": "Users Invited",
     "userInvite": "Users invited",
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
-    "sentInvite": "Send Invite"
+    "sentInvite": "Send Invite",
+    "personalNoteError": "Bitte geben Sie eine gültige persönliche Notiz ein",
+    "emailRequired": "E-Mail ist erforderlich"
   },
   "verifyRegistration": {
     "title": "Verify your registration data",
