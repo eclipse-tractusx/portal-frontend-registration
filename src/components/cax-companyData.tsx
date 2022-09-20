@@ -248,7 +248,7 @@ export const CompanyDataCax = ({
                   data-tip="hello world"
                 />
               </label>
-              <input type="text" value={bpn} />
+              <input type="text" disabled value={bpn} />
               <div className="company-hint">
                 {t('registrationStepOne.helperText')}
               </div>
