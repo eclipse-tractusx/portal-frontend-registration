@@ -383,7 +383,6 @@ export const CompanyDataCax = ({
         </div>
       </div>
       <FooterButton
-        labelBack={t('button.back')}
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
