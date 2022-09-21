@@ -63,6 +63,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
       silentCheckSsoRedirectUri:
         window.location.origin + '/silent-check-sso.html',
       pkceMethod: 'S256',
+      redirectUri: `${window.location.origin}/landing`,
     })
     .then(() => {
       onAuthenticatedCallback()
