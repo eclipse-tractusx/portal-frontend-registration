@@ -20,10 +20,10 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ApplicationApi } from './api'
-import { ApplicationStatus, CompanyDetails } from './types'
+import { ApplicationStatus, CompanyDetails, name } from './types'
 
 const fetchId = createAsyncThunk(
-  'registration/application/fetchId',
+  `${name}/fetchId`,
   async () => {
     try {
       return await ApplicationApi.getInstance().getId()
@@ -37,7 +37,7 @@ const fetchId = createAsyncThunk(
 )
 
 const updateInvitation = createAsyncThunk(
-  'registration/application/updateInvitation',
+  `${name}/updateInvitation`,
   async () => {
     try {
       return await ApplicationApi.getInstance().putInvitation()
@@ -49,7 +49,7 @@ const updateInvitation = createAsyncThunk(
 )
 
 const updateStatus = createAsyncThunk(
-  'registration/application/updateStatus',
+  `${name}/updateStatus`,
   async (status: ApplicationStatus) => {
     try {
       return await ApplicationApi.getInstance().putStatus(status)
@@ -63,7 +63,7 @@ const updateStatus = createAsyncThunk(
 )
 
 const getCompanyDetailsWithAddress = createAsyncThunk(
-  `registration/application/companyDetailsWithAddress`,
+  `${name}/companyDetailsWithAddress/get`,
   async (applicationId: string) => {
     try {
       return await ApplicationApi.getInstance().getCompanyDetailsWithAddress(
@@ -79,7 +79,7 @@ const getCompanyDetailsWithAddress = createAsyncThunk(
 )
 
 const saveCompanyDetailsWithAddress = createAsyncThunk(
-  `registration/application/companyDetailsWithAddress/save`,
+  `${name}/companyDetailsWithAddress/save-address`,
   async ({
     applicationId,
     companyData,

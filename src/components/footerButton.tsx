@@ -29,17 +29,25 @@ export const FooterButton = ({
   handleBackClick,
   handleNextClick,
   tooltip = null,
+}: {
+  labelBack?: string
+  labelNext: string
+  handleBackClick: () => void
+  handleNextClick: () => void
+  tooltip?: null | string
 }) => {
   return (
     <div className="mx-auto col-9 info">
       <Row>
         <FooterHeadline />
         <div className="col12 d-flex align-items-center justify-content-center button-section">
-          <Button
-            styleClass="button btn-default"
-            label={labelBack}
-            handleClick={handleBackClick}
-          />
+          {labelBack && (
+            <Button
+              styleClass="button btn-default"
+              label={labelBack}
+              handleClick={handleBackClick}
+            />
+          )}
           <Button
             label={labelNext}
             styleClass={
