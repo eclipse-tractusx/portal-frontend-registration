@@ -22,12 +22,20 @@ import { RequestState } from '../../../types/MainTypes'
 
 export type agreementData = {
   companyRoles: Array<string>
-  agreements: Array<string>
+  agreements: { agreementId: string; consentStatus: string }[]
+}
+
+export type agreementResponseData = { agreementId: string; name: string }
+
+export type companyRole = {
+  companyRole: string
+  agreementIds: string[]
+  descriptions: { de: string; en: string }
 }
 
 export type roleData = {
-  agreements: Array<string>
-  companyRoles: Array<string>
+  agreements: agreementResponseData[]
+  companyRoles: companyRole[]
 }
 
 export const agreementDataValue = {

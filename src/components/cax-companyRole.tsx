@@ -37,6 +37,7 @@ import {
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 import '../styles/newApp.css'
+import { companyRole } from '../state/features/applicationCompanyRole/types'
 
 interface CompanyRoleProps {
   currentActiveStep: number
@@ -51,42 +52,36 @@ export const CompanyRoleCax = ({
 
   const { status } = useSelector(applicationSelector)
   const { allConsentData, consentData, error } = useSelector(stateSelector)
-
-  const checkIfAgreementEnabled = (id) =>
-    allConsentData.agreements.filter(
-      (agreement: any) => agreement.agreementId === id
-    ).length >= 0
-
-  const checkIfRoleEnabled = (item) =>
-    consentData.companyRoles.filter((role) => role === item).length >= 0
-
-  const agreementMap = new Map()
-  consentData.agreements.length &&
-    consentData.agreements.map(
-      (item: any) =>
-        (agreementMap[item.agreementId] = checkIfAgreementEnabled(
-          item.agreementId
-        ))
-    )
-
-  const roleMap = new Map()
-  consentData.companyRoles.length &&
-    consentData.companyRoles.map(
-      (item: any) => (roleMap[item] = checkIfRoleEnabled(item))
-    )
-
-  const [companyRoleChecked, setCompanyRoleChecked] = useState(roleMap)
-  const [agreementChecked, setAgreementChecked] = useState(agreementMap)
+  const [companyRoleChecked, setCompanyRoleChecked] = useState({})
+  const [agreementChecked, setAgreementChecked] = useState({})
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
   const dispatch = useDispatch()
 
+  const updateSelectedRolesAndAgreement = () => {
+    setCompanyRoleChecked(
+      consentData.companyRoles.reduce((prev, next) => {
+        return { ...prev, [next]: true }
+      }, {})
+    )
+
+    setAgreementChecked(
+      consentData.agreements.reduce((prev, next) => {
+        return { ...prev, [next.agreementId]: true }
+      }, {})
+    )
+  }
+
   useEffect(() => {
     dispatch(fetchAgreementData())
     dispatch(fetchAgreementConsents(applicationId))
   }, [dispatch])
+
+  useEffect(() => {
+    updateSelectedRolesAndAgreement()
+  }, [consentData])
 
   const backClick = () => {
     addCurrentStep(currentActiveStep - 1)
@@ -122,6 +117,24 @@ export const CompanyRoleCax = ({
   const handleCompanyRoleCheck = (id) => {
     const updatedMap = { ...companyRoleChecked }
     updatedMap[id] = !updatedMap[id]
+
+    if (!updatedMap[id]) {
+      const companyRoleIndex = allConsentData.companyRoles.findIndex(
+        (item) => item.companyRole === id
+      )
+
+      const updatedAgreementIds = allConsentData.companyRoles[
+        companyRoleIndex
+      ].agreementIds.reduce((prev, next) => {
+        return { ...prev, [next]: false }
+      }, {})
+
+      setAgreementChecked((prevState) => ({
+        ...prevState,
+        ...updatedAgreementIds,
+      }))
+    }
+
     setCompanyRoleChecked(updatedMap)
   }
 
@@ -130,7 +143,7 @@ export const CompanyRoleCax = ({
     dispatch(fetchAgreementConsents(applicationId))
   }
 
-  const renderTermsSection = (role) => {
+  const renderTermsSection = (role: companyRole) => {
     if (role.agreementIds.length === 0) return null
     return (
       <div>
@@ -144,7 +157,7 @@ export const CompanyRoleCax = ({
                 onChange={() => handleAgreementCheck(id)}
                 checked={agreementChecked[id]}
               />
-              {allConsentData.agreements.map((agreement: any) => {
+              {allConsentData.agreements.map((agreement) => {
                 if (agreement.agreementId == id)
                   return (
                     <p className="agreement-text">
@@ -179,7 +192,7 @@ export const CompanyRoleCax = ({
           {error ? (
             <RolesError retry={retry} />
           ) : (
-            allConsentData.companyRoles.map((role: any, index) => (
+            allConsentData.companyRoles.map((role, index) => (
               <div className="company-role-section" key={index}>
                 <Row>
                   <div className="col-1">
