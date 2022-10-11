@@ -69,7 +69,7 @@ export const VerifyRegistration = ({
   }
 
   const nextClick = () => {
-    dispatch(saveRegistration())
+    dispatch(saveRegistration(applicationId))
   }
 
   const getTooltip = () => {
