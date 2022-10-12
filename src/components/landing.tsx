@@ -34,10 +34,7 @@ import {
   updateInvitation,
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import {
-  ADD_COMPANY_DATA,
-  CREATED,
-} from '../state/features/application/types'
+import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
 
 export const Landing = () => {
   const { t } = useTranslation()

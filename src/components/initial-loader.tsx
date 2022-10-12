@@ -22,9 +22,7 @@ import { useEffect } from 'react'
 import { withRouter, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import {
-  fetchId,
-} from '../state/features/application/actions'
+import { fetchId } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import {
   SUBMITTED,
@@ -62,8 +60,6 @@ export const InitialLoader = () => {
     dispatch(fetchId())
   }, [dispatch])
 
-  return (
-    <div className="initial-loader"></div>
-  )
+  return <div className="initial-loader"></div>
 }
 export default withRouter(InitialLoader)

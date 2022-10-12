@@ -77,7 +77,7 @@ export default handleActions<IUserData, any>(
         ...state,
         roleComposite: action.payload,
       })
-    )
+    ),
   },
   initialState
 )
