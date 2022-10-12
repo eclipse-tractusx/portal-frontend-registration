@@ -1,6 +1,6 @@
 {
   "name": "product-portal-frontend-registration",
-  "version": "0.6.1",
+  "version": "0.5.5.1",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
