@@ -33,6 +33,7 @@ import './styles/dropzone.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import Landing from './components/landing'
+import InitialLoader from './components/initial-loader'
 import RegistrationCax from './components/cax-registration'
 import Finish from './components/finish'
 import Authinfo from './components/authinfo'
@@ -59,7 +60,12 @@ const App = () => {
   return (
     <BrowserRouter basename="/registration">
       <Switch>
-        <Redirect path="/" exact to="/landing" />
+        <Redirect path="/" exact to="/load" />
+        <ProtectedRoute
+          path="/load"
+          rolesAllowedForTheRoute={['view_registration']}
+          component={() => <InitialLoader />}
+        />
         <ProtectedRoute
           path="/landing"
           rolesAllowedForTheRoute={['view_registration']}
