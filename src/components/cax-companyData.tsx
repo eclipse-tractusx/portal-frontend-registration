@@ -213,6 +213,7 @@ export const CompanyDataCax = ({
   const nextClick = () => {
     addCurrentStep(currentActiveStep + 1)
     const companyData = { ...companyDetails }
+    companyData.bpn = bpn
     companyData.name = legalEntity
     companyData.shortName = registeredName
     companyData.streetName = streetHouseNumber
