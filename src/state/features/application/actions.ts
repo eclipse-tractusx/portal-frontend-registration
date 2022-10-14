@@ -22,19 +22,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ApplicationApi } from './api'
 import { ApplicationStatus, CompanyDetails, name } from './types'
 
-const fetchId = createAsyncThunk(
-  `${name}/fetchId`,
-  async () => {
-    try {
-      return await ApplicationApi.getInstance().getId()
-    } catch (error: unknown) {
-      console.error('api call error:', error)
-      throw Error(
-        'Application ID not existing. Please contact the administrator.'
-      )
-    }
+const fetchId = createAsyncThunk(`${name}/fetchId`, async () => {
+  try {
+    return await ApplicationApi.getInstance().getId()
+  } catch (error: unknown) {
+    console.error('api call error:', error)
+    throw Error(
+      'Application ID not existing. Please contact the administrator.'
+    )
   }
-)
+})
 
 const updateInvitation = createAsyncThunk(
   `${name}/updateInvitation`,
