@@ -25,8 +25,8 @@ import { FooterButton } from './footerButton'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
-import { withRouter } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useHistory, withRouter } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Dispatch } from 'redux'
 import { ToastContainer, toast } from 'react-toastify'
 import {
@@ -34,7 +34,7 @@ import {
   saveRegistration,
 } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { stateSelector } from '../state/features/applicationVerifyRegister/slice'
+import { registrationSuccessSelector, stateSelector } from '../state/features/applicationVerifyRegister/slice'
 import { stateSelector as documentSelector } from '../state/features/applicationDocuments/slice'
 
 interface VerifyRegistrationProps {
@@ -47,12 +47,18 @@ export const VerifyRegistration = ({
   addCurrentStep,
 }: VerifyRegistrationProps) => {
   const { t } = useTranslation()
+  const history = useHistory()
 
   const dispatch = useDispatch()
 
+  const [ confirmState, setConfirmState ] = useState(false)
+
   const { status, error, companyDetails } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
+  const registrationSuccess = useSelector(registrationSuccessSelector)
   const { documents } = useSelector(documentSelector)
+
+  if(confirmState && registrationSuccess) history.push('/finish')
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
@@ -69,6 +75,7 @@ export const VerifyRegistration = ({
   }
 
   const nextClick = () => {
+    setConfirmState(true)
     dispatch(saveRegistration(applicationId))
   }
 
