@@ -26,6 +26,7 @@ import { RegistrationState, InitialRegistrationValue } from './types'
 const initialState: RegistrationState = {
   registrationData: InitialRegistrationValue,
   loading: false,
+  success: false,
   error: null,
 }
 
@@ -55,16 +56,19 @@ const applicationSlice = createSlice({
     builder.addCase(saveRegistration.pending, (state) => ({
       ...state,
       loading: true,
+      success: false,
       error: null,
     }))
     builder.addCase(saveRegistration.fulfilled, (state) => ({
       ...state,
       loading: false,
+      success: true,
       error: null,
     }))
     builder.addCase(saveRegistration.rejected, (state, action) => ({
       ...state,
       loading: false,
+      success: false,
       error: action.error.message as string,
     }))
   },
@@ -72,5 +76,8 @@ const applicationSlice = createSlice({
 
 export const stateSelector = (state: RootState): RegistrationState =>
   state.registrationData
+
+export const registrationSuccessSelector = (state: RootState): boolean =>
+  state.registrationData.success
 
 export default applicationSlice
