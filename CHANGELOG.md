@@ -4,8 +4,8 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### In Progress
 
-* Feature - Registration Validation => Step 1 (Country)
-* Feature - Registration Submission: Without BPN
+* Feature - Registration Validation for country in Step 1
+* Feature - Registration Submission should be enabled without BPN
 
 ### 0.6.0
 
