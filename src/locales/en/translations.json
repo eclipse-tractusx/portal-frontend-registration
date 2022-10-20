@@ -56,7 +56,7 @@
     "streetHouseNumberError": "Please enter a valid street and house number",
     "postalCodeError": "Please enter a valid postal code",
     "cityError": "Please enter a valid city name",
-    "countryError": "Please enter a valid country name"
+    "countryError": "Please enter a valid country code. With minimum 2 characters and alpha letters."
   },
   "finish": {
     "greetingMsg": "Congratulations! Your registration has been successfully submitted!",

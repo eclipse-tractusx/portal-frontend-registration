@@ -220,5 +220,5 @@ export const PATTERNS = {
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/,
   postalCodePattern: /^[a-zA-Z0-9À-ÿ]{0,10}$/,
   cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
-  countryPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
+  countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
 }
