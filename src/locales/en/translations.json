@@ -119,7 +119,7 @@
   },
   "verifyRegistration": {
     "title": "Verify your registration data",
-    "subtitle": "Verify your company registration data before submitting the registration. Please ensure that all information are correctly filled. As soon as the verification is finished, click the "Submit" button below to submit the registration for approval.",
+    "subtitle": "Verify your company registration data before submitting the registration. Please ensure that all information are correctly filled. As soon as the verification is finished, click the 'Submit' button below to submit the registration for approval.",
     "heading1": "Company Data",
     "bpn": "BPN",
     "legalEntity": "Legal Entity Name",
