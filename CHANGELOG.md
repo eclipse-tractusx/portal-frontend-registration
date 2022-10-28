@@ -14,7 +14,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * n/a
 
 ### Feature
-* Registration Walcome: With the initital login, the registration welcome page is getting displayed with an "how to" for the upcoming registration steps
+* Registration Welcome: Introduction of a welcome page including a "how to" for the following registration steps
 * Registration Submission: Support of the registration submission incl. new page for successful submission and triggered email to the registrator
 * Registration Closed Function: Company registrations in status "submitted", "approved" or "declined" can not re-visit the registration document. A closed registration information gets displayed.
 
