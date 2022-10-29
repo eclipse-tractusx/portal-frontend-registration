@@ -2,12 +2,6 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-### In Progress
-
-* Feature - Registration Validation for country in Step 1
-* Feature - Registration Submission should be enabled without BPN
-
-
 ## 0.6.0
 
 ### Change
