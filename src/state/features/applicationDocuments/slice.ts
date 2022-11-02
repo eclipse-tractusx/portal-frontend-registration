@@ -51,7 +51,7 @@ const documentSlice = createSlice({
     builder.addCase(fetchDocuments.pending, (state) => ({
       ...state,
       request: RequestState.SUBMIT,
-      uploadRequest: RequestState.NONE,
+      //uploadRequest: RequestState.NONE,
       deleteRequest: RequestState.NONE,
       error: '',
     }))
@@ -59,7 +59,7 @@ const documentSlice = createSlice({
       ...state,
       documents: payload.data || [],
       request: RequestState.OK,
-      uploadRequest: RequestState.NONE,
+      //uploadRequest: RequestState.NONE,
       deleteRequest: RequestState.NONE,
       error: '',
     }))
@@ -67,7 +67,7 @@ const documentSlice = createSlice({
       ...state,
       documents: [],
       request: RequestState.ERROR,
-      uploadRequest: RequestState.NONE,
+      //uploadRequest: RequestState.NONE,
       deleteRequest: RequestState.NONE,
       error: action.error.message as string,
     }))
