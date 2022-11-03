@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import React from 'react'
 import { ILayoutProps } from 'react-dropzone-uploader'
 import { useTranslation } from 'react-i18next'
 
 interface CustomLayoutProps extends ILayoutProps {
-  error: boolean
+  error: string
+  documentError: string
 }
 
 function DragdropLayout(props: CustomLayoutProps) {
@@ -32,9 +32,14 @@ function DragdropLayout(props: CustomLayoutProps) {
   return (
     <div>
       <div {...props.dropzoneProps}>{props.input}</div>
+      {props.documentError && (
+        <div className="text-danger ms-4 mt-2 fw-bold-600 fw-font-12">
+          {t('documentUpload.dragDropExceedSizeErrorMsg')}
+        </div>
+      )}
       {props.error && (
-        <div className="text-danger ms-4 mt-2 fw-bold">
-          {t('documentUpload.dragDropErrorMessage')}
+        <div className="text-danger ms-4 mt-2 fw-bold-600 fw-font-12">
+          {props.error}
         </div>
       )}
     </div>
