@@ -92,8 +92,7 @@ export const VerifyRegistration = ({
     return null
   }
   const hasCompanyData = () => {
-    return companyDetails.bpn ? true : false
-    // return true
+    return true
   }
   const hasRoles = () => {
     return true
