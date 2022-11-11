@@ -129,7 +129,6 @@ export const CompanyDataCax = ({
   }
 
   const validateLegalEntity = (value: string) => {
-    console.log('value', value)
     setLegalEntity(value)
 
     if (!PATTERNS.legalEntityPattern.test(value.trim())) {
