@@ -129,6 +129,7 @@ export const CompanyDataCax = ({
   }
 
   const validateLegalEntity = (value: string) => {
+    console.log('value', value)
     setLegalEntity(value)
 
     if (!PATTERNS.legalEntityPattern.test(value.trim())) {
@@ -387,6 +388,7 @@ export const CompanyDataCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
+        disabled={!legalEntity || !registeredName || !streetHouseNumber || !postalCode || !city || !country}
       />
     </>
   )
