@@ -222,3 +222,12 @@ export const PATTERNS = {
   cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
 }
+
+export function download(file: Blob, fileType: string, fileName: string) {
+  const url = URL.createObjectURL(file)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = fileName
+  a.click()
+}
+
