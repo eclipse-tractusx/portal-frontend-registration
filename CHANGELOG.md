@@ -5,6 +5,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ### In Progress
 
 * Feature - Registration Step 3: Link document terms & conditions
+* Bugfix - Registration Submission validations for step 1 in step 5
 
 ## 0.7.0
 
