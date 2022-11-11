@@ -840,6 +840,13 @@ textarea {
   margin-top: -60px;
 }
 
+.fw-bold-600{
+  font-weight: 600!important;
+}
+.fw-font-12{
+  font-size: 12px!important;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

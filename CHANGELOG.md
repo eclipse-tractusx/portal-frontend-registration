@@ -4,9 +4,22 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### In Progress
 
-* Feature - Registration Validation for country in Step 1
-* Feature - Registration Submission should be enabled without BPN
+* ...
+* ...
 
+## 0.7.0
+
+### Change
+n/a
+
+### Feature
+* Company registration submission for companies without BPN got activated.
+
+### Technical Support
+n/a
+
+### Bugfix
+* Registration Step 1 "Company Data Input Form": Country input field updated to country code incl. input validation
 
 ## 0.6.0
 
