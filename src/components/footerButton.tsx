@@ -18,7 +18,6 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import * as React from 'react'
 import { Row } from 'react-bootstrap'
 import Button from './button'
 import FooterHeadline from './footerHeadline'
@@ -29,12 +28,14 @@ export const FooterButton = ({
   handleBackClick,
   handleNextClick,
   tooltip = null,
+  disabled = false,
 }: {
   labelBack?: string
   labelNext: string
   handleBackClick: () => void
   handleNextClick: () => void
   tooltip?: null | string
+  disabled?: false | boolean
 }) => {
   return (
     <div className="mx-auto col-9 info">
@@ -51,11 +52,12 @@ export const FooterButton = ({
           <Button
             label={labelNext}
             styleClass={
-              tooltip ? 'button btn-disabledCax' : 'button btn-primaryCax'
+              tooltip || disabled ? 'button btn-disabledCax' : 'button btn-primaryCax'
             }
             handleClick={handleNextClick}
             showTooltip={tooltip ? true : false}
             tooltipText={tooltip}
+            disabled={disabled}
           />
         </div>
       </Row>

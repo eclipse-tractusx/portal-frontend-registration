@@ -80,9 +80,6 @@ export const VerifyRegistration = ({
   }
 
   const getTooltip = () => {
-    if (!hasCompanyData()) {
-      return t('ErrorMessage.error1')
-    }
     if (!hasRoles()) {
       return t('ErrorMessage.error2')
     }
@@ -91,9 +88,7 @@ export const VerifyRegistration = ({
     }
     return null
   }
-  const hasCompanyData = () => {
-    return true
-  }
+
   const hasRoles = () => {
     return true
   }

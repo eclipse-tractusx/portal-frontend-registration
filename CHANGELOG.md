@@ -4,8 +4,20 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### In Progress
 
-* ...
-* ...
+
+## 0.8.0
+
+### Change
+n/a
+
+### Feature
+* Registration Step 3 (company role and consent agreement); fetching agreement document from the portal backend and enabling direct documente download.
+
+### Technical Support
+n/a
+
+### Bugfix
+* Registration submission validations as well as registration request validation enhanced/fixed.
 
 ## 0.7.0
 

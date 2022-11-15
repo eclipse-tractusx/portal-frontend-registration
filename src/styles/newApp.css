@@ -819,7 +819,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-.agreement-text span {
+.agreement-span {
   color: #0d6efd;
   cursor: pointer;
   text-decoration: underline;

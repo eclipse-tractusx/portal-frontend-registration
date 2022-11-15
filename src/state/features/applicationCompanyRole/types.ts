@@ -25,7 +25,7 @@ export type agreementData = {
   agreements: { agreementId: string; consentStatus: string }[]
 }
 
-export type agreementResponseData = { agreementId: string; name: string }
+export type agreementResponseData = { agreementId: string; name: string, documentIds: string[] }
 
 export type companyRole = {
   companyRole: string
