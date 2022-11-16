@@ -4,6 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### In Progress
 * Feature - Registration Document Deletion - switch endpoint
+* Bugfix - Registration /finish page image not found
 
 ## 0.8.0
 
