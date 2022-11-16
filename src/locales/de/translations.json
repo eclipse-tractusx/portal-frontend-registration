@@ -92,7 +92,7 @@
     "onlyPDFError": "Only .pdf files are allowed",
     "uploadSuccessMsg": "All files uploaded",
     "deleteSuccess": "Document got deleted",
-    "deleteError": "Request was unsuccessful"
+    "deleteError": "Document does not exist. Deletion unsuccessful"
   },
   "Responsibility": {
     "responsAndAdmin": "Responsibility & admin account",

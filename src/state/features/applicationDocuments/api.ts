@@ -86,7 +86,7 @@ export class Api extends HttpClient {
 
   public deleteDocument = (documentId: string) =>
     this.instance.delete<string>(
-      `/api/administration/Documents/${documentId}`,
+      `/api/registration/documents/${documentId}`,
       RequestService.getHeaders()
     )
 }
