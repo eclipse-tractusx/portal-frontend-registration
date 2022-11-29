@@ -3,9 +3,9 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* Feature - Registration Document Deletion - switch endpoint
+n/a
 
-## 0.8.0
+## 0.9.0
 
 ### Change
 * updated document deletion endpoint (from administration service to registration service) and added error/success messages
