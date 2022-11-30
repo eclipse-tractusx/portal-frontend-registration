@@ -2,8 +2,22 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-### In Progress
+### Unreleased
+n/a
 
+## 0.9.0
+
+### Change
+* updated document deletion endpoint (from administration service to registration service) and added error/success messages
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* Added missing image to the registration finished / successfully submitted page
 
 ## 0.8.0
 

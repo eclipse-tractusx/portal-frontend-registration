@@ -4,24 +4,24 @@
     "helpText1": "Content to be added - this is only a test content",
     "helpText2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     "general": {
-      "questionHeadline": "Question Headline 1",
+      "questionHeadline": "Which company data do I need to add in the registration",
       "question": "(General) Question",
-      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "answer": "For the company registration to catena-x, the legal company data are needed. Please add the Headquarter information inside the given fields. If you already have a BPN (Business Partner Number) available you can easily add the BPN inside the search field and we will pre-fill your company data automatically."
     },
     "invitePeople": {
-      "questionHeadline": "Question Headline 2",
+      "questionHeadline": "What happens with my added company data?",
       "question": "(General) Question",
-      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "answer": "Your company data are used for the registration to catena-x and to create (if not yet existing) a Golden Record data set of your company HQ. This will enable the business partner number creation."
     },
     "uploadDocuments": {
-      "questionHeadline": "Question Headline 3",
+      "questionHeadline": "What if my company doesnt have a postal code?",
       "question": "(General) Question",
-      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "answer": "If you dont have a postal code, don't worry, just keep the field empty."
     },
     "registrationWorkflow": {
-      "questionHeadline": "Question Headline 4",
+      "questionHeadline": "I am not able to finish the registration right away - what shall/can I do?",
       "question": "(General) Question",
-      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "answer": "Thats not a problem. With your user login you can logout and login again later. You current state of the registration will be saved and you can finish the steps as soon as you re-join."
     },
     "userAccount": {
       "questionHeadline": "Question Headline 5",
