@@ -815,7 +815,7 @@ textarea {
 }
 
 .agreement-text {
-  display: inline-block;
+  display: inline;
   font-size: 0.9rem;
 }
 

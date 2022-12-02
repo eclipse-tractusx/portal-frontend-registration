@@ -184,13 +184,22 @@ export const CompanyRoleCax = ({
               />
               {allConsentData.agreements.map((agreement) => {
                 if (agreement.agreementId == id)
-                  return (
-                    <p className="agreement-text">
-                      {t('companyRole.TermsAndCondSpan1')}{' '}
-                      <span className={agreement.documentIds.length>0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
-                      {t('companyRole.TermsAndCondSpan3')}
-                    </p>
-                  )
+                  if(agreement.documentIds.length){
+                    return (
+                      <p className="agreement-text">
+                        {t('companyRole.TermsAndCondSpan1')}{' '}
+                        <span className={agreement.documentIds.length>0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
+                        {t('companyRole.TermsAndCondSpan3')}
+                      </p>
+                    )
+                  }else{
+                    return (
+                      <p className="agreement-text">
+                        <span>{agreement.name}</span>
+                      </p>
+                    )
+                  }
+                  
               })}
             </li>
           ))}
