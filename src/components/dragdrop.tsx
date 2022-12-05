@@ -78,7 +78,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
-  const [fileError, setFileError] = useState(false)
+  const [fileError, setFileError] = useState('')
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
@@ -86,7 +86,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     toast.error(error)
   }
 
-  const { documents, uploadRequest, deleteRequest } = useSelector(stateSelector)
+  const { documents, uploadRequest, deleteRequest, error: documentError } = useSelector(stateSelector)
 
   if (deleteRequest === RequestState.OK) {
     toast.success(t('documentUpload.deleteSuccess'))
@@ -95,13 +95,15 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
   }
 
   useEffect(() => {
-    dispatch(fetchDocuments(applicationId))
+    if(!error && !documentError){
+      dispatch(fetchDocuments(applicationId))
+    }
   }, [dispatch, deleteRequest, uploadRequest])
 
   const manageFileStatus = (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
       case 'done':
-        setFileError(false)
+        setFileError('')
         dispatch(
           saveDocument({
             applicationId,
@@ -111,8 +113,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
         )
         break
       case 'rejected_file_type':
+        setFileError(t('documentUpload.dragDropDocumentTypeErrorMsg'))
+        break
       case 'error_file_size':
-        setFileError(true)
+        setFileError(t('documentUpload.dragDropExceedSizeErrorMsg'))
         fileDetails.remove && fileDetails.remove()
         break
       default:
@@ -169,7 +173,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
           <Dropzone
             onChangeStatus={handleChangeStatus}
             LayoutComponent={(props) => (
-              <DragdropLayout {...props} error={fileError} />
+              <DragdropLayout {...props} error={fileError} documentError={documentError} />
             )}
             inputContent={<DragdropContent />}
             inputWithFilesContent={t('documentUpload.title')}

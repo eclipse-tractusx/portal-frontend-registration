@@ -819,7 +819,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-.agreement-text span {
+.agreement-span {
   color: #0d6efd;
   cursor: pointer;
   text-decoration: underline;
@@ -838,6 +838,13 @@ textarea {
   margin: auto;
   top: 50%;
   margin-top: -60px;
+}
+
+.fw-bold-600{
+  font-weight: 600!important;
+}
+.fw-font-12{
+  font-size: 12px!important;
 }
 
 @keyframes spin {
