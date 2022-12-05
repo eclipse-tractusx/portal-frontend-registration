@@ -28,6 +28,7 @@ const Button = ({
   icon = false,
   showTooltip = false,
   tooltipText = '',
+  disabled = false,
 }) => {
   return showTooltip ? (
     <>
@@ -57,7 +58,7 @@ const Button = ({
       </div>
     </>
   ) : (
-    <button className={styleClass} onClick={handleClick}>
+    <button className={styleClass} onClick={handleClick} disabled={disabled}>
       {!icon ? (
         label
       ) : (

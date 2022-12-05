@@ -36,8 +36,11 @@ import {
 } from '../state/features/applicationCompanyRole/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
-import '../styles/newApp.css'
 import { companyRole } from '../state/features/applicationCompanyRole/types'
+import { download } from '../helpers/utils'
+import UserService from '../services/UserService'
+import { getApiBase } from '../services/EnvironmentService'
+import '../styles/newApp.css'
 
 interface CompanyRoleProps {
   currentActiveStep: number
@@ -143,6 +146,28 @@ export const CompanyRoleCax = ({
     dispatch(fetchAgreementConsents(applicationId))
   }
 
+  const handleDownloadClick = async (
+    documentId: string,
+    documentName: string
+  ) => {
+    if (!documentId) return
+    try {
+      fetch(`${getApiBase()}/api/registration/documents/${documentId}`, {
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        }
+      })
+      .then(async (res) => {
+        const fileType =  res.headers.get('content-type')
+        const file = await res.blob()
+        return download(file, fileType, documentName)
+      })
+    } catch (error) {
+      console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
+    }
+  }
+
   const renderTermsSection = (role: companyRole) => {
     if (role.agreementIds.length === 0) return null
     return (
@@ -162,7 +187,7 @@ export const CompanyRoleCax = ({
                   return (
                     <p className="agreement-text">
                       {t('companyRole.TermsAndCondSpan1')}{' '}
-                      <span>{agreement.name}</span>{' '}
+                      <span className={agreement.documentIds.length>0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
                       {t('companyRole.TermsAndCondSpan3')}
                     </p>
                   )
