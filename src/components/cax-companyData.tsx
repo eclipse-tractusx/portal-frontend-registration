@@ -387,7 +387,7 @@ export const CompanyDataCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={!legalEntity || !registeredName || !streetHouseNumber || !postalCode || !city || !country}
+        disabled={ !legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' }
       />
     </>
   )
