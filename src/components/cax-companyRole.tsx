@@ -158,11 +158,11 @@ export const CompanyRoleCax = ({
           authorization: `Bearer ${UserService.getToken()}`,
         }
       })
-      .then(async (res) => {
-        const fileType =  res.headers.get('content-type')
-        const file = await res.blob()
-        return download(file, fileType, documentName)
-      })
+        .then(async (res) => {
+          const fileType = res.headers.get('content-type')
+          const file = await res.blob()
+          return download(file, fileType, documentName)
+        })
     } catch (error) {
       console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
     }
@@ -184,22 +184,22 @@ export const CompanyRoleCax = ({
               />
               {allConsentData.agreements.map((agreement) => {
                 if (agreement.agreementId == id)
-                  if(agreement.documentIds.length){
-                    return (
-                      <p className="agreement-text">
-                        {t('companyRole.TermsAndCondSpan1')}{' '}
-                        <span className={agreement.documentIds.length>0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
-                        {t('companyRole.TermsAndCondSpan3')}
-                      </p>
-                    )
-                  }else{
-                    return (
-                      <p className="agreement-text">
-                        <span>{agreement.name}</span>
-                      </p>
-                    )
-                  }
-                  
+                  return (
+                    <p className="agreement-text" key={agreement.agreementId}>
+                      {
+                        agreement.documentIds.length
+                          ?
+                          <>
+                            {t('companyRole.TermsAndCondSpan1')}{' '}
+                            <span className={agreement.documentIds.length > 0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
+                            {t('companyRole.TermsAndCondSpan3')}
+                          </>
+                          :
+                          <span>{agreement.name}</span>
+                      }
+
+                    </p>
+                  )
               })}
             </li>
           ))}
