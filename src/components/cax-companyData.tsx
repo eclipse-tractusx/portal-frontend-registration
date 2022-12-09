@@ -170,6 +170,8 @@ export const CompanyDataCax = ({
   const validatePostalCode = (value: string) => {
     setPostalCode(value)
 
+    if(!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+
     if (!PATTERNS.postalCodePattern.test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
