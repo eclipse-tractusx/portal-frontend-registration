@@ -3,8 +3,22 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* Feature - Company Data Postal Code Validation
-* Feature - Agreement Consent Update
+n/a
+
+## 0.10.0
+
+### Change
+* updated postal code validation for registration step 1 to allow international codes
+* update of company role agreement frontend logic to display agreements with and without documents
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+n/a
 
 ## 0.9.0
 
