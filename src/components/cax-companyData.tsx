@@ -170,6 +170,8 @@ export const CompanyDataCax = ({
   const validatePostalCode = (value: string) => {
     setPostalCode(value)
 
+    if(!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+
     if (!PATTERNS.postalCodePattern.test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
@@ -387,7 +389,7 @@ export const CompanyDataCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={!legalEntity || !registeredName || !streetHouseNumber || !postalCode || !city || !country}
+        disabled={ !legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' }
       />
     </>
   )
