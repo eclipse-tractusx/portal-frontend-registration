@@ -3,7 +3,7 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-n/a
+* BugFix - Step1 API Endpoint Error Handling
 
 ## 0.10.0
 
