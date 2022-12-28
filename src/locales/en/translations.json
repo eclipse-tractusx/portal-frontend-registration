@@ -52,7 +52,8 @@
     "streetHouseNumberError": "Please enter a valid street and house number",
     "postalCodeError": "Please enter a valid postal code",
     "cityError": "Please enter a valid city name",
-    "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters."
+    "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters.",
+    "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
     "greetingMsg": "Congratulations! Your registration has been successfully submitted!",

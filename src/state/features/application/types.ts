@@ -58,6 +58,7 @@ export interface ApplicationState {
   companyDetails: CompanyDetails | null
   loading: boolean
   error: string
+  saveError: string
 }
 
 export const InitialCompanyDetail = {

@@ -60,7 +60,6 @@ interface ResponsibilitiesCaxProps {
 export const ResponsibilitiesCax = ({
   currentActiveStep,
   addCurrentStep,
-  removeFromInviteList,
 }: ResponsibilitiesCaxProps) => {
   const { t } = useTranslation()
   const [email, setEmail] = useState<string | null>('')

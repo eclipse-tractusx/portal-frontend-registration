@@ -24,6 +24,7 @@ import {
   fetchId,
   updateInvitation,
   getCompanyDetailsWithAddress,
+  saveCompanyDetailsWithAddress
 } from './actions'
 import { ApplicationState, InitialCompanyDetail } from './types'
 
@@ -32,6 +33,7 @@ const initialState: ApplicationState = {
   companyDetails: InitialCompanyDetail,
   loading: false,
   error: null,
+  saveError: null
 }
 
 const applicationSlice = createSlice({
@@ -92,6 +94,24 @@ const applicationSlice = createSlice({
       companyDetails: InitialCompanyDetail,
       loading: false,
       error: action.error.message as string,
+    }))
+    builder.addCase(saveCompanyDetailsWithAddress.pending, (state) => ({
+      ...state,
+      loading: true,
+      saveError: null,
+    }))
+    builder.addCase(
+      saveCompanyDetailsWithAddress.fulfilled,
+      (state) => ({
+        ...state,
+        loading: false,
+        saveError: null,
+      })
+    )
+    builder.addCase(saveCompanyDetailsWithAddress.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+      saveError: action.error.message as string,
     }))
   },
 })
