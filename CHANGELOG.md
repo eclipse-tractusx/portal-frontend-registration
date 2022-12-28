@@ -4,6 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 * BugFix - Step1 API Endpoint Error Handling
+* BugFix - Security Hotspot (Sonarcould)
 
 ## 0.10.0
 
