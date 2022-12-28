@@ -61,7 +61,17 @@ export const CompanyDataCax = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const [nextClicked, setNextClicked] = useState(false)
+
+  const { status, error, loading, saveError, companyDetails } = useSelector(applicationSelector)
+
+  if(nextClicked && !loading){
+    if(saveError){
+      toast.error(t('registrationStepOne.submitError'))
+    }else{
+      addCurrentStep(currentActiveStep + 1)
+    }  
+  }
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
@@ -213,7 +223,6 @@ export const CompanyDataCax = ({
   }
 
   const nextClick = () => {
-    addCurrentStep(currentActiveStep + 1)
     const companyData = { ...companyDetails }
     companyData.bpn = bpn
     companyData.name = legalEntity
@@ -224,6 +233,7 @@ export const CompanyDataCax = ({
     companyData.countryAlpha2Code = country
     //addCompanyData(companyData)
     dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
+    setNextClicked(true)
   }
 
   return (
