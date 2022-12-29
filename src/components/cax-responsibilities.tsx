@@ -104,7 +104,7 @@ export const ResponsibilitiesCax = ({
 
   const validateEmail = (email) =>
     //eslint-disable-next-line
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[.\d{1,3}\])|(([a-z0-9-]+\.)+[a-z]{2,}))$/i.test(email)
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([a-z0-9-]+\.)+[a-z]{2,})$/i.test(email)
 
   const validatePersonalNote = (note: string) =>
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
