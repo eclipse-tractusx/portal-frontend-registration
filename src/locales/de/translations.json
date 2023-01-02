@@ -44,7 +44,7 @@
     "streetHouseNumber": "Straße und Hausnummer",
     "postalCode": "Postleitzahl",
     "city": "Stadt",
-    "country": "Land",
+    "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
