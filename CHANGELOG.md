@@ -3,8 +3,20 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* BugFix - Step1 API Endpoint Error Handling
-* BugFix - Security Hotspot (Sonarcould)
+
+## 1.0.0 RC-1
+
+### Change
+* implemented in the step 1 "company data" error handling for unsuccessful company data save function
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+n/a
 
 ## 0.10.0
 
