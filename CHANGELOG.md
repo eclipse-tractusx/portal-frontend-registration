@@ -4,7 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 
-## 1.0.0 RC-1
+## 1.0.0-RC1
 
 ### Change
 * implemented in the step 1 "company data" error handling for unsuccessful company data save function
@@ -53,7 +53,7 @@ n/a
 n/a
 
 ### Feature
-* Registration Step 3 (company role and consent agreement); fetching agreement document from the portal backend and enabling direct documente download.
+* Registration Step 3 (company role and consent agreement); fetching agreement document from the portal backend and enabling direct document download.
 
 ### Technical Support
 n/a
@@ -83,7 +83,7 @@ n/a
 ### Feature
 * Registration Welcome: Introduction of a welcome page including a "how to" for the following registration steps
 * Registration Submission: Support of the registration submission incl. new page for successful submission and triggered email to the registrator
-* Registration Closed Function: Company registrations in status "submitted", "approved" or "declined" can not re-visit the registration document. A closed registration information gets displayed.
+* Registration Closed Function: Company registrations in status "submitted", "approved" or "declined" cannot re-visit the registration document. A closed registration information gets displayed.
 
 ### Technical Support
 * n/a
