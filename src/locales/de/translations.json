@@ -44,7 +44,7 @@
     "streetHouseNumber": "Straße und Hausnummer",
     "postalCode": "Postleitzahl",
     "city": "Stadt",
-    "country": "Land",
+    "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
@@ -52,7 +52,8 @@
     "streetHouseNumberError": "Bitte geben Sie eine gültige Straße und Hausnummer ein.",
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
-    "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character."
+    "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
+    "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
     "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
