@@ -22,5 +22,4 @@ custom_env_vars_anchor='{"PORTAL_FRONTEND_URL":"https://portal.dummy","PORTAL_BA
 index_html_reference=`cat /usr/share/nginx/html/index.html.reference`
 index_html=${index_html_reference//$custom_env_vars_anchor/$custom_env_vars}
 echo "$index_html" > /usr/share/nginx/html/index.html
-rm /usr/share/nginx/html/index.html.reference
 echo "Environment config successfully injected into index.html"
