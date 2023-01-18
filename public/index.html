@@ -27,15 +27,12 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Catena-X</title>
   </head>
-
+<!-- Do NOT change 'ENV' without changing 'custom_env_vars_anchor' in scripts/inject-dynamic-env.sh as well -->
   <body>
     <base href="/registration">
     <div id="root" style='width:100%; height:100%'></div>
-    <script
-      type="application/json"
-      id="envConfig"
-    >
-      <!--CUSTOM_CONFIG_PLACEHOLDER-->
+    <script>
+      const ENV = {"PORTAL_FRONTEND_URL":"https://portal.dummy","PORTAL_BACKEND_URL":"https://portal-backend.dummy","CENTRALIDP_URL":"https://centralidp.dummy/auth"}
     </script>
   </body>
 
