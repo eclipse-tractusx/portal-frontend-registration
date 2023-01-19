@@ -278,7 +278,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.bpn')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Displays the bpn and can't get eddited."
                 />
               </label>
               <input type="text" disabled value={bpn} />
@@ -295,7 +296,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.legalEntity')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Legal Company Name"
                 />{' '}
               </label>
               <input
@@ -314,10 +316,6 @@ export const CompanyDataCax = ({
               <label>
                 {' '}
                 {t('registrationStepOne.registeredName')}{' '}
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  data-tip="hello world"
-                />
               </label>
               <input
                 type="text"
