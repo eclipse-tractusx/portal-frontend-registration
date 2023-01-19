@@ -27,5 +27,5 @@ RUN chmod +x /docker-entrypoint.d/00-inject-dynamic-env.sh
 # Install bash for env variables inject script
 RUN apk update && apk add bash
 # Make nginx owner of /usr/share/nginx/html/ and change to nginx user
-RUN chown -R nginx:nginx /usr/share/nginx/html/
-USER nginx
+RUN chown -R 101:101 /usr/share/nginx/html/
+USER 101
