@@ -33,7 +33,7 @@
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Unternehmensdaten",
-    "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der <strong>B</strong>usiness <strong>Partner</strong> <strong>N</strong>umber (BPN). Sollten Sie die BPN nicht zur Hand haben, dann können sie ihre Daten manuell eingeben.",
+    "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der Business Partner Number (BPN). Sollten Sie die BPN nicht zur Hand haben, dann können sie ihre Daten manuell eingeben.",
     "seachDatabase": "Suche (mit Hilfe der BPN)",
     "enterManualText": "oder füllen Sie die relevanten Felder manuell aus:",
     "bpn": "Business Partner Number",

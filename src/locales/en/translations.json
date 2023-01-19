@@ -33,7 +33,7 @@
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Add your company data",
-    "verifyCompayDataSubHeading": "Please add your legal entity company data below. For a quick and easy data entering, use your company <strong>b</strong>usiness <strong>p</strong>artner <strong>n</strong>umber (BPN) to automatically retrieve all necessary information. If you don't have a BPN so far, you can enter the company data manually.",
+    "verifyCompayDataSubHeading": "Please add your legal entity company data below. For a quick and easy data entering, use your company business partner number (BPN) to automatically retrieve all necessary information. If you don't have a BPN so far, you can enter the company data manually.",
     "seachDatabase": "Search for your company data by BPN to autofill the relevant data fields",
     "enterManualText": "or enter your data manually:",
     "bpn": "Business Partner Number",
@@ -84,7 +84,7 @@
   "documentUpload": {
     "title": "Upload documents",
     "step": "4",
-    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). <br> Please ensure to upload a pdf document only with limited document size of < 8MB.",
+    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). /n Please ensure to upload a pdf document only with limited document size of < 8MB.",
     "dragDropMessage": "Drag and drop files here, or click to select files",
     "dragDropCaption": "on your computer",
     "dragDropSpanCaption": "browse files",
