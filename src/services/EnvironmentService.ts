@@ -18,24 +18,15 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare let ENV: any;
+declare const ENV: any;
 
-export const getHostname = () => window.location.hostname
+export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
 
-export const isLocal = () => getHostname() === 'localhost'
-
-const PORTAL_FRONTEND_URL = () => ENV.PORTAL_FRONTEND_URL
-
-export const getApiBase = () => ENV.PORTAL_BACKEND_URL
-
-export const getAssetBase = () =>
-  `${isLocal() ? PORTAL_FRONTEND_URL : ''}/assets`
+export const getAssetBase = () => `${typeof ENV === 'undefined' ? '' : ENV.PORTAL_FRONTEND_URL}/assets`
 
 export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
 
 const EnvironmentService = {
-  isLocal,
-  getHostname,
   getApiBase,
   getAssetBase,
   getCentralIdp,
