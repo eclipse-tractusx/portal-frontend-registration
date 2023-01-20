@@ -18,35 +18,20 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-const LOCAL_SERVICES_FRONTEND = 'https://portal.dev.demo.catena-x.net'
-const LOCAL_SERVICES_BACKEND = 'https://portal-backend.dev.demo.catena-x.net'
+declare let ENV: any;
 
 export const getHostname = () => window.location.hostname
 
 export const isLocal = () => getHostname() === 'localhost'
 
-export const getApiBase = () =>
-  isLocal()
-    ? LOCAL_SERVICES_BACKEND
-    : window.location.origin.replace('portal', 'portal-backend')
+const PORTAL_FRONTEND_URL = () => ENV.PORTAL_FRONTEND_URL
+
+export const getApiBase = () => ENV.PORTAL_BACKEND_URL
 
 export const getAssetBase = () =>
-  `${isLocal() ? LOCAL_SERVICES_FRONTEND : ''}/assets`
+  `${isLocal() ? PORTAL_FRONTEND_URL : ''}/assets`
 
-export const getCentralIdp = () => {
-  const hostname = getHostname()
-  if (hostname === 'portal.int.demo.catena-x.net')
-    return 'https://centralidp.int.demo.catena-x.net/auth'
-  if (hostname === 'portal-pen.dev.demo.catena-x.net')
-    return 'https://centralidp-pen.dev.demo.catena-x.net/auth'
-  if (hostname === 'portal.beta.demo.catena-x.net')
-    return 'https://centralidp.beta.demo.catena-x.net/auth'
-  if (hostname === 'portal.pre-prod.demo.catena-x.net')
-    return 'https://centralidp.pre-prod.demo.catena-x.net/auth'
-  if (hostname === 'portal.catena-x.net')
-    return 'https://centralidp.catena-x.net/auth'
-  return 'https://centralidp.dev.demo.catena-x.net/auth'
-}
+export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
 
 const EnvironmentService = {
   isLocal,
