@@ -45,6 +45,16 @@
     "postalCode": "Postleitzahl",
     "city": "Stadt",
     "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
+    "countrytIdentifier": "Country Identifier",
+    "identifierType": "Identifier Type",
+    "identifierNumber": "Identifier Number",
+    "identifierTypes": {
+      "COMMERCIAL_REG_NUMBER": "Handelsregisternummer",
+      "VAT_ID": "Steuernummer",
+      "LEI_CODE": "LEI Code",
+      "VIES": "VIES",
+      "EORI": "EORI"
+    },
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
@@ -53,6 +63,9 @@
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
     "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
+    "COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with exact 9 digits.",
+    "VAT_ID": "Please enter a valid number. Hint: Starting with DE and followed by 9 digit numbers",
+    "LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
     "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {

@@ -25,6 +25,11 @@ export type ApplicationStatus = {
   status: string
 }
 
+export type Identifier = {
+  type: string
+  value: string
+}
+
 export type CompanyDetails = {
   companyId: string
   bpn: string
@@ -39,6 +44,7 @@ export type CompanyDetails = {
   countryAlpha2Code: string
   countryDe: string
   taxId: string
+  uniqueIds: Identifier[]
 }
 
 export type ApplicationInvitedUsers = {
@@ -56,9 +62,15 @@ export type ApplicationInvitedFormUsers = {
 export interface ApplicationState {
   status: Array<ApplicationStatus>
   companyDetails: CompanyDetails | null
+  identifierDetails: Array<UniqueIdentifier>
   loading: boolean
   error: string
   saveError: string
+}
+
+export type UniqueIdentifier = {
+  id: number
+  label: string
 }
 
 export const InitialCompanyDetail = {
@@ -75,6 +87,7 @@ export const InitialCompanyDetail = {
   countryAlpha2Code: '',
   countryDe: '',
   taxId: '',
+  uniqueIds: []
 }
 
 export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
