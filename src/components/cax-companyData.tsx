@@ -445,8 +445,8 @@ export const CompanyDataCax = ({
                   <label> {t('registrationStepOne.identifierType')} </label>
                   <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)}>
                     {identifierDetails &&
-                      identifierDetails.map((identifier, index) => (
-                        <option key={index} value={identifier.label}>
+                      identifierDetails.map((identifier) => (
+                        <option key={identifier.id} value={identifier.label}>
                           {t(`registrationStepOne.identifierTypes.${identifier.label}`)}
                         </option>
                       ))}

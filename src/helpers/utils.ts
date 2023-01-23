@@ -214,38 +214,38 @@ export const downloadDocument = (
 
 export const PATTERNS = {
   legalEntityPattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
+    /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
   registeredNamePattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
-  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/,
-  postalCodePattern: /^(?=[a-zA-Z0-9]*[-\s]?[a-zA-Z0-9]*$)[a-zA-Z0-9-\s]{2,10}$/,
+    /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
+  postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
   cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   en: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z0-9-]{6,21}$/,
-    VAT_ID: /^[a-zA-Z0-9-]{5,6}$/,
-    LEI_CODE: /^[a-zA-Z0-9]{20}$/,
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-]{5,6}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
   de: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z0-9-\s]{9}$/,
-    VAT_ID: /^DE[0-9]{9}$/,
-    LEI_CODE: /^[a-zA-Z0-9]{20}$/,
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-\s]{9}$/,
+    VAT_ID: /^DE[\d]{9}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
   fr: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z0-9\s]{14,17}$/,
-    VAT_ID: /^[a-zA-Z0-9-\s]{8,15}$/,
-    LEI_CODE: /^[a-zA-Z0-9]{20}$/,
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d\s]{14,17}$/,
+    VAT_ID: /^[a-zA-Z\d-\s]{8,15}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
   mx: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z0-9-]{6,21}$/,
-    VAT_ID: /^[a-zA-Z0-9-&]{12,13}$/,
-    LEI_CODE: /^[a-zA-Z0-9]{20}$/,
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-&]{12,13}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
