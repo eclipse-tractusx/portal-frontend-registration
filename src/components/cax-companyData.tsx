@@ -38,6 +38,7 @@ import {
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
+import { isBPN } from '../types/Patterns'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -118,8 +119,7 @@ export const CompanyDataCax = ({
   }
 
   const onSearchChange = (expr: string) => {
-    const bpnPattern = /^BPNL[a-z0-9]{12}$/i
-    if (bpnPattern.test(expr.trim())) {
+    if (isBPN(expr.trim())) {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
