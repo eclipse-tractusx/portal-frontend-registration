@@ -230,7 +230,7 @@ export const PATTERNS = {
   },
   de: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-\s]{9}$/,
-    VAT_ID: /^DE[\d]{9}$/,
+    VAT_ID: /^DE\d{9}$/,
     LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
