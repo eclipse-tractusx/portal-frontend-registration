@@ -3,7 +3,21 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* Feature - Look-up Unique Identifier
+
+
+## 1.0.0-RC1
+
+### Change
+n/a
+
+### Feature
+* enabled company data input form to support unique identifier handling for companies based on company location country code. ![Tag](https://img.shields.io/static/v1?label=&message=Pre-Release&color=grey&style=flat)
+
+### Technical Support
+n/a
+
+### Bugfix
+* translation fixes on static text values
 
 ## 1.0.0-RC1
 
