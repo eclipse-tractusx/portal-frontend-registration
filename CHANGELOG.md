@@ -5,7 +5,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ### Unreleased
 
 
-## 1.0.0-RC1
+## 1.0.0-RC2
 
 ### Change
 n/a
