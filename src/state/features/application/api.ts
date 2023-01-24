@@ -21,7 +21,7 @@
 import { HttpClient } from '../../../helpers/HttpClient'
 import UserService from '../../../services/UserService'
 import { getApiBase } from '../../../services/EnvironmentService'
-import { ApplicationStatus, CompanyDetails } from './types'
+import { ApplicationStatus, CompanyDetails, UniqueIdentifier } from './types'
 
 export class ApplicationApi extends HttpClient {
   private static classInstance?: ApplicationApi
@@ -76,6 +76,17 @@ export class ApplicationApi extends HttpClient {
   public getCompanyDetailsWithAddress = (applicationId: string) => {
     return this.instance.get<CompanyDetails>(
       `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+      {
+        headers: {
+          authorization: `Bearer ${UserService.getToken()}`,
+        },
+      }
+    )
+  }
+
+  public getUniqueIdentifier = (alpha2Code: string) => {
+    return this.instance.get<UniqueIdentifier[]>(
+      `/api/registration/company/country/${alpha2Code}/uniqueidentifiers`,
       {
         headers: {
           authorization: `Bearer ${UserService.getToken()}`,

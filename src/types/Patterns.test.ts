@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021,2022,2023 BMW Group AG
+ * Copyright (c) 2021,2022,2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,18 +18,27 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: any;
+import {
+    isBPN,
+} from './Patterns'
 
-export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
-
-export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
-
-export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
-
-const EnvironmentService = {
-  getApiBase,
-  getAssetBase,
-  getCentralIdp,
+const TESTDATA = {
+    BPN: {
+        valid: ['BPNL000000015OHJ', 'bpnl000000000001', 'bpnlaaaaaaaaaaaa'],
+        invalid: [
+            '',
+            'word',
+            'some string',
+            '    BPNL000000000001  ',
+            'BPNL00000000000015OHJ',
+            'BPNL01',
+        ],
+    },
 }
 
-export default EnvironmentService
+describe('Input Pattern Tests', () => {
+    it('validates BPNs', () => {
+        TESTDATA.BPN.valid.forEach((expr) => expect(isBPN(expr)).toBe(true))
+        TESTDATA.BPN.invalid.forEach((expr) => expect(isBPN(expr)).toBe(false))
+    })
+})

@@ -34,10 +34,12 @@ import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
 import {
   getCompanyDetailsWithAddress,
+  getUniqueIdentifier,
   saveCompanyDetailsWithAddress,
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
+import { isBPN } from '../types/Patterns'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -52,6 +54,7 @@ const initialErrors = {
   postalCode: '',
   city: '',
   country: '',
+  identifierNumber: ''
 }
 
 export const CompanyDataCax = ({
@@ -63,14 +66,14 @@ export const CompanyDataCax = ({
 
   const [nextClicked, setNextClicked] = useState(false)
 
-  const { status, error, loading, saveError, companyDetails } = useSelector(applicationSelector)
+  const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
 
-  if(nextClicked && !loading){
-    if(saveError){
+  if (nextClicked && !loading) {
+    if (saveError) {
       toast.error(t('registrationStepOne.submitError'))
-    }else{
+    } else {
       addCurrentStep(currentActiveStep + 1)
-    }  
+    }
   }
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
@@ -91,7 +94,16 @@ export const CompanyDataCax = ({
     setPostalCode(companyDetails?.zipCode)
     setCity(companyDetails?.city)
     setCountry(companyDetails?.countryAlpha2Code)
+    companyDetails?.countryAlpha2Code && dispatch(getUniqueIdentifier(companyDetails?.countryAlpha2Code))
+    setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
+    setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
   }, [companyDetails])
+
+  useEffect(() => {
+    if(identifierDetails.length > 0){
+      setShowIdentifiers(true)
+    } 
+  }, [identifierDetails])
 
   const [search, setSearch] = useState('')
   const [bpn, setBpn] = useState(companyDetails?.bpn)
@@ -104,7 +116,15 @@ export const CompanyDataCax = ({
   const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
+  const [showIdentifiers, setShowIdentifiers] = useState(false)
+  const [identifierNumber, setIdentifierNumber] = useState<string>()
   const [errors, setErrors] = useState(initialErrors)
+
+  const [identifierType, setIdentifierType] = useState<string>()
+
+  useEffect(() => {
+    identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
+  }, [identifierType, identifierNumber, country])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
@@ -118,8 +138,7 @@ export const CompanyDataCax = ({
   }
 
   const onSearchChange = (expr: string) => {
-    const bpnPattern = /^BPNL[a-z0-9]{12}$/i
-    if (bpnPattern.test(expr.trim())) {
+    if (isBPN(expr.trim())) {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
@@ -180,7 +199,7 @@ export const CompanyDataCax = ({
   const validatePostalCode = (value: string) => {
     setPostalCode(value)
 
-    if(!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+    if (!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
 
     if (!PATTERNS.postalCodePattern.test(value.trim())) {
       return setErrors((prevState) => ({
@@ -207,15 +226,31 @@ export const CompanyDataCax = ({
 
   const validateCountry = (value: string) => {
     setCountry(value)
-
     if (!PATTERNS.countryPattern.test(value.trim())) {
+      setShowIdentifiers(false)
       return setErrors((prevState) => ({
         ...prevState,
         country: 'countryError',
       }))
     }
-
+    dispatch(getUniqueIdentifier(value))
     return setErrors((prevState) => ({ ...prevState, country: '' }))
+  }
+
+  const validateIdentifierNumber = (value) => {
+    setIdentifierNumber(value)
+    const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
+    if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        identifierNumber: countryCode+'_'+identifierType,
+      }))
+    }
+    return setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+  }
+
+  const onIdentifierTypeChange = (e) => {
+    setIdentifierType(e.target.value)
   }
 
   const backClick = () => {
@@ -231,6 +266,10 @@ export const CompanyDataCax = ({
     companyData.city = city
     companyData.zipCode = postalCode
     companyData.countryAlpha2Code = country
+    companyData.uniqueIds = [{
+      type: identifierType,
+      value: identifierNumber
+    }]
     //addCompanyData(companyData)
     dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
     setNextClicked(true)
@@ -278,7 +317,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.bpn')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Displays the bpn and can't get eddited."
                 />
               </label>
               <input type="text" disabled value={bpn} />
@@ -295,7 +335,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.legalEntity')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Legal Company Name"
                 />{' '}
               </label>
               <input
@@ -314,10 +355,6 @@ export const CompanyDataCax = ({
               <label>
                 {' '}
                 {t('registrationStepOne.registeredName')}{' '}
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  data-tip="hello world"
-                />
               </label>
               <input
                 type="text"
@@ -393,13 +430,53 @@ export const CompanyDataCax = ({
               )}
             </div>
           </Row>
+
+          {
+            showIdentifiers &&
+            <>
+              <Row className="mx-auto col-9">
+                <span className="form-heading">
+                  {t('registrationStepOne.countrytIdentifier')}
+                </span>
+              </Row>
+              <Row className="mx-auto col-9">
+                <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
+                  <label> {t('registrationStepOne.identifierType')} </label>
+                  <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)}>
+                    <option value="">{t('registrationStepOne.pleaseSelect')}</option>
+                    {identifierDetails &&
+                      identifierDetails.map((identifier) => (
+                        <option key={identifier.id} value={identifier.label}>
+                          {t(`registrationStepOne.identifierTypes.${identifier.label}`)}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </Row>
+              <Row className="mx-auto col-9">
+                <div className={`form-data ${errors.identifierNumber && 'error'}`}>
+                  <label> {t('registrationStepOne.identifierNumber')} </label>
+                  <input
+                    type="text"
+                    value={identifierNumber}
+                    onChange={(e) => validateIdentifierNumber(e.target.value)}
+                  />
+                  {errors.identifierNumber && (
+                    <label>
+                      {t(`registrationStepOne.${errors.identifierNumber}`)}
+                    </label>
+                  )}
+                </div>
+              </Row>
+            </>
+          }
         </div>
       </div>
       <FooterButton
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={ !legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' }
+        disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.identifierNumber !== ''}
       />
     </>
   )
@@ -422,3 +499,4 @@ export default withRouter(
     mapDispatchToProps
   )(CompanyDataCax)
 )
+

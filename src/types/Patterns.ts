@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021,2022,2023 BMW Group AG
+ * Copyright (c) 2021,2022,2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,18 +18,8 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: any;
-
-export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
-
-export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
-
-export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
-
-const EnvironmentService = {
-  getApiBase,
-  getAssetBase,
-  getCentralIdp,
+export const Patterns = {
+    BPN: /^BPNL[a-z0-9]{12}$/i
 }
 
-export default EnvironmentService
+export const isBPN = (expr: string) => Patterns.BPN.test(expr)
