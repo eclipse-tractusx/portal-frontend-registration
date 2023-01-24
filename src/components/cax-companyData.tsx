@@ -60,7 +60,7 @@ export const CompanyDataCax = ({
   currentActiveStep,
   addCurrentStep,
 }: CompanyDataProps) => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const [nextClicked, setNextClicked] = useState(false)
@@ -123,7 +123,7 @@ export const CompanyDataCax = ({
 
   useEffect(() => {
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
-  }, [identifierType, identifierNumber])
+  }, [identifierType, identifierNumber, country])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
@@ -239,10 +239,11 @@ export const CompanyDataCax = ({
 
   const validateIdentifierNumber = (value) => {
     setIdentifierNumber(value)
-    if (!PATTERNS[i18n.language][identifierType].test(value.trim())) {
+    const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
+    if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
-        identifierNumber: identifierType,
+        identifierNumber: countryCode+'_'+identifierType,
       }))
     }
     return setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
@@ -444,6 +445,7 @@ export const CompanyDataCax = ({
                 <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
                   <label> {t('registrationStepOne.identifierType')} </label>
                   <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)}>
+                    <option value="">{t('registrationStepOne.pleaseSelect')}</option>
                     {identifierDetails &&
                       identifierDetails.map((identifier) => (
                         <option key={identifier.id} value={identifier.label}>

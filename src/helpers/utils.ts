@@ -221,34 +221,41 @@ export const PATTERNS = {
   postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
   cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
-  en: {
+  IN: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
     VAT_ID: /^[a-zA-Z\d-]{5,6}$/,
     LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
-  de: {
+  DE: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-\s]{9}$/,
     VAT_ID: /^DE\d{9}$/,
     LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
-  fr: {
+  FR: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d\s]{14,17}$/,
     VAT_ID: /^[a-zA-Z\d-\s]{8,15}$/,
     LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
-  mx: {
+  MX: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
     VAT_ID: /^[a-zA-Z\d-&]{12,13}$/,
     LEI_CODE: /^[a-zA-Z\d]{20}$/,
     VIES: /.*/,
     EORI: /.*/
   },
+  Worldwide: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-\s]{8,15}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /^[a-zA-Z\d\s]{18}$/,
+  }
 }
 
 export function download(file: Blob, fileType: string, fileName: string) {
