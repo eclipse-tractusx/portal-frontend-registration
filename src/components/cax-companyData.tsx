@@ -69,18 +69,12 @@ export const CompanyDataCax = ({
   const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
 
   if (nextClicked && !loading) {
-    if (saveError) {
-      toast.error(t('registrationStepOne.submitError'))
-    } else {
-      addCurrentStep(currentActiveStep + 1)
-    }
+    saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1)
   }
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (error) {
-    toast.error(error)
-  }
+  error && toast.error(error)
 
   useEffect(() => {
     dispatch(getCompanyDetailsWithAddress(applicationId))
@@ -448,8 +442,8 @@ export const CompanyDataCax = ({
                   </Row>
                   <Row className="mx-auto col-9">
                     <ul className="agreement-check-list">
-                      {uniqueIds.map((id, key) => (
-                        <li key={key} className="agreement-li">
+                      {uniqueIds.map((id) => (
+                        <li key={id.type} className="agreement-li">
                           <input
                             type="radio"
                             name='uniqueIds'

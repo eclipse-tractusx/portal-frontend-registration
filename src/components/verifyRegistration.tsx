@@ -170,8 +170,8 @@ export const VerifyRegistration = ({
                 </Row>
               </li>
               {
-                registrationData?.uniqueIds.map((identifier, key) =>
-                  <li className="list-group-item-cax" key={key}>
+                registrationData?.uniqueIds.map((identifier) =>
+                  <li className="list-group-item-cax" key={identifier.type}>
                     <Row>
                       <span className="col-6">
                         {t(`registrationStepOne.identifierTypes.${identifier.type}`)}
