@@ -123,8 +123,6 @@ export const CompanyDataCax = ({
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    console.log('identifierNumber', identifierNumber)
-    console.log('identifierType', identifierType)
     validateCountry(country)
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
