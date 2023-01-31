@@ -26,17 +26,17 @@ export interface RegistrationState {
 }
 
 export type AgreementData = {
-  agreementId: 'string'
-  consentStatus: 'string'
+  agreementId: string
+  consentStatus: string
 }
 
 export type DocumentData = {
-  documentName: 'string'
+  documentName: string
 }
 
 export type IdentifierData = {
-  type: 'string'
-  value: 'string'
+  type: string
+  value: string
 }
 
 export type RegistrationDetails = {
