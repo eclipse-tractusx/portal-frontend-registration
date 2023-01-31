@@ -68,19 +68,12 @@ export const CompanyDataCax = ({
 
   const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
 
-  if (nextClicked && !loading) {
-    if (saveError) {
-      toast.error(t('registrationStepOne.submitError'))
-    } else {
-      addCurrentStep(currentActiveStep + 1)
-    }
-  }
+  nextClicked && !loading &&
+    (saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1))
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (error) {
-    toast.error(error)
-  }
+  error && toast.error(error)
 
   useEffect(() => {
     dispatch(getCompanyDetailsWithAddress(applicationId))
@@ -95,17 +88,17 @@ export const CompanyDataCax = ({
     setCity(companyDetails?.city)
     setCountry(companyDetails?.countryAlpha2Code)
     companyDetails?.countryAlpha2Code && dispatch(getUniqueIdentifier(companyDetails?.countryAlpha2Code))
+    setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
   }, [companyDetails])
 
   useEffect(() => {
-    if(identifierDetails.length > 0){
+    if (identifierDetails.length > 0) {
       setShowIdentifiers(true)
-    } 
+    }
   }, [identifierDetails])
 
-  const [search, setSearch] = useState('')
   const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState(companyDetails.shortName)
@@ -117,24 +110,28 @@ export const CompanyDataCax = ({
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
   const [showIdentifiers, setShowIdentifiers] = useState(false)
+  const [uniqueIds, setUniqueIds] = useState<any>()
+  const [identifierType, setIdentifierType] = useState<string>()
   const [identifierNumber, setIdentifierNumber] = useState<string>()
   const [errors, setErrors] = useState(initialErrors)
 
-  const [identifierType, setIdentifierType] = useState<string>()
-
   useEffect(() => {
+    validateCountry(country)
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
-    setBpn(details?.[0]?.bpn)
-    setLegalEntity(details?.[0]?.names?.[0]?.value)
-    setRegisteredName(details?.[0]?.names?.[0]?.value)
-    setStreetHouseNumber(details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value)
-    setPostalCode(details?.[0]?.addresses?.[0]?.postCodes[0]?.value)
-    setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
-    setCountry(details?.[0]?.addresses?.[0]?.country?.technicalKey)
+    setBpn(details['bpn'])
+    setLegalEntity(details['shortName'])
+    setRegisteredName(details['name'])
+    setStreetHouseNumber(details['streetName'])
+    setPostalCode(details['zipcode'])
+    setCity(details['city'])
+    setCountry(details['countryAlpha2Code'])
+    setUniqueIds(details['uniqueIds'])
+    setIdentifierNumber(details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['value'] : '')
+    setIdentifierType(details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['type'] : '')
   }
 
   const onSearchChange = (expr: string) => {
@@ -146,10 +143,7 @@ export const CompanyDataCax = ({
           const message = DataErrorCodes.includes(errorCode)
             ? t(`ErrorMessage.${errorCode}`)
             : t(`ErrorMessage.default`)
-          //   alert(message)
-
           toast.error(message)
-          //  history.push("/finish");
         })
       setBpnErrorMessage('')
     } else {
@@ -243,10 +237,15 @@ export const CompanyDataCax = ({
     if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
-        identifierNumber: countryCode+'_'+identifierType,
+        identifierNumber: countryCode + '_' + identifierType,
       }))
     }
     return setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+  }
+
+  const handleIdentifierSelect = (type, value) => {
+    setIdentifierType(type)
+    setIdentifierNumber(value)
   }
 
   const onIdentifierTypeChange = (e) => {
@@ -295,7 +294,7 @@ export const CompanyDataCax = ({
               <label> {t('registrationStepOne.seachDatabase')}</label>
               <SearchInput
                 className="search-input"
-                value={search}
+                value={''}
                 onChange={(expr) => onSearchChange(expr)}
               />
               <label>{bpnErrorMsg}</label>
@@ -432,43 +431,72 @@ export const CompanyDataCax = ({
           </Row>
 
           {
-            showIdentifiers &&
-            <>
-              <Row className="mx-auto col-9">
-                <span className="form-heading">
-                  {t('registrationStepOne.countrytIdentifier')}
-                </span>
-              </Row>
-              <Row className="mx-auto col-9">
-                <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
-                  <label> {t('registrationStepOne.identifierType')} </label>
-                  <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)}>
-                    <option value="">{t('registrationStepOne.pleaseSelect')}</option>
-                    {identifierDetails &&
-                      identifierDetails.map((identifier) => (
-                        <option key={identifier.id} value={identifier.label}>
-                          {t(`registrationStepOne.identifierTypes.${identifier.label}`)}
-                        </option>
+            uniqueIds && uniqueIds.length > 1 ?
+              (
+                <>
+                  <Row className="mx-auto col-9">
+                    <span className="form-heading">
+                      {t('registrationStepOne.countrytIdentifier')}
+                    </span>
+                  </Row>
+                  <Row className="mx-auto col-9">
+                    <ul className="agreement-check-list">
+                      {uniqueIds.map((id) => (
+                        <li key={id.type} className="agreement-li">
+                          <input
+                            type="radio"
+                            name='uniqueIds'
+                            value={id.type}
+                            className="regular-radio agreement-check"
+                            onChange={() => handleIdentifierSelect(id.type, id.value)}
+                            defaultChecked={uniqueIds[0].type === id.type}
+                          />
+                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+':'+id.value}</label>
+                        </li>
                       ))}
-                  </select>
-                </div>
-              </Row>
-              <Row className="mx-auto col-9">
-                <div className={`form-data ${errors.identifierNumber && 'error'}`}>
-                  <label> {t('registrationStepOne.identifierNumber')} </label>
-                  <input
-                    type="text"
-                    value={identifierNumber}
-                    onChange={(e) => validateIdentifierNumber(e.target.value)}
-                  />
-                  {errors.identifierNumber && (
-                    <label>
-                      {t(`registrationStepOne.${errors.identifierNumber}`)}
-                    </label>
-                  )}
-                </div>
-              </Row>
-            </>
+                    </ul>
+                  </Row>
+                </>
+              )
+              :
+              showIdentifiers &&
+              <>
+                <Row className="mx-auto col-9">
+                  <span className="form-heading">
+                    {t('registrationStepOne.countrytIdentifier')}
+                  </span>
+                </Row>
+                <Row className="mx-auto col-9">
+                  <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
+                    <label> {t('registrationStepOne.identifierType')} </label>
+                    <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)} disabled={uniqueIds && uniqueIds.length === 1}>
+                      <option value="">{t('registrationStepOne.pleaseSelect')}</option>
+                      {identifierDetails &&
+                        identifierDetails.map((identifier) => (
+                          <option key={identifier.id} value={identifier.label}>
+                            {t(`registrationStepOne.identifierTypes.${identifier.label}`)}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </Row>
+                <Row className="mx-auto col-9">
+                  <div className={`form-data ${errors.identifierNumber && 'error'}`}>
+                    <label> {t('registrationStepOne.identifierNumber')} </label>
+                    <input
+                      type="text"
+                      value={identifierNumber}
+                      onChange={(e) => validateIdentifierNumber(e.target.value)}
+                      disabled={uniqueIds && uniqueIds.length === 1}
+                    />
+                    {errors.identifierNumber && (
+                      <label>
+                        {t(`registrationStepOne.${errors.identifierNumber}`)}
+                      </label>
+                    )}
+                  </div>
+                </Row>
+              </>
           }
         </div>
       </div>

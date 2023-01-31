@@ -26,12 +26,17 @@ export interface RegistrationState {
 }
 
 export type AgreementData = {
-  agreementId: 'string'
-  consentStatus: 'string'
+  agreementId: string
+  consentStatus: string
 }
 
 export type DocumentData = {
-  documentName: 'string'
+  documentName: string
+}
+
+export type IdentifierData = {
+  type: string
+  value: string
 }
 
 export type RegistrationDetails = {
@@ -51,6 +56,7 @@ export type RegistrationDetails = {
   companyRoles: Array<string>
   agreements: Array<AgreementData>
   documents: Array<DocumentData>
+  uniqueIds: Array<IdentifierData>
 }
 
 export const InitialRegistrationValue = {
@@ -70,6 +76,7 @@ export const InitialRegistrationValue = {
   companyRoles: [],
   agreements: [],
   documents: [],
+  uniqueIds: [],
 }
 
 export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'

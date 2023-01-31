@@ -3,6 +3,9 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
+* Feature - Unique Identifier
+        * Verify Data (Add Identifier)
+        * Add UniqueId via BPN Search
 
 
 ## 1.0.0-RC2

@@ -30,6 +30,12 @@ export class FetchBusinessPartnerDto {
   public types: string[]
   public bankAccounts: Bankaccount[]
   public roles: string[]
+  public uniqueIds: UniqueId[]
+}
+
+export class UniqueId {
+  public type: string
+  public value: string
 }
 
 export class Legalform {

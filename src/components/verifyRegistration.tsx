@@ -51,14 +51,14 @@ export const VerifyRegistration = ({
 
   const dispatch = useDispatch()
 
-  const [ confirmState, setConfirmState ] = useState(false)
+  const [confirmState, setConfirmState] = useState(false)
 
-  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const { status, error } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
   const registrationSuccess = useSelector(registrationSuccessSelector)
   const { documents } = useSelector(documentSelector)
 
-  if(confirmState && registrationSuccess) history.push('/finish')
+  if (confirmState && registrationSuccess) history.push('/finish')
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
@@ -169,6 +169,18 @@ export const VerifyRegistration = ({
                   <span className="col-6">{registrationData?.countryDe}</span>
                 </Row>
               </li>
+              {
+                registrationData?.uniqueIds.map((identifier) =>
+                  <li className="list-group-item-cax" key={identifier.type}>
+                    <Row>
+                      <span className="col-6">
+                        {t(`registrationStepOne.identifierTypes.${identifier.type}`)}
+                      </span>
+                      <span className="col-6">{identifier.value}</span>
+                    </Row>
+                  </li>
+                )
+              }
             </ul>
           </Row>
           <Row>

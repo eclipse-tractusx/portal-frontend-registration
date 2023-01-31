@@ -294,6 +294,11 @@ input[type='search'] {
   padding-left: 5px;
 }
 
+.regular-radio{
+  width: 2%;
+  height: 13px;
+}
+
 select {
   text-indent: 5px;
 }

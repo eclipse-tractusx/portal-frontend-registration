@@ -28,7 +28,7 @@ export function getCompanyDetails(
 ): Promise<FetchBusinessPartnerDto[]> {
   console.log('API called getCompanyDetails')
   const token = UserService.getToken()
-  const u = `${getApiBase()}/api/registration/company/${oneId}`
+  const u = `${getApiBase()}/api/registration/legalEntityAddress/${oneId}`
   const myResponseData: FetchBusinessPartnerDto[] = []
   const promise = new Promise<FetchBusinessPartnerDto[]>((resolve, reject) => {
     fetch(u, {
