@@ -53,7 +53,7 @@ export const VerifyRegistration = ({
 
   const [confirmState, setConfirmState] = useState(false)
 
-  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const { status, error } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
   const registrationSuccess = useSelector(registrationSuccessSelector)
   const { documents } = useSelector(documentSelector)

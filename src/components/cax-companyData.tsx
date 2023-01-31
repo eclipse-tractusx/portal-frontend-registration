@@ -68,9 +68,8 @@ export const CompanyDataCax = ({
 
   const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
 
-  if (nextClicked && !loading) {
-    saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1)
-  }
+  nextClicked && !loading &&
+    (saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1))
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
