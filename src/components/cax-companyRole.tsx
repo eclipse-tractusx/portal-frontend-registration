@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import { FooterButton } from './footerButton'
-import RolesError from './rolesError'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { addCurrentStep } from '../state/features/user/action'
@@ -54,14 +54,29 @@ export const CompanyRoleCax = ({
   const { t, i18n } = useTranslation()
 
   const { status } = useSelector(applicationSelector)
-  const { allConsentData, consentData, error } = useSelector(stateSelector)
+  const { allConsentData, consentData, error, loading } = useSelector(stateSelector)
   const [companyRoleChecked, setCompanyRoleChecked] = useState({})
   const [agreementChecked, setAgreementChecked] = useState({})
+  const [nextClicked, setNextClicked] = useState(false)
+
+  useEffect(() => {
+    nextClicked && !loading &&
+    (error ? toast.error(t('companyRole.submitError')) : addCurrentStep(currentActiveStep + 1))
+  }, [error])
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchAgreementData())
+    dispatch(fetchAgreementConsents(applicationId))
+  }, [dispatch])
+
+  useEffect(() => {
+    updateSelectedRolesAndAgreement()
+  }, [consentData])
 
   const updateSelectedRolesAndAgreement = () => {
     setCompanyRoleChecked(
@@ -77,45 +92,11 @@ export const CompanyRoleCax = ({
     )
   }
 
-  useEffect(() => {
-    dispatch(fetchAgreementData())
-    dispatch(fetchAgreementConsents(applicationId))
-  }, [dispatch])
-
-  useEffect(() => {
-    updateSelectedRolesAndAgreement()
-  }, [consentData])
-
-  const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
-  }
-
-  const nextClick = () => {
-    const companyRoles = Object.keys(companyRoleChecked).filter(
-      (item) => companyRoleChecked[item]
-    )
-    const agreements = Object.keys(agreementChecked).map((agreementId) => {
-      return {
-        agreementId: agreementId,
-        consentStatus:
-          agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE',
-      }
-    })
-
-    const data = {
-      companyRoles: companyRoles,
-      agreements: agreements,
-    }
-
-    dispatch(updateAgreementConsents({ applicationId, data }))
-    addCurrentStep(currentActiveStep + 1)
-  }
-
-  const handleAgreementCheck = (id) => {
+  const handleAgreementCheck = useCallback((id) => {
     const updatedMap = { ...agreementChecked }
     updatedMap[id] = !updatedMap[id]
     setAgreementChecked(updatedMap)
-  }
+  }, [agreementChecked])
 
   const handleCompanyRoleCheck = (id) => {
     const updatedMap = { ...companyRoleChecked }
@@ -140,12 +121,7 @@ export const CompanyRoleCax = ({
 
     setCompanyRoleChecked(updatedMap)
   }
-
-  const retry = () => {
-    dispatch(fetchAgreementData())
-    dispatch(fetchAgreementConsents(applicationId))
-  }
-
+  
   const handleDownloadClick = async (
     documentId: string,
     documentName: string
@@ -208,6 +184,31 @@ export const CompanyRoleCax = ({
     )
   }
 
+  const backClick = () => {
+    addCurrentStep(currentActiveStep - 1)
+  }
+
+  const nextClick = () => {
+    const companyRoles = Object.keys(companyRoleChecked).filter(
+      (item) => companyRoleChecked[item]
+    )
+    const agreements = Object.keys(agreementChecked).map((agreementId) => {
+      return {
+        agreementId: agreementId,
+        consentStatus:
+          agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE',
+      }
+    })
+
+    const data = {
+      companyRoles: companyRoles,
+      agreements: agreements,
+    }
+
+    dispatch(updateAgreementConsents({ applicationId, data }))
+    setNextClicked(true)
+  }
+
   return (
     <>
       <div className="mx-auto col-9 container-registration">
@@ -223,9 +224,7 @@ export const CompanyRoleCax = ({
           </div>
         </div>
         <div className="companydata-form mx-auto col-9">
-          {error ? (
-            <RolesError retry={retry} />
-          ) : (
+          {
             allConsentData.companyRoles.map((role, index) => (
               <div className="company-role-section" key={index}>
                 <Row>
@@ -247,7 +246,7 @@ export const CompanyRoleCax = ({
                 </Row>
               </div>
             ))
-          )}
+          }
         </div>
       </div>
       <FooterButton

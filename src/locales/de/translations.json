@@ -106,7 +106,8 @@
     "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Bitte",
-    "Retry": "wiederholen"
+    "Retry": "wiederholen",
+    "submitError": "Stimmen Sie allen Allgemeinen Geschäftsbedingungen der ausgewählten Firmenrolle zu, bevor Sie mit dem nächsten Schritt fortfahren können."
   },
   "documentUpload": {
     "title": "Dokumente hochladen",

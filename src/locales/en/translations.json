@@ -106,7 +106,8 @@
     "NoRolesError2": " or contact the system administrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Please",
-    "Retry": "retry"
+    "Retry": "retry",
+    "submitError": "Please agree to all Terms & Conditions of the selected company role(s) before proceeding to the next step."
   },
   "documentUpload": {
     "title": "Upload documents",

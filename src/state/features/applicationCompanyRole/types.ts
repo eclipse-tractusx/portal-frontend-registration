@@ -46,6 +46,7 @@ export const agreementDataValue = {
 export type roleAggrementState = {
   consentData: agreementData
   allConsentData: roleData
+  loading: boolean
   request: RequestState
   error: string
 }

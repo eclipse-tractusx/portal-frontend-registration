@@ -69,11 +69,10 @@ export const CompanyDataCax = ({
   const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
 
   nextClicked && !loading &&
-    (saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1))
+    (!saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1))
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  error && toast.error(error)
 
   useEffect(() => {
     dispatch(getCompanyDetailsWithAddress(applicationId))
@@ -116,7 +115,7 @@ export const CompanyDataCax = ({
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    validateCountry(country)
+    errors.country === '' && dispatch(getUniqueIdentifier(country))
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
 
@@ -227,7 +226,6 @@ export const CompanyDataCax = ({
         country: 'countryError',
       }))
     }
-    dispatch(getUniqueIdentifier(value))
     return setErrors((prevState) => ({ ...prevState, country: '' }))
   }
 

@@ -6,6 +6,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * Feature - Unique Identifier
         * Verify Data (Add Identifier)
         * Add UniqueId via BPN Search
+* Feature - On Submit Error Handling in Step 3
 
 
 ## 1.0.0-RC2
