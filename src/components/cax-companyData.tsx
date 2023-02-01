@@ -115,7 +115,7 @@ export const CompanyDataCax = ({
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    errors.country === '' && dispatch(getUniqueIdentifier(country))
+    errors.country === '' && country && dispatch(getUniqueIdentifier(country))
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
 

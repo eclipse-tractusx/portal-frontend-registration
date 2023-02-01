@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
@@ -92,11 +92,11 @@ export const CompanyRoleCax = ({
     )
   }
 
-  const handleAgreementCheck = useCallback((id) => {
+  const handleAgreementCheck = (id) => {
     const updatedMap = { ...agreementChecked }
     updatedMap[id] = !updatedMap[id]
     setAgreementChecked(updatedMap)
-  }, [agreementChecked])
+  }
 
   const handleCompanyRoleCheck = (id) => {
     const updatedMap = { ...companyRoleChecked }
@@ -121,7 +121,7 @@ export const CompanyRoleCax = ({
 
     setCompanyRoleChecked(updatedMap)
   }
-  
+
   const handleDownloadClick = async (
     documentId: string,
     documentName: string
