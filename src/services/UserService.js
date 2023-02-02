@@ -57,7 +57,6 @@ const _kc = new Keycloak({
  * @param onAuthenticatedCallback
  */
 const initKeycloak = (onAuthenticatedCallback) => {
-  console.log('window.location.origin', window.location)
   const url = window.location.pathname === '/registration/help' ? '/registration/help' : '/registration/load'
   _kc
     .init({
