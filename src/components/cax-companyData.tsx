@@ -434,7 +434,10 @@ export const CompanyDataCax = ({
                 <>
                   <Row className="mx-auto col-9">
                     <span className="form-heading">
-                      {t('registrationStepOne.countrytIdentifier')}
+                      {t('registrationStepOne.countryIdentifier')}
+                      <div className="company-hint">
+                        {t('registrationStepOne.identifierhelperText')}
+                      </div>
                     </span>
                   </Row>
                   <Row className="mx-auto col-9">
@@ -449,7 +452,7 @@ export const CompanyDataCax = ({
                             onChange={() => handleIdentifierSelect(id.type, id.value)}
                             defaultChecked={uniqueIds[0].type === id.type}
                           />
-                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+':'+id.value}</label>
+                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+' : '+id.value}</label>
                         </li>
                       ))}
                     </ul>
@@ -461,7 +464,7 @@ export const CompanyDataCax = ({
               <>
                 <Row className="mx-auto col-9">
                   <span className="form-heading">
-                    {t('registrationStepOne.countrytIdentifier')}
+                    {t('registrationStepOne.countryIdentifier')}
                   </span>
                 </Row>
                 <Row className="mx-auto col-9">

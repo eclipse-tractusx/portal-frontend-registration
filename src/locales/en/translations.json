@@ -45,7 +45,7 @@
     "postalCode": "Postal Code",
     "city": "City",
     "country": "Country Code (ISO 3166 Alpha 2 - e.g. DE)",
-    "countrytIdentifier": "Country Identifier",
+    "countryIdentifier": "Country Identifier",
     "identifierType": "Identifier Type",
     "identifierNumber": "Identifier Number",
     "identifierTypes": {
@@ -63,6 +63,7 @@
     "postalCodeError": "Please enter a valid postal code",
     "cityError": "Please enter a valid city name",
     "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters.",
+    "identifierhelperText": "We have retrieved two registered identifiers. Please select the preferred identifier for your company registration.",
     "pleaseSelect": "Please select",
     "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
     "IN_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 5 to 6 digits.",
