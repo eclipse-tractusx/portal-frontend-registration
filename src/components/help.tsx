@@ -118,13 +118,6 @@ export const Help = () => {
           </div>
         </Col>
       </Row>
-      <div className="button-section col-10 mx-auto">
-        <Button
-          label={t('footerPages.Back')}
-          styleClass="button btn-primaryCax"
-          handleClick={() => history.goBack()}
-        />
-      </div>
       <Footer />
     </Container>
   )
