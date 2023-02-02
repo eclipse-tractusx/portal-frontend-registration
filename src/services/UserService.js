@@ -57,13 +57,14 @@ const _kc = new Keycloak({
  * @param onAuthenticatedCallback
  */
 const initKeycloak = (onAuthenticatedCallback) => {
+  const url = window.location.pathname === '/registration/help' ? '/registration/help' : '/registration/load'
   _kc
     .init({
       onLoad: 'login-required',
       silentCheckSsoRedirectUri:
         window.location.origin + '/silent-check-sso.html',
       pkceMethod: 'S256',
-      redirectUri: `${window.location.origin}/registration/load`,
+      redirectUri: `${window.location.origin}/${url}`,
     })
     .then(() => {
       onAuthenticatedCallback()
