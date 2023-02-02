@@ -45,7 +45,7 @@
     "postalCode": "Postleitzahl",
     "city": "Stadt",
     "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
-    "countrytIdentifier": "Country Identifier",
+    "countryIdentifier": "Country Identifier",
     "identifierType": "Identifier Type",
     "identifierNumber": "Identifier Number",
     "identifierTypes": {
@@ -63,6 +63,7 @@
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
     "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
+    "identifierhelperText": "We have retrieved two registered identifiers. Please select the preferred identifier for your company registration.",
     "pleaseSelect": "Please select",
     "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
     "IN_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 5 to 6 digits.",
@@ -106,7 +107,8 @@
     "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Bitte",
-    "Retry": "wiederholen"
+    "Retry": "wiederholen",
+    "submitError": "Stimmen Sie allen Allgemeinen Geschäftsbedingungen der ausgewählten Firmenrolle zu, bevor Sie mit dem nächsten Schritt fortfahren können."
   },
   "documentUpload": {
     "title": "Dokumente hochladen",

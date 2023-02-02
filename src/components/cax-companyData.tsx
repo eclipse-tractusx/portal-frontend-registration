@@ -73,7 +73,6 @@ export const CompanyDataCax = ({
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  error && toast.error(error)
 
   useEffect(() => {
     dispatch(getCompanyDetailsWithAddress(applicationId))
@@ -116,7 +115,7 @@ export const CompanyDataCax = ({
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    validateCountry(country)
+    errors.country === '' && country && dispatch(getUniqueIdentifier(country))
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
 
@@ -227,7 +226,6 @@ export const CompanyDataCax = ({
         country: 'countryError',
       }))
     }
-    dispatch(getUniqueIdentifier(value))
     return setErrors((prevState) => ({ ...prevState, country: '' }))
   }
 
@@ -436,7 +434,10 @@ export const CompanyDataCax = ({
                 <>
                   <Row className="mx-auto col-9">
                     <span className="form-heading">
-                      {t('registrationStepOne.countrytIdentifier')}
+                      {t('registrationStepOne.countryIdentifier')}
+                      <div className="company-hint">
+                        {t('registrationStepOne.identifierhelperText')}
+                      </div>
                     </span>
                   </Row>
                   <Row className="mx-auto col-9">
@@ -451,7 +452,7 @@ export const CompanyDataCax = ({
                             onChange={() => handleIdentifierSelect(id.type, id.value)}
                             defaultChecked={uniqueIds[0].type === id.type}
                           />
-                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+':'+id.value}</label>
+                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+' : '+id.value}</label>
                         </li>
                       ))}
                     </ul>
@@ -463,11 +464,11 @@ export const CompanyDataCax = ({
               <>
                 <Row className="mx-auto col-9">
                   <span className="form-heading">
-                    {t('registrationStepOne.countrytIdentifier')}
+                    {t('registrationStepOne.countryIdentifier')}
                   </span>
                 </Row>
                 <Row className="mx-auto col-9">
-                  <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
+                  <div className={`form-data`}>
                     <label> {t('registrationStepOne.identifierType')} </label>
                     <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)} disabled={uniqueIds && uniqueIds.length === 1}>
                       <option value="">{t('registrationStepOne.pleaseSelect')}</option>
