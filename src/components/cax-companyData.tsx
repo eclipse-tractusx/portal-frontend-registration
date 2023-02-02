@@ -468,7 +468,7 @@ export const CompanyDataCax = ({
                   </span>
                 </Row>
                 <Row className="mx-auto col-9">
-                  <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
+                  <div className={`form-data`}>
                     <label> {t('registrationStepOne.identifierType')} </label>
                     <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)} disabled={uniqueIds && uniqueIds.length === 1}>
                       <option value="">{t('registrationStepOne.pleaseSelect')}</option>
