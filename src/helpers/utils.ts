@@ -219,7 +219,7 @@ export const PATTERNS = {
     /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
   postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
-  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
+  cityPattern: /^[A-Za-zÀ-ÿ]{2,20}+(?:[\s-][a-zA-Z]{2,20}+)*$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   IN: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
