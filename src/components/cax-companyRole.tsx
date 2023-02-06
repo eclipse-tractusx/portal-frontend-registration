@@ -59,10 +59,6 @@ export const CompanyRoleCax = ({
   const [agreementChecked, setAgreementChecked] = useState({})
   const [nextClicked, setNextClicked] = useState(false)
 
-  console.log('nextClicked', nextClicked)
-  console.log('!loading', !loading)
-  console.log('error', error)
-
   useEffect(() => {
     nextClicked && !loading &&
     (error ? toast.error(t('companyRole.submitError')) : addCurrentStep(currentActiveStep + 1))
