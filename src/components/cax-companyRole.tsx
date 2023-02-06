@@ -62,7 +62,7 @@ export const CompanyRoleCax = ({
   useEffect(() => {
     nextClicked && !loading &&
     (error ? toast.error(t('companyRole.submitError')) : addCurrentStep(currentActiveStep + 1))
-  }, [error])
+  }, [nextClicked, loading, error])
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
