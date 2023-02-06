@@ -115,7 +115,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
             </span>
           </div>
           <div className="profile-link">
-            <Link to="/help">{t('header.help')}</Link>
+            <Link to="/help" target="_blank">{t('header.help')}</Link>
           </div>
         </div>
         <ToastContainer />
