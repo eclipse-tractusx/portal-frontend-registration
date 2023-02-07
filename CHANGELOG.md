@@ -18,6 +18,7 @@ n/a
 
 ### Bugfix
 * help page handling
+* CVE-2022-46175 - Prototype Pollution in JSON5 via Parse Method - upgraded all dependencies
 
 ## 1.0.0-RC2
 
