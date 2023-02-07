@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -30,6 +30,12 @@ export class FetchBusinessPartnerDto {
   public types: string[]
   public bankAccounts: Bankaccount[]
   public roles: string[]
+  public uniqueIds: UniqueId[]
+}
+
+export class UniqueId {
+  public type: string
+  public value: string
 }
 
 export class Legalform {

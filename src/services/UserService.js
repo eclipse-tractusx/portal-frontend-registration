@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -57,13 +57,14 @@ const _kc = new Keycloak({
  * @param onAuthenticatedCallback
  */
 const initKeycloak = (onAuthenticatedCallback) => {
+  const url = window.location.pathname === '/registration/help' ? '/registration/help' : '/registration/load'
   _kc
     .init({
       onLoad: 'login-required',
       silentCheckSsoRedirectUri:
         window.location.origin + '/silent-check-sso.html',
       pkceMethod: 'S256',
-      redirectUri: `${window.location.origin}/registration/load`,
+      redirectUri: `${window.location.origin}/${url}`,
     })
     .then(() => {
       onAuthenticatedCallback()

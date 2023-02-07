@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -28,7 +28,7 @@ export function getCompanyDetails(
 ): Promise<FetchBusinessPartnerDto[]> {
   console.log('API called getCompanyDetails')
   const token = UserService.getToken()
-  const u = `${getApiBase()}/api/registration/company/${oneId}`
+  const u = `${getApiBase()}/api/registration/legalEntityAddress/${oneId}`
   const myResponseData: FetchBusinessPartnerDto[] = []
   const promise = new Promise<FetchBusinessPartnerDto[]>((resolve, reject) => {
     fetch(u, {
@@ -219,7 +219,6 @@ export const PATTERNS = {
     /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
   postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
-  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   IN: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,

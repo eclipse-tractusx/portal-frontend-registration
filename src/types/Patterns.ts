@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022,2023 BMW Group AG
- * Copyright (c) 2021,2022,2023 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -19,7 +19,9 @@
  ********************************************************************************/
 
 export const Patterns = {
-    BPN: /^BPNL[a-z0-9]{12}$/i
+    BPN: /^BPNL[a-z0-9]{12}$/i,
+    CITY: /^[A-ZÀ-ÿ](([ .'-]|\. )?[A-Za-zÀ-ÿ]{1,40}){1,10}$/
 }
 
 export const isBPN = (expr: string) => Patterns.BPN.test(expr)
+export const isCity = (expr: string) => Patterns.CITY.test(expr)

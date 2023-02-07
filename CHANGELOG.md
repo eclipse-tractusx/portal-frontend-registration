@@ -4,6 +4,21 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 
+## 1.0.0-RC3
+
+### Change
+* add error pop-up for step 3 - select company role and commit to t&c's
+* city data input pattern updated
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* help page handling
+* CVE-2022-46175 - Prototype Pollution in JSON5 via Parse Method - upgraded all dependencies
 
 ## 1.0.0-RC2
 
