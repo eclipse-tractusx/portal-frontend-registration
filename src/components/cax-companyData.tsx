@@ -207,7 +207,7 @@ export const CompanyDataCax = ({
   const validateCity = (value: string) => {
     setCity(value)
 
-    if (isCity(value.trim())) {
+    if (!isCity(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',
