@@ -18,18 +18,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import Button from './button'
 import { Container, Row, Col, Nav } from 'react-bootstrap'
 import Footer from './footer'
 import Header from './cax-header'
 import SearchInput from 'react-search-input'
 import { useRef, useState } from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 export const Help = () => {
   const { t } = useTranslation('help', { keyPrefix: 'help' })
-  const history = useHistory()
   const [search, setSearch] = useState('')
 
   const headerRef = useRef(null)
