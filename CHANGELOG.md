@@ -3,11 +3,22 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* Feature - Unique Identifier
-        * Verify Data (Add Identifier)
-        * Add UniqueId via BPN Search
-* Feature - On Submit Error Handling in Step 3
-* Bugfix - Help Section open to new tab
+
+## 1.0.0-RC3
+
+### Change
+* add error pop-up for step 3 - select company role and commit to t&c's
+* city data input pattern updated
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* help page handling
+* CVE-2022-46175 - Prototype Pollution in JSON5 via Parse Method - upgraded all dependencies
 
 ## 1.0.0-RC2
 
