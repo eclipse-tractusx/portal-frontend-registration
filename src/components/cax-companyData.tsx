@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -39,7 +39,7 @@ import {
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
-import { isBPN } from '../types/Patterns'
+import { isBPN, isCity } from '../types/Patterns'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -208,7 +208,7 @@ export const CompanyDataCax = ({
   const validateCity = (value: string) => {
     setCity(value)
 
-    if (!PATTERNS.cityPattern.test(value.trim())) {
+    if (!isCity(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',

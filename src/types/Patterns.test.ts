@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022,2023 BMW Group AG
- * Copyright (c) 2021,2022,2023 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import {
-    isBPN,
+    isBPN, isCity,
 } from './Patterns'
 
 const TESTDATA = {
@@ -34,11 +34,44 @@ const TESTDATA = {
             'BPNL01',
         ],
     },
+    CITY: {
+        valid: [
+            'Munich',
+            'Toronto',
+            'San Francisco',
+            'St. Catharines',
+            'Val-d\'Or',
+            'Presqu\'ile',
+            'Niagara on the Lake',
+            'Niagara-on-the-Lake',
+            'München',
+            'Villes du Québec',
+            'Provence-Alpes-Côte d\'Azur',
+            'Île-de-France',
+            'Kópavogur',
+            'Garðabær',
+            'Sauðárkrókur',
+            'Þorlákshöfn',
+        ],
+        invalid: [
+            ' Munich',
+            'Munich ',
+            ',',
+            '.',
+            '--',
+            'Niagara--on-the-Lake',
+            'Presqu\'\'ile',
+        ],
+    }
 }
 
 describe('Input Pattern Tests', () => {
     it('validates BPNs', () => {
         TESTDATA.BPN.valid.forEach((expr) => expect(isBPN(expr)).toBe(true))
         TESTDATA.BPN.invalid.forEach((expr) => expect(isBPN(expr)).toBe(false))
+    })
+    it('validates cities', () => {
+        TESTDATA.CITY.valid.forEach((expr) => expect(isCity(expr)).toBe(true))
+        TESTDATA.CITY.invalid.forEach((expr) => expect(isCity(expr)).toBe(false))
     })
 })
