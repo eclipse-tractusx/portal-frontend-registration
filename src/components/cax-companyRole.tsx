@@ -163,11 +163,11 @@ export const CompanyRoleCax = ({
                   return (
                     <p className="agreement-text" key={agreement.agreementId}>
                       {
-                        agreement.documentIds.length
+                        agreement.documentId
                           ?
                           <>
                             {t('companyRole.TermsAndCondSpan1')}{' '}
-                            <span className={agreement.documentIds.length > 0 ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentIds[0], agreement.name)}>{agreement.name}</span>{' '}
+                            <span className={agreement.documentId ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentId, agreement.name)}>{agreement.name}</span>{' '}
                             {t('companyRole.TermsAndCondSpan3')}
                           </>
                           :
