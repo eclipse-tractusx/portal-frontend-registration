@@ -5,6 +5,11 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ### Unreleased
 * Bugfix - Change companyRoleAgreementData API response
 
+* Bugfix - Unique Idenfier
+         * Identifier Type Blinking Fix
+         * Identifier Number Not Changable fix
+         * Identifer Number pattern error validation fix
+
 ## 1.0.0-RC3
 
 ### Change
