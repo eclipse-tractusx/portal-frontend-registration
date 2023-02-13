@@ -1,6 +1,6 @@
 {
   "name": "cx-portal-registration",
-  "version": "1.0.0-RC3",
+  "version": "1.0.0-RC4",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
@@ -49,7 +49,9 @@
     "vis": "^4.21.0-EOL",
     "web-vitals": "^2.1.4"
   },
-  "resolutions": { "**/nth-check": "^2.0.1"},
+  "resolutions": {
+    "**/nth-check": "^2.0.1"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
