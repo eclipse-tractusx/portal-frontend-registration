@@ -13,14 +13,16 @@ n/a
 n/a
 
 ### Technical Support
-n/a
+* resolve dependabot finding
+* temp fix for cve-2023-0286
+* add missing '--no-cache': apk update && apk add
 
 ### Bugfix
 * Change companyRoleAgreementData API response (new structure of the response body)
-* Company Data Unique Idenfier
+* Company Data Unique Identifier
   * Identifier type ui issue when entering the value fixed
   * Identifier number change enabled even after initial save
-  * Identifer number pattern error validation updated (fe)
+  * Identifier number pattern error validation updated (fe)
 
 ## 1.0.0-RC3
 
