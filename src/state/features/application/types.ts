@@ -90,9 +90,12 @@ export const InitialCompanyDetail = {
   uniqueIds: []
 }
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
 export const CREATED = 'CREATED'
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
+export const INVITE_USER = 'INVITE_USER'
+export const SELECT_COMPANY_RESP = 'SELECT_COMPANY_RESP'
+export const UPLOAD_DOCUMENTS = 'UPLOAD_DOCUMENTS'
+export const VERIFY = 'VERIFY'
 export const SUBMITTED = 'SUBMITTED'
 export const CONFIRMED = 'CONFIRMED'
 export const DECLINED = 'DECLINED'
-export const VERIFY = 'VERIFY'

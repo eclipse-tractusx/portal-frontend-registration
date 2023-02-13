@@ -4,6 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 * Bugfix - Change companyRoleAgreementData API response
+* Feature - Redirect User based on Application Status
 
 * Bugfix - Unique Idenfier
          * Identifier Type Blinking Fix

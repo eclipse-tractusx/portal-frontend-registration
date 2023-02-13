@@ -25,6 +25,12 @@ import { toast } from 'react-toastify'
 import { fetchId } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import {
+  CREATED,
+  ADD_COMPANY_DATA,
+  INVITE_USER,
+  SELECT_COMPANY_RESP,
+  UPLOAD_DOCUMENTS,
+  VERIFY,
   SUBMITTED,
   CONFIRMED,
   DECLINED,
@@ -45,13 +51,29 @@ export const InitialLoader = () => {
     if (status && status.length) {
       if (
         status[0] &&
-        (status[0]['applicationStatus'] === SUBMITTED ||
-          status[0]['applicationStatus'] === CONFIRMED ||
-          status[0]['applicationStatus'] === DECLINED)
+        (status[0]['applicationStatus'] === CREATED ||
+          status[0]['applicationStatus'] === ADD_COMPANY_DATA ||
+          status[0]['applicationStatus'] === INVITE_USER ||
+          status[0]['applicationStatus'] === SELECT_COMPANY_RESP ||
+          status[0]['applicationStatus'] === UPLOAD_DOCUMENTS ||
+          status[0]['applicationStatus'] === VERIFY)
       ) {
-        history.push('/registration-closed')
-      } else {
         history.push('/landing')
+      }else if (
+        status[0] &&
+        (status[0]['applicationStatus'] === SUBMITTED)
+      ){
+        history.push('/registration-validate')
+      } else if (
+        status[0] &&
+        (status[0]['applicationStatus'] === CONFIRMED)
+      ){
+        history.push('/home')
+      }else if (
+        status[0] &&
+        (status[0]['applicationStatus'] === DECLINED)
+      ){
+        history.push('/registration-closed')
       }
     }
   }, [status])

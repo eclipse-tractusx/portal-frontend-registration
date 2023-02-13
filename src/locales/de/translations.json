@@ -221,9 +221,14 @@
   "footerPages": {
     "Back": "Back"
   },
-  "registrationClosed": {
-    "heading1": "Ihre Registrierung wurde bereits übermittelt und abgeschlossen. Wir prüfen jetzt den Antrag.",
+  "registrationValidation": {
+    "heading1": "Ihre Registrierung wurde bereits übermittelt und unter validierung. Wir prüfen jetzt den Antrag.",
     "heading2": "Sobald dies abgeschlossen ist, erhalten Sie eine E-Mail mit dem Zugang zum Catena-X Portal.",
     "close": "Schließen"
+  },
+  "registrationClosed": {
+    "heading1": "Your registration has been declined and closed. You can resubmit your application.",
+    "heading2": "",
+    "close": "Close"
   }
 }
