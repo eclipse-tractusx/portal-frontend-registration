@@ -63,7 +63,7 @@ export const InitialLoader = () => {
         status[0] &&
         (status[0]['applicationStatus'] === SUBMITTED)
       ){
-        history.push('/registration-validate')
+        history.push('/registration-closed?param=validate')
       } else if (
         status[0] &&
         (status[0]['applicationStatus'] === CONFIRMED)

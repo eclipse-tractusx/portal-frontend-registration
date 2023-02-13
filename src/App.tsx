@@ -47,7 +47,6 @@ import TermsOfService from './components/termsOfService'
 import CookiePolicy from './components/cookiePolicy'
 import ThirdPartyLicenseNotes from './components/thirdPartyLicenseNotes'
 import RegistrationClosed from './components/registrationClosed'
-import RegistrationValidate from './components/registrationValidate'
 
 createBrowserHistory()
 
@@ -93,10 +92,6 @@ const App = () => {
         <Route
           path="/thirdPartyLicenseNotes"
           component={() => <ThirdPartyLicenseNotes />}
-        />
-        <Route
-          path="/registration-validate"
-          component={() => <RegistrationValidate />}
         />
         <Route
           path="/registration-closed"
