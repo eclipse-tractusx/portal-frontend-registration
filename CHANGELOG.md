@@ -3,12 +3,26 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-* Bugfix - Change companyRoleAgreementData API response
 
-* Bugfix - Unique Idenfier
-         * Identifier Type Blinking Fix
-         * Identifier Number Not Changable fix
-         * Identifer Number pattern error validation fix
+## 1.0.0-RC4
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+* resolve dependabot finding
+* temp fix for cve-2023-0286
+* add missing '--no-cache': apk update && apk add
+
+### Bugfix
+* Change companyRoleAgreementData API response (new structure of the response body)
+* Company Data Unique Identifier
+  * Identifier type ui issue when entering the value fixed
+  * Identifier number change enabled even after initial save
+  * Identifier number pattern error validation updated (fe)
 
 ## 1.0.0-RC3
 
