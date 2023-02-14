@@ -3,6 +3,8 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
+* Bugfix - Change companyRoleAgreementData API response
+* Feature - Redirect User based on Application Status
 
 ## 1.0.0-RC4
 
