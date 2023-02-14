@@ -232,6 +232,7 @@ export const CompanyDataCax = ({
   }
 
   const validateIdentifierNumber = (value) => {
+    setChangedCountryValue(false)
     setIdentifierNumber(value)
     const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
     if (value && !PATTERNS[countryCode][identifierType].test(value.trim())) {

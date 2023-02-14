@@ -249,10 +249,6 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  ├─ glob-to-regexp@0.4.1
 │  │  ├─ URL: https://github.com/fitzgen/glob-to-regexp.git
 │  │  └─ VendorName: Nick Fitzgerald
-│  ├─ nth-check@1.0.2
-│  │  ├─ URL: https://github.com/fb55/nth-check
-│  │  ├─ VendorName: Felix Boehm
-│  │  └─ VendorUrl: https://github.com/fb55/nth-check
 │  ├─ nth-check@2.1.1
 │  │  ├─ URL: https://github.com/fb55/nth-check
 │  │  ├─ VendorName: Felix Boehm
@@ -4590,4 +4586,4 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
       ├─ URL: https://github.com/pieroxy/lz-string.git
       ├─ VendorName: pieroxy
       └─ VendorUrl: http://pieroxy.net/blog/pages/lz-string/index.html
-Done in 20.09s.
+Done in 1.45s.
