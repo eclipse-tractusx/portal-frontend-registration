@@ -58,10 +58,6 @@ export const RegistrationCax = ({
   }
 
   useEffect(() => {
-    status && status.length > 0 && handleStatusRedirect(status[0]['applicationStatus'], history)
-  }, [status])
-
-  useEffect(() => {
     if (status.length <= 0) {
       dispatch(updateInvitation())
       dispatch(fetchId())
