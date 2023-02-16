@@ -40,11 +40,7 @@ import {
   fetchId,
   updateInvitation,
 } from '../state/features/application/actions'
-import {
-  SUBMITTED,
-  CONFIRMED,
-  DECLINED,
-} from '../state/features/application/types'
+import { handleStatusRedirect } from '../helpers/utils'
 interface RegistrationCaxProps {
   currentActiveStep: number
 }
@@ -60,18 +56,6 @@ export const RegistrationCax = ({
   if (error) {
     toast.error(error)
   }
-
-  useEffect(() => {
-    if (
-      status &&
-      status[0] &&
-      (status[0]['applicationStatus'] === SUBMITTED ||
-        status[0]['applicationStatus'] === CONFIRMED ||
-        status[0]['applicationStatus'] === DECLINED)
-    ) {
-      history.push('/registration-closed')
-    }
-  }, [status])
 
   useEffect(() => {
     if (status.length <= 0) {

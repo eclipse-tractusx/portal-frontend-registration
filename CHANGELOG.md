@@ -4,6 +4,20 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 
+## 1.0.0-RC5
+
+### Change
+n/a
+
+### Feature
+* Redirect user to "closed"; "under validation" or portal page based on application status 
+
+### Technical Support
+n/a
+
+### Bugfix
+* Company Data Unique Identifier field value irritation when entering the unique identifier value
+
 ## 1.0.0-RC4
 
 ### Change

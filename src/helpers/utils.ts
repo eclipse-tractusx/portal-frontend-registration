@@ -18,10 +18,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+import { RouteComponentProps } from 'react-router-dom'
 import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
+import {
+  SUBMITTED,
+  CONFIRMED,
+  DECLINED,
+} from '../state/features/application/types'
 
 export function getCompanyDetails(
   oneId: string
@@ -265,3 +271,15 @@ export function download(file: Blob, fileType: string, fileName: string) {
   a.click()
 }
 
+export function handleStatusRedirect (status: string, history: RouteComponentProps["history"]) {
+  switch (status) {
+    case SUBMITTED:
+      return history.push('/registration-closed?param=validate')
+    case CONFIRMED:
+      return history.push('/home')
+    case DECLINED:
+      return history.push('/registration-closed')
+    default:
+      return history.push('/landing')
+  }
+}
