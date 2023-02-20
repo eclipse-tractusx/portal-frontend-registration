@@ -122,6 +122,7 @@ export const CompanyDataCax = ({
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
+    details['countryAlpha2Code'] && dispatch(getUniqueIdentifier(details['countryAlpha2Code']))
     setBpn(details['bpn'])
     setLegalEntity(details['shortName'])
     setRegisteredName(details['name'])
