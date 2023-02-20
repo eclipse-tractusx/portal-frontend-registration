@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import {
-    isBPN, isCity,
+    isBPN, isCity, isStreet,
 } from './Patterns'
 
 const TESTDATA = {
@@ -62,16 +62,46 @@ const TESTDATA = {
             'Niagara--on-the-Lake',
             'Presqu\'\'ile',
         ],
+    },
+    STREET: {
+        valid: [
+            'Dorfstraße',
+            'Hauptstrasse',
+            'Bahnhofstr.',
+            'Gmeiner Weg',
+            '701 FIFTH AVE',
+            'HOLLYWOOD, FL 33022-2480',
+            '111 MONUMENT CIRCLE, SUITE 3700',
+            'P.O. BOX 2903',
+            'P.O. Box 12345 Los Angeles',
+            '1441 SEAMIST DR.',
+            '2000 PENNSYLVANIA AVENUE, N.W.',
+            'Gertrud-Grunow-Str. 09',
+            'Gertrud-Grunow-Straße 09',
+            'Rue d\'Alger',
+            'Rue de l\'Amiral-de-Coligny',
+            'Allée André-Breton',
+        ],
+        invalid: [
+            ' Hauptstr',
+            'Einbahnstr. ',
+            'Rotkehlchenweg ',
+            ',',
+            '.',
+            '--',
+            'Finken  weg',
+            'Rue de l\'\'este',
+        ]
     }
 }
 
+const validate = (data, valid) => {
+    data.valid.forEach((expr) => expect(valid(expr)).toBe(true))
+    data.invalid.forEach((expr) => expect(valid(expr)).toBe(false))
+}
+
 describe('Input Pattern Tests', () => {
-    it('validates BPNs', () => {
-        TESTDATA.BPN.valid.forEach((expr) => expect(isBPN(expr)).toBe(true))
-        TESTDATA.BPN.invalid.forEach((expr) => expect(isBPN(expr)).toBe(false))
-    })
-    it('validates cities', () => {
-        TESTDATA.CITY.valid.forEach((expr) => expect(isCity(expr)).toBe(true))
-        TESTDATA.CITY.invalid.forEach((expr) => expect(isCity(expr)).toBe(false))
-    })
+    it('validates BPNs', () => validate(TESTDATA.BPN, isBPN))
+    it('validates cities', () => validate(TESTDATA.CITY, isCity))
+    it('validates streets', () => validate(TESTDATA.STREET, isStreet))
 })
