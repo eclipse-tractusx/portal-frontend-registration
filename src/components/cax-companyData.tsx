@@ -112,10 +112,11 @@ export const CompanyDataCax = ({
   const [uniqueIds, setUniqueIds] = useState<any>()
   const [identifierType, setIdentifierType] = useState<string>()
   const [identifierNumber, setIdentifierNumber] = useState<string>()
+  const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    errors.country === '' && country && dispatch(getUniqueIdentifier(country))
+    errors.country === '' && country && changedCountryValue && dispatch(getUniqueIdentifier(country))
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
   }, [identifierType, identifierNumber, country])
 
@@ -218,6 +219,7 @@ export const CompanyDataCax = ({
   }
 
   const validateCountry = (value: string) => {
+    setChangedCountryValue(true)
     setCountry(value)
     if (!PATTERNS.countryPattern.test(value.trim())) {
       setShowIdentifiers(false)
@@ -230,9 +232,10 @@ export const CompanyDataCax = ({
   }
 
   const validateIdentifierNumber = (value) => {
+    setChangedCountryValue(false)
     setIdentifierNumber(value)
     const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
-    if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
+    if (value && !PATTERNS[countryCode][identifierType].test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         identifierNumber: countryCode + '_' + identifierType,
@@ -470,7 +473,11 @@ export const CompanyDataCax = ({
                 <Row className="mx-auto col-9">
                   <div className={`form-data`}>
                     <label> {t('registrationStepOne.identifierType')} </label>
-                    <select value={identifierType} onChange={(e) => onIdentifierTypeChange(e)} disabled={uniqueIds && uniqueIds.length === 1}>
+                    <select 
+                      value={identifierType} 
+                      onChange={(e) => onIdentifierTypeChange(e)} 
+                      disabled={uniqueIds && uniqueIds.length === 1}
+                    >
                       <option value="">{t('registrationStepOne.pleaseSelect')}</option>
                       {identifierDetails &&
                         identifierDetails.map((identifier) => (
@@ -488,7 +495,6 @@ export const CompanyDataCax = ({
                       type="text"
                       value={identifierNumber}
                       onChange={(e) => validateIdentifierNumber(e.target.value)}
-                      disabled={uniqueIds && uniqueIds.length === 1}
                     />
                     {errors.identifierNumber && (
                       <label>
