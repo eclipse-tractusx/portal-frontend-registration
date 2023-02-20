@@ -95,9 +95,9 @@ const TESTDATA = {
     }
 }
 
-const validate = (data, valid) => {
-    data.valid.forEach((expr) => expect(valid(expr)).toBe(true))
-    data.invalid.forEach((expr) => expect(valid(expr)).toBe(false))
+const validate = (data, check) => {
+    data.valid.forEach((expr) => expect(check(expr)).toBe(true))
+    data.invalid.forEach((expr) => expect(check(expr)).toBe(false))
 }
 
 describe('Input Pattern Tests', () => {
