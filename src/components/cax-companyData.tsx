@@ -39,7 +39,7 @@ import {
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
-import { isBPN, isCity } from '../types/Patterns'
+import { isBPN, isCity, isStreet } from '../types/Patterns'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -180,7 +180,7 @@ export const CompanyDataCax = ({
   const validateStreetHouseNumber = (value: string) => {
     setStreetHouseNumber(value)
 
-    if (!PATTERNS.streetHouseNumberPattern.test(value.trim())) {
+    if (!isStreet(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         streetHouseNumber: 'streetHouseNumberError',
