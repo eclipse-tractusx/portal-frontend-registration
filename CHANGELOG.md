@@ -3,6 +3,8 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
+- Bugfix - Fetch Company details with Legal Entity Name and Registered Name by name only
+- Bugfix - Submit Application - Loading element
 
 ## 1.0.0-RC5
 

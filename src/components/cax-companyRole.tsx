@@ -205,7 +205,7 @@ export const CompanyRoleCax = ({
       agreements: agreements,
     }
 
-    dispatch(updateAgreementConsents({ applicationId, data }))
+    //dispatch(updateAgreementConsents({ applicationId, data }))
     setNextClicked(true)
   }
 

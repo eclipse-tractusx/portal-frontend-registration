@@ -51,6 +51,7 @@ export const VerifyRegistration = ({
 
   const dispatch = useDispatch()
 
+  const [loading, setLoading] = useState(false)
   const [confirmState, setConfirmState] = useState(false)
 
   const { status, error } = useSelector(applicationSelector)
@@ -75,6 +76,7 @@ export const VerifyRegistration = ({
   }
 
   const nextClick = () => {
+    setLoading(true)
     setConfirmState(true)
     dispatch(saveRegistration(applicationId))
   }
@@ -227,7 +229,8 @@ export const VerifyRegistration = ({
 
       <FooterButton
         labelBack={t('button.back')}
-        labelNext={t('button.submit')}
+        labelNext={loading === false ? 'Submitting...' : t('button.submit')}
+        loading={loading === false}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         tooltip={getTooltip()}

@@ -29,6 +29,7 @@ export const FooterButton = ({
   handleNextClick,
   tooltip = null,
   disabled = false,
+  loading = false
 }: {
   labelBack?: string
   labelNext: string
@@ -36,6 +37,7 @@ export const FooterButton = ({
   handleNextClick: () => void
   tooltip?: null | string
   disabled?: false | boolean
+  loading?: false | boolean
 }) => {
   return (
     <div className="mx-auto col-9 info">
@@ -58,6 +60,7 @@ export const FooterButton = ({
             showTooltip={tooltip ? true : false}
             tooltipText={tooltip}
             disabled={disabled}
+            loading={loading}
           />
         </div>
       </Row>

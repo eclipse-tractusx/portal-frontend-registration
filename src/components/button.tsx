@@ -29,6 +29,7 @@ const Button = ({
   showTooltip = false,
   tooltipText = '',
   disabled = false,
+  loading = false,
 }) => {
   return showTooltip ? (
     <>
@@ -58,15 +59,22 @@ const Button = ({
       </div>
     </>
   ) : (
-    <button className={styleClass} onClick={handleClick} disabled={disabled}>
-      {!icon ? (
+    loading ?
+      <button className={styleClass} onClick={handleClick} disabled={disabled}>
+        {
         label
-      ) : (
-        <>
-          <AiOutlineMail className="button-icon" /> <span>{label}</span>
-        </>
-      )}
-    </button>
+        }
+      </button>
+      :
+      <button className={styleClass} onClick={handleClick} disabled={disabled}>
+        {!icon ? (
+          label
+        ) : (
+          <>
+            <AiOutlineMail className="button-icon" /> <span>{label}</span>
+          </>
+        )}
+      </button>
   )
 }
 

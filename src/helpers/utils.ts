@@ -276,7 +276,7 @@ export function handleStatusRedirect (status: string, history: RouteComponentPro
     case SUBMITTED:
       return history.push('/registration-closed?param=validate')
     case CONFIRMED:
-      return history.push('/home')
+      return history.push('/landing')
     case DECLINED:
       return history.push('/registration-closed')
     default:
