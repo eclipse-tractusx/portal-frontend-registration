@@ -40,7 +40,6 @@ import {
   fetchId,
   updateInvitation,
 } from '../state/features/application/actions'
-import { handleStatusRedirect } from '../helpers/utils'
 interface RegistrationCaxProps {
   currentActiveStep: number
 }
