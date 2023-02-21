@@ -22,7 +22,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
-import { getApiBase } from '../services/EnvironmentService'
+import { getApiBase, getFrontEndBase } from '../services/EnvironmentService'
 import {
   SUBMITTED,
   CONFIRMED,
@@ -276,7 +276,7 @@ export function handleStatusRedirect (status: string, history: RouteComponentPro
     case SUBMITTED:
       return history.push('/registration-closed?param=validate')
     case CONFIRMED:
-      return history.push('/home')
+      return window.location.replace(`${getFrontEndBase()}/home`)
     case DECLINED:
       return history.push('/registration-closed')
     default:
