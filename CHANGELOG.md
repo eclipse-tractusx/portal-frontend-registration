@@ -7,6 +7,22 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 - Bugfix - Submit Application - Loading element
 - Bugfix - Redirect Issue for home page
 
+## 1.0.0-RC6
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* Fix redirect url issue in case of redirection to portal homepage
+* Updated regular expression of street name pattern for company data input field
+* Fix unique identifier display option for bpdm company data autofill
+
 ## 1.0.0-RC5
 
 ### Change
