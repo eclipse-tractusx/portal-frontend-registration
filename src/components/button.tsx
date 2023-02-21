@@ -32,48 +32,52 @@ const Button = ({
   disabled = false,
   loading = false,
 }) => {
-
-  const renderButton = () => {
-    return loading ?
-      <button className={styleClass} onClick={handleClick} disabled={disabled} style={{display: 'flex', alignItems: 'center'}}>
-        {
-          <>
-          <CircularProgress
-            sx={{ color: '#fff', marginRight: '5px' }}
-            size={20}
-          />
-            {label}
-          </>
-        }
-      </button>
-      :
-      <button className={styleClass} onClick={handleClick} disabled={disabled}>
-        {!icon ? (
-          label
-        ) : (
-          <>
-            <AiOutlineMail className="button-icon" /> <span>{label}</span>
-          </>
-        )}
-      </button>
-  }
-  return showTooltip ? (
+  return (
     <>
-      <ReactTooltip
-        className="tooltip"
-        id="tooltipBtn"
-        place="top"
-        effect="solid"
-      >
-        {tooltipText}
-      </ReactTooltip>
-      <div data-tip data-for="tooltipBtn">
-        <button
-          className={styleClass}
-          onClick={handleClick}
-          color="#CBCBCB"
-          disabled
-        >
+      {
+        showTooltip && 
+        <>
+          <ReactTooltip
+            className="tooltip"
+            id="tooltipBtn"
+            place="top"
+            effect="solid"
+          >
+            {tooltipText}
+          </ReactTooltip>
+          <div data-tip data-for="tooltipBtn">
+            <button
+              className={styleClass}
+              onClick={handleClick}
+              color="#CBCBCB"
+              disabled
+            >
+              {!icon ? (
+                label
+              ) : (
+                <>
+                  <AiOutlineMail className="button-icon" /> <span>{label}</span>
+                </>
+              )}
+            </button>
+          </div>
+        </>
+      }
+      {
+        loading ?
+        <button className={styleClass} onClick={handleClick} disabled={disabled} style={{display: 'flex', alignItems: 'center'}}>
+          {
+            <>
+            <CircularProgress
+              sx={{ color: '#fff', marginRight: '5px' }}
+              size={20}
+            />
+              {label}
+            </>
+          }
+        </button>
+        :
+        <button className={styleClass} onClick={handleClick} disabled={disabled}>
           {!icon ? (
             label
           ) : (
@@ -82,9 +86,9 @@ const Button = ({
             </>
           )}
         </button>
-      </div>
+      }
     </>
-  ) : renderButton()
+  )
 }
 
 export default Button
