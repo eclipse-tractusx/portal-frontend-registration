@@ -80,7 +80,7 @@ export const CompanyDataCax = ({
 
   useEffect(() => {
     setBpn(companyDetails?.bpn)
-    setLegalEntity(companyDetails?.shortName)
+    setLegalEntity(companyDetails?.name)
     setRegisteredName(companyDetails?.name)
     setStreetHouseNumber(companyDetails?.streetName)
     setPostalCode(companyDetails?.zipCode)
@@ -100,7 +100,7 @@ export const CompanyDataCax = ({
 
   const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
-  const [legalEntity, setLegalEntity] = useState(companyDetails.shortName)
+  const [legalEntity, setLegalEntity] = useState(companyDetails.name)
   const [registeredName, setRegisteredName] = useState(companyDetails.name)
   const [streetHouseNumber, setStreetHouseNumber] = useState(
     companyDetails.streetName
@@ -124,7 +124,7 @@ export const CompanyDataCax = ({
     const details = await getCompanyDetails(expr)
     details['countryAlpha2Code'] && dispatch(getUniqueIdentifier(details['countryAlpha2Code']))
     setBpn(details['bpn'])
-    setLegalEntity(details['shortName'])
+    setLegalEntity(details['name'])
     setRegisteredName(details['name'])
     setStreetHouseNumber(details['streetName'])
     setPostalCode(details['zipcode'])
