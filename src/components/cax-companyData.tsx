@@ -272,7 +272,7 @@ export const CompanyDataCax = ({
       value: identifierNumber
     }]
     //addCompanyData(companyData)
-    //dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
+    dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
     setNextClicked(true)
   }
 

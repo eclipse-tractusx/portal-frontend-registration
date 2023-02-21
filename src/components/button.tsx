@@ -20,6 +20,7 @@
 
 import { AiOutlineMail } from 'react-icons/ai'
 import ReactTooltip from 'react-tooltip'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Button = ({
   label,
@@ -60,9 +61,15 @@ const Button = ({
     </>
   ) : (
     loading ?
-      <button className={styleClass} onClick={handleClick} disabled={disabled}>
+      <button className={styleClass} onClick={handleClick} disabled={disabled} style={{display: 'flex', alignItems: 'center'}}>
         {
-        label
+          <>
+          <CircularProgress
+            sx={{ color: '#fff', marginRight: '5px' }}
+            size={20}
+          />
+            {label}
+          </>
         }
       </button>
       :
