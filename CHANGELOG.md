@@ -17,7 +17,7 @@ n/a
 
 ### Bugfix
 * Fix redirect url issue in case of redirection to portal homepage
-* Updated regular expression of streete name pattern for company data input field
+* Updated regular expression of street name pattern for company data input field
 * Fix unique identifier display option for bpdm company data autofill
 
 ## 1.0.0-RC5
