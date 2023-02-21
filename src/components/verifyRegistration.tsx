@@ -230,7 +230,7 @@ export const VerifyRegistration = ({
 
       <FooterButton
         labelBack={t('button.back')}
-        labelNext={loading ? 'Submitting...' : t('button.submit')}
+        labelNext={loading ? t('button.submitting') : t('button.submit')}
         loading={loading }
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
