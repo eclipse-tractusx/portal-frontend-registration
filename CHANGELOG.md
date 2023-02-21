@@ -5,6 +5,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ### Unreleased
 - Bugfix - Fetch Company details with Legal Entity Name and Registered Name by name only
 - Bugfix - Submit Application - Loading element
+- Bugfix - Redirect Issue for home page
 
 ## 1.0.0-RC5
 
