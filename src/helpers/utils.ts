@@ -77,7 +77,7 @@ export function submitSendInvites(userInviteList: any): Promise<any> {
       body: JSON.stringify(userInviteList),
     })
       .then((res) =>
-        res.text().then((data) => {
+        res.text().then(() => {
           if (res.ok) {
             resolve('Sent Invite')
           } else {
