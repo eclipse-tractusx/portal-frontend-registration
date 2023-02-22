@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import Button from './button'
 
@@ -44,33 +44,37 @@ export const ErrorPage = () => {
                 <img src="/registration/robot-sw.925342207cc863d3ed2cc9c65ffb7c33.svg" alt="" />
             </Box>
             <Box>
-                <h4
-                    style={{
+                <Typography
+                    variant="h5"
+                    sx={{
                         fontFamily: 'LibreFranklin-Light',
                         fontWeight: '600',
                         marginBottom: '10px',
                     }}
                 >
                     {t('errorPage.heading')}
-                </h4>
-                <p
+                </Typography>
+                <Typography
+                    variant="body1"
                     style={{
                         fontSize: '18px',
                         fontFamily: 'LibreFranklin-Light',
+                        marginBottom: '20px'
                     }}
                 >
                     {t('errorPage.title')}
-                </p>
-                <p
+                </Typography>
+                <Typography
+                    variant="body1"
                     style={{
                         fontFamily: 'LibreFranklin-Light',
                         fontSize: '18px',
                         width: '640px',
-                        paddingTop: '20px !important',
+                        marginBottom: '20px'
                     }}
                 >
                     {t('errorPage.description')}
-                </p>
+                </Typography>
                 <Box 
                     sx={{ 
                         position: 'absolute',
