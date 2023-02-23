@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -40,11 +40,6 @@ import {
   fetchId,
   updateInvitation,
 } from '../state/features/application/actions'
-import {
-  SUBMITTED,
-  CONFIRMED,
-  DECLINED,
-} from '../state/features/application/types'
 interface RegistrationCaxProps {
   currentActiveStep: number
 }
@@ -60,18 +55,6 @@ export const RegistrationCax = ({
   if (error) {
     toast.error(error)
   }
-
-  useEffect(() => {
-    if (
-      status &&
-      status[0] &&
-      (status[0]['applicationStatus'] === SUBMITTED ||
-        status[0]['applicationStatus'] === CONFIRMED ||
-        status[0]['applicationStatus'] === DECLINED)
-    ) {
-      history.push('/registration-closed')
-    }
-  }, [status])
 
   useEffect(() => {
     if (status.length <= 0) {

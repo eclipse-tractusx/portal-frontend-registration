@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -25,7 +25,7 @@ export type agreementData = {
   agreements: { agreementId: string; consentStatus: string }[]
 }
 
-export type agreementResponseData = { agreementId: string; name: string, documentIds: string[] }
+export type agreementResponseData = { agreementId: string; name: string, documentId: string }
 
 export type companyRole = {
   companyRole: string
@@ -46,6 +46,7 @@ export const agreementDataValue = {
 export type roleAggrementState = {
   consentData: agreementData
   allConsentData: roleData
+  loading: boolean
   request: RequestState
   error: string
 }

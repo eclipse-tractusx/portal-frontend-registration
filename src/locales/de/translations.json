@@ -33,7 +33,7 @@
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Unternehmensdaten",
-    "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der <strong>B</strong>usiness <strong>Partner</strong> <strong>N</strong>umber (BPN). Sollten Sie die BPN nicht zur Hand haben, dann können sie ihre Daten manuell eingeben.",
+    "verifyCompayDataSubHeading": "Bitte fügen Sie in dem relevanten Felden die Unternehmensdaten aus. Um schnell und einfach die Daten zu befüllen, empfehlen wir die automatische befüllung der Felder via der Unternehmensdaten suche mit der Business Partner Number (BPN). Sollten Sie die BPN nicht zur Hand haben, dann können sie ihre Daten manuell eingeben.",
     "seachDatabase": "Suche (mit Hilfe der BPN)",
     "enterManualText": "oder füllen Sie die relevanten Felder manuell aus:",
     "bpn": "Business Partner Number",
@@ -44,7 +44,17 @@
     "streetHouseNumber": "Straße und Hausnummer",
     "postalCode": "Postleitzahl",
     "city": "Stadt",
-    "country": "Land",
+    "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
+    "countryIdentifier": "Country Identifier",
+    "identifierType": "Identifier Type",
+    "identifierNumber": "Identifier Number",
+    "identifierTypes": {
+      "COMMERCIAL_REG_NUMBER": "Handelsregisternummer",
+      "VAT_ID": "Steuernummer",
+      "LEI_CODE": "LEI Code",
+      "VIES": "VIES",
+      "EORI": "EORI"
+    },
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
@@ -52,7 +62,26 @@
     "streetHouseNumberError": "Bitte geben Sie eine gültige Straße und Hausnummer ein.",
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
-    "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character."
+    "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
+    "identifierhelperText": "We have retrieved two registered identifiers. Please select the preferred identifier for your company registration.",
+    "pleaseSelect": "Please select",
+    "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "IN_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 5 to 6 digits.",
+    "IN_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "DE_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with exact 9 digits.",
+    "DE_VAT_ID": "Please enter a valid number. Hint: Starting with DE and followed by 9 digit numbers",
+    "DE_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "FR_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with space with 14 to 17 digits.",
+    "FR_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with 8 to 15 digits.",
+    "FR_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "MX_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "MX_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and & with 12 to 13 digits.",
+    "MX_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "Worldwide_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "Worldwide_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with 8 to 15 digits.",
+    "Worldwide_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "Worldwide_EORI": "Please enter a valid number. Hint: Aplhanumeric with space with exact 18 digits.",
+    "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
     "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
@@ -78,7 +107,8 @@
     "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Bitte",
-    "Retry": "wiederholen"
+    "Retry": "wiederholen",
+    "submitError": "Stimmen Sie allen Allgemeinen Geschäftsbedingungen der ausgewählten Firmenrolle zu, bevor Sie mit dem nächsten Schritt fortfahren können."
   },
   "documentUpload": {
     "title": "Dokumente hochladen",
@@ -191,9 +221,14 @@
   "footerPages": {
     "Back": "Back"
   },
-  "registrationClosed": {
-    "heading1": "Ihre Registrierung wurde bereits übermittelt und abgeschlossen. Wir prüfen jetzt den Antrag.",
+  "registrationValidation": {
+    "heading1": "Ihre Registrierung wurde bereits übermittelt und unter validierung. Wir prüfen jetzt den Antrag.",
     "heading2": "Sobald dies abgeschlossen ist, erhalten Sie eine E-Mail mit dem Zugang zum Catena-X Portal.",
     "close": "Schließen"
+  },
+  "registrationClosed": {
+    "heading1": "Your registration has been declined and closed. You can resubmit your application.",
+    "heading2": "",
+    "close": "Close"
   }
 }

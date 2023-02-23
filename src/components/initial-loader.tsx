@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -24,12 +24,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { fetchId } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import {
-  SUBMITTED,
-  CONFIRMED,
-  DECLINED,
-} from '../state/features/application/types'
 import '../styles/newApp.css'
+import { handleStatusRedirect } from '../helpers/utils'
 
 export const InitialLoader = () => {
   const history = useHistory()
@@ -42,18 +38,7 @@ export const InitialLoader = () => {
   }
 
   useEffect(() => {
-    if (status && status.length) {
-      if (
-        status[0] &&
-        (status[0]['applicationStatus'] === SUBMITTED ||
-          status[0]['applicationStatus'] === CONFIRMED ||
-          status[0]['applicationStatus'] === DECLINED)
-      ) {
-        history.push('/registration-closed')
-      } else {
-        history.push('/landing')
-      }
-    }
+    status && status.length > 0 && handleStatusRedirect(status[0]['applicationStatus'], history)
   }, [status])
 
   useEffect(() => {

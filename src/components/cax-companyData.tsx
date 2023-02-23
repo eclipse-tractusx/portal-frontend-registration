@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -34,10 +34,12 @@ import { DataErrorCodes } from '../helpers/DataError'
 import { toast } from 'react-toastify'
 import {
   getCompanyDetailsWithAddress,
+  getUniqueIdentifier,
   saveCompanyDetailsWithAddress,
 } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import { CompanyDetails } from '../state/features/application/types'
+import { isBPN, isCity, isStreet } from '../types/Patterns'
 
 interface CompanyDataProps {
   currentActiveStep: number
@@ -52,6 +54,7 @@ const initialErrors = {
   postalCode: '',
   city: '',
   country: '',
+  identifierNumber: ''
 }
 
 export const CompanyDataCax = ({
@@ -61,13 +64,15 @@ export const CompanyDataCax = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { status, error, companyDetails } = useSelector(applicationSelector)
+  const [nextClicked, setNextClicked] = useState(false)
+
+  const { status, error, loading, saveError, companyDetails, identifierDetails } = useSelector(applicationSelector)
+
+  nextClicked && !loading &&
+    (saveError ? toast.error(t('registrationStepOne.submitError')) : addCurrentStep(currentActiveStep + 1))
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (error) {
-    toast.error(error)
-  }
 
   useEffect(() => {
     dispatch(getCompanyDetailsWithAddress(applicationId))
@@ -81,9 +86,18 @@ export const CompanyDataCax = ({
     setPostalCode(companyDetails?.zipCode)
     setCity(companyDetails?.city)
     setCountry(companyDetails?.countryAlpha2Code)
+    companyDetails?.countryAlpha2Code && dispatch(getUniqueIdentifier(companyDetails?.countryAlpha2Code))
+    setUniqueIds(companyDetails?.uniqueIds)
+    setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
+    setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
   }, [companyDetails])
 
-  const [search, setSearch] = useState('')
+  useEffect(() => {
+    if (identifierDetails.length > 0) {
+      setShowIdentifiers(true)
+    }
+  }, [identifierDetails])
+
   const [bpn, setBpn] = useState(companyDetails?.bpn)
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
   const [legalEntity, setLegalEntity] = useState(companyDetails.shortName)
@@ -94,22 +108,35 @@ export const CompanyDataCax = ({
   const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
   const [city, setCity] = useState(companyDetails.city)
   const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
+  const [showIdentifiers, setShowIdentifiers] = useState(false)
+  const [uniqueIds, setUniqueIds] = useState<any>()
+  const [identifierType, setIdentifierType] = useState<string>()
+  const [identifierNumber, setIdentifierNumber] = useState<string>()
+  const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
+
+  useEffect(() => {
+    errors.country === '' && country && changedCountryValue && dispatch(getUniqueIdentifier(country))
+    identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
+  }, [identifierType, identifierNumber, country])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
-    setBpn(details?.[0]?.bpn)
-    setLegalEntity(details?.[0]?.names?.[0]?.value)
-    setRegisteredName(details?.[0]?.names?.[0]?.value)
-    setStreetHouseNumber(details?.[0]?.addresses?.[0]?.thoroughfares[0]?.value)
-    setPostalCode(details?.[0]?.addresses?.[0]?.postCodes[0]?.value)
-    setCity(details?.[0]?.addresses?.[0]?.localities[0]?.value)
-    setCountry(details?.[0]?.addresses?.[0]?.country?.technicalKey)
+    details['countryAlpha2Code'] && dispatch(getUniqueIdentifier(details['countryAlpha2Code']))
+    setBpn(details['bpn'])
+    setLegalEntity(details['shortName'])
+    setRegisteredName(details['name'])
+    setStreetHouseNumber(details['streetName'])
+    setPostalCode(details['zipcode'])
+    setCity(details['city'])
+    setCountry(details['countryAlpha2Code'])
+    setUniqueIds(details['uniqueIds'])
+    setIdentifierNumber(details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['value'] : '')
+    setIdentifierType(details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['type'] : '')
   }
 
   const onSearchChange = (expr: string) => {
-    const bpnPattern = /^BPNL[a-z0-9]{12}$/i
-    if (bpnPattern.test(expr.trim())) {
+    if (isBPN(expr.trim())) {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
@@ -117,10 +144,7 @@ export const CompanyDataCax = ({
           const message = DataErrorCodes.includes(errorCode)
             ? t(`ErrorMessage.${errorCode}`)
             : t(`ErrorMessage.default`)
-          //   alert(message)
-
           toast.error(message)
-          //  history.push("/finish");
         })
       setBpnErrorMessage('')
     } else {
@@ -157,7 +181,7 @@ export const CompanyDataCax = ({
   const validateStreetHouseNumber = (value: string) => {
     setStreetHouseNumber(value)
 
-    if (!PATTERNS.streetHouseNumberPattern.test(value.trim())) {
+    if (!isStreet(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         streetHouseNumber: 'streetHouseNumberError',
@@ -170,7 +194,7 @@ export const CompanyDataCax = ({
   const validatePostalCode = (value: string) => {
     setPostalCode(value)
 
-    if(!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+    if (!value) return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
 
     if (!PATTERNS.postalCodePattern.test(value.trim())) {
       return setErrors((prevState) => ({
@@ -185,7 +209,7 @@ export const CompanyDataCax = ({
   const validateCity = (value: string) => {
     setCity(value)
 
-    if (!PATTERNS.cityPattern.test(value.trim())) {
+    if (!isCity(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',
@@ -196,16 +220,38 @@ export const CompanyDataCax = ({
   }
 
   const validateCountry = (value: string) => {
+    setChangedCountryValue(true)
     setCountry(value)
-
     if (!PATTERNS.countryPattern.test(value.trim())) {
+      setShowIdentifiers(false)
       return setErrors((prevState) => ({
         ...prevState,
         country: 'countryError',
       }))
     }
-
     return setErrors((prevState) => ({ ...prevState, country: '' }))
+  }
+
+  const validateIdentifierNumber = (value) => {
+    setChangedCountryValue(false)
+    setIdentifierNumber(value)
+    const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
+    if (value && !PATTERNS[countryCode][identifierType].test(value.trim())) {
+      return setErrors((prevState) => ({
+        ...prevState,
+        identifierNumber: countryCode + '_' + identifierType,
+      }))
+    }
+    return setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+  }
+
+  const handleIdentifierSelect = (type, value) => {
+    setIdentifierType(type)
+    setIdentifierNumber(value)
+  }
+
+  const onIdentifierTypeChange = (e) => {
+    setIdentifierType(e.target.value)
   }
 
   const backClick = () => {
@@ -213,7 +259,6 @@ export const CompanyDataCax = ({
   }
 
   const nextClick = () => {
-    addCurrentStep(currentActiveStep + 1)
     const companyData = { ...companyDetails }
     companyData.bpn = bpn
     companyData.name = legalEntity
@@ -222,8 +267,13 @@ export const CompanyDataCax = ({
     companyData.city = city
     companyData.zipCode = postalCode
     companyData.countryAlpha2Code = country
+    companyData.uniqueIds = [{
+      type: identifierType,
+      value: identifierNumber
+    }]
     //addCompanyData(companyData)
     dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
+    setNextClicked(true)
   }
 
   return (
@@ -246,7 +296,7 @@ export const CompanyDataCax = ({
               <label> {t('registrationStepOne.seachDatabase')}</label>
               <SearchInput
                 className="search-input"
-                value={search}
+                value={''}
                 onChange={(expr) => onSearchChange(expr)}
               />
               <label>{bpnErrorMsg}</label>
@@ -268,7 +318,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.bpn')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Displays the bpn and can't get eddited."
                 />
               </label>
               <input type="text" disabled value={bpn} />
@@ -285,7 +336,8 @@ export const CompanyDataCax = ({
                 {t('registrationStepOne.legalEntity')}{' '}
                 <AiOutlineQuestionCircle
                   color="#939393"
-                  data-tip="hello world"
+                  // tip data need to get moved to the locales files
+                  data-tip="Legal Company Name"
                 />{' '}
               </label>
               <input
@@ -304,10 +356,6 @@ export const CompanyDataCax = ({
               <label>
                 {' '}
                 {t('registrationStepOne.registeredName')}{' '}
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  data-tip="hello world"
-                />
               </label>
               <input
                 type="text"
@@ -383,13 +431,88 @@ export const CompanyDataCax = ({
               )}
             </div>
           </Row>
+
+          {
+            uniqueIds && uniqueIds.length > 1 ?
+              (
+                <>
+                  <Row className="mx-auto col-9">
+                    <span className="form-heading">
+                      {t('registrationStepOne.countryIdentifier')}
+                      <div className="company-hint">
+                        {t('registrationStepOne.identifierhelperText')}
+                      </div>
+                    </span>
+                  </Row>
+                  <Row className="mx-auto col-9">
+                    <ul className="agreement-check-list">
+                      {uniqueIds.map((id) => (
+                        <li key={id.type} className="agreement-li">
+                          <input
+                            type="radio"
+                            name='uniqueIds'
+                            value={id.type}
+                            className="regular-radio agreement-check"
+                            onChange={() => handleIdentifierSelect(id.type, id.value)}
+                            defaultChecked={uniqueIds[0].type === id.type}
+                          />
+                          <label>{t(`registrationStepOne.identifierTypes.${id.type}`)+' : '+id.value}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  </Row>
+                </>
+              )
+              :
+              showIdentifiers &&
+              <>
+                <Row className="mx-auto col-9">
+                  <span className="form-heading">
+                    {t('registrationStepOne.countryIdentifier')}
+                  </span>
+                </Row>
+                <Row className="mx-auto col-9">
+                  <div className={`form-data`}>
+                    <label> {t('registrationStepOne.identifierType')} </label>
+                    <select 
+                      value={identifierType} 
+                      onChange={(e) => onIdentifierTypeChange(e)} 
+                      disabled={uniqueIds && uniqueIds.length === 1}
+                    >
+                      <option value="">{t('registrationStepOne.pleaseSelect')}</option>
+                      {identifierDetails &&
+                        identifierDetails.map((identifier) => (
+                          <option key={identifier.id} value={identifier.label}>
+                            {t(`registrationStepOne.identifierTypes.${identifier.label}`)}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </Row>
+                <Row className="mx-auto col-9">
+                  <div className={`form-data ${errors.identifierNumber && 'error'}`}>
+                    <label> {t('registrationStepOne.identifierNumber')} </label>
+                    <input
+                      type="text"
+                      value={identifierNumber}
+                      onChange={(e) => validateIdentifierNumber(e.target.value)}
+                    />
+                    {errors.identifierNumber && (
+                      <label>
+                        {t(`registrationStepOne.${errors.identifierNumber}`)}
+                      </label>
+                    )}
+                  </div>
+                </Row>
+              </>
+          }
         </div>
       </div>
       <FooterButton
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={ !legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' }
+        disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.identifierNumber !== ''}
       />
     </>
   )
@@ -412,3 +535,4 @@ export default withRouter(
     mapDispatchToProps
   )(CompanyDataCax)
 )
+

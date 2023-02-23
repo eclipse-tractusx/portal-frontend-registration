@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,18 +18,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import Button from './button'
 import { Container, Row, Col, Nav } from 'react-bootstrap'
 import Footer from './footer'
 import Header from './cax-header'
 import SearchInput from 'react-search-input'
 import { useRef, useState } from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 export const Help = () => {
   const { t } = useTranslation('help', { keyPrefix: 'help' })
-  const history = useHistory()
   const [search, setSearch] = useState('')
 
   const headerRef = useRef(null)
@@ -118,13 +116,6 @@ export const Help = () => {
           </div>
         </Col>
       </Row>
-      <div className="button-section col-10 mx-auto">
-        <Button
-          label={t('footerPages.Back')}
-          styleClass="button btn-primaryCax"
-          handleClick={() => history.goBack()}
-        />
-      </div>
       <Footer />
     </Container>
   )

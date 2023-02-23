@@ -3,6 +3,99 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
+
+## 1.0.0-RC6
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* Fix redirect url issue in case of redirection to portal homepage
+* Updated regular expression of street name pattern for company data input field
+* Fix unique identifier display option for bpdm company data autofill
+
+## 1.0.0-RC5
+
+### Change
+n/a
+
+### Feature
+* Redirect user to "closed"; "under validation" or portal page based on application status 
+
+### Technical Support
+n/a
+
+### Bugfix
+* Company Data Unique Identifier field value irritation when entering the unique identifier value
+
+## 1.0.0-RC4
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+* resolve dependabot finding
+* temp fix for cve-2023-0286
+* add missing '--no-cache': apk update && apk add
+
+### Bugfix
+* Change companyRoleAgreementData API response (new structure of the response body)
+* Company Data Unique Identifier
+  * Identifier type ui issue when entering the value fixed
+  * Identifier number change enabled even after initial save
+  * Identifier number pattern error validation updated (fe)
+
+## 1.0.0-RC3
+
+### Change
+* add error pop-up for step 3 - select company role and commit to t&c's
+* city data input pattern updated
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
+* help page handling
+* CVE-2022-46175 - Prototype Pollution in JSON5 via Parse Method - upgraded all dependencies
+
+## 1.0.0-RC2
+
+### Change
+n/a
+
+### Feature
+* enabled company data input form to support unique identifier handling for companies based on company location country code. ![Tag](https://img.shields.io/static/v1?label=&message=Pre-Release&color=grey&style=flat)
+
+### Technical Support
+n/a
+
+### Bugfix
+* translation fixes on static text values
+
+## 1.0.0-RC1
+
+### Change
+* implemented in the step 1 "company data" error handling for unsuccessful company data save function
+
+### Feature
+n/a
+
+### Technical Support
+n/a
+
+### Bugfix
 n/a
 
 ## 0.10.0
@@ -40,7 +133,7 @@ n/a
 n/a
 
 ### Feature
-* Registration Step 3 (company role and consent agreement); fetching agreement document from the portal backend and enabling direct documente download.
+* Registration Step 3 (company role and consent agreement); fetching agreement document from the portal backend and enabling direct document download.
 
 ### Technical Support
 n/a
@@ -70,7 +163,7 @@ n/a
 ### Feature
 * Registration Welcome: Introduction of a welcome page including a "how to" for the following registration steps
 * Registration Submission: Support of the registration submission incl. new page for successful submission and triggered email to the registrator
-* Registration Closed Function: Company registrations in status "submitted", "approved" or "declined" can not re-visit the registration document. A closed registration information gets displayed.
+* Registration Closed Function: Company registrations in status "submitted", "approved" or "declined" cannot re-visit the registration document. A closed registration information gets displayed.
 
 ### Technical Support
 * n/a

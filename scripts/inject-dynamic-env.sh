@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ###############################################################
 # Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
 #
@@ -17,34 +19,8 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Veracode
-
-# run on manual trigger or once a week
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * 0"
-    
-jobs:
-  static_analysis:
-    name: Static Analysis
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Check out main branch
-        uses: actions/checkout@v3
-
-      - name: Zip Sources for Static Analysis
-        run: yarn build:sources
-        
-      - name: Veracode Upload And Scan
-        uses: veracode/veracode-uploadandscan-action@0.2.1
-        with:
-          appname: 'Registration Frontend'
-          createprofile: false
-          filepath: 'portal-registration.zip'
-          vid: '${{ secrets.ORG_VERACODE_API_ID }}'
-          vkey: '${{ secrets.ORG_VERACODE_API_KEY }}' 
+custom_env_vars='{PORTAL_FRONTEND_URL:"'$PORTAL_FRONTEND_URL'",PORTAL_ASSETS_URL:"'$PORTAL_ASSETS_URL'",PORTAL_BACKEND_URL:"'$PORTAL_BACKEND_URL'",CENTRALIDP_URL:"'$CENTRALIDP_URL'"}'
+custom_env_vars_anchor='{PORTAL_FRONTEND_URL:"https://portal.dev.demo.catena-x.net",PORTAL_ASSETS_URL:"https://portal.dev.demo.catena-x.net/assets",PORTAL_BACKEND_URL:"https://portal-backend.dev.demo.catena-x.net",CENTRALIDP_URL:"https://centralidp.dev.demo.catena-x.net/auth"}'
+index_html_reference=`cat /usr/share/nginx/html/index.html.reference`
+index_html=${index_html_reference//$custom_env_vars_anchor/$custom_env_vars}
+echo "$index_html" > /usr/share/nginx/html/index.html

@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,17 +18,23 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+import { RouteComponentProps } from 'react-router-dom'
 import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
-import { getApiBase } from '../services/EnvironmentService'
+import { getApiBase, getFrontEndBase } from '../services/EnvironmentService'
+import {
+  SUBMITTED,
+  CONFIRMED,
+  DECLINED,
+} from '../state/features/application/types'
 
 export function getCompanyDetails(
   oneId: string
 ): Promise<FetchBusinessPartnerDto[]> {
   console.log('API called getCompanyDetails')
   const token = UserService.getToken()
-  const u = `${getApiBase()}/api/registration/company/${oneId}`
+  const u = `${getApiBase()}/api/registration/legalEntityAddress/${oneId}`
   const myResponseData: FetchBusinessPartnerDto[] = []
   const promise = new Promise<FetchBusinessPartnerDto[]>((resolve, reject) => {
     fetch(u, {
@@ -214,13 +220,47 @@ export const downloadDocument = (
 
 export const PATTERNS = {
   legalEntityPattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
+    /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
   registeredNamePattern:
-    /^[a-zA-ZÀ-ÿ0-9][a-zA-ZÀ-ÿ0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
-  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z0-9][a-zA-ZÀ-ÿ0-9 -]{2,60}$/,
-  postalCodePattern: /^(?=[a-zA-Z0-9]*[-\s]?[a-zA-Z0-9]*$)[a-zA-Z0-9-\s]{2,10}$/,
-  cityPattern: /^[A-Za-zÀ-ÿ]{3,20}$/,
+    /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+  streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
+  postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
+  IN: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-]{5,6}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /.*/
+  },
+  DE: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-\s]{9}$/,
+    VAT_ID: /^DE\d{9}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /.*/
+  },
+  FR: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d\s]{14,17}$/,
+    VAT_ID: /^[a-zA-Z\d-\s]{8,15}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /.*/
+  },
+  MX: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-&]{12,13}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /.*/
+  },
+  Worldwide: {
+    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d]{6,21}$/,
+    VAT_ID: /^[a-zA-Z\d-\s]{8,15}$/,
+    LEI_CODE: /^[a-zA-Z\d]{20}$/,
+    VIES: /.*/,
+    EORI: /^[a-zA-Z\d\s]{18}$/,
+  }
 }
 
 export function download(file: Blob, fileType: string, fileName: string) {
@@ -231,3 +271,15 @@ export function download(file: Blob, fileType: string, fileName: string) {
   a.click()
 }
 
+export function handleStatusRedirect (status: string, history: RouteComponentProps["history"]) {
+  switch (status) {
+    case SUBMITTED:
+      return history.push('/registration-closed?param=validate')
+    case CONFIRMED:
+      return window.location.replace(`${getFrontEndBase()}/home`)
+    case DECLINED:
+      return history.push('/registration-closed')
+    default:
+      return history.push('/landing')
+  }
+}

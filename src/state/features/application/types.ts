@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -25,6 +25,11 @@ export type ApplicationStatus = {
   status: string
 }
 
+export type Identifier = {
+  type: string
+  value: string
+}
+
 export type CompanyDetails = {
   companyId: string
   bpn: string
@@ -39,6 +44,7 @@ export type CompanyDetails = {
   countryAlpha2Code: string
   countryDe: string
   taxId: string
+  uniqueIds: Identifier[]
 }
 
 export type ApplicationInvitedUsers = {
@@ -56,8 +62,15 @@ export type ApplicationInvitedFormUsers = {
 export interface ApplicationState {
   status: Array<ApplicationStatus>
   companyDetails: CompanyDetails | null
+  identifierDetails: Array<UniqueIdentifier>
   loading: boolean
   error: string
+  saveError: string
+}
+
+export type UniqueIdentifier = {
+  id: number
+  label: string
 }
 
 export const InitialCompanyDetail = {
@@ -74,11 +87,15 @@ export const InitialCompanyDetail = {
   countryAlpha2Code: '',
   countryDe: '',
   taxId: '',
+  uniqueIds: []
 }
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
 export const CREATED = 'CREATED'
+export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
+export const INVITE_USER = 'INVITE_USER'
+export const SELECT_COMPANY_RESP = 'SELECT_COMPANY_RESP'
+export const UPLOAD_DOCUMENTS = 'UPLOAD_DOCUMENTS'
+export const VERIFY = 'VERIFY'
 export const SUBMITTED = 'SUBMITTED'
 export const CONFIRMED = 'CONFIRMED'
 export const DECLINED = 'DECLINED'
-export const VERIFY = 'VERIFY'

@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -24,14 +24,18 @@ import {
   fetchId,
   updateInvitation,
   getCompanyDetailsWithAddress,
+  saveCompanyDetailsWithAddress,
+  getUniqueIdentifier
 } from './actions'
 import { ApplicationState, InitialCompanyDetail } from './types'
 
 const initialState: ApplicationState = {
   status: [],
   companyDetails: InitialCompanyDetail,
+  identifierDetails: [],
   loading: false,
   error: null,
+  saveError: null
 }
 
 const applicationSlice = createSlice({
@@ -92,6 +96,45 @@ const applicationSlice = createSlice({
       companyDetails: InitialCompanyDetail,
       loading: false,
       error: action.error.message as string,
+    }))
+    builder.addCase(getUniqueIdentifier.pending, (state) => ({
+      ...state,
+      identifierDetails: [],
+      loading: true,
+      error: null,
+    }))
+    builder.addCase(
+      getUniqueIdentifier.fulfilled,
+      (state, { payload }) => ({
+        ...state,
+        identifierDetails: payload,
+        loading: false,
+        error: null,
+      })
+    )
+    builder.addCase(getUniqueIdentifier.rejected, (state, action) => ({
+      ...state,
+      identifierDetails: [],
+      loading: false,
+      error: action.error.message as string,
+    }))
+    builder.addCase(saveCompanyDetailsWithAddress.pending, (state) => ({
+      ...state,
+      loading: true,
+      saveError: null,
+    }))
+    builder.addCase(
+      saveCompanyDetailsWithAddress.fulfilled,
+      (state) => ({
+        ...state,
+        loading: false,
+        saveError: null,
+      })
+    )
+    builder.addCase(saveCompanyDetailsWithAddress.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+      saveError: action.error.message as string,
     }))
   },
 })

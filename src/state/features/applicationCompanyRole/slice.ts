@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -31,6 +31,7 @@ import { agreementDataValue, roleAggrementState } from './types'
 const initialState: roleAggrementState = {
   consentData: agreementDataValue,
   allConsentData: agreementDataValue,
+  loading: false,
   request: RequestState.NONE,
   error: null,
 }
@@ -85,16 +86,19 @@ const roleSlice = createSlice({
     }))
     builder.addCase(updateAgreementConsents.pending, (state) => ({
       ...state,
+      loading: true,
       request: RequestState.SUBMIT,
       error: '',
     }))
     builder.addCase(updateAgreementConsents.fulfilled, (state) => ({
       ...state,
+      loading: false,
       request: RequestState.OK,
       error: '',
     }))
     builder.addCase(updateAgreementConsents.rejected, (state, action) => ({
       ...state,
+      loading: false,
       request: RequestState.ERROR,
       error: action.error.message as string,
     }))

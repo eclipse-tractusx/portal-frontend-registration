@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -27,7 +27,11 @@ import Button from './button'
 import UserService from '../services/UserService'
 
 export const RegistrationClosed = () => {
-  const { t } = useTranslation()
+  const queryParams = new URLSearchParams(window.location.search)
+  const term = queryParams.get("param")
+  const { t } = useTranslation('', {
+    keyPrefix: term === 'validate' ? 'registrationValidation' : 'registrationClosed',
+  })
 
   return (
     <Container>
@@ -35,12 +39,12 @@ export const RegistrationClosed = () => {
       <Row>
         <Col>
           <div className="mx-auto container-body registration-close-content">
-            <h6 className="mb-4">{t('registrationClosed.heading1')}</h6>
-            <h6>{t('registrationClosed.heading2')}</h6>
+            <h6 className="mb-4">{t('heading1')}</h6>
+            <h6>{t('heading2')}</h6>
             <Row className="content">
               <Col>
                 <Button
-                  label={t('registrationClosed.close')}
+                  label={t('close')}
                   styleClass="button btn-primaryCax"
                   handleClick={() => UserService.doLogout()}
                 />

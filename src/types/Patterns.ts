@@ -18,23 +18,12 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { combineReducers } from 'redux'
-import applicationSlice from './application/slice'
-import inviteSlice from './applicationInviteUser/slice'
-import documentSlice from './applicationDocuments/slice'
-import user from './user/reducer'
-import roleSlice from './applicationCompanyRole/slice'
-import registrationData from './applicationVerifyRegister/slice'
-
-export const reducers = {
-  application: applicationSlice.reducer,
-  role: roleSlice.reducer,
-  invite: inviteSlice.reducer,
-  document: documentSlice.reducer,
-  registrationData: registrationData.reducer,
-  user,
+export const Patterns = {
+    BPN: /^BPNL[a-z0-9]{12}$/i,
+    CITY: /^[A-ZÀ-ÿ](([ .'-]|\. )?[A-Za-zÀ-ÿ]{1,40}){1,10}$/,
+    STREET: /^([a-zA-Z0-9À-ÿ]{1,40}( ?[.,'-] ?| )?){1,10}[a-zA-Z0-9À-ÿ.]$/,
 }
 
-const rootReducer = combineReducers(reducers)
-
-export default rootReducer
+export const isBPN = (expr: string) => Patterns.BPN.test(expr)
+export const isCity = (expr: string) => Patterns.CITY.test(expr)
+export const isStreet = (expr: string) => Patterns.STREET.test(expr)

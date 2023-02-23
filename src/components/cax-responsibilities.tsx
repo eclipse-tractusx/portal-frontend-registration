@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 Microsoft and BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -60,7 +60,6 @@ interface ResponsibilitiesCaxProps {
 export const ResponsibilitiesCax = ({
   currentActiveStep,
   addCurrentStep,
-  removeFromInviteList,
 }: ResponsibilitiesCaxProps) => {
   const { t } = useTranslation()
   const [email, setEmail] = useState<string | null>('')
@@ -105,12 +104,13 @@ export const ResponsibilitiesCax = ({
 
   const validateEmail = (email) =>
     //eslint-disable-next-line
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(email)
 
   const validatePersonalNote = (note: string) =>
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
-  const handleSendInvite = () => {
+  
+    const handleSendInvite = () => {
     if (email && validateEmail(email)) {
       const user = {
         email: email,

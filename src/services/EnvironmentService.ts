@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021,2022 BMW Group AG
- * Copyright (c) 2021,2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,42 +18,21 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-const LOCAL_SERVICES_FRONTEND = 'https://portal.dev.demo.catena-x.net'
-const LOCAL_SERVICES_BACKEND = 'https://portal-backend.dev.demo.catena-x.net'
+declare const ENV: any;
 
-export const getHostname = () => window.location.hostname
+export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
 
-export const isLocal = () => getHostname() === 'localhost'
+export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
 
-export const getApiBase = () =>
-  isLocal()
-    ? LOCAL_SERVICES_BACKEND
-    : window.location.origin.replace('portal', 'portal-backend')
+export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
 
-export const getAssetBase = () =>
-  `${isLocal() ? LOCAL_SERVICES_FRONTEND : ''}/assets`
-
-export const getCentralIdp = () => {
-  const hostname = getHostname()
-  if (hostname === 'portal.int.demo.catena-x.net')
-    return 'https://centralidp.int.demo.catena-x.net/auth'
-  if (hostname === 'portal-pen.dev.demo.catena-x.net')
-    return 'https://centralidp-pen.dev.demo.catena-x.net/auth'
-  if (hostname === 'portal.beta.demo.catena-x.net')
-    return 'https://centralidp.beta.demo.catena-x.net/auth'
-  if (hostname === 'portal.pre-prod.demo.catena-x.net')
-    return 'https://centralidp.pre-prod.demo.catena-x.net/auth'
-  if (hostname === 'portal.catena-x.net')
-    return 'https://centralidp.catena-x.net/auth'
-  return 'https://centralidp.dev.demo.catena-x.net/auth'
-}
+export const getFrontEndBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_FRONTEND_URL
 
 const EnvironmentService = {
-  isLocal,
-  getHostname,
   getApiBase,
   getAssetBase,
   getCentralIdp,
+  getFrontEndBase,
 }
 
 export default EnvironmentService

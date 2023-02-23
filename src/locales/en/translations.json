@@ -33,7 +33,7 @@
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Add your company data",
-    "verifyCompayDataSubHeading": "Please add your legal entity company data below. For a quick and easy data entering, use your company <strong>b</strong>usiness <strong>p</strong>artner <strong>n</strong>umber (BPN) to automatically retrieve all necessary information. If you don't have a BPN so far, you can enter the company data manually.",
+    "verifyCompayDataSubHeading": "Please add your legal entity company data below. For a quick and easy data entering, use your company business partner number (BPN) to automatically retrieve all necessary information. If you don't have a BPN so far, you can enter the company data manually.",
     "seachDatabase": "Search for your company data by BPN to autofill the relevant data fields",
     "enterManualText": "or enter your data manually:",
     "bpn": "Business Partner Number",
@@ -44,7 +44,17 @@
     "streetHouseNumber": "Street with House Number",
     "postalCode": "Postal Code",
     "city": "City",
-    "country": "Country",
+    "country": "Country Code (ISO 3166 Alpha 2 - e.g. DE)",
+    "countryIdentifier": "Country Identifier",
+    "identifierType": "Identifier Type",
+    "identifierNumber": "Identifier Number",
+    "identifierTypes": {
+      "COMMERCIAL_REG_NUMBER": "Commercial Registration Number",
+      "VAT_ID": "VAT ID",
+      "LEI_CODE": "LEI Code",
+      "VIES": "VIES",
+      "EORI": "EORI"
+    },
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Please enter a valid legal entity name.",
@@ -52,7 +62,26 @@
     "streetHouseNumberError": "Please enter a valid street and house number",
     "postalCodeError": "Please enter a valid postal code",
     "cityError": "Please enter a valid city name",
-    "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters."
+    "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters.",
+    "identifierhelperText": "We have retrieved two registered identifiers. Please select the preferred identifier for your company registration.",
+    "pleaseSelect": "Please select",
+    "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "IN_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 5 to 6 digits.",
+    "IN_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "DE_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with exact 9 digits.",
+    "DE_VAT_ID": "Please enter a valid number. Hint: Starting with DE and followed by 9 digit numbers",
+    "DE_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "FR_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with space with 14 to 17 digits.",
+    "FR_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with 8 to 15 digits.",
+    "FR_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "MX_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "MX_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and & with 12 to 13 digits.",
+    "MX_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "Worldwide_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Aplhanumeric with hyphen with 6 to 21 digits.",
+    "Worldwide_VAT_ID": "Please enter a valid number. Hint: Aplhanumeric with hyphen and space with 8 to 15 digits.",
+    "Worldwide_LEI_CODE": "Please enter a valid number. Hint: Aplhanumeric with exact 20 digits.",
+    "Worldwide_EORI": "Please enter a valid number. Hint: Aplhanumeric with space with exact 18 digits.",
+    "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
     "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
@@ -78,12 +107,13 @@
     "NoRolesError2": " or contact the system administrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
     "Please": "Please",
-    "Retry": "retry"
+    "Retry": "retry",
+    "submitError": "Please agree to all Terms & Conditions of the selected company role(s) before proceeding to the next step."
   },
   "documentUpload": {
     "title": "Upload documents",
     "step": "4",
-    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). <br> Please ensure to upload a pdf document only with limited document size of < 8MB.",
+    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). /n Please ensure to upload a pdf document only with limited document size of < 8MB.",
     "dragDropMessage": "Drag and drop files here, or click to select files",
     "dragDropCaption": "on your computer",
     "dragDropSpanCaption": "browse files",
@@ -191,9 +221,14 @@
   "footerPages": {
     "Back": "Back"
   },
-  "registrationClosed": {
-    "heading1": "Your registration has already been submitted and closed. We are now reviewing the application.",
+  "registrationValidation": {
+    "heading1": "Your registration has already been submitted and under validation. We are now reviewing the application.",
     "heading2": "As soon as this is finished you will receive an email with the access to the Catena-X Portal.",
+    "close": "Close"
+  },
+  "registrationClosed": {
+    "heading1": "Your registration has been declined and closed. You can resubmit your application.",
+    "heading2": "",
     "close": "Close"
   }
 }

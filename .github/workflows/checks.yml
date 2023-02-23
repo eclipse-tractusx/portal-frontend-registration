@@ -17,34 +17,26 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Veracode
+name: pr checks
 
-# run on manual trigger or once a week
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * 0"
-    
+on: pull_request
+
 jobs:
-  static_analysis:
-    name: Static Analysis
+  run-unit-tests:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Check out main branch
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Zip Sources for Static Analysis
-        run: yarn build:sources
-        
-      - name: Veracode Upload And Scan
-        uses: veracode/veracode-uploadandscan-action@0.2.1
-        with:
-          appname: 'Registration Frontend'
-          createprofile: false
-          filepath: 'portal-registration.zip'
-          vid: '${{ secrets.ORG_VERACODE_API_ID }}'
-          vkey: '${{ secrets.ORG_VERACODE_API_KEY }}' 
+      - name: Install Dependencies
+        run: yarn
+
+#      - name: linter checks
+#        run: yarn lint
+
+      - name: Unit Tests
+        run: yarn test:ci
