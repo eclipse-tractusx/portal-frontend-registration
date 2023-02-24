@@ -224,6 +224,7 @@ export const PATTERNS = {
   registeredNamePattern:
     /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
+  regionPattern: /^[a-zA-Z,"\s()']*$/,
   postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   IN: {

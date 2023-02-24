@@ -3,9 +3,10 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ### Unreleased
-- Bugfix - Fetch Company details with Legal Entity Name and Registered Name by name only
-- Bugfix - Submit Application - Loading element
-- Bugfix - Redirect Issue for home page
+* Bugfix - Fetch Company details with Legal Entity Name and Registered Name by name only
+* Bugfix - Submit Application - Loading element
+* Bugfix - Redirect Issue for home page
+* Feature - Add Region/State inside Step1
 
 ## 1.0.0-RC6
 
