@@ -7,6 +7,10 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * Bugfix - Submit Application - Loading element
 * Bugfix - Redirect Issue for home page
 * Feature - Add Region/State inside Step1
+- Bugfix - Fetch Company details with Legal Entity Name and Registered Name by name only
+- Bugfix - Submit Application - Loading element
+- Bugfix - Redirect Issue for home page
+- Feature - Display Error Page for error handling
 
 ## 1.0.0-RC6
 

@@ -4,7 +4,8 @@
     "confirm": "Confirm",
     "submit": "Submit",
     "submitting": "Submitting...",
-    "back": "Back"
+    "back": "Back",
+    "reload": "Reload Page"
   },
   "header": {
     "logout": "Logout",
@@ -234,5 +235,10 @@
     "heading1": "Your registration has been declined and closed. You can resubmit your application.",
     "heading2": "",
     "close": "Close"
+  },
+  "errorPage": {
+    "heading": "500 Internal Server Error",
+    "title": "Oops, Something went wrong.",
+    "description": "The server encountered an internal error or misconfiguration and was unable to complete your request."
   }
 }

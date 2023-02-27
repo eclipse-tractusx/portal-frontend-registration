@@ -26,6 +26,7 @@ import { fetchId } from '../state/features/application/actions'
 import { applicationSelector } from '../state/features/application/slice'
 import '../styles/newApp.css'
 import { handleStatusRedirect } from '../helpers/utils'
+import { ErrorPage } from './ErrorPage'
 
 export const InitialLoader = () => {
   const history = useHistory()
@@ -45,6 +46,11 @@ export const InitialLoader = () => {
     dispatch(fetchId())
   }, [dispatch])
 
-  return <div className="initial-loader"></div>
+  return (
+    error ?
+      <ErrorPage />
+      :
+      <div className="initial-loader"></div>
+  )
 }
 export default withRouter(InitialLoader)
