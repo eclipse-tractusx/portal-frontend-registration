@@ -11,6 +11,9 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 - Bugfix - Submit Application - Loading element
 - Bugfix - Redirect Issue for home page
 - Feature - Display Error Page for error handling
+- Bugfix - BPN Not Exist Double Error
+- Bugfix - BPN error UI 
+- Bugfix - Step1 multiple errors handling
 
 ## 1.0.0-RC6
 

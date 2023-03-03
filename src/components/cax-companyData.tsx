@@ -146,10 +146,6 @@ export const CompanyDataCax = ({
         // make sure to catch any error
         .catch((errorCode: number) => {
           setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-          const message = DataErrorCodes.includes(errorCode)
-            ? t(`ErrorMessage.${errorCode}`)
-            : t(`ErrorMessage.default`)
-          toast.error(message)
         })
       setBpnErrorMessage('')
     } else {
@@ -260,7 +256,7 @@ export const CompanyDataCax = ({
     setChangedCountryValue(false)
     setIdentifierNumber(value)
     const countryCode = country === 'DE' || country === 'FR' || country === 'IN' || country === 'MX' ? country : 'Worldwide'
-    if (value && !PATTERNS[countryCode][identifierType].test(value.trim())) {
+    if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         identifierNumber: countryCode + '_' + identifierType,
@@ -324,7 +320,7 @@ export const CompanyDataCax = ({
                 value={''}
                 onChange={(expr) => onSearchChange(expr)}
               />
-              <label>{bpnErrorMsg}</label>
+              <label className="error-message">{bpnErrorMsg}</label>
             </div>
           </Row>
 
