@@ -324,11 +324,6 @@ textarea {
 .btn-lg {
   margin: 0 20px;
 }
-.companydata-form label {
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-family: 'LibreFranklin-bold', sans-serif;
-}
 
 .section-divider {
   display: flex;
