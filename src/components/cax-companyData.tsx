@@ -242,7 +242,7 @@ export const CompanyDataCax = ({
       setErrors((prevState) => ({ ...prevState, region: '' }))
     }
 
-    if (!PATTERNS.regionPattern.test(value.trim())) {
+    if (value && !PATTERNS.regionPattern.test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         region: 'regionError',
