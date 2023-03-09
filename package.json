@@ -1,6 +1,6 @@
 {
   "name": "cx-portal-registration",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
@@ -17,6 +17,9 @@
     "deploy": "export CAX_ENV=${CAX_ENV:-dev003} && az webapp deployment source config-zip --resource-group catenax-${CAX_ENV}-rg --name catenax-${CAX_ENV}-app-onboarding --src ./dist/build.zip"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.10",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/react-redux": "^7.1.22",
     "@types/redux-actions": "^2.6.2",

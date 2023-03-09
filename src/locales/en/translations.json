@@ -3,7 +3,9 @@
     "next": "Next",
     "confirm": "Confirm",
     "submit": "Submit",
-    "back": "Back"
+    "submitting": "Submitting...",
+    "back": "Back",
+    "reload": "Reload Page"
   },
   "header": {
     "logout": "Logout",
@@ -42,9 +44,10 @@
     "registeredName": "Registered Name",
     "organizationAdd": "Organization Address",
     "streetHouseNumber": "Street with House Number",
+    "region": "Region",
     "postalCode": "Postal Code",
     "city": "City",
-    "country": "Country Code (ISO 3166 Alpha 2 - e.g. DE)",
+    "country": "Country Code (e.g. DE)",
     "countryIdentifier": "Country Identifier",
     "identifierType": "Identifier Type",
     "identifierNumber": "Identifier Number",
@@ -60,6 +63,7 @@
     "legalEntityError": "Please enter a valid legal entity name.",
     "registerdNameError": "Please enter a valid registered name.",
     "streetHouseNumberError": "Please enter a valid street and house number",
+    "regionError": "Please enter a valid region.",
     "postalCodeError": "Please enter a valid postal code",
     "cityError": "Please enter a valid city name",
     "countryError": "Please enter a valid country code. Hint: country codes are 2 alpha letters.",
@@ -153,6 +157,7 @@
     "registeredName": "Registered Name",
     "street": "Street",
     "city": "Postal Code / City",
+    "region": "Region",
     "country": "Country",
     "ActiveRole": "Active Role",
     "ActiveParticipant": "Active Participant",
@@ -230,5 +235,10 @@
     "heading1": "Your registration has been declined and closed. You can resubmit your application.",
     "heading2": "",
     "close": "Close"
+  },
+  "errorPage": {
+    "heading": "500 Internal Server Error",
+    "title": "Oops, Something went wrong.",
+    "description": "The server encountered an internal error or misconfiguration and was unable to complete your request."
   }
 }

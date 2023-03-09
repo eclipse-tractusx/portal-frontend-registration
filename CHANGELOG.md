@@ -4,6 +4,23 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 
+## 1.1.0
+
+### Change
+* Updated registration "Submit" button to load button
+
+### Feature
+* Company Data - added region field optionally as well as mandatory for a given number of countries
+* Released error page for 4xx and 5xx errors when accessing/loading the registration app
+
+### Technical Support
+* Added temp fix for CVE-2023-23916
+
+### Bugfix
+* Company Data - display company name as 'Legal Entity Name' and 'Registered Name'
+* Company Data - errors displayed for "bpn does not exist" reduced to input field error only, additionally style updated
+* Company Data - confirm button disabled till all company data are added
+
 ## 1.0.0-RC6
 
 ### Change
