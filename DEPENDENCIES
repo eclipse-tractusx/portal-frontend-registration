@@ -361,6 +361,10 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: https://github.com/7rulnik/source-map-js.git
 │  │  ├─ VendorName: Valentin 7rulnik Semirulnik
 │  │  └─ VendorUrl: https://github.com/7rulnik/source-map-js
+│  ├─ source-map@0.5.7
+│  │  ├─ URL: http://github.com/mozilla/source-map.git
+│  │  ├─ VendorName: Nick Fitzgerald
+│  │  └─ VendorUrl: https://github.com/mozilla/source-map
 │  ├─ source-map@0.6.1
 │  │  ├─ URL: http://github.com/mozilla/source-map.git
 │  │  ├─ VendorName: Nick Fitzgerald
@@ -1206,6 +1210,10 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: https://github.com/babel/babel.git
 │  │  ├─ VendorName: The Babel Team
 │  │  └─ VendorUrl: https://babel.dev/docs/en/next/babel-runtime
+│  ├─ @babel/runtime@7.21.0
+│  │  ├─ URL: https://github.com/babel/babel.git
+│  │  ├─ VendorName: The Babel Team
+│  │  └─ VendorUrl: https://babel.dev/docs/en/next/babel-runtime
 │  ├─ @babel/template@7.20.7
 │  │  ├─ URL: https://github.com/babel/babel.git
 │  │  ├─ VendorName: The Babel Team
@@ -1222,14 +1230,39 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: git://github.com/demurgos/v8-coverage.git
 │  │  ├─ VendorName: Charles Samborski
 │  │  └─ VendorUrl: https://demurgos.github.io/v8-coverage
+│  ├─ @emotion/babel-plugin@11.10.6
+│  │  ├─ URL: https://github.com/emotion-js/emotion/tree/main/packages/babel-plugin
+│  │  ├─ VendorName: Kye Hohenberger
+│  │  └─ VendorUrl: https://emotion.sh/
+│  ├─ @emotion/cache@11.10.5
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/cache
+│  ├─ @emotion/hash@0.9.0
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/hash
 │  ├─ @emotion/is-prop-valid@1.2.0
 │  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid
 │  ├─ @emotion/memoize@0.8.0
 │  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/memoize
+│  ├─ @emotion/react@11.10.6
+│  │  ├─ URL: https://github.com/emotion-js/emotion/tree/main/packages/react
+│  │  └─ VendorName: Emotion Contributors
+│  ├─ @emotion/serialize@1.1.1
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/serialize
+│  ├─ @emotion/sheet@1.2.1
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/sheet
+│  ├─ @emotion/styled@11.10.6
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/styled
 │  ├─ @emotion/stylis@0.8.5
 │  │  └─ URL: https://github.com/emotion-js/emotion/tree/master/packages/stylis
 │  ├─ @emotion/unitless@0.7.5
 │  │  └─ URL: https://github.com/emotion-js/emotion/tree/master/packages/unitless
+│  ├─ @emotion/unitless@0.8.0
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/unitless
+│  ├─ @emotion/use-insertion-effect-with-fallbacks@1.0.0
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/use-insertion-effect-with-fallbacks
+│  ├─ @emotion/utils@1.2.0
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/utils
+│  ├─ @emotion/weak-memoize@0.3.0
+│  │  └─ URL: https://github.com/emotion-js/emotion/tree/main/packages/weak-memoize
 │  ├─ @eslint/eslintrc@0.4.3
 │  │  ├─ URL: https://github.com/eslint/eslintrc.git
 │  │  ├─ VendorName: Nicholas C. Zakas
@@ -1305,6 +1338,38 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: git+https://github.com/martinheidegger/ip-codec.git
 │  │  ├─ VendorName: Martin Heidegger
 │  │  └─ VendorUrl: https://github.com/martinheidegger/ip-codec#readme
+│  ├─ @mui/base@5.0.0-alpha.118
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/base/getting-started/overview/
+│  ├─ @mui/core-downloads-tracker@5.11.9
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/
+│  ├─ @mui/material@5.11.10
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/material-ui/getting-started/overview/
+│  ├─ @mui/private-theming@5.11.9
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/
+│  ├─ @mui/styled-engine@5.11.9
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/material-ui/guides/styled-engine/
+│  ├─ @mui/system@5.11.9
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://mui.com/system/getting-started/overview/
+│  ├─ @mui/types@7.2.3
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://github.com/mui/material-ui/tree/master/packages/mui-types
+│  ├─ @mui/utils@5.11.9
+│  │  ├─ URL: https://github.com/mui/material-ui.git
+│  │  ├─ VendorName: MUI Team
+│  │  └─ VendorUrl: https://github.com/mui/material-ui/tree/master/packages/mui-utils
 │  ├─ @nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1
 │  ├─ @nodelib/fs.scandir@2.1.5
 │  │  └─ URL: https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.scandir
@@ -1545,6 +1610,9 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  ├─ @types/react-dom@18.0.10
 │  │  ├─ URL: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 │  │  └─ VendorUrl: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom
+│  ├─ @types/react-is@17.0.3
+│  │  ├─ URL: https://github.com/DefinitelyTyped/DefinitelyTyped.git
+│  │  └─ VendorUrl: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-is
 │  ├─ @types/react-redux@7.1.25
 │  │  ├─ URL: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 │  │  └─ VendorUrl: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-redux
@@ -2477,6 +2545,9 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  └─ VendorName: Douglas Christopher Wilson
 │  ├─ find-cache-dir@3.3.2
 │  │  └─ URL: https://github.com/avajs/find-cache-dir.git
+│  ├─ find-root@1.1.0
+│  │  ├─ URL: git@github.com:js-n/find-root.git
+│  │  └─ VendorName: jsdnxx
 │  ├─ find-up@3.0.0
 │  │  ├─ URL: https://github.com/sindresorhus/find-up.git
 │  │  ├─ VendorName: Sindre Sorhus
@@ -4171,6 +4242,10 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: https://github.com/cssnano/cssnano.git
 │  │  ├─ VendorName: Ben Briggs
 │  │  └─ VendorUrl: https://github.com/cssnano/cssnano
+│  ├─ stylis@4.1.3
+│  │  ├─ URL: https://github.com/thysultan/stylis.js
+│  │  ├─ VendorName: Sultan Tarimo
+│  │  └─ VendorUrl: https://github.com/thysultan/stylis.js
 │  ├─ supports-color@5.5.0
 │  │  ├─ URL: https://github.com/chalk/supports-color.git
 │  │  ├─ VendorName: Sindre Sorhus
@@ -4586,4 +4661,4 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
       ├─ URL: https://github.com/pieroxy/lz-string.git
       ├─ VendorName: pieroxy
       └─ VendorUrl: http://pieroxy.net/blog/pages/lz-string/index.html
-Done in 1.45s.
+Done in 4.92s.
