@@ -6,7 +6,7 @@
   "scripts": {
     "pretty": "prettier --write \"./src/**/*.{ts,tsx,js,jsx,json,css,sass,scss,xml,md}\"",
     "lint": "eslint ./src",
-    "start": "react-scripts start",
+    "start": "PORT=3002 BROWSER=none react-scripts start",
     "build:dirty": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "build": "react-scripts build && mkdir registration && mv build/* registration && mv registration build/",
     "build:sources": "zip -r portal-registration.zip src package.json yarn.lock -x '*.stories.*' -x '*.test.*' -x '*.ttf' -x '*.svg' -x '*.png'",
