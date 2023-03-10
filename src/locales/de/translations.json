@@ -3,7 +3,9 @@
     "next": "Weiter",
     "confirm": "Bestätigen",
     "submit": "Senden",
-    "back": "zurück"
+    "submitting": "Wird gesendet...",
+    "back": "zurück",
+    "reload": "Reload Page"
   },
   "header": {
     "logout": "Ausloggen",
@@ -42,9 +44,10 @@
     "registeredName": "Eingetragener Unternehmensname",
     "organizationAdd": "Organisationsadresse",
     "streetHouseNumber": "Straße und Hausnummer",
+    "region": "Region",
     "postalCode": "Postleitzahl",
     "city": "Stadt",
-    "country": "Ländercode (ISO 3166 Alpha 2 - z.B. DE)",
+    "country": "Ländercode (z.B. DE)",
     "countryIdentifier": "Country Identifier",
     "identifierType": "Identifier Type",
     "identifierNumber": "Identifier Number",
@@ -60,6 +63,7 @@
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
     "registerdNameError": "Bitte geben Sie einen gültigen registrierten Namen ein.",
     "streetHouseNumberError": "Bitte geben Sie eine gültige Straße und Hausnummer ein.",
+    "regionError": "Bitte geben Sie einen gültigen Region.",
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
     "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
@@ -153,6 +157,7 @@
     "registeredName": "Eingetragener Unternehmensname",
     "street": "Straße",
     "city": "Stadt",
+    "region": "Region",
     "country": "Land",
     "ActiveRole": "Unternehmesrolle",
     "ActiveParticipant": "Active Participant",
@@ -230,5 +235,10 @@
     "heading1": "Your registration has been declined and closed. You can resubmit your application.",
     "heading2": "",
     "close": "Close"
+  },
+  "errorPage": {
+    "heading": "500 Internal Server Error",
+    "title": "Oops, Something went wrong.",
+    "description": "The server encountered an internal error or misconfiguration and was unable to complete your request."
   }
 }
