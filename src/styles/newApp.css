@@ -370,6 +370,10 @@ textarea {
   padding-right: 30px;
 }
 
+.mandatory-asterisk{
+  color: var(--input-error-color);
+}
+
 .calender-icon,
 .error-icon {
   position: absolute;
