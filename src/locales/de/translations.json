@@ -88,7 +88,8 @@
     "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
-    "greetingMsg": "Glückwunsch! Ihre Registrierung wurde erfolgreich abgesendet!",
+    "congratulationsMsg": "Glückwunsch! ",
+    "greetingMsg": "Ihre Registrierung wurde erfolgreich abgesendet!",
     "heading1": "Nächste Schritte",
     "point1": "Alle Registrierungsteilnehmer ihrer Firma erhalten eine E-Mail mit der Bestätigung und den nächsten Schritten",
     "point2": "Catena-X prüft in der Zwischenzeit ihren Registrierungsanfrage. Sobald die Prüfung erfolgreich beendet ist, werden wir Ihnen eine Email mit dem direkten Zugang zum Netwzrk senden.",

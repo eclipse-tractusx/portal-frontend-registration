@@ -3,6 +3,7 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ## Unreleased
+* Next Steps Congratulations (pretty up UI)
 
 ### Technical Support
 * Change local development port to run behind reverse proxy

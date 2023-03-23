@@ -19,11 +19,12 @@
  ********************************************************************************/
 
 import { Container, Row, Col } from 'react-bootstrap'
-import Header from './cax-header'
-import Footer from './footer'
-import BulletList from './bulletList'
 import { useTranslation } from 'react-i18next'
 import { withRouter, Link } from 'react-router-dom'
+import { AiOutlineMail } from 'react-icons/ai'
+import { BsCheck2Circle, BsArrowCounterclockwise } from 'react-icons/bs'
+import Header from './cax-header'
+import Footer from './footer'
 
 export const Finish = () => {
   const { t } = useTranslation()
@@ -34,13 +35,41 @@ export const Finish = () => {
       <Row>
         <Col>
           <div className="mx-auto col-9 container-body">
-            <h4 className="col-10">{t('finish.greetingMsg')}</h4>
+            <h4 className="col-10">{t('finish.congratulationsMsg')}</h4>
+            <h4 className="col-10 mb-60">{t('finish.greetingMsg')}</h4>
             <h6 className="col-8">{t('finish.heading1')}</h6>
             <Row className="content">
               <Col>
-                <BulletList text={t('finish.point1')} icon="circle" />
-                <BulletList text={t('finish.point2')} icon="circle" />
-                <BulletList text={t('finish.point3')} icon="circle" />
+                <div className="content-items">
+                  <div className="row">
+                    <div className="col-1">
+                      <AiOutlineMail color="#0F71CB" fontSize="25px" />
+                    </div>
+                    <div className="col-11 bullet-points">
+                      {t('finish.point1')}
+                    </div>
+                  </div>
+                </div>
+                <div className="content-items">
+                  <div className="row">
+                    <div className="col-1">
+                      <BsCheck2Circle color="#0F71CB" fontSize="25px" />
+                    </div>
+                    <div className="col-11 bullet-points">
+                      {t('finish.point2')}
+                    </div>
+                  </div>
+                </div>
+                <div className="content-items">
+                  <div className="row">
+                    <div className="col-1">
+                      <BsArrowCounterclockwise color="#0F71CB" fontSize="25px" />
+                    </div>
+                    <div className="col-11 bullet-points">
+                      {t('finish.point3')}
+                    </div>
+                  </div>
+                </div>
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
                 <img src="/registration/mail.png" alt="" />
