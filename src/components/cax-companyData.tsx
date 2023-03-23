@@ -355,6 +355,7 @@ export const CompanyDataCax = ({
               <label>
                 {' '}
                 {t('registrationStepOne.legalEntity')}{' '}
+                <span className="mandatory-asterisk">*</span>
                 <AiOutlineQuestionCircle
                   color="#939393"
                   // tip data need to get moved to the locales files
@@ -377,6 +378,7 @@ export const CompanyDataCax = ({
               <label>
                 {' '}
                 {t('registrationStepOne.registeredName')}{' '}
+                <span className="mandatory-asterisk">*</span>
               </label>
               <input
                 type="text"
@@ -399,7 +401,10 @@ export const CompanyDataCax = ({
 
           <Row className="mx-auto col-9">
             <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
-              <label> {t('registrationStepOne.streetHouseNumber')} </label>
+              <label> 
+                {t('registrationStepOne.streetHouseNumber')} {' '}
+                <span className="mandatory-asterisk">*</span>
+              </label>
               <input
                 type="text"
                 value={streetHouseNumber}
@@ -427,7 +432,10 @@ export const CompanyDataCax = ({
             </div>
 
             <div className={`col-8 form-data ${errors.city && 'error'}`}>
-              <label>{t('registrationStepOne.city')}</label>
+              <label>
+                {t('registrationStepOne.city')} {' '}
+                <span className="mandatory-asterisk">*</span>
+              </label>
               <input
                 type="text"
                 value={city}
@@ -441,7 +449,10 @@ export const CompanyDataCax = ({
 
           <Row className="mx-auto col-9">
             <div className={`col-4 form-data ${errors.country && 'error'}`}>
-              <label>{t('registrationStepOne.country')}</label>
+              <label>
+                {t('registrationStepOne.country')} {' '}
+                <span className="mandatory-asterisk">*</span>
+              </label>
               <input
                 type="text"
                 value={country}
@@ -525,7 +536,10 @@ export const CompanyDataCax = ({
                 </Row>
                 <Row className="mx-auto col-9">
                   <div className={`form-data ${errors.identifierNumber && 'error'}`}>
-                    <label> {t('registrationStepOne.identifierNumber')} </label>
+                    <label> 
+                      {t('registrationStepOne.identifierNumber')} {' '}
+                      <span className="mandatory-asterisk">*</span>
+                    </label>
                     <input
                       type="text"
                       value={identifierNumber}
