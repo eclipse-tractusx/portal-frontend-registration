@@ -80,4 +80,7 @@ export const stateSelector = (state: RootState): RegistrationState =>
 export const registrationSuccessSelector = (state: RootState): boolean =>
   state.registrationData.success
 
+export const registrationErrorSelector = (state: RootState): string =>
+  state.registrationData.error
+
 export default applicationSlice

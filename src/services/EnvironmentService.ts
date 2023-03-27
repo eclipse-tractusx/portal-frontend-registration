@@ -26,13 +26,10 @@ export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_A
 
 export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
 
-export const getFrontEndBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_FRONTEND_URL
-
 const EnvironmentService = {
   getApiBase,
   getAssetBase,
   getCentralIdp,
-  getFrontEndBase,
 }
 
 export default EnvironmentService
