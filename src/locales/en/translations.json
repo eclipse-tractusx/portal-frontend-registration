@@ -88,7 +88,8 @@
     "submitError": "Something went wrong. Your entered data could not get saved. Please try again later or contact the administrator."
   },
   "finish": {
-    "greetingMsg": "Congratulations! Your registration has been successfully submitted!",
+    "congratulationsMsg": "Congratulations! ",
+    "greetingMsg": "Your registration has been successfully submitted!",
     "heading1": "What happens next?",
     "point1": "You, as well as added Legal Managers, will receive a e-mail with all the details of your registration form",
     "point2": "We will validate your registration request. As soon as your registration is approved (usually within 2 working days), you will receive a e-mail confirmation",
