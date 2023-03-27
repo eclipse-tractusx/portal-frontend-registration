@@ -43,7 +43,7 @@ export const Finish = () => {
                 <div className="content-items">
                   <div className="row">
                     <div className="col-1">
-                      <AiOutlineMail color="#0F71CB" fontSize="25px" />
+                      <AiOutlineMail className='icons-bullets' />
                     </div>
                     <div className="col-11 bullet-points">
                       {t('finish.point1')}
@@ -53,7 +53,7 @@ export const Finish = () => {
                 <div className="content-items">
                   <div className="row">
                     <div className="col-1">
-                      <BsCheck2Circle color="#0F71CB" fontSize="25px" />
+                      <BsCheck2Circle className='icons-bullets' />
                     </div>
                     <div className="col-11 bullet-points">
                       {t('finish.point2')}
@@ -63,7 +63,7 @@ export const Finish = () => {
                 <div className="content-items">
                   <div className="row">
                     <div className="col-1">
-                      <BsArrowCounterclockwise color="#0F71CB" fontSize="25px" />
+                      <BsArrowCounterclockwise className='icons-bullets' />
                     </div>
                     <div className="col-11 bullet-points">
                       {t('finish.point3')}
