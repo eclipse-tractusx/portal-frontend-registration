@@ -281,6 +281,6 @@ export function handleStatusRedirect (status: string, history: RouteComponentPro
     case DECLINED:
       return history.push('/registration-closed')
     default:
-      return history.push('/landing')
+      return history.push('/finish')
   }
 }

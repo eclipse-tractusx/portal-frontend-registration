@@ -40,36 +40,32 @@ export const Finish = () => {
             <h6 className="col-8">{t('finish.heading1')}</h6>
             <Row className="content">
               <Col>
-                <div className="content-items">
+              {[
+                {
+                  "icon": AiOutlineMail,
+                  "text": t('finish.point1')
+                },
+                {
+                  "icon": BsCheck2Circle,
+                  "text": t('finish.point2')
+                },
+                {
+                  "icon": BsArrowCounterclockwise,
+                  "text": t('finish.point3')
+                }
+              ].map(item => (
+                <div className="content-items" key={item.text}>
                   <div className="row">
                     <div className="col-1">
-                      <AiOutlineMail className='icons-bullets' />
+                      <item.icon className='icons-bullets' />
                     </div>
                     <div className="col-11 bullet-points">
-                      {t('finish.point1')}
+                      { item.text }
                     </div>
                   </div>
                 </div>
-                <div className="content-items">
-                  <div className="row">
-                    <div className="col-1">
-                      <BsCheck2Circle className='icons-bullets' />
-                    </div>
-                    <div className="col-11 bullet-points">
-                      {t('finish.point2')}
-                    </div>
-                  </div>
-                </div>
-                <div className="content-items">
-                  <div className="row">
-                    <div className="col-1">
-                      <BsArrowCounterclockwise className='icons-bullets' />
-                    </div>
-                    <div className="col-11 bullet-points">
-                      {t('finish.point3')}
-                    </div>
-                  </div>
-                </div>
+              ))
+              }
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
                 <img src="/registration/mail.png" alt="" />
