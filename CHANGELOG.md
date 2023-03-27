@@ -4,8 +4,20 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ## Unreleased
 
+## 1.2.0
+
+### Change
+* Visually highlight mandatory company data input fields
+* Update "Submit" registration button to support delays, network latency via loading element
+
+### Feature
+n/a
+
 ### Technical Support
-* Change local development port to run behind reverse proxy
+* Change local port to run behind reverse proxy
+
+### Bugfix
+n/a
 
 ## 1.1.0
 
