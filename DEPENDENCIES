@@ -4507,7 +4507,7 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 │  │  ├─ URL: git+https://github.com/webpack/webpack-sources.git
 │  │  ├─ VendorName: Tobias Koppers @sokra
 │  │  └─ VendorUrl: https://github.com/webpack/webpack-sources#readme
-│  ├─ webpack@5.75.0
+│  ├─ webpack@5.76.2
 │  │  ├─ URL: https://github.com/webpack/webpack.git
 │  │  ├─ VendorName: Tobias Koppers @sokra
 │  │  └─ VendorUrl: https://github.com/webpack/webpack
@@ -4661,4 +4661,4 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
       ├─ URL: https://github.com/pieroxy/lz-string.git
       ├─ VendorName: pieroxy
       └─ VendorUrl: http://pieroxy.net/blog/pages/lz-string/index.html
-Done in 4.92s.
+Done in 1.76s.
