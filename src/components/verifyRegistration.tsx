@@ -34,7 +34,7 @@ import {
   saveRegistration,
 } from '../state/features/applicationVerifyRegister/actions'
 import { applicationSelector } from '../state/features/application/slice'
-import { registrationSuccessSelector, stateSelector } from '../state/features/applicationVerifyRegister/slice'
+import { registrationErrorSelector, registrationSuccessSelector, stateSelector } from '../state/features/applicationVerifyRegister/slice'
 import { stateSelector as documentSelector } from '../state/features/applicationDocuments/slice'
 
 interface VerifyRegistrationProps {
@@ -57,9 +57,17 @@ export const VerifyRegistration = ({
   const { status, error } = useSelector(applicationSelector)
   const { registrationData } = useSelector(stateSelector)
   const registrationSuccess = useSelector(registrationSuccessSelector)
+  const registrationError = useSelector(registrationErrorSelector)
   const { documents } = useSelector(documentSelector)
 
   if (confirmState && registrationSuccess) history.push('/finish')
+
+  useEffect(() => {
+    if(confirmState && registrationError){
+      setLoading(false)
+      toast.error(t('verifyRegistration.submitErrorMessage'))
+    }
+  }, [registrationError])
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']

@@ -161,7 +161,8 @@
     "country": "Land",
     "ActiveRole": "Unternehmesrolle",
     "ActiveParticipant": "Active Participant",
-    "UploadedCertificates": "Dokumente"
+    "UploadedCertificates": "Dokumente",
+    "submitErrorMessage": "The submission was unsuccessful. Please try it later again"
   },
   "ErrorMessage": {
     "400": "Input value is invalid",
