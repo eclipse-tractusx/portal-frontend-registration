@@ -4,6 +4,22 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ## Unreleased
 
+## 1.3.0 RC1
+
+### Change
+* Updating style for /nextStep page (beautify UI)
+
+### Feature
+n/a
+
+### Technical Support
+* added temp fix for CVE-2023-0464
+* added build workflow for v1.3.0 release candidate phase
+* updated actions workflows
+
+### Bugfix
+n/a
+
 ## 1.2.0
 
 ### Change

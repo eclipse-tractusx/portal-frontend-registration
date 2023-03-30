@@ -17,12 +17,12 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
-name: build
+name: release candidate
 
 on:
   push:
     branches:
-      - 'dev'
+      - 'release/1.3.0*'
   workflow_dispatch:
 
 env:
@@ -74,8 +74,7 @@ jobs:
           context: .
           file: .conf/Dockerfile
           push: true
-          # build tag :dev with commit-sha and latest
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_SHA }}, ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_SHA }}, ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:rc
           labels: ${{ steps.meta.outputs.labels }}
 
   auth-and-dispatch:
@@ -97,8 +96,8 @@ jobs:
         run: |
           curl -v \
             --request POST \
-            --url https://api.github.com/repos/catenax-ng/tx-portal-cd/actions/workflows/portal-registration-image-update.yml/dispatches \
+            --url https://api.github.com/repos/catenax-ng/tx-portal-cd/actions/workflows/portal-registration-rc-image-update.yml/dispatches \
             --header "authorization: Bearer $TOKEN" \
             --header "Accept: application/vnd.github.v3+json" \
-            --data '{"ref":"helm-environments", "inputs": { "new-image":"${{ env.COMMIT_SHA }}" }}' \
+            --data '{"ref":"release-candidate", "inputs": { "new-image":"${{ env.COMMIT_SHA }}" }}' \
             --fail
