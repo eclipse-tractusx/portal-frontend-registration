@@ -3,6 +3,7 @@
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
 ## Unreleased
+* Swicth Documents API in step 3
 
 ## 1.3.0 RC1
 
