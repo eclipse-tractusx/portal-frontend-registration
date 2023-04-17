@@ -4,6 +4,9 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ## Unreleased
 
+* BugFix
+  * Support multiline for Personal Note field
+
 ## 1.3.0 RC1
 
 ### Change
