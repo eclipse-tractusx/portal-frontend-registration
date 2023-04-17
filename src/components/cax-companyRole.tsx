@@ -128,7 +128,7 @@ export const CompanyRoleCax = ({
   ) => {
     if (!documentId) return
     try {
-      fetch(`${getApiBase()}/api/registration/documents/${documentId}`, {
+      fetch(`${getApiBase()}/api/registration/registrationDocuments/${documentId}`, {
         method: 'GET',
         headers: {
           authorization: `Bearer ${UserService.getToken()}`,
