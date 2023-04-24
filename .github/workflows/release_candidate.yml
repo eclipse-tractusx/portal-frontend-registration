@@ -17,7 +17,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
-name: release candidate
+name: release candidate (RC)
 
 on:
   push:
