@@ -457,6 +457,7 @@ export const CompanyDataCax = ({
                 type="text"
                 value={country}
                 onChange={(e) => validateCountry(e.target.value)}
+                maxLength={2}
               />
               {errors.country && (
                 <label>{t(`registrationStepOne.${errors.country}`)}</label>
