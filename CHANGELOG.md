@@ -2,24 +2,11 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-## 1.3.0 RC2
-
-### Change
-* Company Role Step – document download used api endpoint path updated
-
-### Feature
-n/a
-
-### Technical Support
-n/a
-
-### Bugfix
-n/a
-
-## 1.3.0 RC1
+## 1.3.0
 
 ### Change
 * Updating style for /nextStep page (beautify UI)
+* Company Role Step – document download used api endpoint path updated
 
 ### Feature
 n/a
