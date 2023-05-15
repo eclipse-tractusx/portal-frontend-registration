@@ -13,8 +13,6 @@ The Catena-X Portal application consists of
 
 The Catena-X Portal is designed to work with the [Catena-X IAM](https://github.com/eclipse-tractusx/portal-iam).
 
-* Dev Install: https://portal-dev.demo.catena-x.net/registration/
-
 ### Local build & run
 
 Run the application on your machine on http://localhost:3002/registration/
