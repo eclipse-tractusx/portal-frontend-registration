@@ -1,6 +1,6 @@
 ## Notice for Docker image
 
-DockerHub: [https://hub.docker.com/r/tractusx/portal-registration](https://hub.docker.com/r/tractusx/portal-registration)
+DockerHub: [https://hub.docker.com/r/tractusx/portal-frontend-registration](https://hub.docker.com/r/tractusx/portal-frontend-registration)
 
 Eclipse Tractus-X product(s) installed within the image:
 
