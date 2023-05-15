@@ -107,7 +107,7 @@ export const ResponsibilitiesCax = ({
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(email)
 
   const validatePersonalNote = (note: string) =>
-    /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
+    /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
   
     const handleSendInvite = () => {
