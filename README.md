@@ -13,9 +13,7 @@ The Catena-X Portal application consists of
 
 The Catena-X Portal is designed to work with the [Catena-X IAM](https://github.com/eclipse-tractusx/portal-iam).
 
-* Dev Install: https://portal-dev.demo.catena-x.net/registration/
-
-### Local build & run
+## Local build & run
 
 Run the application on your machine on http://localhost:3002/registration/
 
@@ -24,3 +22,20 @@ Note: if you'd like to run the complete frontend application, follow the 'Run fr
     yarn
     yarn build
     yarn start
+
+## Notice for Docker image
+
+This application provides container images for demonstration purposes.
+
+DockerHub: https://hub.docker.com/r/tractusx/portal-frontend-registration
+
+Base image: nginxinc/nginx-unprivileged:alpine
+
+* Dockerfile: [nginxinc/nginx-unprivileged:alpine](https://github.com/nginxinc/docker-nginx-unprivileged/blob/main/Dockerfile-alpine.template)
+* GitHub project: [https://github.com/nginxinc/docker-nginx-unprivileged](https://github.com/nginxinc/docker-nginx-unprivileged)
+* DockerHub: [https://hub.docker.com/r/nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged)
+
+## License
+
+Distributed under the Apache 2.0 License.
+See [LICENSE](./LICENSE) for more information.
