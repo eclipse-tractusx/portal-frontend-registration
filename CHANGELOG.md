@@ -2,6 +2,23 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.3.1
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+* changed release workflow to retrieve tag from github.ref_name (set-output command deprecated)
+* added release workflow for release-candidates
+* changed container registry to Docker Hub
+* added pull request template
+
+### Bugfix
+* added support for multiline in personal note field
+
 ## 1.3.0
 
 ### Change
