@@ -19,13 +19,14 @@
 
 import { useTranslation } from 'react-i18next'
 import { AboutCard } from './AboutCard'
-import legalJson from '../../src/notice/legal-notice.json'
+import legalJson from '../notice/legal-notice.json'
 import Footer from './footer'
 import Header from './cax-header'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Box } from '@mui/material'
+import { withRouter } from 'react-router-dom'
 
-export default function AboutPage() {
+export const About = () => {
   const { t } = useTranslation()
   return (
     <Container>
@@ -50,3 +51,6 @@ export default function AboutPage() {
     </Container>
   )
 }
+
+export default withRouter(About)
+
