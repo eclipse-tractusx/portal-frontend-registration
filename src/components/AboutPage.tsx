@@ -23,7 +23,7 @@ import legalJson from '../../src/notice/legal-notice.json'
 import Footer from './footer'
 import Header from './cax-header'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 
 export default function AboutPage() {
   const { t } = useTranslation()
