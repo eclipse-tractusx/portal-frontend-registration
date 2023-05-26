@@ -1,5 +1,4 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 BMW Group AG
  * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -18,39 +17,36 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import Button from './button'
-import { Container, Row, Col } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { AboutCard } from './AboutCard'
+import legalJson from '../../src/notice/legal-notice.json'
 import Footer from './footer'
 import Header from './cax-header'
-import { useHistory, withRouter } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Box, Typography } from '@mui/material'
 
-export const ThirdPartyLicenseNotes = () => {
+export default function AboutPage() {
   const { t } = useTranslation()
-  const history = useHistory()
-
   return (
     <Container>
       <Header />
       <Row className="footer-content">
         <Col>
-          <div className="mx-auto col-10">
-            <h4>{t('thirdPartyLicenseNotes.title')}</h4>
-            <p>{t('thirdPartyLicenseNotes.thirdPartyLicenseNotesText1')}.</p>
-            <div>{t('thirdPartyLicenseNotes.thirdPartyLicenseNotesText2')}</div>
-            <div className="button-section">
-              <Button
-                label={t('footerPages.Back')}
-                styleClass="button btn-primaryCax"
-                handleClick={() => history.goBack()}
-              />
+          <Box
+            sx={{
+              maxWidth: '800px',
+              margin: 'auto',
+              paddingBottom: '100px',
+            }}
+          >
+            <div className="mx-auto col-10">
+              <h4>{t('about.title')}</h4>
+              <AboutCard {...legalJson} />
             </div>
-          </div>
+          </Box>
         </Col>
       </Row>
       <Footer />
     </Container>
   )
 }
-
-export default withRouter(ThirdPartyLicenseNotes)

@@ -45,7 +45,7 @@ import Imprint from './components/imprint'
 import Privacy from './components/privacy'
 import TermsOfService from './components/termsOfService'
 import CookiePolicy from './components/cookiePolicy'
-import ThirdPartyLicenseNotes from './components/thirdPartyLicenseNotes'
+import AboutPage from './components/AboutPage'
 import RegistrationClosed from './components/registrationClosed'
 
 createBrowserHistory()
@@ -89,10 +89,7 @@ const App = () => {
         <Route path="/privacy" component={() => <Privacy />} />
         <Route path="/termsOfService" component={() => <TermsOfService />} />
         <Route path="/cookiePolicy" component={() => <CookiePolicy />} />
-        <Route
-          path="/thirdPartyLicenseNotes"
-          component={() => <ThirdPartyLicenseNotes />}
-        />
+        <Route path="/about" component={() => <AboutPage />} />
         <Route
           path="/registration-closed"
           component={() => <RegistrationClosed />}
