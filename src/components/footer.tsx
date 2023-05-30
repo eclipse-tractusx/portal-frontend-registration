@@ -52,7 +52,7 @@ export const Footer = () => {
                   <Nav.Link as={Link} to="/cookiePolicy">
                     {t('FooterLink.link6')}
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/thirdPartyLicenseNotes">
+                  <Nav.Link as={Link} to="/about">
                     {t('FooterLink.link7')}
                   </Nav.Link>
                 </Nav>

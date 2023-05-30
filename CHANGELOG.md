@@ -2,6 +2,10 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## unreleased
+* About page and About card component
+* Removed Third party libraries related files and text from the app
+
 ## 1.3.1
 
 ### Change
