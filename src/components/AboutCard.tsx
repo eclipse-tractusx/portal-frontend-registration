@@ -119,7 +119,7 @@ export const AboutCard = (props: {
                   textAlign: 'left',
                 }}
               >
-                Commit ID : {props.commitId}
+                Commit ID: {props.commitId}
               </Typography>
             </Box>
           )}
