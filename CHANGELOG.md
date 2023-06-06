@@ -2,6 +2,19 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.4.1-RC1
+
+### Feature
+* About page for legal notice
+   * About card added
+   * About page added and linked in footer component
+   * card component integrated in About page
+* Third-party-licenses page removed (replaced by About page)
+
+### Technical Support
+* About page
+   * enabled build and release workflows to provide content
+
 ## 1.3.1
 
 ### Change
