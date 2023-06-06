@@ -147,7 +147,8 @@
     "userInviteSubHeading": "No users defined, please use the form below to add users:",
     "sentInvite": "Send Invite",
     "personalNoteError": "Bitte geben Sie eine gültige persönliche Notiz ein",
-    "emailRequired": "E-Mail ist erforderlich"
+    "emailRequired": "E-Mail ist erforderlich",
+    "sendInviteSuccessMsg": "Invite sent successfully."
   },
   "verifyRegistration": {
     "title": "Verify your registration data",

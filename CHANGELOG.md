@@ -5,6 +5,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ## unreleased
 * About page and About card component
 * Removed Third party libraries related files and text from the app
+* Optional User Invite - System Behavior
 
 ## 1.3.1
 
