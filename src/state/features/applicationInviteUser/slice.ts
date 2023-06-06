@@ -22,13 +22,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
 import { RootState } from '../../store'
 import { fetchInvited, fetchRolesComposite, sendInvite } from './actions'
-import { InvitedUser, InviteUserState, InitialInvitedUser } from './types'
+import { InviteUserState, InitialInvitedUser } from './types'
 
 const initialState: InviteUserState = {
   roles: [],
   invitedUsers: [],
   newUser: InitialInvitedUser,
   request: RequestState.NONE,
+  sendRequest: RequestState.NONE,
   error: null,
 }
 
@@ -53,6 +54,7 @@ const inviteSlice = createSlice({
       ...state,
       roles: payload || [],
       request: RequestState.OK,
+      sendRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchRolesComposite.rejected, (state, action) => ({
@@ -73,6 +75,7 @@ const inviteSlice = createSlice({
       ...state,
       invitedUsers: payload || [],
       request: RequestState.OK,
+      sendRequest: RequestState.NONE,
       error: '',
     }))
     builder.addCase(fetchInvited.rejected, (state, action) => ({
@@ -84,7 +87,7 @@ const inviteSlice = createSlice({
     // invite new
     builder.addCase(sendInvite.pending, (state) => ({
       ...state,
-      request: RequestState.SUBMIT,
+      sendRequest: RequestState.SUBMIT,
       error: '',
     }))
     builder.addCase(sendInvite.fulfilled, (state) => ({
@@ -98,12 +101,12 @@ const inviteSlice = createSlice({
         },
       ],
       newUser: null,
-      request: RequestState.OK,
+      sendRequest: RequestState.OK,
       error: '',
     }))
     builder.addCase(sendInvite.rejected, (state, action) => ({
       ...state,
-      request: RequestState.ERROR,
+      sendRequest: RequestState.ERROR,
       error: action.error.message as string,
     }))
   },
@@ -112,8 +115,5 @@ const inviteSlice = createSlice({
 export const stateSelector = (state: RootState): InviteUserState => state.invite
 
 export const rolesSelector = (state: RootState): string[] => state.invite.roles
-
-export const invitedUserSelector = (state: RootState): InvitedUser[] =>
-  state.invite.invitedUsers
 
 export default inviteSlice

@@ -40,6 +40,7 @@ export type InviteUserState = {
   invitedUsers: InvitedUser[]
   newUser: InviteNewUser | null
   request: RequestState
+  sendRequest: RequestState
   error: string
 }
 
