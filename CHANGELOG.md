@@ -4,6 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ## unreleased
 * Optional User Invite - System Behavior
+* Sonar Cloud Bug Fixes
 ## 1.4.0-RC1
 
 ### Feature

@@ -139,6 +139,7 @@ export const CompanyRoleCax = ({
           const file = await res.blob()
           return download(file, fileType, documentName)
         })
+        .catch((error) => console.log(error))
     } catch (error) {
       console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
     }
