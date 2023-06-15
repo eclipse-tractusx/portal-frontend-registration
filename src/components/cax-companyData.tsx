@@ -118,7 +118,7 @@ export const CompanyDataCax = ({
 
   useEffect(() => {
     if(errors.country === '' && country && changedCountryValue) {
-      dispatch(getUniqueIdentifier(country))
+      dispatch(getUniqueIdentifier(country.toUpperCase()))
       validateRegion(region)
     }
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
@@ -222,7 +222,7 @@ export const CompanyDataCax = ({
 
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
-    setCountry(value)
+    setCountry(value.toUpperCase())
     if (!PATTERNS.countryPattern.test(value.trim())) {
       setShowIdentifiers(false)
       return setErrors((prevState) => ({

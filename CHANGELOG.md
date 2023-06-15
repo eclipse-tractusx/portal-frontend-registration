@@ -5,6 +5,8 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 ## unreleased
 * Optional User Invite - System Behavior
 * Sonar Cloud Bug Fixes
+* Registration Process - endpoint content breaking change
+* Company registration - Step 1 - Country Code is case sensitive which leads to error
 ## 1.4.0-RC1
 
 ### Feature

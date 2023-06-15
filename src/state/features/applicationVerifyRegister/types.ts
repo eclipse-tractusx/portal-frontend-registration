@@ -51,7 +51,6 @@ export type RegistrationDetails = {
   streetNumber: string
   zipCode: string
   countryAlpha2Code: string
-  countryDe: string
   taxId: string
   companyRoles: Array<string>
   agreements: Array<AgreementData>
@@ -71,7 +70,6 @@ export const InitialRegistrationValue = {
   streetNumber: '',
   zipCode: '',
   countryAlpha2Code: '',
-  countryDe: '',
   taxId: '',
   companyRoles: [],
   agreements: [],

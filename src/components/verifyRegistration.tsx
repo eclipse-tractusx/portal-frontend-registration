@@ -188,7 +188,7 @@ export const VerifyRegistration = ({
                   <span className="col-6">
                     {t('verifyRegistration.country')}
                   </span>
-                  <span className="col-6">{registrationData?.countryDe}</span>
+                  <span className="col-6">{registrationData?.countryAlpha2Code}</span>
                 </Row>
               </li>
               {
