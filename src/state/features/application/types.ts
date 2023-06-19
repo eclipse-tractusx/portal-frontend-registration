@@ -42,7 +42,6 @@ export type CompanyDetails = {
   streetNumber: string
   zipCode: string
   countryAlpha2Code: string
-  countryDe: string
   taxId: string
   uniqueIds: Identifier[]
 }
@@ -85,7 +84,6 @@ export const InitialCompanyDetail = {
   streetNumber: '',
   zipCode: '',
   countryAlpha2Code: '',
-  countryDe: '',
   taxId: '',
   uniqueIds: []
 }
