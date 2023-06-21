@@ -7,7 +7,8 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * Sonar Cloud Bug Fixes
 * Registration Process - endpoint content breaking change
 * Company registration - Step 1 - Country Code is case sensitive which leads to error
-## 1.4.0-RC1
+
+## 1.4.0
 
 ### Feature
 * About page for legal notice
