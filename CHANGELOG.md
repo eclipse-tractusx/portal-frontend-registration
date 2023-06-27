@@ -7,6 +7,10 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * Sonar Cloud Bug Fixes
 * Registration Process - endpoint content breaking change
 * Company registration - Step 1 - Country Code is case sensitive which leads to error
+* Add Loading button when Click on User invite till response
+* Typo fix for Identifier Number Error Message
+* Country Identifier Cannot change after Confirm Fix
+* Missing "Country Identifier" results in unclear error
 
 ## 1.4.0
 

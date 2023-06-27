@@ -88,10 +88,12 @@ export const ResponsibilitiesCax = ({
     if(loading){
       if(sendRequest === RequestState.ERROR && invitedError){
         toast.error(invitedError)
+        setLoading(false)
       }else if(sendRequest === RequestState.OK){
         setEmail('')
         setMessage('')
         toast.success(t('Responsibility.sendInviteSuccessMsg'))
+        setLoading(false)
       }
     }
   },[sendRequest])
@@ -244,9 +246,10 @@ export const ResponsibilitiesCax = ({
             <div>
               <Button
                 styleClass="button btn-primaryCax"
-                label={t('Responsibility.sentInvite')}
+                label={loading ? t('button.sending') : t('Responsibility.sentInvite')}
                 handleClick={handleSendInvite}
                 icon={true}
+                loading={loading}
               />
             </div>
             <ToastContainer />
