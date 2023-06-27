@@ -1292,7 +1292,7 @@ npm/npmjs/@types/retry/0.12.0, MIT, approved, clearlydefined
 npm/npmjs/@types/scheduler/0.16.2, MIT, approved, #7582
 npm/npmjs/@types/semver/7.3.13, MIT, approved, #4668
 npm/npmjs/@types/serve-index/1.9.1, MIT, approved, clearlydefined
-npm/npmjs/@types/serve-static/1.15.0, None, restricted, #9186
+npm/npmjs/@types/serve-static/1.15.0, MIT, approved, #9188
 npm/npmjs/@types/sockjs/0.3.33, MIT, approved, clearlydefined
 npm/npmjs/@types/stack-utils/2.0.1, MIT, approved, clearlydefined
 npm/npmjs/@types/testing-library__jest-dom/5.14.5, MIT, approved, clearlydefined
