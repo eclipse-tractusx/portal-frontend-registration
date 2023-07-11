@@ -11,6 +11,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 * Typo fix for Identifier Number Error Message
 * Country Identifier Cannot change after Confirm Fix
 * Missing "Country Identifier" results in unclear error
+* Added validation for Step 1 - Fields 'City' & 'Region' to allow numerical values
 
 ## 1.4.0
 
