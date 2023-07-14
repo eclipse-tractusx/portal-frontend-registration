@@ -39,7 +39,7 @@ import { withRouter } from 'react-router-dom'
 import { FooterButton } from './footerButton'
 import { applicationSelector } from '../state/features/application/slice'
 import {
-  invitedUserSelector,
+  stateSelector,
   rolesSelector,
 } from '../state/features/applicationInviteUser/slice'
 import {
@@ -48,6 +48,7 @@ import {
   sendInvite,
   setUserToInvite,
 } from '../state/features/applicationInviteUser/actions'
+import { RequestState } from '../types/MainTypes'
 
 interface ResponsibilitiesCaxProps {
   addToInviteList: (userItem: IUserItem) => void
@@ -75,12 +76,27 @@ export const ResponsibilitiesCax = ({
     role: '',
     personalNote: '',
   })
+  const [loading, setLoading] = useState<boolean>()
 
   const dispatch = useDispatch()
 
   const { status, error } = useSelector(applicationSelector)
   const rolesComposite = useSelector(rolesSelector)
-  const invitedUsers = useSelector(invitedUserSelector)
+  const {invitedUsers, sendRequest, error: invitedError} = useSelector(stateSelector)
+  
+  useEffect(()=> {
+    if(loading){
+      if(sendRequest === RequestState.ERROR && invitedError){
+        toast.error(invitedError)
+        setLoading(false)
+      }else if(sendRequest === RequestState.OK){
+        setEmail('')
+        setMessage('')
+        toast.success(t('Responsibility.sendInviteSuccessMsg'))
+        setLoading(false)
+      }
+    }
+  },[sendRequest])
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
@@ -109,9 +125,10 @@ export const ResponsibilitiesCax = ({
   const validatePersonalNote = (note: string) =>
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
-  
-    const handleSendInvite = () => {
+
+  const handleSendInvite = () => {
     if (email && validateEmail(email)) {
+      setLoading(true)
       const user = {
         email: email,
         roles: [role],
@@ -229,9 +246,10 @@ export const ResponsibilitiesCax = ({
             <div>
               <Button
                 styleClass="button btn-primaryCax"
-                label={t('Responsibility.sentInvite')}
+                label={loading ? t('button.sending') : t('Responsibility.sentInvite')}
                 handleClick={handleSendInvite}
                 icon={true}
+                loading={loading}
               />
             </div>
             <ToastContainer />

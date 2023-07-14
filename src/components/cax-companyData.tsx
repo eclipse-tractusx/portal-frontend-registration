@@ -118,7 +118,7 @@ export const CompanyDataCax = ({
 
   useEffect(() => {
     if(errors.country === '' && country && changedCountryValue) {
-      dispatch(getUniqueIdentifier(country))
+      dispatch(getUniqueIdentifier(country.toUpperCase()))
       validateRegion(region)
     }
     identifierNumber && identifierType && validateIdentifierNumber(identifierNumber)
@@ -222,7 +222,7 @@ export const CompanyDataCax = ({
 
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
-    setCountry(value)
+    setCountry(value.toUpperCase())
     if (!PATTERNS.countryPattern.test(value.trim())) {
       setShowIdentifiers(false)
       return setErrors((prevState) => ({
@@ -523,7 +523,6 @@ export const CompanyDataCax = ({
                     <select
                       value={identifierType}
                       onChange={(e) => onIdentifierTypeChange(e)}
-                      disabled={uniqueIds && uniqueIds.length === 1}
                     >
                       <option value="">{t('registrationStepOne.pleaseSelect')}</option>
                       {identifierDetails &&
@@ -561,7 +560,7 @@ export const CompanyDataCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.region !== '' || errors.identifierNumber !== ''}
+        disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.region !== '' || !identifierDetails.length || errors.identifierNumber !== ''}
       />
     </>
   )
