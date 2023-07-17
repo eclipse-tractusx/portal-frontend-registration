@@ -2,16 +2,21 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-## unreleased
-* Optional User Invite - System Behavior
-* Sonar Cloud Bug Fixes
-* Registration Process - endpoint content breaking change
-* Company registration - Step 1 - Country Code is case sensitive which leads to error
-* Add Loading button when Click on User invite till response
-* Typo fix for Identifier Number Error Message
-* Country Identifier Cannot change after Confirm Fix
-* Missing "Country Identifier" results in unclear error
-* Added validation for Step 1 - Fields 'City' & 'Region' to allow numerical values
+## 1.5.0-RC1
+
+### Changes
+* Removed country_de property from all api connected business logics and UI field
+* Company Data Step
+  * enabled change of country identifier for pre-saved company data
+  * enhanced 'City' and 'Region' input patterns to allow numeric values on top
+
+### Feature
+* System Behavior
+  * Company Data Step 1 field "CountryCode" disabled case sensitive behavior
+  * Enhanced "Invite" button on optional user invite screen to display load element till backend response is received
+
+### Technical Support
+* Sonar Cloud code smell and bug fixes
 
 ## 1.4.0
 
