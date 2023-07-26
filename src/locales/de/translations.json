@@ -123,7 +123,7 @@
     "dragDropMessage": "Ziehen Sie Dateien hierher und legen Sie sie dort ab, oder klicken Sie, um Dateien auszuwählen",
     "dragDropCaption": "auf deinem Computer",
     "dragDropSpanCaption": "Dateien durchsuchen",
-    "dragDropExceedSizeErrorMsg": "Please select another document. The maximum upload size is limited to 8MB",
+    "dragDropExceedSizeErrorMsg": "Please select another document. The maximum upload size is limited to 1MB",
     "dragDropDocumentTypeErrorMsg": "The selected document type is not supported. Please upload a document with the type .pdf",
     "or": "oder",
     "upload": "Hochladen",
