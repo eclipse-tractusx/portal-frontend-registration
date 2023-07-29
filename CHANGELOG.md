@@ -2,6 +2,12 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.5.0-RC2
+
+### Change
+* Company Data Step
+  * enhanced 'City' and 'Region' input patterns to allow numeric values
+
 ## 1.5.0-RC1
 
 ### Changes
