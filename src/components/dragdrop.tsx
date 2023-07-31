@@ -180,7 +180,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
             submitButtonContent={t('documentUpload.upload')}
             maxFiles={3}
             accept=".pdf"
-            maxSizeBytes={8000000}
+            maxSizeBytes={1000000}
             InputComponent={DragdropInput}
             PreviewComponent={(props) => <DragdropFiles props={props} />}
           />
