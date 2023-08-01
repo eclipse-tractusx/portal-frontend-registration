@@ -1295,7 +1295,7 @@ npm/npmjs/@types/serve-index/1.9.1, MIT, approved, clearlydefined
 npm/npmjs/@types/serve-static/1.15.0, MIT, approved, #9188
 npm/npmjs/@types/sockjs/0.3.33, MIT, approved, clearlydefined
 npm/npmjs/@types/stack-utils/2.0.1, MIT, approved, clearlydefined
-npm/npmjs/@types/testing-library__jest-dom/5.14.5, MIT, approved, clearlydefined
+npm/npmjs/@types/testing-library__jest-dom/5.14.5, MIT, approved, #9436
 npm/npmjs/@types/trusted-types/2.0.2, MIT, approved, clearlydefined
 npm/npmjs/@types/warning/3.0.0, MIT, approved, clearlydefined
 npm/npmjs/@types/ws/8.5.4, MIT, approved, #6016
