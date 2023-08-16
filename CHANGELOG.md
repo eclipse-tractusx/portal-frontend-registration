@@ -2,6 +2,11 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.5.0-RC3
+
+### Technical Support
+Change container registry for Trivy scan to Docker Hub
+
 ## 1.5.0-RC2
 
 ### Change
