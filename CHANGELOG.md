@@ -2,6 +2,15 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.5.0-RC4
+
+### Technical Support
+- changed license notice for images
+- added second license
+
+### Bugfix
+- upgraded dependencies and set resolution for tough-cookie library to v4.1.3
+
 ## 1.5.0-RC3
 
 ### Technical Support
