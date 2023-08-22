@@ -2,41 +2,32 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-## 1.5.0-RC4
-
-### Technical Support
-- changed license notice for images
-- added second license
-
-### Bugfix
-- upgraded dependencies and set resolution for tough-cookie library to v4.1.3
-
-## 1.5.0-RC3
-
-### Technical Support
-Change container registry for Trivy scan to Docker Hub
-
-## 1.5.0-RC2
-
-### Change
-* Company Data Step
-  * enhanced 'City' and 'Region' input patterns to allow numeric values
-
-## 1.5.0-RC1
+## 1.5.0-RC5
 
 ### Changes
-* Removed country_de property from all api connected business logics and UI field
+* removed country_de property from all api connected business logics and UI field
 * Company Data Step
   * enabled change of country identifier for pre-saved company data
   * enhanced 'City' and 'Region' input patterns to allow numeric values on top
+* Company Data Step
+  * enhanced 'City' and 'Region' input patterns to allow numeric values
+* System Behavior
+  * Add Company Data (Step 1) input field "Country Code" case sensitive function disabled
+  * Enhanced "Invite" button to display load element till backend response is received
 
 ### Feature
-* System Behavior
-  * Company Data Step 1 field "CountryCode" disabled case sensitive behavior
-  * Enhanced "Invite" button on optional user invite screen to display load element till backend response is received
+n/a
 
 ### Technical Support
-* Sonar Cloud code smell and bug fixes
+- changed license notice for images
+- changed container registry for Trivy scan to Docker Hub
+
+### Bugfix
+- fixed code smells and bugs from Sonarcloud
+- upgraded dependencies and set resolution for tough-cookie library to v4.1.3
+
+### Known Knowns
+- Company Data (Step 1) input field "street" does not allow special characters such as specific polish letters
 
 ## 1.4.0
 
