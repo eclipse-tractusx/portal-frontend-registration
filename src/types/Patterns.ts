@@ -21,7 +21,7 @@
 export const Patterns = {
     BPN: /^BPNL[a-z0-9]{12}$/i,
     CITY: /^[A-ZÀ-ÿ0-9](([ .'-]|\. )?[A-Za-zÀ-ÿ0-9]{1,40}){1,10}$/,
-    STREET: /^([a-zA-Z0-9À-ÿšá]{1,40}( ?[.,'-] ?| )?){1,10}[a-zA-Z0-9À-ÿšá.]$/,
+    STREET: /^([a-zA-Z0-9À-ÿš]{1,40}( ?[.,'-] ?| )?){1,10}[a-zA-Z0-9À-ÿš.]$/,
 }
 
 export const isBPN = (expr: string) => Patterns.BPN.test(expr)
