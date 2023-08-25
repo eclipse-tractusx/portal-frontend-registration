@@ -2,7 +2,7 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-## 1.5.0-RC5
+## 1.5.0
 
 ### Changes
 * removed country_de property from all api connected business logics and UI field
