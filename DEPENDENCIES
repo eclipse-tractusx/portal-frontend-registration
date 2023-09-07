@@ -316,7 +316,7 @@ npm/npmjs/-/fs-monkey/1.0.3, Unlicense AND (ISC AND MIT), approved, #2964
 npm/npmjs/-/fs.realpath/1.0.0, ISC, approved, clearlydefined
 npm/npmjs/-/fsevents/2.3.2, MIT, approved, #2967
 npm/npmjs/-/function-bind/1.1.1, MIT, approved, clearlydefined
-npm/npmjs/-/function.prototype.name/1.1.5, MIT, approved, clearlydefined
+npm/npmjs/-/function.prototype.name/1.1.5, MIT, approved, #10255
 npm/npmjs/-/functional-red-black-tree/1.0.1, MIT, approved, clearlydefined
 npm/npmjs/-/functions-have-names/1.2.3, MIT, approved, clearlydefined
 npm/npmjs/-/fuse.js/3.6.1, Apache-2.0, approved, clearlydefined
@@ -1198,7 +1198,7 @@ npm/npmjs/@leichtgewicht/ip-codec/2.0.4, MIT, approved, clearlydefined
 npm/npmjs/@mui/base/5.0.0-alpha.118, MIT, approved, #2992
 npm/npmjs/@mui/core-downloads-tracker/5.11.9, MIT, approved, #7908
 npm/npmjs/@mui/icons-material/5.14.3, MIT AND CC-BY-3.0, approved, #9876
-npm/npmjs/@mui/material/5.11.10, , approved, #7346
+npm/npmjs/@mui/material/5.11.10, CC-BY-3.0 AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND ISC AND MIT AND Unlicense AND OFL-1.1, approved, #7346
 npm/npmjs/@mui/private-theming/5.11.9, MIT AND OFL-1.1 AND CC-BY-3.0, approved, #6629
 npm/npmjs/@mui/styled-engine/5.11.9, MIT AND OFL-1.1 AND CC-BY-3.0, approved, #6642
 npm/npmjs/@mui/system/5.11.9, MIT AND OFL-1.1 AND CC-BY-3.0, approved, #6627
