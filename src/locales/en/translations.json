@@ -119,7 +119,7 @@
   "documentUpload": {
     "title": "Upload documents",
     "step": "4",
-    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). /n Please ensure to upload a pdf document only with limited document size of < 8MB.",
+    "subTitle": "Please upload your legal company commercial register document as well as the conformity approval (if app/service provider role was selected). Please ensure to upload a pdf document only with limited document size of < 8MB.",
     "dragDropMessage": "Drag and drop files here, or click to select files",
     "dragDropCaption": "on your computer",
     "dragDropSpanCaption": "browse files",
