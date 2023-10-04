@@ -2,6 +2,16 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+## 1.5.1
+
+### Change
+* updated translations
+
+### Technical Support
+* Build images also for arm64, in addition to amd64
+* Security.md updated
+* npm-get-version action updated 
+
 ## 1.5.0
 
 ### Changes
