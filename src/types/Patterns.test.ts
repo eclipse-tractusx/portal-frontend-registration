@@ -81,6 +81,7 @@ const TESTDATA = {
             'Rue d\'Alger',
             'Rue de l\'Amiral-de-Coligny',
             'Allée André-Breton',
+            'Vlašská 19'
         ],
         invalid: [
             ' Hauptstr',
