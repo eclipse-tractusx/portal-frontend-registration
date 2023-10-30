@@ -299,6 +299,7 @@ export const ResponsibilitiesCax = ({
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
+        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'}
       />
     </>
   )

@@ -561,6 +561,7 @@ export const CompanyDataCax = ({
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.region !== '' || !identifierDetails.length || errors.identifierNumber !== ''}
+        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'}
       />
     </>
   )
