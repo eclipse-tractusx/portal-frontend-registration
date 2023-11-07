@@ -109,6 +109,7 @@
     "ACTIVE_PARTICIPANT": "Activer Teilnehmer",
     "APP_PROVIDER": "App Provider",
     "SERVICE_PROVIDER": "Service Provider",
+    "ONBOARDING_SERVICE_PROVIDER": "Onboarding Service Provider",
     "NoRolesError1": "Ein Fehler ist aufgetreten. Keine Rollen gefunden.",
     "NoRolesError2": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Systemadministrator.",
     "NoRolesError": "An error occured. No roles found. Please {{ retry }} or contact the system administrator.",
