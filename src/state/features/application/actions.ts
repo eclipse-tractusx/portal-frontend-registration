@@ -18,9 +18,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
 import { ApplicationApi } from './api'
 import { ApplicationStatus, CompanyDetails, name } from './types'
+import { setStatusCode } from '../statusCodeError'
 
 const fetchId = createAsyncThunk(`${name}/fetchId`, async () => {
   try {
@@ -61,13 +62,15 @@ const updateStatus = createAsyncThunk(
 
 const getCompanyDetailsWithAddress = createAsyncThunk(
   `${name}/companyDetailsWithAddress/get`,
-  async (applicationId: string) => {
+  async ({applicationId, dispatch}: {applicationId: string, dispatch: Dispatch}) => {
     try {
+      dispatch(setStatusCode({ errorCode: '' }))
       return await ApplicationApi.getInstance().getCompanyDetailsWithAddress(
         applicationId
       )
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error(
         'No active company application existing. Please contact the administrator.'
       )

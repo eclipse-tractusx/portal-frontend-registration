@@ -76,7 +76,7 @@ export const CompanyDataCax = ({
   const applicationId = obj['applicationId']
 
   useEffect(() => {
-    dispatch(getCompanyDetailsWithAddress(applicationId))
+    dispatch(getCompanyDetailsWithAddress({applicationId, dispatch}))
   }, [dispatch])
 
   useEffect(() => {

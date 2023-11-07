@@ -1,5 +1,4 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 BMW Group AG
  * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -18,25 +17,29 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { combineReducers } from 'redux'
-import applicationSlice from './application/slice'
-import inviteSlice from './applicationInviteUser/slice'
-import documentSlice from './applicationDocuments/slice'
-import user from './user/reducer'
-import roleSlice from './applicationCompanyRole/slice'
-import registrationData from './applicationVerifyRegister/slice'
-import statusCodeErrorSlice from './statusCodeError'
+import { createSlice } from '@reduxjs/toolkit'
+import type { RootState } from '../store'
 
-export const reducers = {
-  application: applicationSlice.reducer,
-  role: roleSlice.reducer,
-  invite: inviteSlice.reducer,
-  document: documentSlice.reducer,
-  registrationData: registrationData.reducer,
-  user,
-  statuscode: statusCodeErrorSlice.reducer
+const name = 'statuscode'
+
+const initialState = {
+  errorCode: '',
 }
 
-const rootReducer = combineReducers(reducers)
+export const slice = createSlice({
+  name,
+  initialState,
+  reducers: {
+    setStatusCode: (state, { payload }) => ({
+      ...state,
+      ...payload,
+    })
+  },
+})
 
-export default rootReducer
+export const { setStatusCode } = slice.actions
+
+export const statusCodeSelector = (state: RootState): string =>
+  state.statuscode.errorCode
+
+export default slice

@@ -101,7 +101,7 @@ export const VerifyRegistration = ({
   }
 
   const hasRoles = () => {
-    return true
+    return registrationData.companyRoles.length > 0 ? true : false
   }
   const hasDocuments = () => {
     return documents && documents.length > 0 ? true : false

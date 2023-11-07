@@ -70,8 +70,8 @@ export const CompanyRoleCax = ({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchAgreementData())
-    dispatch(fetchAgreementConsents(applicationId))
+    dispatch(fetchAgreementData(dispatch))
+    dispatch(fetchAgreementConsents({applicationId, dispatch}))
   }, [dispatch])
 
   useEffect(() => {

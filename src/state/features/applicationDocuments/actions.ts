@@ -24,6 +24,7 @@ import { Api } from './api'
 import { DocumentType } from './types'
 import { ProgressType } from '../../../types/MainTypes'
 import { downloadDocument } from '../../../helpers/utils'
+import { setStatusCode } from '../statusCodeError'
 
 const handleUpdateProgress = (
   progress: ProgressType,
@@ -39,14 +40,16 @@ const handleUpdateProgress = (
 
 const fetchDocuments = createAsyncThunk(
   'registration/application/user/fetchDocuments',
-  async (applicationId: string) => {
+  async ({applicationId, dispatch}: {applicationId: string, dispatch: Dispatch}) => {
     try {
+      dispatch(setStatusCode({ errorCode: '' }))
       return await Api.getInstance().getDocuments(
         applicationId,
         DocumentType.COMMERCIAL_REGISTER_EXTRACT
       )
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error('Unable to load documents. Please contact the administrator.')
     }
   }
@@ -57,18 +60,21 @@ const fetchDocumentByDocumentId = createAsyncThunk(
   async ({
     documentId,
     documentName,
+    dispatch
   }: {
     documentId: string
     documentName: string
+    dispatch: Dispatch
   }) => {
     try {
       const { data, headers } = await Api.getInstance().getDocumentByDocumentId(
         documentId
       )
-
+      dispatch(setStatusCode({ errorCode: '' }))
       return downloadDocument(data, headers['content-type'], documentName)
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error(
         'Unable to download document. Please contact the administrator.'
       )

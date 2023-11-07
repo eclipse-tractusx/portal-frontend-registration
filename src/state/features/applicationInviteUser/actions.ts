@@ -18,9 +18,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { Dispatch, createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Api } from './api'
 import { InviteNewUser } from './types'
+import { setStatusCode } from '../statusCodeError'
 
 const setUserToInvite = createAction<InviteNewUser>(
   'registration/application/user/setUserToInvite'
@@ -28,11 +29,13 @@ const setUserToInvite = createAction<InviteNewUser>(
 
 const fetchRolesComposite = createAsyncThunk(
   'registration/application/user/fetchRoles',
-  async () => {
+  async (dispatch: Dispatch) => {
     try {
+      dispatch(setStatusCode({ errorCode: '' }))
       return await Api.getInstance().getRolesComposite()
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error('Unable to load roles. Please contact the administrator.')
     }
   }
@@ -40,11 +43,13 @@ const fetchRolesComposite = createAsyncThunk(
 
 const fetchInvited = createAsyncThunk(
   'registration/application/user/fetchInvited',
-  async (applicationId: string) => {
+  async ({applicationId, dispatch}: {applicationId: string, dispatch: Dispatch}) => {
     try {
+      dispatch(setStatusCode({ errorCode: '' }))
       return await Api.getInstance().getInvitedUsers(applicationId)
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error(
         'Application ID not existing. Please contact the administrator.'
       )

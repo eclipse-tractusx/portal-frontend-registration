@@ -18,16 +18,19 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
 import { API } from './api'
+import { setStatusCode } from '../statusCodeError'
 
 const fetchAgreementData = createAsyncThunk(
   'registration/application/user/fetchAgreementData',
-  async () => {
+  async (dispatch: Dispatch) => {
     try {
+      dispatch(setStatusCode({ errorCode: '' }))
       return await API.getInstance().companyRoleAgreementData()
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error('fetchCompanyRole api call error')
     }
   }
@@ -35,11 +38,13 @@ const fetchAgreementData = createAsyncThunk(
 
 const fetchAgreementConsents = createAsyncThunk(
   'registration/application/user/fetchAgreementConsents',
-  async (appId: string) => {
+  async ({applicationId, dispatch}: {applicationId: string, dispatch: Dispatch}) => {
     try {
-      return await API.getInstance().companyRoleAgreementConsents(appId)
-    } catch (error: unknown) {
+      dispatch(setStatusCode({ errorCode: '' }))
+      return await API.getInstance().companyRoleAgreementConsents(applicationId)
+    } catch (error: any) {
       console.error('api call error:', error)
+      dispatch(setStatusCode({ errorCode: error.response.status }))
       throw Error('fetchCompanyRole api call error')
     }
   }

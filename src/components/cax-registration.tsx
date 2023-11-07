@@ -40,6 +40,7 @@ import {
   fetchId,
   updateInvitation,
 } from '../state/features/application/actions'
+import { statusCodeSelector } from '../state/features/statusCodeError'
 interface RegistrationCaxProps {
   currentActiveStep: number
 }
@@ -51,6 +52,27 @@ export const RegistrationCax = ({
   const history = useHistory()
   const dispatch = useDispatch()
   const { status, error } = useSelector(applicationSelector)
+
+  const errorCode = useSelector(statusCodeSelector)
+
+  const getErrorMessage = (errorCode: string) => {
+    switch (errorCode){
+      case '400':
+      case '404':
+        return 'Something went wrong, please connect your administrator'
+      case '401':
+      case '403':
+        return 'Missing permissions, please connect your administrator'
+      case '409':
+        return 'Something went wrong, please connect your administrator'
+      default:
+        return 'Something went wrong, please reload and connect your administrator if the issue appears again'
+    }
+  }
+
+  useEffect(() => {
+    errorCode && toast.error(getErrorMessage(errorCode))
+  },[errorCode])
 
   if (error) {
     toast.error(error)

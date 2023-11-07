@@ -96,7 +96,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
 
   useEffect(() => {
     if(!error && !documentError){
-      dispatch(fetchDocuments(applicationId))
+      dispatch(fetchDocuments({applicationId, dispatch}))
     }
   }, [dispatch, deleteRequest, uploadRequest])
 
@@ -152,7 +152,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     documentId: string,
     documentName: string
   ) => {
-    dispatch(fetchDocumentByDocumentId({ documentId, documentName }))
+    dispatch(fetchDocumentByDocumentId({ documentId, documentName, dispatch }))
   }
 
   return (

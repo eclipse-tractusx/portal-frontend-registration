@@ -105,8 +105,8 @@ export const ResponsibilitiesCax = ({
   }
 
   useEffect(() => {
-    dispatch(fetchRolesComposite())
-    dispatch(fetchInvited(applicationId))
+    dispatch(fetchRolesComposite(dispatch))
+    dispatch(fetchInvited({applicationId, dispatch}))
   }, [dispatch])
 
   useEffect(() => {
