@@ -179,7 +179,10 @@
     "default": "This Page isn't working.",
     "error1": "Registration form cant get submitted, since company data are missing. Please fill out all company data in Step 1.",
     "error2": "Registration form cant get submitted. CX Terms and Conditions need to get accepted. Please accept the Terms and Conditions under Step 3 to proceed.",
-    "error3": "Registration form cant get submitted. Please upload your company document under Step 4."
+    "error3": "Registration form cant get submitted. Please upload your company document under Step 4.",
+    "connectAdministrator": "Something went wrong, please connect your administrator",
+    "missingPermissions": "Missing permissions, please connect your administrator",
+    "defaultReload": "Something went wrong, please reload and connect your administrator if the issue appears again"
   },
   "FooterContent": {
     "Footer1": "Please enter all the required information before proceeding.",

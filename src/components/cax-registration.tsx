@@ -55,18 +55,19 @@ export const RegistrationCax = ({
 
   const errorCode = useSelector(statusCodeSelector)
 
-  const getErrorMessage = (errorCode: string) => {
+  const getErrorMessage = (errorCode: number) => {
+    console.log('errorCode', typeof errorCode)
     switch (errorCode){
-      case '400':
-      case '404':
-        return 'Something went wrong, please connect your administrator'
-      case '401':
-      case '403':
-        return 'Missing permissions, please connect your administrator'
-      case '409':
-        return 'Something went wrong, please connect your administrator'
+      case 400:
+      case 404:
+        return t('ErrorMessage.connectAdministrator')
+      case 401:
+      case 403:
+        return t('ErrorMessage.missingPermissions')
+      case 409:
+        return t('ErrorMessage.connectAdministrator')
       default:
-        return 'Something went wrong, please reload and connect your administrator if the issue appears again'
+        return t('ErrorMessage.defaultReload')
     }
   }
 

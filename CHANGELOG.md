@@ -6,6 +6,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Change
 * updated translations
+* Status error code api error handling
 
 ### Technical Support
 * Build images also for arm64, in addition to amd64

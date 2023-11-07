@@ -23,7 +23,7 @@ import type { RootState } from '../store'
 const name = 'statuscode'
 
 const initialState = {
-  errorCode: '',
+  errorCode: null,
 }
 
 export const slice = createSlice({
@@ -39,7 +39,7 @@ export const slice = createSlice({
 
 export const { setStatusCode } = slice.actions
 
-export const statusCodeSelector = (state: RootState): string =>
+export const statusCodeSelector = (state: RootState): number =>
   state.statuscode.errorCode
 
 export default slice
