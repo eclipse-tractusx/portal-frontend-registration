@@ -4,6 +4,8 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Change
 * updated help links with valid help page content
+* company Role
+  * Updated transaltions for roles
 
 ## 1.5.1
 
