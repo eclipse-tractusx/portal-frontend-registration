@@ -88,7 +88,8 @@ export const Landing = () => {
           <div className="mx-auto col-9 d-flex align-items-center justify-content-center info small-info">
             <span className="">
               {t('landing.footerText1')}{' '}
-              <Link to="/form">{t('landing.footerText2')}</Link>.
+              <a href={window.location.pathname.replace(window.location.pathname, '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration')}
+                target="_blank" rel='noreferrer'> {t('landing.footerText2')}.</a>
             </span>
           </div>
         </Col>

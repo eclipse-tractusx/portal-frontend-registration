@@ -233,6 +233,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
+        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'}
       />
     </>
   )
