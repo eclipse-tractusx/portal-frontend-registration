@@ -255,6 +255,7 @@ export const CompanyRoleCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
+        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'}
       />
     </>
   )
