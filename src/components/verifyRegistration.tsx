@@ -100,12 +100,9 @@ export const VerifyRegistration = ({
     return null
   }
 
-  const hasRoles = () => {
-    return true
-  }
-  const hasDocuments = () => {
-    return documents && documents.length > 0 ? true : false
-  }
+  const hasRoles = () => registrationData.companyRoles.length > 0
+
+  const hasDocuments = () => documents && documents.length > 0
 
   return (
     <>
@@ -254,7 +251,6 @@ export const VerifyRegistration = ({
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         tooltip={getTooltip()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F06.+Verify+Registration+Data.md'}
       />
     </>
   )
