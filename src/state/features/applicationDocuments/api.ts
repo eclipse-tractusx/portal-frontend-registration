@@ -22,7 +22,7 @@ import axios, { AxiosResponse, AxiosResponseHeaders } from 'axios'
 import { HttpClient } from '../../../helpers/HttpClient'
 import { getApiBase } from '../../../services/EnvironmentService'
 import RequestService from '../../../services/RequestService'
-import { PostDocumentType, ProgressType } from '../../../types/MainTypes'
+import { PostDocumentType } from '../../../types/MainTypes'
 
 export class Api extends HttpClient {
   private static classInstance?: Api
