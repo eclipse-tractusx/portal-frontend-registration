@@ -21,8 +21,8 @@
 import axios, {
   AxiosError,
   AxiosInstance,
-  AxiosRequestHeaders,
   AxiosResponse,
+  RawAxiosRequestHeaders,
   ResponseType,
 } from 'axios'
 
@@ -42,7 +42,7 @@ export abstract class HttpClient {
     baseURL: string,
     reponseSuccessInterceptor = undefined,
     responseErrorInterceptor = undefined,
-    headers: AxiosRequestHeaders = {
+    headers: RawAxiosRequestHeaders = {
       'Content-Type': 'application/json',
     },
     timeout: number = Number.parseInt(
