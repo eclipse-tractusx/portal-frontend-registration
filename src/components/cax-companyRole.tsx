@@ -168,8 +168,16 @@ export const CompanyRoleCax = ({
                           ?
                           <>
                             {t('companyRole.TermsAndCondSpan1')}{' '}
-                            <span className={agreement.documentId ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentId, agreement.name)}>{agreement.name}</span>{' '}
-                            {t('companyRole.TermsAndCondSpan3')}
+                            <span 
+                              className={agreement.documentId ? 'agreement-span' : ''}
+                              onClick={() => handleDownloadClick(agreement.documentId, agreement.name)} 
+                              onKeyUp={() => {
+                                // do nothing
+                              }}
+                            >
+                              {agreement.name}
+                            </span>
+                            {' '}{t('companyRole.TermsAndCondSpan3')}
                           </>
                           :
                           <span>{agreement.name}</span>
