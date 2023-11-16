@@ -28,6 +28,7 @@ import { store } from './state/store'
 
 UserService.initKeycloak(() => {
   const rootDiv = document.getElementById('root') as HTMLElement
+  /* eslint react/no-deprecated: off */
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>

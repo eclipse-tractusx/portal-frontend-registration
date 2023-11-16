@@ -29,7 +29,8 @@ export const FooterButton = ({
   handleNextClick,
   tooltip = null,
   disabled = false,
-  loading = false
+  loading = false,
+  helpUrl
 }: {
   labelBack?: string
   labelNext: string
@@ -38,11 +39,12 @@ export const FooterButton = ({
   tooltip?: null | string
   disabled?: false | boolean
   loading?: false | boolean
+  helpUrl: string
 }) => {
   return (
     <div className="mx-auto col-9 info">
       <Row>
-        <FooterHeadline />
+        <FooterHeadline helpUrl={helpUrl} />
         <div className="col12 d-flex align-items-center justify-content-center button-section">
           {labelBack && (
             <Button
