@@ -6,6 +6,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Change
 * updated help links with valid help application hyperlinks
+* Sonar Bugs Error fixes
 
 ### Feature
 n/a
