@@ -4,9 +4,12 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ## 1.5.2
 
+### Unreleased
+* Sonar Bugs Error fixes
+
+
 ### Change
 * updated help links with valid help application hyperlinks
-* Sonar Bugs Error fixes
 
 ### Feature
 n/a
