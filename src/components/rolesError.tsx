@@ -28,7 +28,14 @@ function RolesError({ retry }) {
       <h4>{t('companyRole.NoRolesError1')}</h4>
       <h4>
         {t('companyRole.Please')}{' '}
-        <span onClick={retry}>{t('companyRole.Retry')}</span>{' '}
+        <span 
+          onClick={retry}
+          onKeyUp={() => {
+            // do nothing
+          }}
+        >
+          {t('companyRole.Retry')}
+        </span>{' '}
         {t('companyRole.NoRolesError2')}{' '}
       </h4>
     </div>

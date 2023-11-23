@@ -99,6 +99,9 @@ export const DragdropFiles = ({ props }: DragdropFilesProps) => {
         onClick={
           !hasError ? props.fileWithMeta.remove : props.fileWithMeta.restart
         }
+        onKeyUp={() => {
+          // do nothing
+        }}
       ></div>
     </div>
   )

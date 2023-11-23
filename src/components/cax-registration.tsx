@@ -32,7 +32,7 @@ import DragDropUploadFiles from './dragdrop'
 import CompanyRoleCax from './cax-companyRole'
 import { IState } from '../state/features/user/redux.store.types'
 import { useTranslation } from 'react-i18next'
-import { useHistory, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Stepper from './stepper'
 import VerifyRegistration from './verifyRegistration'
 import { applicationSelector } from '../state/features/application/slice'
@@ -48,7 +48,6 @@ export const RegistrationCax = ({
   currentActiveStep,
 }: RegistrationCaxProps) => {
   const { t } = useTranslation()
-  const history = useHistory()
   const dispatch = useDispatch()
   const { status, error } = useSelector(applicationSelector)
 

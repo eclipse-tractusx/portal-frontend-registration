@@ -53,4 +53,3 @@ export const About = () => {
 }
 
 export default withRouter(About)
-

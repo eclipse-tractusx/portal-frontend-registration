@@ -196,6 +196,9 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
                       document.documentName
                     )
                   }
+                  onKeyUp={() => {
+                    // do nothing
+                  }}
                   className="dropzone-overview-file-name"
                 >
                   {document.documentName}
@@ -223,6 +226,9 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
               <div
                 className="dropzone-overview-remove"
                 onClick={() => deleteDocumentFn(document.documentId)}
+                onKeyUp={() => {
+                  // do nothing
+                }}
               ></div>
             </div>
           ))}

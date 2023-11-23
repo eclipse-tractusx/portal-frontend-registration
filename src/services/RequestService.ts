@@ -18,17 +18,17 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { AxiosRequestHeaders, ResponseType } from 'axios'
+import { RawAxiosRequestHeaders, ResponseType } from 'axios'
 import UserService from './UserService'
 
-export const getHeaders = (): { headers: AxiosRequestHeaders } => ({
+export const getHeaders = (): { headers: RawAxiosRequestHeaders } => ({
   headers: {
     authorization: `Bearer ${UserService.getToken()}`,
   },
 })
 
 export const getBlobHeaders = (): {
-  headers: AxiosRequestHeaders
+  headers: RawAxiosRequestHeaders
   responseType: ResponseType
 } => ({
   headers: {
