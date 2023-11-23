@@ -2,6 +2,9 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+### Unreleased
+* Sonar Bugs Error fixes
+
 ## 1.5.2
 
 ### Change

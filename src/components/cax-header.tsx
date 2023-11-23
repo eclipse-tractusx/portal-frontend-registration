@@ -86,6 +86,9 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
             <span
               className={language === 'en' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('en')}
+              onKeyUp={() => {
+                // do nothing
+              }}
             >
               {' '}
               EN{' '}
@@ -95,6 +98,9 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
             <span
               className={language === 'de' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('de')}
+              onKeyUp={() => {
+                // do nothing
+              }}
             >
               {' '}
               DE
@@ -109,7 +115,13 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
               <div> {username}</div>
               <div> {UserService.getDomain()}</div>
               <div>({userRoles.join(', ')})</div>
-              <div className="logout" onClick={() => UserService.doLogout()}>
+              <div 
+                className="logout"
+                onClick={() => UserService.doLogout()}
+                onKeyUp={() => {
+                  // do nothing
+                }}
+                >
                 {t('header.logout')}
               </div>
             </span>
