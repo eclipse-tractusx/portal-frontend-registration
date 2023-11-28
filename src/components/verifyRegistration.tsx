@@ -251,7 +251,7 @@ export const VerifyRegistration = ({
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         tooltip={getTooltip()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'}
+        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F06.+Verify+Registration+Data.md'}
       />
     </>
   )
