@@ -2,6 +2,9 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+### Unreleased
+* updated verify registration help link with valid link
+
 ## 1.5.3
 
 ### Change
