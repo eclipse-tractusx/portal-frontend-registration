@@ -1,6 +1,6 @@
 {
   "name": "cx-portal-registration",
-  "version": "v1.5.3",
+  "version": "v1.5.4",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
@@ -8,8 +8,9 @@
     "lint": "eslint ./src",
     "start": "PORT=3002 BROWSER=none react-scripts start",
     "build:dirty": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "build": "react-scripts build && mkdir registration && mv build/* registration && mv registration build/",
+    "build": "yarn build:copy-legal-info && react-scripts build && mkdir registration && mv build/* registration && mv registration build/",
     "build:legal-notice": "bash scripts/legal-notice.sh",
+    "build:copy-legal-info": "cp LICENSE NOTICE.md DEPENDENCIES SECURITY.md public/",
     "build:sources": "zip -r portal-registration.zip src package.json yarn.lock -x '*.stories.*' -x '*.test.*' -x '*.ttf' -x '*.svg' -x '*.png'",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test",
