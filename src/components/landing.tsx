@@ -21,42 +21,36 @@
 import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { withRouter, useHistory, Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { withRouter, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Footer from './footer'
 import BulletList from './bulletList'
-import Header from './cax-header'
+import {Header} from './cax-header'
 import Button from './button'
-import {
-  fetchId,
-  updateStatus,
-  updateInvitation,
-} from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice'
 import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
+import { useFetchApplicationsQuery, useUpdateInvitationMutation, useUpdateStatusMutation } from '../state/features/application/applicationApiSlice'
 
 export const Landing = () => {
   const { t } = useTranslation()
   const history = useHistory()
-  const dispatch = useDispatch()
 
-  const { status, error } = useSelector(applicationSelector)
+  const { data: status, error } = useFetchApplicationsQuery()
+  const [updateInvitation] = useUpdateInvitationMutation()
+  const [updateStatus] = useUpdateStatusMutation()
 
   if (error) {
-    toast.error(error)
+    toast.error('error')
   }
 
   useEffect(() => {
-    dispatch(updateInvitation())
-    dispatch(fetchId())
-  }, [dispatch])
+    updateInvitation().unwrap()
+  }, [])
 
-  const onClick = () => {
+  const onClick = async () => {
     const obj = status.find((o) => o['applicationStatus'] === CREATED)
     if (obj) {
       const statusData = { id: obj['applicationId'], status: ADD_COMPANY_DATA }
-      dispatch(updateStatus(statusData))
+      await updateStatus(statusData)
     }
     history.push('/form')
   }

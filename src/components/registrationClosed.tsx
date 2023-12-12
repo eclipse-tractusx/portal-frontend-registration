@@ -22,7 +22,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 import Footer from './footer'
-import Header from './cax-header'
+import {Header} from './cax-header'
 import Button from './button'
 import UserService from '../services/UserService'
 

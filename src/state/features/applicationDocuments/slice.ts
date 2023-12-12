@@ -20,7 +20,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
-import { RootState } from '../../store'
+import { RootState } from '../store'
 import { fetchDocuments, saveDocument, deleteDocument } from './actions'
 import { DocumentsState } from './types'
 

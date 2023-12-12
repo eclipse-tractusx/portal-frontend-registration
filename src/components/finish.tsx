@@ -20,10 +20,10 @@
 
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { AiOutlineMail } from 'react-icons/ai'
 import { BsCheck2Circle, BsArrowCounterclockwise } from 'react-icons/bs'
-import Header from './cax-header'
+import {Header} from './cax-header'
 import Footer from './footer'
 
 export const Finish = () => {

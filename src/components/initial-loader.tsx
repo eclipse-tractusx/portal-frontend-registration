@@ -20,31 +20,19 @@
 
 import { useEffect } from 'react'
 import { withRouter, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
-import { fetchId } from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice'
 import '../styles/newApp.css'
 import { handleStatusRedirect } from '../helpers/utils'
 import { ErrorPage } from './ErrorPage'
+import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
 
 export const InitialLoader = () => {
   const history = useHistory()
-  const dispatch = useDispatch()
 
-  const { status, error } = useSelector(applicationSelector)
-
-  if (error) {
-    toast.error(error)
-  }
-
+  const { data: status, error } = useFetchApplicationsQuery()
+  
   useEffect(() => {
     status && status.length > 0 && handleStatusRedirect(status[0]['applicationStatus'], history)
   }, [status])
-
-  useEffect(() => {
-    dispatch(fetchId())
-  }, [dispatch])
 
   return (
     error ?

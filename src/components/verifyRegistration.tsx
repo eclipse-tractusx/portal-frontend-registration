@@ -22,72 +22,52 @@ import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep } from '../state/features/user/action'
-import { useHistory, withRouter } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Dispatch } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import {
-  fetchRegistrationData,
-  saveRegistration,
-} from '../state/features/applicationVerifyRegister/actions'
-import { applicationSelector } from '../state/features/application/slice'
-import { registrationErrorSelector, registrationSuccessSelector, stateSelector } from '../state/features/applicationVerifyRegister/slice'
-import { stateSelector as documentSelector } from '../state/features/applicationDocuments/slice'
+import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
+import { useFetchDocumentsQuery } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
+import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
+import { useFetchRegistrationDataQuery, useUpdateRegistrationMutation } from '../state/features/applicationVerifyRegister/applicationVerifyRegisterApiSlice'
 
-interface VerifyRegistrationProps {
-  currentActiveStep: number
-  addCurrentStep: (step: number) => void
-}
-
-export const VerifyRegistration = ({
-  currentActiveStep,
-  addCurrentStep,
-}: VerifyRegistrationProps) => {
+export const VerifyRegistration = () => {
   const { t } = useTranslation()
   const history = useHistory()
-
   const dispatch = useDispatch()
 
+  const currentActiveStep = useSelector(getCurrentStep)
+
   const [loading, setLoading] = useState(false)
-  const [confirmState, setConfirmState] = useState(false)
 
-  const { status, error } = useSelector(applicationSelector)
-  const { registrationData } = useSelector(stateSelector)
-  const registrationSuccess = useSelector(registrationSuccessSelector)
-  const registrationError = useSelector(registrationErrorSelector)
-  const { documents } = useSelector(documentSelector)
-
-  if (confirmState && registrationSuccess) history.push('/finish')
-
-  useEffect(() => {
-    if(confirmState && registrationError){
-      setLoading(false)
-      toast.error(t('verifyRegistration.submitErrorMessage'))
-    }
-  }, [registrationError])
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
-  if (error) {
-    toast.error(error)
+  if (statusError) {
+    toast.error('statusError')
   }
 
-  useEffect(() => {
-    dispatch(fetchRegistrationData(applicationId))
-  }, [dispatch])
+  const {data: registrationData} = useFetchRegistrationDataQuery(applicationId)
+  const {data: documents} = useFetchDocumentsQuery(applicationId)
+  const [updateRegistration] = useUpdateRegistrationMutation()
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
-  const nextClick = () => {
+  const nextClick = async() => {
     if (loading) return
     setLoading(true)
-    setConfirmState(true)
-    dispatch(saveRegistration(applicationId))
+    await updateRegistration(applicationId).unwrap()
+    .then(() => {
+      history.push('/finish')
+    })
+    .catch((errors: any) => {
+      console.log('errors', errors)
+      setLoading(false)
+      toast.error(t('verifyRegistration.submitErrorMessage'))
+    })
   }
 
   const getTooltip = () => {
@@ -214,7 +194,7 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              {registrationData.companyRoles.map((role, index) => (
+              {registrationData?.companyRoles.map((role, index) => (
                 <li key={index} className="list-group-item-cax">
                   <Row>
                     <span className="col-12">{role}</span>
@@ -232,7 +212,7 @@ export const VerifyRegistration = ({
                   </span>
                 </Row>
               </li>
-              {registrationData.documents.map((file, index) => {
+              {registrationData?.documents.map((file, index) => {
                 return (
                   <li key={index} className="list-group-item-cax">
                     <Row>
@@ -259,18 +239,3 @@ export const VerifyRegistration = ({
     </>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      currentActiveStep: state.user.currentStep,
-    }),
-    mapDispatchToProps
-  )(VerifyRegistration)
-)

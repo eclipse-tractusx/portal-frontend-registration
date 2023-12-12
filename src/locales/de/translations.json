@@ -68,6 +68,7 @@
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
     "cityError": "Bitte geben Sie einen gültigen Städtenamen ein.",
     "countryError": "Please enter a valid country code. Country codes have a 2 digit alpha character.",
+    "identifierError": "No identifier found",
     "identifierhelperText": "We have retrieved two registered identifiers. Please select the preferred identifier for your company registration.",
     "pleaseSelect": "Please select",
     "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with hyphen with 6 to 21 digits.",

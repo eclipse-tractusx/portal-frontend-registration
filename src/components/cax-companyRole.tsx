@@ -24,55 +24,35 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { FooterButton } from './footerButton'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep } from '../state/features/user/action'
-import { withRouter } from 'react-router-dom'
-import { Dispatch } from 'redux'
-import {
-  fetchAgreementData,
-  fetchAgreementConsents,
-  updateAgreementConsents,
-} from '../state/features/applicationCompanyRole/actions'
-import { applicationSelector } from '../state/features/application/slice'
+import { useDispatch, useSelector } from 'react-redux'
 import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 import { companyRole } from '../state/features/applicationCompanyRole/types'
 import { download } from '../helpers/utils'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
 import '../styles/newApp.css'
+import { useFetchAgreementConsentsQuery, useFetchAgreementDataQuery, useUpdateAgreementConsentsMutation } from '../state/features/applicationCompanyRole/applicationCompanyRoleApiSlice'
+import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
+import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
 
-interface CompanyRoleProps {
-  currentActiveStep: number
-  addCurrentStep: (step: number) => void
-}
-
-export const CompanyRoleCax = ({
-  currentActiveStep,
-  addCurrentStep,
-}: CompanyRoleProps) => {
+export const CompanyRoleCax = () => {
   const { t, i18n } = useTranslation()
+  const dispatch = useDispatch()
 
-  const { status } = useSelector(applicationSelector)
-  const { allConsentData, consentData, error, loading } = useSelector(stateSelector)
+  const currentActiveStep = useSelector(getCurrentStep)
   const [companyRoleChecked, setCompanyRoleChecked] = useState({})
   const [agreementChecked, setAgreementChecked] = useState({})
-  const [nextClicked, setNextClicked] = useState(false)
 
-  useEffect(() => {
-    nextClicked && !loading &&
-    (error ? toast.error(t('companyRole.submitError')) : addCurrentStep(currentActiveStep + 1))
-  }, [nextClicked, loading, error])
+  const { data: status } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
-  const dispatch = useDispatch()
+  const {data: allConsentData, error: allConsentError, isLoading: allConsentLoading} = useFetchAgreementDataQuery()
+  const {data: consentData, error: consentError, isLoading: consentLoading} = useFetchAgreementConsentsQuery(applicationId)
+  const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
 
-  useEffect(() => {
-    dispatch(fetchAgreementData())
-    dispatch(fetchAgreementConsents(applicationId))
-  }, [dispatch])
+  if((allConsentLoading && allConsentError) || (consentLoading && consentError)) toast.error('')
 
   useEffect(() => {
     updateSelectedRolesAndAgreement()
@@ -80,13 +60,13 @@ export const CompanyRoleCax = ({
 
   const updateSelectedRolesAndAgreement = () => {
     setCompanyRoleChecked(
-      consentData.companyRoles.reduce((prev, next) => {
+      consentData?.companyRoles.reduce((prev, next) => {
         return { ...prev, [next]: true }
       }, {})
     )
 
     setAgreementChecked(
-      consentData.agreements.reduce((prev, next) => {
+      consentData?.agreements.reduce((prev, next) => {
         return { ...prev, [next.agreementId]: true }
       }, {})
     )
@@ -103,11 +83,11 @@ export const CompanyRoleCax = ({
     updatedMap[id] = !updatedMap[id]
 
     if (!updatedMap[id]) {
-      const companyRoleIndex = allConsentData.companyRoles.findIndex(
+      const companyRoleIndex = allConsentData?.companyRoles.findIndex(
         (item) => item.companyRole === id
       )
 
-      const updatedAgreementIds = allConsentData.companyRoles[
+      const updatedAgreementIds = allConsentData?.companyRoles[
         companyRoleIndex
       ].agreementIds.reduce((prev, next) => {
         return { ...prev, [next]: false }
@@ -157,9 +137,9 @@ export const CompanyRoleCax = ({
                 name={id}
                 className="regular-checkbox agreement-check"
                 onChange={() => handleAgreementCheck(id)}
-                checked={agreementChecked[id]}
+                checked={agreementChecked?.[id]}
               />
-              {allConsentData.agreements.map((agreement) => {
+              {allConsentData?.agreements.map((agreement) => {
                 if (agreement.agreementId == id)
                   return (
                     <p className="agreement-text" key={agreement.agreementId}>
@@ -186,10 +166,10 @@ export const CompanyRoleCax = ({
   }
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
-  const nextClick = () => {
+  const nextClick = async () => {
     const companyRoles = Object.keys(companyRoleChecked).filter(
       (item) => companyRoleChecked[item]
     )
@@ -206,8 +186,14 @@ export const CompanyRoleCax = ({
       agreements: agreements,
     }
 
-    dispatch(updateAgreementConsents({ applicationId, data }))
-    setNextClicked(true)
+    await updateAgreementConsents({ applicationId, data })
+    .unwrap()
+    .then(() => {
+      dispatch(addCurrentStep(currentActiveStep + 1))
+    })
+    .catch((errors: any) => {
+      toast.error(t('companyRole.submitError'))
+    })
   }
 
   return (
@@ -226,7 +212,7 @@ export const CompanyRoleCax = ({
         </div>
         <div className="companydata-form mx-auto col-9">
           {
-            allConsentData.companyRoles.map((role, index) => (
+            allConsentData?.companyRoles.map((role, index) => (
               <div className="company-role-section" key={index}>
                 <Row>
                   <div className="col-1">
@@ -235,13 +221,13 @@ export const CompanyRoleCax = ({
                       name={role.companyRole}
                       className="regular-checkbox"
                       onChange={() => handleCompanyRoleCheck(role.companyRole)}
-                      checked={companyRoleChecked[role.companyRole]}
+                      checked={companyRoleChecked?.[role.companyRole]}
                     />
                   </div>
                   <div className="col-11">
                     <h6>{t(`companyRole.${role.companyRole}`)}</h6>
                     <p>{role.descriptions[i18n.language]}</p>
-                    {companyRoleChecked[role.companyRole] &&
+                    {companyRoleChecked?.[role.companyRole] &&
                       renderTermsSection(role)}
                   </div>
                 </Row>
@@ -260,18 +246,3 @@ export const CompanyRoleCax = ({
     </>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      currentActiveStep: state.user.currentStep,
-    }),
-    mapDispatchToProps
-  )(CompanyRoleCax)
-)

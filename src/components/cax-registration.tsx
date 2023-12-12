@@ -21,47 +21,37 @@
 import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Footer from './footer'
-import Header from './cax-header'
+import {Header} from './cax-header'
 import ReactTooltip from 'react-tooltip'
-import { useDispatch, useSelector, connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import 'react-datepicker/dist/react-datepicker.css'
-import CompanyDataCax from './cax-companyData'
-import ResponsibilitiesCax from './cax-responsibilities'
-import DragDropUploadFiles from './dragdrop'
-import CompanyRoleCax from './cax-companyRole'
-import { IState } from '../state/features/user/redux.store.types'
+import {CompanyDataCax} from './cax-companyData'
+import {ResponsibilitiesCax} from './cax-responsibilities'
+import {DragDrop} from './dragdrop'
+import {CompanyRoleCax} from './cax-companyRole'
 import { useTranslation } from 'react-i18next'
-import { useHistory, withRouter } from 'react-router-dom'
-import Stepper from './stepper'
-import VerifyRegistration from './verifyRegistration'
-import { applicationSelector } from '../state/features/application/slice'
-import {
-  fetchId,
-  updateInvitation,
-} from '../state/features/application/actions'
-interface RegistrationCaxProps {
-  currentActiveStep: number
-}
+import {Stepper} from './stepper'
+import {VerifyRegistration} from './verifyRegistration'
+import { useFetchApplicationsQuery, useUpdateInvitationMutation } from '../state/features/application/applicationApiSlice'
+import { getCurrentStep } from '../state/features/user/userApiSlice'
 
-export const RegistrationCax = ({
-  currentActiveStep,
-}: RegistrationCaxProps) => {
+export const RegistrationCax = () => {
   const { t } = useTranslation()
-  const history = useHistory()
   const dispatch = useDispatch()
-  const { status, error } = useSelector(applicationSelector)
+  const currentActiveStep = useSelector(getCurrentStep)
+  const { data: status, error } = useFetchApplicationsQuery()
+  const [updateInvitation] = useUpdateInvitationMutation()
 
   if (error) {
-    toast.error(error)
+    toast.error('error')
   }
 
   useEffect(() => {
     if (status.length <= 0) {
-      dispatch(updateInvitation())
-      dispatch(fetchId())
+      updateInvitation()
     }
-  }, [dispatch])
+  }, [])
 
   return (
     <Container>
@@ -82,7 +72,7 @@ export const RegistrationCax = ({
             ) : currentActiveStep === 3 ? (
               <CompanyRoleCax />
             ) : currentActiveStep === 4 ? (
-              <DragDropUploadFiles />
+              <DragDrop />
             ) : (
               <VerifyRegistration />
             )}
@@ -94,9 +84,3 @@ export const RegistrationCax = ({
     </Container>
   )
 }
-
-export default withRouter(
-  connect((state: IState) => ({
-    currentActiveStep: state.user.currentStep,
-  }))(RegistrationCax)
-)

@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
+import { RootState } from '../store'
 import {
   fetchId,
   updateInvitation,

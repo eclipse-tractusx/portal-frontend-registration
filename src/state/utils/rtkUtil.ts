@@ -18,20 +18,21 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: any;
+import { getApiBase, getBpdmApiBase } from '../../../src/services/EnvironmentService'
+import UserService from '../../../src/services/UserService'
 
-export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
+export const apiBaseQuery = () => ({
+  baseUrl: getApiBase(),
+  prepareHeaders: (headers: Headers) => {
+    headers.set('authorization', `Bearer ${UserService.getToken()}`)
+    return headers
+  },
+})
 
-export const getBpdmApiBase = () => typeof ENV === 'undefined' ? '' : ENV.BPDM_API_URL
-
-export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
-
-export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
-
-const EnvironmentService = {
-  getApiBase,
-  getAssetBase,
-  getCentralIdp,
-}
-
-export default EnvironmentService
+export const apiBpdmQuery = () => ({
+  baseUrl: getBpdmApiBase(),
+  prepareHeaders: (headers: Headers) => {
+    headers.set('authorization', `Bearer ${UserService.getToken()}`)
+    return headers
+  },
+})

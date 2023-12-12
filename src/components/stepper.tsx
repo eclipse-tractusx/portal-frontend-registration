@@ -21,14 +21,14 @@
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import React, { FC, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { IState } from '../state/features/user/redux.store.types'
 import { stepNames } from '../helpers/steps'
-interface StepperProps {
-  currentActiveStep: number
-}
+import { getCurrentStep } from '../state/features/user/userApiSlice'
 
-export const Stepper: FC<StepperProps> = ({ currentActiveStep }) => {
+export const Stepper = () => {
+  const currentActiveStep = useSelector(getCurrentStep)
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [currentActiveStep])
@@ -75,7 +75,3 @@ export const Stepper: FC<StepperProps> = ({ currentActiveStep }) => {
     </div>
   )
 }
-
-export default connect((state: IState) => ({
-  currentActiveStep: state.user.currentStep,
-}))(Stepper)

@@ -31,11 +31,8 @@ import { addrolesComposite } from '../state/features/user/action'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { IState } from '../state/features/user/redux.store.types'
-interface HeaderCaxProps {
-  addrolesComposite: (rolesComposite: string[]) => void
-}
 
-export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
+export const Header = () => {
   const { t } = useTranslation()
 
   const username = UserService.getUsername()
@@ -51,7 +48,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
         data.includes(value)
       )
       setuserRoles(filterComposite)
-      addrolesComposite(data)
+      //addrolesComposite(data)
     }
 
     // call the function
@@ -61,10 +58,8 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
           : t(`ErrorMessage.default`)
-        //   alert(message)
 
         toast.error(message)
-        //  history.push("/finish");
       })
   }, [tokenRoles, addrolesComposite, t])
 
@@ -123,18 +118,3 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
     </Row>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addrolesComposite: (rolesComposite: string[]) => {
-    dispatch(addrolesComposite(rolesComposite))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      roleComposite: state.user.roleComposite,
-    }),
-    mapDispatchToProps
-  )(Header)
-)

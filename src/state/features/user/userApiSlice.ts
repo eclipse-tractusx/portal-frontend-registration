@@ -18,14 +18,32 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './features/reducer'
+import { createSlice } from '@reduxjs/toolkit'
+import type { RootState } from '../store'
 
-export const store = configureStore({
-  reducer: rootReducer,
+const name = 'user/add'
+
+export interface UserRoleState {
+    currentStep: number
+}
+
+export const initialState: UserRoleState = {
+    currentStep: 1,
+}
+
+const slice = createSlice({
+  name,
+  initialState,
+  reducers: {
+    addCurrentStep: (state, action) => {
+      state.currentStep = action.payload
+    },
+  },
 })
 
-type RootState = ReturnType<typeof store.getState>
-type AppDispatch = typeof store.dispatch
+export const getCurrentStep = (state: RootState): number => {
+  return state.user.currentStep
+}
 
-export type { RootState, AppDispatch }
+export const { addCurrentStep } = slice.actions
+export default slice
