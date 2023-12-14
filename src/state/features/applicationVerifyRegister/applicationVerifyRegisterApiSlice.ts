@@ -36,41 +36,40 @@ export type IdentifierData = {
 }
 
 export type RegistrationDetails = {
-    companyId: string
-    bpn: string
-    name: string
-    shortName: string
-    city: string
-    region: string
-    streetAdditional: string
-    streetName: string
-    streetNumber: string
-    zipCode: string
-    countryAlpha2Code: string
-    taxId: string
-    companyRoles: Array<string>
-    agreements: Array<AgreementData>
-    documents: Array<DocumentData>
-    uniqueIds: Array<IdentifierData>
-  }
+  companyId: string
+  bpn: string
+  name: string
+  shortName: string
+  city: string
+  region: string
+  streetAdditional: string
+  streetName: string
+  streetNumber: string
+  zipCode: string
+  countryAlpha2Code: string
+  taxId: string
+  companyRoles: Array<string>
+  agreements: Array<AgreementData>
+  documents: Array<DocumentData>
+  uniqueIds: Array<IdentifierData>
+}
 
 export const apiSlice = createApi({
-    reducerPath: 'rtk/applicationVerifyRegister',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    endpoints: (builder) => ({
-        fetchRegistrationData: builder.query<RegistrationDetails, string>({
-            query: (applicationId) => `/api/registration/application/${applicationId}/registrationData`,
-        }),
-        updateRegistration: builder.mutation<string, string>({
-            query: (applicationId) => ({
-                url: `/api/registration/application/${applicationId}/submitRegistration`,
-                method: 'POST',
-            }),
-        }),
-    })
+  reducerPath: 'rtk/applicationVerifyRegister',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    fetchRegistrationData: builder.query<RegistrationDetails, string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/registrationData`,
+    }),
+    updateRegistration: builder.mutation<string, string>({
+      query: (applicationId) => ({
+        url: `/api/registration/application/${applicationId}/submitRegistration`,
+        method: 'POST',
+      }),
+    }),
+  }),
 })
 
-export const {
-    useFetchRegistrationDataQuery,
-    useUpdateRegistrationMutation,
-} = apiSlice
+export const { useFetchRegistrationDataQuery, useUpdateRegistrationMutation } =
+  apiSlice

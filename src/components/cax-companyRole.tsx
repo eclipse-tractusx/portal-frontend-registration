@@ -25,15 +25,21 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { stateSelector } from '../state/features/applicationCompanyRole/slice'
 import { companyRole } from '../state/features/applicationCompanyRole/types'
 import { download } from '../helpers/utils'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
 import '../styles/newApp.css'
-import { useFetchAgreementConsentsQuery, useFetchAgreementDataQuery, useUpdateAgreementConsentsMutation } from '../state/features/applicationCompanyRole/applicationCompanyRoleApiSlice'
+import {
+  useFetchAgreementConsentsQuery,
+  useFetchAgreementDataQuery,
+  useUpdateAgreementConsentsMutation,
+} from '../state/features/applicationCompanyRole/applicationCompanyRoleApiSlice'
 import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
-import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
+import {
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
 
 export const CompanyRoleCax = () => {
   const { t, i18n } = useTranslation()
@@ -48,11 +54,23 @@ export const CompanyRoleCax = () => {
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
-  const {data: allConsentData, error: allConsentError, isLoading: allConsentLoading} = useFetchAgreementDataQuery()
-  const {data: consentData, error: consentError, isLoading: consentLoading} = useFetchAgreementConsentsQuery(applicationId)
+  const {
+    data: allConsentData,
+    error: allConsentError,
+    isLoading: allConsentLoading,
+  } = useFetchAgreementDataQuery()
+  const {
+    data: consentData,
+    error: consentError,
+    isLoading: consentLoading,
+  } = useFetchAgreementConsentsQuery(applicationId)
   const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
 
-  if((allConsentLoading && allConsentError) || (consentLoading && consentError)) toast.error('')
+  if (
+    (allConsentLoading && allConsentError) ||
+    (consentLoading && consentError)
+  )
+    toast.error('')
 
   useEffect(() => {
     updateSelectedRolesAndAgreement()
@@ -108,12 +126,15 @@ export const CompanyRoleCax = () => {
   ) => {
     if (!documentId) return
     try {
-      fetch(`${getApiBase()}/api/registration/registrationDocuments/${documentId}`, {
-        method: 'GET',
-        headers: {
-          authorization: `Bearer ${UserService.getToken()}`,
+      fetch(
+        `${getApiBase()}/api/registration/registrationDocuments/${documentId}`,
+        {
+          method: 'GET',
+          headers: {
+            authorization: `Bearer ${UserService.getToken()}`,
+          },
         }
-      })
+      )
         .then(async (res) => {
           const fileType = res.headers.get('content-type')
           const file = await res.blob()
@@ -143,18 +164,31 @@ export const CompanyRoleCax = () => {
                 if (agreement.agreementId == id)
                   return (
                     <p className="agreement-text" key={agreement.agreementId}>
-                      {
-                        agreement.documentId
-                          ?
-                          <>
-                            {t('companyRole.TermsAndCondSpan1')}{' '}
-                            <span className={agreement.documentId ? 'agreement-span' : ''} onClick={() => handleDownloadClick(agreement.documentId, agreement.name)}>{agreement.name}</span>{' '}
-                            {t('companyRole.TermsAndCondSpan3')}
-                          </>
-                          :
-                          <span>{agreement.name}</span>
-                      }
-
+                      {agreement.documentId ? (
+                        <>
+                          {t('companyRole.TermsAndCondSpan1')}{' '}
+                          <span
+                            className={
+                              agreement.documentId ? 'agreement-span' : ''
+                            }
+                            onClick={() =>
+                              handleDownloadClick(
+                                agreement.documentId,
+                                agreement.name
+                              )
+                            }
+                            onKeyDown={() => {
+                              // do nothing
+                            }}
+                            role="button"
+                          >
+                            {agreement.name}
+                          </span>{' '}
+                          {t('companyRole.TermsAndCondSpan3')}
+                        </>
+                      ) : (
+                        <span>{agreement.name}</span>
+                      )}
                     </p>
                   )
               })}
@@ -187,13 +221,14 @@ export const CompanyRoleCax = () => {
     }
 
     await updateAgreementConsents({ applicationId, data })
-    .unwrap()
-    .then(() => {
-      dispatch(addCurrentStep(currentActiveStep + 1))
-    })
-    .catch((errors: any) => {
-      toast.error(t('companyRole.submitError'))
-    })
+      .unwrap()
+      .then(() => {
+        dispatch(addCurrentStep(currentActiveStep + 1))
+      })
+      .catch((errors) => {
+        console.log('errors', errors)
+        toast.error(t('companyRole.submitError'))
+      })
   }
 
   return (
@@ -211,29 +246,27 @@ export const CompanyRoleCax = () => {
           </div>
         </div>
         <div className="companydata-form mx-auto col-9">
-          {
-            allConsentData?.companyRoles.map((role, index) => (
-              <div className="company-role-section" key={index}>
-                <Row>
-                  <div className="col-1">
-                    <input
-                      type="checkbox"
-                      name={role.companyRole}
-                      className="regular-checkbox"
-                      onChange={() => handleCompanyRoleCheck(role.companyRole)}
-                      checked={companyRoleChecked?.[role.companyRole]}
-                    />
-                  </div>
-                  <div className="col-11">
-                    <h6>{t(`companyRole.${role.companyRole}`)}</h6>
-                    <p>{role.descriptions[i18n.language]}</p>
-                    {companyRoleChecked?.[role.companyRole] &&
-                      renderTermsSection(role)}
-                  </div>
-                </Row>
-              </div>
-            ))
-          }
+          {allConsentData?.companyRoles.map((role, index) => (
+            <div className="company-role-section" key={index}>
+              <Row>
+                <div className="col-1">
+                  <input
+                    type="checkbox"
+                    name={role.companyRole}
+                    className="regular-checkbox"
+                    onChange={() => handleCompanyRoleCheck(role.companyRole)}
+                    checked={companyRoleChecked?.[role.companyRole]}
+                  />
+                </div>
+                <div className="col-11">
+                  <h6>{t(`companyRole.${role.companyRole}`)}</h6>
+                  <p>{role.descriptions[i18n.language]}</p>
+                  {companyRoleChecked?.[role.companyRole] &&
+                    renderTermsSection(role)}
+                </div>
+              </Row>
+            </div>
+          ))}
         </div>
       </div>
       <FooterButton
@@ -241,7 +274,9 @@ export const CompanyRoleCax = () => {
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'
+        }
       />
     </>
   )

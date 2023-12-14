@@ -28,12 +28,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
+import { setUserToInvite } from '../state/features/applicationInviteUser/actions'
 import {
-  setUserToInvite,
-} from '../state/features/applicationInviteUser/actions'
-import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
 import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
-import { useFetchInvitedUsersQuery, useFetchRolesCompositeQuery, useUpdateInviteNewUserMutation } from '../state/features/applicationInviteUser/applicationInviteUserApiSlice'
+import {
+  useFetchInvitedUsersQuery,
+  useFetchRolesCompositeQuery,
+  useUpdateInviteNewUserMutation,
+} from '../state/features/applicationInviteUser/applicationInviteUserApiSlice'
 
 export const ResponsibilitiesCax = () => {
   const { t } = useTranslation()
@@ -55,17 +60,18 @@ export const ResponsibilitiesCax = () => {
   const dispatch = useDispatch()
   const currentActiveStep = useSelector(getCurrentStep)
 
-  const { data: status, error } = useFetchApplicationsQuery()
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (error) {
+  if (statusError) {
     toast.error('error')
   }
 
-  const [updateInviteNewUser, {error: invitedError, isSuccess }] = useUpdateInviteNewUserMutation()
+  const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
   const { data: rolesComposite } = useFetchRolesCompositeQuery()
-  const { data: invitedUsers, refetch} = useFetchInvitedUsersQuery(applicationId)
+  const { data: invitedUsers, refetch } =
+    useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
     setavailableUserRoles(rolesComposite)
@@ -78,11 +84,12 @@ export const ResponsibilitiesCax = () => {
 
   const validateEmail = (email) =>
     //eslint-disable-next-line
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(email)
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(
+      email
+    )
 
   const validatePersonalNote = (note: string) =>
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
-
 
   const handleSendInvite = () => {
     if (email && validateEmail(email)) {
@@ -96,18 +103,19 @@ export const ResponsibilitiesCax = () => {
       updateInviteNewUser({
         applicationId,
         user,
-      }).unwrap()
-      .then(() => {
-        setEmail('')
-        setMessage('')
-        refetch()
-        toast.success(t('Responsibility.sendInviteSuccessMsg'))
-        setLoading(false)
       })
-      .catch((errors: any) => {
-        toast.error(errors.data.errors.unknown[0])
-        setLoading(false)
-      })
+        .unwrap()
+        .then(() => {
+          setEmail('')
+          setMessage('')
+          refetch()
+          toast.success(t('Responsibility.sendInviteSuccessMsg'))
+          setLoading(false)
+        })
+        .catch((errors: any) => {
+          toast.error(errors.data.errors.unknown[0])
+          setLoading(false)
+        })
     }
   }
 
@@ -213,7 +221,9 @@ export const ResponsibilitiesCax = () => {
             <div>
               <Button
                 styleClass="button btn-primaryCax"
-                label={loading ? t('button.sending') : t('Responsibility.sentInvite')}
+                label={
+                  loading ? t('button.sending') : t('Responsibility.sentInvite')
+                }
                 handleClick={handleSendInvite}
                 icon={true}
                 loading={loading}
@@ -266,7 +276,9 @@ export const ResponsibilitiesCax = () => {
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
+        }
       />
     </>
   )

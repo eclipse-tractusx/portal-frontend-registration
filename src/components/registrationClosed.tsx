@@ -22,15 +22,16 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 import Footer from './footer'
-import {Header} from './cax-header'
+import { Header } from './cax-header'
 import Button from './button'
 import UserService from '../services/UserService'
 
 export const RegistrationClosed = () => {
   const queryParams = new URLSearchParams(window.location.search)
-  const term = queryParams.get("param")
+  const term = queryParams.get('param')
   const { t } = useTranslation('', {
-    keyPrefix: term === 'validate' ? 'registrationValidation' : 'registrationClosed',
+    keyPrefix:
+      term === 'validate' ? 'registrationValidation' : 'registrationClosed',
   })
 
   return (

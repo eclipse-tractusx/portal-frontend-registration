@@ -31,9 +31,12 @@ export const reducers = {
   user: userApiSlice.reducer,
   [applicationApiSlice.reducerPath]: applicationApiSlice.reducer,
   [applicationInviteUserSlice.reducerPath]: applicationInviteUserSlice.reducer,
-  [applicationCompanyRoleApiSlice.reducerPath]: applicationCompanyRoleApiSlice.reducer,
-  [applicationDocumentsApiSlice.reducerPath]: applicationDocumentsApiSlice.reducer,
-  [applicationVerifyRegisterApiSlice.reducerPath]: applicationVerifyRegisterApiSlice.reducer,
+  [applicationCompanyRoleApiSlice.reducerPath]:
+    applicationCompanyRoleApiSlice.reducer,
+  [applicationDocumentsApiSlice.reducerPath]:
+    applicationDocumentsApiSlice.reducer,
+  [applicationVerifyRegisterApiSlice.reducerPath]:
+    applicationVerifyRegisterApiSlice.reducer,
 }
 
 export const store = configureStore({

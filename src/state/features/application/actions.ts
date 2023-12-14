@@ -79,14 +79,10 @@ const getUniqueIdentifier = createAsyncThunk(
   `${name}/uniqueIdentifier/get`,
   async (alpha2Code: string) => {
     try {
-      return await ApplicationApi.getInstance().getUniqueIdentifier(
-        alpha2Code
-      )
+      return await ApplicationApi.getInstance().getUniqueIdentifier(alpha2Code)
     } catch (error: unknown) {
       console.error('api call error:', error)
-      throw Error(
-        'No identifier found.'
-      )
+      throw Error('No identifier found.')
     }
   }
 )

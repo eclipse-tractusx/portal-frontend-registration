@@ -22,42 +22,46 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export type InvitedUser = {
-    invitationStatus: string
-    emailId: string
-    invitedUserRoles: Array<string>
+  invitationStatus: string
+  emailId: string
+  invitedUserRoles: Array<string>
 }
 
 export type InviteNewUser = {
-    userName?: string
-    firstName?: string
-    lastName?: string
-    email: string
-    roles: string[]
-    message: string
+  userName?: string
+  firstName?: string
+  lastName?: string
+  email: string
+  roles: string[]
+  message: string
 }
 
 export const apiSlice = createApi({
-    reducerPath: 'rtk/applicationInviteUser',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    endpoints: (builder) => ({
-        fetchRolesComposite: builder.query<string[], void>({
-            query: () => '/api/registration/rolesComposite',
-        }),
-        fetchInvitedUsers: builder.query<InvitedUser[], string>({
-            query: (applicationId) => `/api/registration/application/${applicationId}/invitedusers`,
-        }),
-        updateInviteNewUser: builder.mutation<string, { applicationId: string; user: InviteNewUser }>({
-            query: (body) => ({
-                url: `/api/registration/application/${body.applicationId}/inviteNewUser`,
-                method: 'POST',
-                body: body.user,
-            }),
-        }),
-    })
+  reducerPath: 'rtk/applicationInviteUser',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    fetchRolesComposite: builder.query<string[], void>({
+      query: () => '/api/registration/rolesComposite',
+    }),
+    fetchInvitedUsers: builder.query<InvitedUser[], string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/invitedusers`,
+    }),
+    updateInviteNewUser: builder.mutation<
+      string,
+      { applicationId: string; user: InviteNewUser }
+    >({
+      query: (body) => ({
+        url: `/api/registration/application/${body.applicationId}/inviteNewUser`,
+        method: 'POST',
+        body: body.user,
+      }),
+    }),
+  }),
 })
 
 export const {
-    useFetchRolesCompositeQuery,
-    useFetchInvitedUsersQuery,
-    useUpdateInviteNewUserMutation,
+  useFetchRolesCompositeQuery,
+  useFetchInvitedUsersQuery,
+  useUpdateInviteNewUserMutation,
 } = apiSlice

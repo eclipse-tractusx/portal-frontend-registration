@@ -20,7 +20,7 @@
 
 import { AiOutlineMail } from 'react-icons/ai'
 import ReactTooltip from 'react-tooltip'
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Button = ({
   label,
@@ -33,8 +33,13 @@ const Button = ({
   loading = false,
 }) => {
   const renderButton = () => {
-    return loading ?
-      <button className={styleClass} onClick={handleClick} disabled={disabled} style={{ display: 'flex', alignItems: 'center' }}>
+    return loading ? (
+      <button
+        className={styleClass}
+        onClick={handleClick}
+        disabled={disabled}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         {
           <>
             <CircularProgress
@@ -45,7 +50,7 @@ const Button = ({
           </>
         }
       </button>
-      :
+    ) : (
       <button className={styleClass} onClick={handleClick} disabled={disabled}>
         {!icon ? (
           label
@@ -55,40 +60,40 @@ const Button = ({
           </>
         )}
       </button>
+    )
   }
   return (
     <>
-      {
-        showTooltip ?
-          <>
-            <ReactTooltip
-              className="tooltip"
-              id="tooltipBtn"
-              place="top"
-              effect="solid"
+      {showTooltip ? (
+        <>
+          <ReactTooltip
+            className="tooltip"
+            id="tooltipBtn"
+            place="top"
+            effect="solid"
+          >
+            {tooltipText}
+          </ReactTooltip>
+          <div data-tip data-for="tooltipBtn">
+            <button
+              className={styleClass}
+              onClick={handleClick}
+              color="#CBCBCB"
+              disabled
             >
-              {tooltipText}
-            </ReactTooltip>
-            <div data-tip data-for="tooltipBtn">
-              <button
-                className={styleClass}
-                onClick={handleClick}
-                color="#CBCBCB"
-                disabled
-              >
-                {!icon ? (
-                  label
-                ) : (
-                  <>
-                    <AiOutlineMail className="button-icon" /> <span>{label}</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </>
-          :
-          renderButton()
-      }
+              {!icon ? (
+                label
+              ) : (
+                <>
+                  <AiOutlineMail className="button-icon" /> <span>{label}</span>
+                </>
+              )}
+            </button>
+          </div>
+        </>
+      ) : (
+        renderButton()
+      )}
     </>
   )
 }

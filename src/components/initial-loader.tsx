@@ -29,16 +29,13 @@ export const InitialLoader = () => {
   const history = useHistory()
 
   const { data: status, error } = useFetchApplicationsQuery()
-  
+
   useEffect(() => {
-    status && status.length > 0 && handleStatusRedirect(status[0]['applicationStatus'], history)
+    status &&
+      status.length > 0 &&
+      handleStatusRedirect(status[0]['applicationStatus'], history)
   }, [status])
 
-  return (
-    error ?
-      <ErrorPage />
-      :
-      <div className="initial-loader"></div>
-  )
+  return error ? <ErrorPage /> : <div className="initial-loader"></div>
 }
 export default withRouter(InitialLoader)

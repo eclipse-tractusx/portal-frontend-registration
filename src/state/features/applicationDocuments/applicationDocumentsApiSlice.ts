@@ -22,73 +22,74 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export const DocumentType = {
-    CX_FRAME_CONTRACT: 'CX_FRAME_CONTRACT',
-    COMMERCIAL_REGISTER_EXTRACT: 'COMMERCIAL_REGISTER_EXTRACT',
-    APP_CONTRACT: 'APP_CONTRACT',
-    DATA_CONTRACT: 'DATA_CONTRACT',
+  CX_FRAME_CONTRACT: 'CX_FRAME_CONTRACT',
+  COMMERCIAL_REGISTER_EXTRACT: 'COMMERCIAL_REGISTER_EXTRACT',
+  APP_CONTRACT: 'APP_CONTRACT',
+  DATA_CONTRACT: 'DATA_CONTRACT',
 }
 
 export type DocumentResponse = {
-    documentId: string,
-    documentName: string
+  documentId: string
+  documentName: string
 }
 
 enum Tags {
-    DOCUMENT = 'Document',
+  DOCUMENT = 'Document',
 }
 
 export const apiSlice = createApi({
-    reducerPath: 'rtk/applicationDocument',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    tagTypes: [Tags.DOCUMENT],
-    endpoints: (builder) => ({
-        fetchDocuments: builder.query<DocumentResponse[], string>({
-            query: (applicationId) => `/api/registration/application/${applicationId}/documentType/${DocumentType.COMMERCIAL_REGISTER_EXTRACT}/documents`,
-            providesTags: [Tags.DOCUMENT],
+  reducerPath: 'rtk/applicationDocument',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  tagTypes: [Tags.DOCUMENT],
+  endpoints: (builder) => ({
+    fetchDocuments: builder.query<DocumentResponse[], string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/documentType/${DocumentType.COMMERCIAL_REGISTER_EXTRACT}/documents`,
+      providesTags: [Tags.DOCUMENT],
+    }),
+    fetchDocumentByDocumentId: builder.mutation({
+      query: (documentId) => ({
+        url: `/api/registration/documents/${documentId}`,
+        responseHandler: async (response) => ({
+          headers: response.headers,
+          data: await response.blob(),
         }),
-        fetchDocumentByDocumentId: builder.mutation({
-            query: (documentId) => ({
-                url: `/api/registration/documents/${documentId}`,
-                responseHandler: async (response) => ({
-                    headers: response.headers,
-                    data: await response.blob(),
-                }),
-            }),
-        }),
-        updateDocument: builder.mutation({
-            async queryFn(
-                data: { applicationId: string; body: { file: File } },
-                _queryApi,
-                _extraOptions,
-                fetchWithBaseQuery
-            ) {
-                const formData = new FormData()
-                formData.append('document', data.body.file)
+      }),
+    }),
+    updateDocument: builder.mutation({
+      async queryFn(
+        data: { applicationId: string; body: { file: File } },
+        _queryApi,
+        _extraOptions,
+        fetchWithBaseQuery
+      ) {
+        const formData = new FormData()
+        formData.append('document', data.body.file)
 
-                const response = await fetchWithBaseQuery({
-                    url: `/api/registration/application/${data.applicationId}/documentType/${DocumentType.COMMERCIAL_REGISTER_EXTRACT}/documents`,
-                    method: 'POST',
-                    body: formData,
-                })
-                return response.data
-                    ? { data: response.data }
-                    : { error: response.error }
-            },
-            invalidatesTags: [Tags.DOCUMENT],
-        }),
-        removeDocument: builder.mutation<string, string>({
-            query: (documentId) => ({
-                url: `/api/registration/documents/${documentId}`,
-                method: 'DELETE',
-            }),
-            invalidatesTags: [Tags.DOCUMENT],
-        }),
-    })
+        const response = await fetchWithBaseQuery({
+          url: `/api/registration/application/${data.applicationId}/documentType/${DocumentType.COMMERCIAL_REGISTER_EXTRACT}/documents`,
+          method: 'POST',
+          body: formData,
+        })
+        return response.data
+          ? { data: response.data }
+          : { error: response.error }
+      },
+      invalidatesTags: [Tags.DOCUMENT],
+    }),
+    removeDocument: builder.mutation<string, string>({
+      query: (documentId) => ({
+        url: `/api/registration/documents/${documentId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [Tags.DOCUMENT],
+    }),
+  }),
 })
 
 export const {
-    useFetchDocumentsQuery,
-    useFetchDocumentByDocumentIdMutation,
-    useUpdateDocumentMutation,
-    useRemoveDocumentMutation,
+  useFetchDocumentsQuery,
+  useFetchDocumentByDocumentIdMutation,
+  useUpdateDocumentMutation,
+  useRemoveDocumentMutation,
 } = apiSlice

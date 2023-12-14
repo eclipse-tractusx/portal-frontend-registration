@@ -26,7 +26,17 @@ export const FooterHeadline = ({ helpUrl }: { helpUrl?: string }) => {
   return (
     <div className="col12 d-flex align-items-center justify-content-center">
       {t('FooterContent.Footer1')} {t('FooterContent.Footer2')} &nbsp;
-      <a href={window.location.pathname.replace(window.location.pathname, helpUrl)} target="_blank" rel='noreferrer'> {t('FooterContent.FooterLink')}</a>
+      <a
+        href={window.location.pathname.replace(
+          window.location.pathname,
+          helpUrl
+        )}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {' '}
+        {t('FooterContent.FooterLink')}
+      </a>
       {t('FooterContent.Footer3')}
     </div>
   )

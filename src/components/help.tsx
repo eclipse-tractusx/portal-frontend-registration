@@ -20,7 +20,7 @@
 
 import { Container, Row, Col, Nav } from 'react-bootstrap'
 import Footer from './footer'
-import {Header} from './cax-header'
+import { Header } from './cax-header'
 import SearchInput from 'react-search-input'
 import { useRef, useState } from 'react'
 import { withRouter } from 'react-router-dom'

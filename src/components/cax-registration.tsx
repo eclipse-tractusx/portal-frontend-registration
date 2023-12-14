@@ -21,29 +21,31 @@
 import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Footer from './footer'
-import {Header} from './cax-header'
+import { Header } from './cax-header'
 import ReactTooltip from 'react-tooltip'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import 'react-datepicker/dist/react-datepicker.css'
-import {CompanyDataCax} from './cax-companyData'
-import {ResponsibilitiesCax} from './cax-responsibilities'
-import {DragDrop} from './dragdrop'
-import {CompanyRoleCax} from './cax-companyRole'
+import { CompanyDataCax } from './cax-companyData'
+import { ResponsibilitiesCax } from './cax-responsibilities'
+import { DragDrop } from './dragdrop'
+import { CompanyRoleCax } from './cax-companyRole'
 import { useTranslation } from 'react-i18next'
-import {Stepper} from './stepper'
-import {VerifyRegistration} from './verifyRegistration'
-import { useFetchApplicationsQuery, useUpdateInvitationMutation } from '../state/features/application/applicationApiSlice'
+import { Stepper } from './stepper'
+import { VerifyRegistration } from './verifyRegistration'
+import {
+  useFetchApplicationsQuery,
+  useUpdateInvitationMutation,
+} from '../state/features/application/applicationApiSlice'
 import { getCurrentStep } from '../state/features/user/userApiSlice'
 
 export const RegistrationCax = () => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const currentActiveStep = useSelector(getCurrentStep)
-  const { data: status, error } = useFetchApplicationsQuery()
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
   const [updateInvitation] = useUpdateInvitationMutation()
 
-  if (error) {
+  if (statusError) {
     toast.error('error')
   }
 

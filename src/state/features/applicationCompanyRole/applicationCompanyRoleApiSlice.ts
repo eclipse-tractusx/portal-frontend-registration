@@ -22,56 +22,60 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export type CompanyRoleData = {
-    companyRole: string,
-    descriptions: {
-      de: string,
-      en: string,
-    },
-    agreementIds: string[]
+  companyRole: string
+  descriptions: {
+    de: string
+    en: string
+  }
+  agreementIds: string[]
 }
 
 export type AgreementData = {
-    agreementId: string,
-    name: string,
-    agreementLink: string,
-    documentId: string
-  }
+  agreementId: string
+  name: string
+  agreementLink: string
+  documentId: string
+}
 
 export type AgreementResponse = {
-    companyRoles: CompanyRoleData[],
-    agreements: AgreementData[]
+  companyRoles: CompanyRoleData[]
+  agreements: AgreementData[]
 }
 
 export type AgreementConsents = {
-    companyRoles: string[],
-    agreements: {
-        agreementId: string,
-        consentStatus: string
-    }[]
-  }
+  companyRoles: string[]
+  agreements: {
+    agreementId: string
+    consentStatus: string
+  }[]
+}
 
 export const apiSlice = createApi({
-    reducerPath: 'rtk/applicationCompanyRole',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    endpoints: (builder) => ({
-        fetchAgreementData: builder.query<AgreementResponse, void>({
-            query: () => '/api/registration/companyRoleAgreementData',
-        }),
-        fetchAgreementConsents: builder.query<AgreementConsents, string>({
-            query: (applicationId) => `/api/registration/application/${applicationId}/companyRoleAgreementConsents`,
-        }),
-        updateAgreementConsents: builder.mutation<string, { applicationId: string; data: AgreementConsents }>({
-            query: (body) => ({
-                url: `/api/registration/application/${body.applicationId}/companyRoleAgreementConsents`,
-                method: 'POST',
-                body: body.data,
-            }),
-        }),
-    })
+  reducerPath: 'rtk/applicationCompanyRole',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    fetchAgreementData: builder.query<AgreementResponse, void>({
+      query: () => '/api/registration/companyRoleAgreementData',
+    }),
+    fetchAgreementConsents: builder.query<AgreementConsents, string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/companyRoleAgreementConsents`,
+    }),
+    updateAgreementConsents: builder.mutation<
+      string,
+      { applicationId: string; data: AgreementConsents }
+    >({
+      query: (body) => ({
+        url: `/api/registration/application/${body.applicationId}/companyRoleAgreementConsents`,
+        method: 'POST',
+        body: body.data,
+      }),
+    }),
+  }),
 })
 
 export const {
-    useFetchAgreementDataQuery,
-    useFetchAgreementConsentsQuery,
-    useUpdateAgreementConsentsMutation,
+  useFetchAgreementDataQuery,
+  useFetchAgreementConsentsQuery,
+  useUpdateAgreementConsentsMutation,
 } = apiSlice

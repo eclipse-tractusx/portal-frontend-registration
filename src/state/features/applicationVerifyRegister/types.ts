@@ -21,7 +21,7 @@
 export interface RegistrationState {
   registrationData: RegistrationDetails | null
   loading: boolean
-  success: boolean,
+  success: boolean
   error: string
 }
 

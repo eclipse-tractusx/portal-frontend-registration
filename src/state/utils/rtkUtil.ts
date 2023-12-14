@@ -18,7 +18,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { getApiBase, getBpdmApiBase } from '../../../src/services/EnvironmentService'
+import {
+  getApiBase,
+  getBpdmApiBase,
+} from '../../../src/services/EnvironmentService'
 import UserService from '../../../src/services/UserService'
 
 export const apiBaseQuery = () => ({

@@ -24,11 +24,11 @@ import type { RootState } from '../store'
 const name = 'user/add'
 
 export interface UserRoleState {
-    currentStep: number
+  currentStep: number
 }
 
 export const initialState: UserRoleState = {
-    currentStep: 1,
+  currentStep: 1,
 }
 
 const slice = createSlice({

@@ -25,20 +25,24 @@ import { withRouter, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Footer from './footer'
 import BulletList from './bulletList'
-import {Header} from './cax-header'
+import { Header } from './cax-header'
 import Button from './button'
 import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
-import { useFetchApplicationsQuery, useUpdateInvitationMutation, useUpdateStatusMutation } from '../state/features/application/applicationApiSlice'
+import {
+  useFetchApplicationsQuery,
+  useUpdateInvitationMutation,
+  useUpdateStatusMutation,
+} from '../state/features/application/applicationApiSlice'
 
 export const Landing = () => {
   const { t } = useTranslation()
   const history = useHistory()
 
-  const { data: status, error } = useFetchApplicationsQuery()
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
   const [updateInvitation] = useUpdateInvitationMutation()
   const [updateStatus] = useUpdateStatusMutation()
 
-  if (error) {
+  if (statusError) {
     toast.error('error')
   }
 
@@ -82,8 +86,17 @@ export const Landing = () => {
           <div className="mx-auto col-9 d-flex align-items-center justify-content-center info small-info">
             <span className="">
               {t('landing.footerText1')}{' '}
-              <a href={window.location.pathname.replace(window.location.pathname, '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration')}
-                target="_blank" rel='noreferrer'> {t('landing.footerText2')}.</a>
+              <a
+                href={window.location.pathname.replace(
+                  window.location.pathname,
+                  '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration'
+                )}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {' '}
+                {t('landing.footerText2')}.
+              </a>
             </span>
           </div>
         </Col>

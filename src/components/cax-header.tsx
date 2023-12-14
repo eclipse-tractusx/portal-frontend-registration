@@ -23,14 +23,11 @@ import { Row, Col } from 'react-bootstrap'
 import UserService from '../services/UserService'
 import { getClientRolesComposite } from '../helpers/utils'
 import { useState, useEffect } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
 import { addrolesComposite } from '../state/features/user/action'
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import { IState } from '../state/features/user/redux.store.types'
 
 export const Header = () => {
   const { t } = useTranslation()
@@ -81,6 +78,9 @@ export const Header = () => {
             <span
               className={language === 'en' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('en')}
+              onKeyDown={() => {
+                // do nothing
+              }}
             >
               {' '}
               EN{' '}
@@ -90,6 +90,9 @@ export const Header = () => {
             <span
               className={language === 'de' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('de')}
+              onKeyDown={() => {
+                // do nothing
+              }}
             >
               {' '}
               DE
@@ -104,13 +107,22 @@ export const Header = () => {
               <div> {username}</div>
               <div> {UserService.getDomain()}</div>
               <div>({userRoles.join(', ')})</div>
-              <div className="logout" onClick={() => UserService.doLogout()}>
+              <div
+                className="logout"
+                onClick={() => UserService.doLogout()}
+                onKeyDown={() => {
+                  // do nothing
+                }}
+                role="button"
+              >
                 {t('header.logout')}
               </div>
             </span>
           </div>
           <div className="profile-link">
-            <Link to="/help" target="_blank">{t('header.help')}</Link>
+            <Link to="/help" target="_blank">
+              {t('header.help')}
+            </Link>
           </div>
         </div>
         <ToastContainer />

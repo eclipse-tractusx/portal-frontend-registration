@@ -23,71 +23,74 @@ import { useTranslation } from 'react-i18next'
 import Button from './button'
 
 export const ErrorPage = () => {
-    const { t } = useTranslation()
-    return (
-        <Box
-            sx={{
-                position: 'absolute',
-                top: '20%',
-                left: '16%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                margin: 'auto auto',
-            }}
+  const { t } = useTranslation()
+  return (
+    <Box
+      sx={{
+        position: 'absolute',
+        top: '20%',
+        left: '16%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        margin: 'auto auto',
+      }}
+    >
+      <Box
+        sx={{
+          minWidth: '400px',
+        }}
+      >
+        <img
+          src="/registration/robot-sw.925342207cc863d3ed2cc9c65ffb7c33.svg"
+          alt=""
+        />
+      </Box>
+      <Box>
+        <Typography
+          variant="h5"
+          sx={{
+            fontFamily: 'LibreFranklin-Light',
+            fontWeight: '600',
+            marginBottom: '10px',
+          }}
         >
-            <Box
-                sx={{
-                    minWidth: '400px',
-                }}
-            >
-                <img src="/registration/robot-sw.925342207cc863d3ed2cc9c65ffb7c33.svg" alt="" />
-            </Box>
-            <Box>
-                <Typography
-                    variant="h5"
-                    sx={{
-                        fontFamily: 'LibreFranklin-Light',
-                        fontWeight: '600',
-                        marginBottom: '10px',
-                    }}
-                >
-                    {t('errorPage.heading')}
-                </Typography>
-                <Typography
-                    variant="body1"
-                    style={{
-                        fontSize: '18px',
-                        fontFamily: 'LibreFranklin-Light',
-                        marginBottom: '20px'
-                    }}
-                >
-                    {t('errorPage.title')}
-                </Typography>
-                <Typography
-                    variant="body1"
-                    style={{
-                        fontFamily: 'LibreFranklin-Light',
-                        fontSize: '18px',
-                        width: '640px',
-                        marginBottom: '20px'
-                    }}
-                >
-                    {t('errorPage.description')}
-                </Typography>
-                <Box 
-                    sx={{ 
-                        position: 'absolute',
-                        left: '60%'
-                    }}
-                >
-                    <Button
-                        label={t('button.reload')}
-                        styleClass='button btn-default'
-                        handleClick={() => location.reload()}
-                    />
-                </Box>
-            </Box>
+          {t('errorPage.heading')}
+        </Typography>
+        <Typography
+          variant="body1"
+          style={{
+            fontSize: '18px',
+            fontFamily: 'LibreFranklin-Light',
+            marginBottom: '20px',
+          }}
+        >
+          {t('errorPage.title')}
+        </Typography>
+        <Typography
+          variant="body1"
+          style={{
+            fontFamily: 'LibreFranklin-Light',
+            fontSize: '18px',
+            width: '640px',
+            marginBottom: '20px',
+          }}
+        >
+          {t('errorPage.description')}
+        </Typography>
+        <Box
+          sx={{
+            position: 'absolute',
+            left: '60%',
+          }}
+        >
+          <Button
+            label={t('button.reload')}
+            styleClass="button btn-default"
+            handleClick={() => location.reload()}
+          />
         </Box>
-    )
+      </Box>
+    </Box>
+  )
 }

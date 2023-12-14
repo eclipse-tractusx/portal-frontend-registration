@@ -25,7 +25,7 @@ import {
   updateInvitation,
   getCompanyDetailsWithAddress,
   saveCompanyDetailsWithAddress,
-  getUniqueIdentifier
+  getUniqueIdentifier,
 } from './actions'
 import { ApplicationState, InitialCompanyDetail } from './types'
 
@@ -35,7 +35,7 @@ const initialState: ApplicationState = {
   identifierDetails: [],
   loading: false,
   error: null,
-  saveError: null
+  saveError: null,
 }
 
 const applicationSlice = createSlice({
@@ -103,15 +103,12 @@ const applicationSlice = createSlice({
       loading: true,
       error: null,
     }))
-    builder.addCase(
-      getUniqueIdentifier.fulfilled,
-      (state, { payload }) => ({
-        ...state,
-        identifierDetails: payload,
-        loading: false,
-        error: null,
-      })
-    )
+    builder.addCase(getUniqueIdentifier.fulfilled, (state, { payload }) => ({
+      ...state,
+      identifierDetails: payload,
+      loading: false,
+      error: null,
+    }))
     builder.addCase(getUniqueIdentifier.rejected, (state, action) => ({
       ...state,
       identifierDetails: [],
@@ -123,19 +120,19 @@ const applicationSlice = createSlice({
       loading: true,
       saveError: null,
     }))
-    builder.addCase(
-      saveCompanyDetailsWithAddress.fulfilled,
-      (state) => ({
-        ...state,
-        loading: false,
-        saveError: null,
-      })
-    )
-    builder.addCase(saveCompanyDetailsWithAddress.rejected, (state, action) => ({
+    builder.addCase(saveCompanyDetailsWithAddress.fulfilled, (state) => ({
       ...state,
       loading: false,
-      saveError: action.error.message as string,
+      saveError: null,
     }))
+    builder.addCase(
+      saveCompanyDetailsWithAddress.rejected,
+      (state, action) => ({
+        ...state,
+        loading: false,
+        saveError: action.error.message as string,
+      })
+    )
   },
 })
 

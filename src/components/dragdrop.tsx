@@ -34,11 +34,21 @@ import { DocumentData } from '../state/features/applicationDocuments/types'
 import { FileStatus, FileStatusValue } from '../types/MainTypes'
 import { VERIFY } from '../state/features/application/types'
 import { v4 as uuidv4 } from 'uuid'
-import { useFetchApplicationsQuery, useUpdateStatusMutation } from '../state/features/application/applicationApiSlice'
-import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
-import { useFetchDocumentByDocumentIdMutation, useFetchDocumentsQuery, useRemoveDocumentMutation, useUpdateDocumentMutation } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
+import {
+  useFetchApplicationsQuery,
+  useUpdateStatusMutation,
+} from '../state/features/application/applicationApiSlice'
+import {
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
+import {
+  useFetchDocumentByDocumentIdMutation,
+  useFetchDocumentsQuery,
+  useRemoveDocumentMutation,
+  useUpdateDocumentMutation,
+} from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
 import { downloadDocument } from '../helpers/utils'
-
 
 const getClassNameByStatus = (status: string) => {
   switch (status) {
@@ -69,11 +79,11 @@ export const DragDrop = () => {
   const { data: status, error: statusError } = useFetchApplicationsQuery()
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
-  
+
   const [fileError, setFileError] = useState('')
 
   const currentActiveStep = useSelector(getCurrentStep)
-  const {data: documents} = useFetchDocumentsQuery(applicationId)
+  const { data: documents } = useFetchDocumentsQuery(applicationId)
   const [fetchDocumentByDocumentId] = useFetchDocumentByDocumentIdMutation()
   const [updateStatus] = useUpdateStatusMutation()
   const [updateDocument] = useUpdateDocumentMutation()
@@ -125,14 +135,15 @@ export const DragDrop = () => {
   }
 
   const deleteDocumentFn = async (documentId) => {
-    await removeDocument(documentId).unwrap()
-    .then(() => {
-      toast.success(t('documentUpload.deleteSuccess'))
-    })
-    .catch((errors: any) => {
-      console.log('errors', errors)
-      toast.error(t('documentUpload.deleteError'))
-    })
+    await removeDocument(documentId)
+      .unwrap()
+      .then(() => {
+        toast.success(t('documentUpload.deleteSuccess'))
+      })
+      .catch((errors: any) => {
+        console.log('errors', errors)
+        toast.error(t('documentUpload.deleteError'))
+      })
   }
 
   const handleDownloadDocument = async (
@@ -169,7 +180,11 @@ export const DragDrop = () => {
           <Dropzone
             onChangeStatus={handleChangeStatus}
             LayoutComponent={(props) => (
-              <DragdropLayout {...props} error={fileError} documentError={'documentError'} />
+              <DragdropLayout
+                {...props}
+                error={fileError}
+                documentError={'documentError'}
+              />
             )}
             inputContent={<DragdropContent />}
             inputWithFilesContent={t('documentUpload.title')}
@@ -186,13 +201,16 @@ export const DragDrop = () => {
             <div className="dropzone-overview-files" key={uuidv4()}>
               <div className="dropzone-overview-file">
                 <div
+                  className="dropzone-overview-file-name"
                   onClick={() =>
                     handleDownloadDocument(
                       document.documentId,
                       document.documentName
                     )
                   }
-                  className="dropzone-overview-file-name"
+                  onKeyDown={() => {
+                    // do nothing
+                  }}
                 >
                   {document.documentName}
                 </div>
@@ -219,6 +237,9 @@ export const DragDrop = () => {
               <div
                 className="dropzone-overview-remove"
                 onClick={() => deleteDocumentFn(document.documentId)}
+                onKeyDown={() => {
+                  // do nothing
+                }}
               ></div>
             </div>
           ))}
@@ -229,7 +250,9 @@ export const DragDrop = () => {
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'
+        }
       />
     </>
   )

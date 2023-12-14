@@ -22,96 +22,98 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export type ApplicationChecklist = {
-    statusId: string
-    typeId: string
+  statusId: string
+  typeId: string
 }
 
 export type ApplicationResponse = {
-    applicationChecklist: ApplicationChecklist[]
-    applicationId: string
-    applicationStatus: string
+  applicationChecklist: ApplicationChecklist[]
+  applicationId: string
+  applicationStatus: string
 }
 
 export type ApplicationStatus = {
-    id: string
-    status: string
+  id: string
+  status: string
 }
 
 export type Identifier = {
-    type: string
-    value: string
+  type: string
+  value: string
 }
 
 export type CompanyDetails = {
-    companyId: string
-    bpn: string
-    name: string
-    shortName: string
-    city: string
-    region: string
-    streetAdditional: string
-    streetName: string
-    streetNumber: string
-    zipCode: string
-    countryAlpha2Code: string
-    taxId: string
-    uniqueIds: Identifier[]
-    uniqueIdentifier: UniqueIdentifier[]
+  companyId: string
+  bpn: string
+  name: string
+  shortName: string
+  city: string
+  region: string
+  streetAdditional: string
+  streetName: string
+  streetNumber: string
+  zipCode: string
+  countryAlpha2Code: string
+  taxId: string
+  uniqueIds: Identifier[]
+  uniqueIdentifier: UniqueIdentifier[]
 }
 
 export type UniqueIdentifier = {
-    id: number
-    label: string
+  id: number
+  label: string
 }
 
 export const apiSlice = createApi({
-    reducerPath: 'rtk/application',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    endpoints: (builder) => ({
-        fetchApplications: builder.query<ApplicationResponse[], void>({
-            query: () => '/api/registration/applications',
-        }),
-        updateInvitation: builder.mutation<string, void>({
-            query: () => ({
-                url: '/api/registration/invitation/status',
-                method: 'PUT'
-            }),
-        }),
-        updateStatus: builder.mutation<string, ApplicationStatus>({
-            query: (status) => ({
-                url: `/api/registration/application/${status.id}/status?status=${status.status}`,
-                method: 'PUT'
-            }),
-        }),
-        fetchCompanyDetailsWithAddress: builder.query<CompanyDetails, string>({
-            query: (applicationId) => `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
-        }),
-        fetchUniqueIdentifier: builder.query<UniqueIdentifier[], string>({
-            query: (alpha2Code) => {
-                if(!alpha2Code || alpha2Code.length < 2) return 
-                return `/api/registration/company/country/${alpha2Code}/uniqueidentifiers`
-            },
-        }),
-        addCompanyDetailsWithAddress: builder.mutation<string,
-        {
-            applicationId: string
-            companyData: CompanyDetails
-        }
-      >({
-        query: (data) => ({
-          url: `/api/registration/application/${data.applicationId}/companyDetailsWithAddress`,
-          method: 'POST',
-          body: data.companyData,
-        }),
+  reducerPath: 'rtk/application',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    fetchApplications: builder.query<ApplicationResponse[], void>({
+      query: () => '/api/registration/applications',
+    }),
+    updateInvitation: builder.mutation<string, void>({
+      query: () => ({
+        url: '/api/registration/invitation/status',
+        method: 'PUT',
       }),
-    })
+    }),
+    updateStatus: builder.mutation<string, ApplicationStatus>({
+      query: (status) => ({
+        url: `/api/registration/application/${status.id}/status?status=${status.status}`,
+        method: 'PUT',
+      }),
+    }),
+    fetchCompanyDetailsWithAddress: builder.query<CompanyDetails, string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/companyDetailsWithAddress`,
+    }),
+    fetchUniqueIdentifier: builder.query<UniqueIdentifier[], string>({
+      query: (alpha2Code) => {
+        if (!alpha2Code || alpha2Code.length < 2) return
+        return `/api/registration/company/country/${alpha2Code}/uniqueidentifiers`
+      },
+    }),
+    addCompanyDetailsWithAddress: builder.mutation<
+      string,
+      {
+        applicationId: string
+        companyData: CompanyDetails
+      }
+    >({
+      query: (data) => ({
+        url: `/api/registration/application/${data.applicationId}/companyDetailsWithAddress`,
+        method: 'POST',
+        body: data.companyData,
+      }),
+    }),
+  }),
 })
 
 export const {
-    useFetchApplicationsQuery,
-    useUpdateInvitationMutation,
-    useUpdateStatusMutation,
-    useFetchCompanyDetailsWithAddressQuery,
-    useFetchUniqueIdentifierQuery,
-    useAddCompanyDetailsWithAddressMutation,
+  useFetchApplicationsQuery,
+  useUpdateInvitationMutation,
+  useUpdateStatusMutation,
+  useFetchCompanyDetailsWithAddressQuery,
+  useFetchUniqueIdentifierQuery,
+  useAddCompanyDetailsWithAddressMutation,
 } = apiSlice

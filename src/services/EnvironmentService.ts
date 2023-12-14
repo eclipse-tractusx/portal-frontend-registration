@@ -18,15 +18,19 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: any;
+declare const ENV: any
 
-export const getApiBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
+export const getApiBase = () =>
+  typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
 
-export const getBpdmApiBase = () => typeof ENV === 'undefined' ? '' : ENV.BPDM_API_URL
+export const getBpdmApiBase = () =>
+  typeof ENV === 'undefined' ? '' : ENV.BPDM_API_URL
 
-export const getAssetBase = () => typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
+export const getAssetBase = () =>
+  typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
 
-export const getCentralIdp = () => typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
+export const getCentralIdp = () =>
+  typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
 
 const EnvironmentService = {
   getApiBase,

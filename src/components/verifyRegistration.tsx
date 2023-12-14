@@ -28,8 +28,14 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
 import { useFetchDocumentsQuery } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
-import { addCurrentStep, getCurrentStep } from '../state/features/user/userApiSlice'
-import { useFetchRegistrationDataQuery, useUpdateRegistrationMutation } from '../state/features/applicationVerifyRegister/applicationVerifyRegisterApiSlice'
+import {
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
+import {
+  useFetchRegistrationDataQuery,
+  useUpdateRegistrationMutation,
+} from '../state/features/applicationVerifyRegister/applicationVerifyRegisterApiSlice'
 
 export const VerifyRegistration = () => {
   const { t } = useTranslation()
@@ -45,29 +51,31 @@ export const VerifyRegistration = () => {
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
   if (statusError) {
-    toast.error('statusError')
+    toast.error('error')
   }
 
-  const {data: registrationData} = useFetchRegistrationDataQuery(applicationId)
-  const {data: documents} = useFetchDocumentsQuery(applicationId)
+  const { data: registrationData } =
+    useFetchRegistrationDataQuery(applicationId)
+  const { data: documents } = useFetchDocumentsQuery(applicationId)
   const [updateRegistration] = useUpdateRegistrationMutation()
 
   const backClick = () => {
     dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
-  const nextClick = async() => {
+  const nextClick = async () => {
     if (loading) return
     setLoading(true)
-    await updateRegistration(applicationId).unwrap()
-    .then(() => {
-      history.push('/finish')
-    })
-    .catch((errors: any) => {
-      console.log('errors', errors)
-      setLoading(false)
-      toast.error(t('verifyRegistration.submitErrorMessage'))
-    })
+    await updateRegistration(applicationId)
+      .unwrap()
+      .then(() => {
+        history.push('/finish')
+      })
+      .catch((errors: any) => {
+        console.log('errors', errors)
+        setLoading(false)
+        toast.error(t('verifyRegistration.submitErrorMessage'))
+      })
   }
 
   const getTooltip = () => {
@@ -80,12 +88,9 @@ export const VerifyRegistration = () => {
     return null
   }
 
-  const hasRoles = () => {
-    return true
-  }
-  const hasDocuments = () => {
-    return documents && documents.length > 0 ? true : false
-  }
+  const hasRoles = () => registrationData.companyRoles.length > 0
+
+  const hasDocuments = () => documents && documents.length > 0
 
   return (
     <>
@@ -152,37 +157,38 @@ export const VerifyRegistration = () => {
                   </span>
                 </Row>
               </li>
-              {
-                registrationData?.region &&
+              {registrationData?.region && (
                 <li className="list-group-item-cax">
                   <Row>
-                    <span className="col-6">{t('verifyRegistration.region')}</span>
                     <span className="col-6">
-                      {registrationData?.region}
+                      {t('verifyRegistration.region')}
                     </span>
+                    <span className="col-6">{registrationData?.region}</span>
                   </Row>
                 </li>
-              }
+              )}
               <li className="list-group-item-cax">
                 <Row>
                   <span className="col-6">
                     {t('verifyRegistration.country')}
                   </span>
-                  <span className="col-6">{registrationData?.countryAlpha2Code}</span>
+                  <span className="col-6">
+                    {registrationData?.countryAlpha2Code}
+                  </span>
                 </Row>
               </li>
-              {
-                registrationData?.uniqueIds.map((identifier) =>
-                  <li className="list-group-item-cax" key={identifier.type}>
-                    <Row>
-                      <span className="col-6">
-                        {t(`registrationStepOne.identifierTypes.${identifier.type}`)}
-                      </span>
-                      <span className="col-6">{identifier.value}</span>
-                    </Row>
-                  </li>
-                )
-              }
+              {registrationData?.uniqueIds.map((identifier) => (
+                <li className="list-group-item-cax" key={identifier.type}>
+                  <Row>
+                    <span className="col-6">
+                      {t(
+                        `registrationStepOne.identifierTypes.${identifier.type}`
+                      )}
+                    </span>
+                    <span className="col-6">{identifier.value}</span>
+                  </Row>
+                </li>
+              ))}
             </ul>
           </Row>
           <Row>
@@ -234,7 +240,9 @@ export const VerifyRegistration = () => {
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         tooltip={getTooltip()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F06.+Verify+Registration+Data.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F06.+Verify+Registration+Data.md'
+        }
       />
     </>
   )
