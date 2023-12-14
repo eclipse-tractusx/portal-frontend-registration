@@ -42,9 +42,7 @@ export const Landing = () => {
   const [updateInvitation] = useUpdateInvitationMutation()
   const [updateStatus] = useUpdateStatusMutation()
 
-  if (statusError) {
-    toast.error('error')
-  }
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   useEffect(() => {
     updateInvitation().unwrap()

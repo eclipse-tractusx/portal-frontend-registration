@@ -32,7 +32,8 @@
     "responsAdmin": "Benutzer hinzufügen",
     "companyRole": "Unternehmensrolle",
     "uploadDocument": "Dokumente",
-    "verifyEntries": "Prüfen & Senden"
+    "verifyEntries": "Prüfen & Senden",
+    "statusApplicationError": "Application ID not existing. Please contact the administrator."
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Unternehmensdaten",

@@ -64,9 +64,8 @@ export const ResponsibilitiesCax = () => {
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (statusError) {
-    toast.error('error')
-  }
+  
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
   const { data: rolesComposite } = useFetchRolesCompositeQuery()

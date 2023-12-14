@@ -89,9 +89,7 @@ export const DragDrop = () => {
   const [updateDocument] = useUpdateDocumentMutation()
   const [removeDocument] = useRemoveDocumentMutation()
 
-  if (statusError) {
-    toast.error('error')
-  }
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   const manageFileStatus = async (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {

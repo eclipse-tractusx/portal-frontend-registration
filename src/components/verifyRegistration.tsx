@@ -50,9 +50,8 @@ export const VerifyRegistration = () => {
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
-  if (statusError) {
-    toast.error('error')
-  }
+  
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   const { data: registrationData } =
     useFetchRegistrationDataQuery(applicationId)

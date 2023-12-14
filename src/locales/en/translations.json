@@ -32,7 +32,8 @@
     "responsAdmin": "Add Users",
     "companyRole": "Company Role",
     "uploadDocument": "Documents",
-    "verifyEntries": "Verify & Submit"
+    "verifyEntries": "Verify & Submit",
+    "statusApplicationError": "Application ID not existing. Please contact the administrator."
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Add your company data",
