@@ -113,7 +113,6 @@ export const Header = () => {
                 onKeyDown={() => {
                   // do nothing
                 }}
-                role="button"
               >
                 {t('header.logout')}
               </div>

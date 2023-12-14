@@ -180,7 +180,6 @@ export const CompanyRoleCax = () => {
                             onKeyDown={() => {
                               // do nothing
                             }}
-                            role="button"
                           >
                             {agreement.name}
                           </span>{' '}
