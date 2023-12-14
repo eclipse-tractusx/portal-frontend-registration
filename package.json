@@ -1,6 +1,6 @@
 {
   "name": "cx-portal-registration",
-  "version": "v1.5.2",
+  "version": "v1.5.4",
   "license": "Apache-2.0",
   "homepage": "/registration",
   "scripts": {
@@ -8,8 +8,9 @@
     "lint": "eslint ./src",
     "start": "PORT=3002 BROWSER=none react-scripts start",
     "build:dirty": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "build": "react-scripts build && mkdir registration && mv build/* registration && mv registration build/",
+    "build": "yarn build:copy-legal-info && react-scripts build && mkdir registration && mv build/* registration && mv registration build/",
     "build:legal-notice": "bash scripts/legal-notice.sh",
+    "build:copy-legal-info": "cp LICENSE NOTICE.md DEPENDENCIES SECURITY.md public/",
     "build:sources": "zip -r portal-registration.zip src package.json yarn.lock -x '*.stories.*' -x '*.test.*' -x '*.ttf' -x '*.svg' -x '*.png'",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test",
@@ -25,7 +26,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "@types/react-redux": "^7.1.22",
     "@types/redux-actions": "^2.6.2",
-    "axios": "^0.27.2",
+    "axios": "^1.6.1",
     "bootstrap": "^5.1.3",
     "history": "^4.10.1",
     "i18next": "^21.5.3",
@@ -59,10 +60,10 @@
     "**/tough-cookie": "^4.1.3",
     "**/webpack": "^5.76.0",
     "**/@babel/traverse": "^7.23.2",
-    "**/axios": "^1.6.1",
     "**/css-what": "^6.1.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",

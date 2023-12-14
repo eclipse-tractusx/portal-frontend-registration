@@ -31,8 +31,15 @@ import { ResponsibilitiesCax } from './cax-responsibilities'
 import { DragDrop } from './dragdrop'
 import { CompanyRoleCax } from './cax-companyRole'
 import { useTranslation } from 'react-i18next'
+<<<<<<< HEAD
 import { Stepper } from './stepper'
 import { VerifyRegistration } from './verifyRegistration'
+=======
+import { withRouter } from 'react-router-dom'
+import Stepper from './stepper'
+import VerifyRegistration from './verifyRegistration'
+import { applicationSelector } from '../state/features/application/slice'
+>>>>>>> 367dd4f32a11a1847fc42e803eb16de530741aae
 import {
   useFetchApplicationsQuery,
   useUpdateInvitationMutation,
@@ -41,9 +48,14 @@ import { getCurrentStep } from '../state/features/user/userApiSlice'
 
 export const RegistrationCax = () => {
   const { t } = useTranslation()
+<<<<<<< HEAD
   const currentActiveStep = useSelector(getCurrentStep)
   const { data: status, error: statusError } = useFetchApplicationsQuery()
   const [updateInvitation] = useUpdateInvitationMutation()
+=======
+  const dispatch = useDispatch()
+  const { status, error } = useSelector(applicationSelector)
+>>>>>>> 367dd4f32a11a1847fc42e803eb16de530741aae
 
   if (statusError) {
     toast.error('error')

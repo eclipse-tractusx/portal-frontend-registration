@@ -50,7 +50,7 @@ export type FileStatusValue = 'done' | 'rejected_file_type' | 'error_file_size'
 
 export interface ProgressType {
   loaded: number
-  total: number
+  total?: number
 }
 
 export interface PostDocumentType {

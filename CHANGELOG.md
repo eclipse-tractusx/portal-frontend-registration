@@ -2,6 +2,45 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
+### Unreleased
+- Change API calls to RTK queries
+
+
+## 1.5.4
+
+### Change
+- Legal information for distributions [TRG 7.05](https://eclipse-tractusx.github.io/docs/release/trg-7/trg-7-05/)
+  - added legal info at build
+
+### Bugfix
+* updated verify registration help link with valid link
+
+### Technical Support
+- added pull request linting
+
+### Known Knowns
+- Backend api errors are partially not handled on FE side, user receives on certain system error scenarios no message on the UI (e.g. if the GET /companyRoles has issues to fetch the already selected roles from the backend) - the issue only appears if the FE and BE are not correctly integrated or if the backend has business logic issues/db service issues
+
+## 1.5.3
+
+### Change
+n/a
+
+### Feature
+n/a
+
+### Technical Support
+- Trivy scan: changed to no failure on high findings, as it should only fail if there is an error/misconfiguration
+
+### Bugfix
+- Vulnerability from dependency
+  - upgrade axios dependency from 0.27.2 to v1.6.1 and implement changes due to major version upgrade
+- Sonar - fixed low bugs
+- Company Registration - Submit button logic of the registration submission updated to handle "inactive"/"disabled" state in case of missing document upload
+
+### Known Knowns
+- Backend api errors are partially not handled on FE side, user receives on certain system error scenarios no message on the UI (e.g. if the GET /companyRoles has issues to fetch the already selected roles from the backend) - the issue only appears if the FE and BE are not correctly integrated or if the backend has business logic issues/db service issues
+
 ## 1.5.2
 
 ### Change
