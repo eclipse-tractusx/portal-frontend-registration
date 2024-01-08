@@ -24,44 +24,23 @@ import { AiOutlineUser } from 'react-icons/ai'
 import Button from './button'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IUserItem } from '../state/features/user/types'
-import { IState } from '../state/features/user/redux.store.types'
-import { Dispatch } from 'redux'
-import {
-  addToInviteList,
-  removeFromInviteList,
-  addCurrentStep,
-} from '../state/features/user/action'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { withRouter } from 'react-router-dom'
 import { FooterButton } from './footerButton'
-import { applicationSelector } from '../state/features/application/slice'
+import { setUserToInvite } from '../state/features/applicationInviteUser/actions'
 import {
-  stateSelector,
-  rolesSelector,
-} from '../state/features/applicationInviteUser/slice'
-import {
-  fetchInvited,
-  fetchRolesComposite,
-  sendInvite,
-  setUserToInvite,
-} from '../state/features/applicationInviteUser/actions'
-import { RequestState } from '../types/MainTypes'
-
-interface ResponsibilitiesCaxProps {
-  addToInviteList: (userItem: IUserItem) => void
-  removeFromInviteList: (userItem: string) => void
-  userInviteList: IUserItem[]
-  currentActiveStep: number
-  addCurrentStep: (step: number) => void
-}
-
-export const ResponsibilitiesCax = ({
-  currentActiveStep,
   addCurrentStep,
-}: ResponsibilitiesCaxProps) => {
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
+import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
+import {
+  useFetchInvitedUsersQuery,
+  useFetchRolesCompositeQuery,
+  useUpdateInviteNewUserMutation,
+} from '../state/features/applicationInviteUser/applicationInviteUserApiSlice'
+
+export const ResponsibilitiesCax = () => {
   const { t } = useTranslation()
   const [email, setEmail] = useState<string | null>('')
   const [role, setRole] = useState<string | null>('')
@@ -79,35 +58,19 @@ export const ResponsibilitiesCax = ({
   const [loading, setLoading] = useState<boolean>()
 
   const dispatch = useDispatch()
+  const currentActiveStep = useSelector(getCurrentStep)
 
-  const { status, error } = useSelector(applicationSelector)
-  const rolesComposite = useSelector(rolesSelector)
-  const {invitedUsers, sendRequest, error: invitedError} = useSelector(stateSelector)
-  
-  useEffect(()=> {
-    if(loading){
-      if(sendRequest === RequestState.ERROR && invitedError){
-        toast.error(invitedError)
-        setLoading(false)
-      }else if(sendRequest === RequestState.OK){
-        setEmail('')
-        setMessage('')
-        toast.success(t('Responsibility.sendInviteSuccessMsg'))
-        setLoading(false)
-      }
-    }
-  },[sendRequest])
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  if (error) {
-    toast.error(error)
-  }
+  
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
-  useEffect(() => {
-    dispatch(fetchRolesComposite())
-    dispatch(fetchInvited(applicationId))
-  }, [dispatch])
+  const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
+  const { data: rolesComposite } = useFetchRolesCompositeQuery()
+  const { data: invitedUsers, refetch } =
+    useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
     setavailableUserRoles(rolesComposite)
@@ -120,11 +83,12 @@ export const ResponsibilitiesCax = ({
 
   const validateEmail = (email) =>
     //eslint-disable-next-line
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(email)
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*))@(([a-z0-9-]+\.)+[a-z]{2,})$/.test(
+      email
+    )
 
   const validatePersonalNote = (note: string) =>
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
-
 
   const handleSendInvite = () => {
     if (email && validateEmail(email)) {
@@ -135,12 +99,22 @@ export const ResponsibilitiesCax = ({
         message: message,
       }
       dispatch(setUserToInvite(user))
-      dispatch(
-        sendInvite({
-          applicationId,
-          user,
+      updateInviteNewUser({
+        applicationId,
+        user,
+      })
+        .unwrap()
+        .then(() => {
+          setEmail('')
+          setMessage('')
+          refetch()
+          toast.success(t('Responsibility.sendInviteSuccessMsg'))
+          setLoading(false)
         })
-      )
+        .catch((errors: any) => {
+          toast.error(errors.data.errors.unknown[0])
+          setLoading(false)
+        })
     }
   }
 
@@ -173,11 +147,11 @@ export const ResponsibilitiesCax = ({
   }
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
   const nextClick = () => {
-    addCurrentStep(currentActiveStep + 1)
+    dispatch(addCurrentStep(currentActiveStep + 1))
   }
 
   return (
@@ -246,7 +220,9 @@ export const ResponsibilitiesCax = ({
             <div>
               <Button
                 styleClass="button btn-primaryCax"
-                label={loading ? t('button.sending') : t('Responsibility.sentInvite')}
+                label={
+                  loading ? t('button.sending') : t('Responsibility.sentInvite')
+                }
                 handleClick={handleSendInvite}
                 icon={true}
                 loading={loading}
@@ -255,7 +231,7 @@ export const ResponsibilitiesCax = ({
             <ToastContainer />
           </Row>
 
-          {invitedUsers.length > 0 && invitedUsers && (
+          {invitedUsers?.length > 0 && invitedUsers && (
             <Row className="mx-auto col-9 send-invite">
               <h5>{t('Responsibility.titleInvite')}</h5>
               <Row>
@@ -299,31 +275,10 @@ export const ResponsibilitiesCax = ({
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
+        }
       />
     </>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addToInviteList: (userItem: IUserItem) => {
-    dispatch(addToInviteList(userItem))
-  },
-  removeFromInviteList: (userUiId: string) => {
-    dispatch(removeFromInviteList(userUiId))
-  },
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      userInviteList: state.user.userInviteList,
-      currentActiveStep: state.user.currentStep,
-      roleComposite: state.user.roleComposite,
-    }),
-    mapDispatchToProps
-  )(ResponsibilitiesCax)
-)

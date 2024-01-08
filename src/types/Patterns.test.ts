@@ -18,91 +18,89 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import {
-    isBPN, isCity, isStreet,
-} from './Patterns'
+import { isBPN, isCity, isStreet } from './Patterns'
 
 const TESTDATA = {
-    BPN: {
-        valid: ['BPNL000000015OHJ', 'bpnl000000000001', 'bpnlaaaaaaaaaaaa'],
-        invalid: [
-            '',
-            'word',
-            'some string',
-            '    BPNL000000000001  ',
-            'BPNL00000000000015OHJ',
-            'BPNL01',
-        ],
-    },
-    CITY: {
-        valid: [
-            'Munich',
-            'Toronto',
-            'San Francisco',
-            'St. Catharines',
-            'Val-d\'Or',
-            'Presqu\'ile',
-            'Niagara on the Lake',
-            'Niagara-on-the-Lake',
-            'München',
-            'Villes du Québec',
-            'Provence-Alpes-Côte d\'Azur',
-            'Île-de-France',
-            'Kópavogur',
-            'Garðabær',
-            'Sauðárkrókur',
-            'Þorlákshöfn',
-        ],
-        invalid: [
-            ' Munich',
-            'Munich ',
-            ',',
-            '.',
-            '--',
-            'Niagara--on-the-Lake',
-            'Presqu\'\'ile',
-        ],
-    },
-    STREET: {
-        valid: [
-            'Dorfstraße',
-            'Hauptstrasse',
-            'Bahnhofstr.',
-            'Gmeiner Weg',
-            '701 FIFTH AVE',
-            'HOLLYWOOD, FL 33022-2480',
-            '111 MONUMENT CIRCLE, SUITE 3700',
-            'P.O. BOX 2903',
-            'P.O. Box 12345 Los Angeles',
-            '1441 SEAMIST DR.',
-            '2000 PENNSYLVANIA AVENUE, N.W.',
-            'Gertrud-Grunow-Str. 09',
-            'Gertrud-Grunow-Straße 09',
-            'Rue d\'Alger',
-            'Rue de l\'Amiral-de-Coligny',
-            'Allée André-Breton',
-            'Vlašská 19'
-        ],
-        invalid: [
-            ' Hauptstr',
-            'Einbahnstr. ',
-            'Rotkehlchenweg ',
-            ',',
-            '.',
-            '--',
-            'Finken  weg',
-            'Rue de l\'\'este',
-        ]
-    }
+  BPN: {
+    valid: ['BPNL000000015OHJ', 'bpnl000000000001', 'bpnlaaaaaaaaaaaa'],
+    invalid: [
+      '',
+      'word',
+      'some string',
+      '    BPNL000000000001  ',
+      'BPNL00000000000015OHJ',
+      'BPNL01',
+    ],
+  },
+  CITY: {
+    valid: [
+      'Munich',
+      'Toronto',
+      'San Francisco',
+      'St. Catharines',
+      "Val-d'Or",
+      "Presqu'ile",
+      'Niagara on the Lake',
+      'Niagara-on-the-Lake',
+      'München',
+      'Villes du Québec',
+      "Provence-Alpes-Côte d'Azur",
+      'Île-de-France',
+      'Kópavogur',
+      'Garðabær',
+      'Sauðárkrókur',
+      'Þorlákshöfn',
+    ],
+    invalid: [
+      ' Munich',
+      'Munich ',
+      ',',
+      '.',
+      '--',
+      'Niagara--on-the-Lake',
+      "Presqu''ile",
+    ],
+  },
+  STREET: {
+    valid: [
+      'Dorfstraße',
+      'Hauptstrasse',
+      'Bahnhofstr.',
+      'Gmeiner Weg',
+      '701 FIFTH AVE',
+      'HOLLYWOOD, FL 33022-2480',
+      '111 MONUMENT CIRCLE, SUITE 3700',
+      'P.O. BOX 2903',
+      'P.O. Box 12345 Los Angeles',
+      '1441 SEAMIST DR.',
+      '2000 PENNSYLVANIA AVENUE, N.W.',
+      'Gertrud-Grunow-Str. 09',
+      'Gertrud-Grunow-Straße 09',
+      "Rue d'Alger",
+      "Rue de l'Amiral-de-Coligny",
+      'Allée André-Breton',
+      'Vlašská 19',
+    ],
+    invalid: [
+      ' Hauptstr',
+      'Einbahnstr. ',
+      'Rotkehlchenweg ',
+      ',',
+      '.',
+      '--',
+      'Finken  weg',
+      "Rue de l''este",
+    ],
+  },
 }
 
 const validate = (data, check) => {
-    data.valid.forEach((expr) => expect(check(expr)).toBe(true))
-    data.invalid.forEach((expr) => expect(check(expr)).toBe(false))
+  data.valid.forEach((expr) => expect(check(expr)).toBe(true))
+  data.invalid.forEach((expr) => expect(check(expr)).toBe(false))
 }
 
 describe('Input Pattern Tests', () => {
-    it('validates BPNs', () => validate(TESTDATA.BPN, isBPN))
-    it('validates cities', () => validate(TESTDATA.CITY, isCity))
-    it('validates streets', () => validate(TESTDATA.STREET, isStreet))
+  it('validates BPNs', () => validate(TESTDATA.BPN, isBPN))
+  it('validates cities', () => validate(TESTDATA.CITY, isCity))
+  it('validates streets', () => validate(TESTDATA.STREET, isStreet))
 })

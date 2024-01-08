@@ -21,7 +21,7 @@
 import Button from './button'
 import { Container, Row, Col } from 'react-bootstrap'
 import Footer from './footer'
-import Header from './cax-header'
+import { Header } from './cax-header'
 import { useHistory, withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 

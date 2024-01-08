@@ -85,7 +85,7 @@ export const InitialCompanyDetail = {
   zipCode: '',
   countryAlpha2Code: '',
   taxId: '',
-  uniqueIds: []
+  uniqueIds: [],
 }
 
 export const CREATED = 'CREATED'

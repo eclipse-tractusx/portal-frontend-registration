@@ -41,7 +41,9 @@ const saveRegistration = createAsyncThunk(
   'registration/application/saveRegistration',
   async (applicationId: string) => {
     try {
-      return await ApplicationApi.getInstance().submitRegistration(applicationId)
+      return await ApplicationApi.getInstance().submitRegistration(
+        applicationId
+      )
     } catch (error: unknown) {
       console.error('api call error:', error)
       throw Error(

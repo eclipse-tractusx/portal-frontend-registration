@@ -18,14 +18,24 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './features/reducer'
+import {
+  getApiBase,
+  getBpdmApiBase,
+} from '../../../src/services/EnvironmentService'
+import UserService from '../../../src/services/UserService'
 
-export const store = configureStore({
-  reducer: rootReducer,
+export const apiBaseQuery = () => ({
+  baseUrl: getApiBase(),
+  prepareHeaders: (headers: Headers) => {
+    headers.set('authorization', `Bearer ${UserService.getToken()}`)
+    return headers
+  },
 })
 
-type RootState = ReturnType<typeof store.getState>
-type AppDispatch = typeof store.dispatch
-
-export type { RootState, AppDispatch }
+export const apiBpdmQuery = () => ({
+  baseUrl: getBpdmApiBase(),
+  prepareHeaders: (headers: Headers) => {
+    headers.set('authorization', `Bearer ${UserService.getToken()}`)
+    return headers
+  },
+})

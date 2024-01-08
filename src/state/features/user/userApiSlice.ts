@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
+ * Copyright (c) 2021, 2023 BMW Group AG
  * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -18,27 +18,32 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { useTranslation } from 'react-i18next'
+import { createSlice } from '@reduxjs/toolkit'
+import type { RootState } from '../store'
 
-export const FooterHeadline = ({ helpUrl }: { helpUrl?: string }) => {
-  const { t } = useTranslation()
+const name = 'user/add'
 
-  return (
-    <div className="col12 d-flex align-items-center justify-content-center">
-      {t('FooterContent.Footer1')} {t('FooterContent.Footer2')} &nbsp;
-      <a
-        href={window.location.pathname.replace(
-          window.location.pathname,
-          helpUrl
-        )}
-        target="_blank"
-        rel="noreferrer"
-      >
-        {' '}
-        {t('FooterContent.FooterLink')}
-      </a>
-      {t('FooterContent.Footer3')}
-    </div>
-  )
+export interface UserRoleState {
+  currentStep: number
 }
-export default FooterHeadline
+
+export const initialState: UserRoleState = {
+  currentStep: 1,
+}
+
+const slice = createSlice({
+  name,
+  initialState,
+  reducers: {
+    addCurrentStep: (state, action) => {
+      state.currentStep = action.payload
+    },
+  },
+})
+
+export const getCurrentStep = (state: RootState): number => {
+  return state.user.currentStep
+}
+
+export const { addCurrentStep } = slice.actions
+export default slice
