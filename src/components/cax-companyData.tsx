@@ -25,26 +25,21 @@ import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep, addCompanyData } from '../state/features/user/action'
-import { withRouter } from 'react-router-dom'
-import { Dispatch } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import {
-  getCompanyDetailsWithAddress,
-  getUniqueIdentifier,
-  saveCompanyDetailsWithAddress,
-} from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice'
-import { CompanyDetails } from '../state/features/application/types'
 import { isBPN, isCity, isStreet } from '../types/Patterns'
-
-interface CompanyDataProps {
-  currentActiveStep: number
-  addCurrentStep: (step: number) => void
-  addCompanyData: (companydata: CompanyDetails) => void
-}
+import {
+  useFetchApplicationsQuery,
+  useFetchCompanyDetailsWithAddressQuery,
+  useFetchUniqueIdentifierQuery,
+  UniqueIdentifier,
+  useAddCompanyDetailsWithAddressMutation,
+  Identifier,
+} from '../state/features/application/applicationApiSlice'
+import {
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
 
 const initialErrors = {
   legalEntity: '',
@@ -57,30 +52,76 @@ const initialErrors = {
   identifierNumber: '',
 }
 
-export const CompanyDataCax = ({
-  currentActiveStep,
-  addCurrentStep,
-}: CompanyDataProps) => {
+export const CompanyDataCax = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
+  const currentActiveStep = useSelector(getCurrentStep)
+
   const [nextClicked, setNextClicked] = useState(false)
+  const [identifierDetails, setIdentifierDetails] =
+    useState<UniqueIdentifier[]>()
 
-  const { status, loading, saveError, companyDetails, identifierDetails } =
-    useSelector(applicationSelector)
-
-  nextClicked &&
-    !loading &&
-    (saveError
-      ? toast.error(t('registrationStepOne.submitError'))
-      : addCurrentStep(currentActiveStep + 1))
+  const { data: status } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
 
+  const [bpn, setBpn] = useState('')
+  const [bpnErrorMsg, setBpnErrorMessage] = useState('')
+  const [legalEntity, setLegalEntity] = useState('')
+  const [registeredName, setRegisteredName] = useState('')
+  const [streetHouseNumber, setStreetHouseNumber] = useState('')
+  const [region, setRegion] = useState('')
+  const [postalCode, setPostalCode] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
+  const [showIdentifiers, setShowIdentifiers] = useState(false)
+  const [uniqueIds, setUniqueIds] = useState<Identifier[]>()
+  const [identifierType, setIdentifierType] = useState<string>()
+  const [identifierNumber, setIdentifierNumber] = useState<string>()
+  const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
+  const [errors, setErrors] = useState(initialErrors)
+
+  const { data: companyDetails } =
+    useFetchCompanyDetailsWithAddressQuery(applicationId)
+  const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
+    useAddCompanyDetailsWithAddressMutation()
+
+  nextClicked &&
+    !isLoading &&
+    (saveError
+      ? toast.error(t('registrationStepOne.submitError'))
+      : dispatch(addCurrentStep(currentActiveStep + 1)))
+
   useEffect(() => {
-    dispatch(getCompanyDetailsWithAddress(applicationId))
-  }, [dispatch])
+    nextClicked && dispatch(addCurrentStep(currentActiveStep + 1))
+  }, [nextClicked, currentActiveStep])
+
+  const {
+    data: identifierData,
+    error,
+    refetch,
+  } = useFetchUniqueIdentifierQuery(country)
+
+  useEffect(() => {
+    setIdentifierDetails(error ? [] : identifierData)
+    if (identifierData?.length > 0) {
+      setShowIdentifiers(!error)
+    }
+    if (country && country.length === 2 && error)
+      toast.error(t('registrationStepOne.identifierError'))
+  }, [identifierData, country, error])
+
+  useEffect(() => {
+    if (errors.country === '' && country && changedCountryValue) {
+      refetch()
+      validateRegion(region)
+    }
+    identifierNumber &&
+      identifierType &&
+      validateIdentifierNumber(identifierNumber)
+  }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
     setBpn(companyDetails?.bpn)
@@ -91,51 +132,14 @@ export const CompanyDataCax = ({
     setPostalCode(companyDetails?.zipCode)
     setCity(companyDetails?.city)
     setCountry(companyDetails?.countryAlpha2Code)
-    companyDetails?.countryAlpha2Code &&
-      dispatch(getUniqueIdentifier(companyDetails?.countryAlpha2Code))
     setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
+    setIdentifierDetails(companyDetails?.uniqueIdentifier)
   }, [companyDetails])
-
-  useEffect(() => {
-    if (identifierDetails.length > 0) {
-      setShowIdentifiers(true)
-    }
-  }, [identifierDetails])
-
-  const [bpn, setBpn] = useState(companyDetails?.bpn)
-  const [bpnErrorMsg, setBpnErrorMessage] = useState('')
-  const [legalEntity, setLegalEntity] = useState(companyDetails.name)
-  const [registeredName, setRegisteredName] = useState(companyDetails.name)
-  const [streetHouseNumber, setStreetHouseNumber] = useState(
-    companyDetails.streetName
-  )
-  const [region, setRegion] = useState(companyDetails.region)
-  const [postalCode, setPostalCode] = useState(companyDetails.zipCode)
-  const [city, setCity] = useState(companyDetails.city)
-  const [country, setCountry] = useState(companyDetails.countryAlpha2Code)
-  const [showIdentifiers, setShowIdentifiers] = useState(false)
-  const [uniqueIds, setUniqueIds] = useState<any>()
-  const [identifierType, setIdentifierType] = useState<string>()
-  const [identifierNumber, setIdentifierNumber] = useState<string>()
-  const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
-  const [errors, setErrors] = useState(initialErrors)
-
-  useEffect(() => {
-    if (errors.country === '' && country && changedCountryValue) {
-      dispatch(getUniqueIdentifier(country.toUpperCase()))
-      validateRegion(region)
-    }
-    identifierNumber &&
-      identifierType &&
-      validateIdentifierNumber(identifierNumber)
-  }, [identifierType, identifierNumber, country])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
-    details['countryAlpha2Code'] &&
-      dispatch(getUniqueIdentifier(details['countryAlpha2Code']))
     setBpn(details['bpn'])
     setLegalEntity(details['name'])
     setRegisteredName(details['name'])
@@ -158,6 +162,7 @@ export const CompanyDataCax = ({
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
+          console.log('errorCode', errorCode)
           setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
         })
       setBpnErrorMessage('')
@@ -295,7 +300,7 @@ export const CompanyDataCax = ({
   }
 
   const backClick = () => {
-    addCurrentStep(currentActiveStep - 1)
+    dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
   const nextClick = () => {
@@ -315,7 +320,7 @@ export const CompanyDataCax = ({
       },
     ]
     //addCompanyData(companyData)
-    dispatch(saveCompanyDetailsWithAddress({ applicationId, companyData }))
+    addCompanyDetailsWithAddress({ applicationId, companyData })
     setNextClicked(true)
   }
 
@@ -593,27 +598,23 @@ export const CompanyDataCax = ({
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        disabled={!legalEntity || !registeredName || !streetHouseNumber || !city || !country || errors.streetHouseNumber !== '' || errors.country !== '' || errors.postalCode !== '' || errors.region !== '' || !identifierDetails.length || errors.identifierNumber !== ''}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'}
+        disabled={
+          !legalEntity ||
+          !registeredName ||
+          !streetHouseNumber ||
+          !city ||
+          !country ||
+          errors.streetHouseNumber !== '' ||
+          errors.country !== '' ||
+          errors.postalCode !== '' ||
+          errors.region !== '' ||
+          !identifierDetails?.length ||
+          errors.identifierNumber !== ''
+        }
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
+        }
       />
     </>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addCurrentStep: (step: number) => {
-    dispatch(addCurrentStep(step))
-  },
-  addCompanyData: (companyData: CompanyDetails) => {
-    dispatch(addCompanyData(companyData))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      currentActiveStep: state.user.currentStep,
-    }),
-    mapDispatchToProps
-  )(CompanyDataCax)
-)

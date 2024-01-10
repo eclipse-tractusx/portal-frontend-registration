@@ -23,19 +23,13 @@ import { Row, Col } from 'react-bootstrap'
 import UserService from '../services/UserService'
 import { getClientRolesComposite } from '../helpers/utils'
 import { useState, useEffect } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
 import { addrolesComposite } from '../state/features/user/action'
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import { IState } from '../state/features/user/redux.store.types'
-interface HeaderCaxProps {
-  addrolesComposite: (rolesComposite: string[]) => void
-}
 
-export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
+export const Header = () => {
   const { t } = useTranslation()
 
   const username = UserService.getUsername()
@@ -51,7 +45,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
         data.includes(value)
       )
       setuserRoles(filterComposite)
-      addrolesComposite(data)
+      //addrolesComposite(data)
     }
 
     // call the function
@@ -61,10 +55,8 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
           : t(`ErrorMessage.default`)
-        //   alert(message)
 
         toast.error(message)
-        //  history.push("/finish");
       })
   }, [tokenRoles, addrolesComposite, t])
 
@@ -86,7 +78,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
             <span
               className={language === 'en' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('en')}
-              onKeyUp={() => {
+              onKeyDown={() => {
                 // do nothing
               }}
             >
@@ -98,7 +90,7 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
             <span
               className={language === 'de' ? 'lang-sel' : ''}
               onClick={() => changeLanguage('de')}
-              onKeyUp={() => {
+              onKeyDown={() => {
                 // do nothing
               }}
             >
@@ -115,19 +107,21 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
               <div> {username}</div>
               <div> {UserService.getDomain()}</div>
               <div>({userRoles.join(', ')})</div>
-              <div 
+              <div
                 className="logout"
                 onClick={() => UserService.doLogout()}
-                onKeyUp={() => {
+                onKeyDown={() => {
                   // do nothing
                 }}
-                >
+              >
                 {t('header.logout')}
               </div>
             </span>
           </div>
           <div className="profile-link">
-            <Link to="/help" target="_blank">{t('header.help')}</Link>
+            <Link to="/help" target="_blank">
+              {t('header.help')}
+            </Link>
           </div>
         </div>
         <ToastContainer />
@@ -135,18 +129,3 @@ export const Header = ({ addrolesComposite }: HeaderCaxProps) => {
     </Row>
   )
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addrolesComposite: (rolesComposite: string[]) => {
-    dispatch(addrolesComposite(rolesComposite))
-  },
-})
-
-export default withRouter(
-  connect(
-    (state: IState) => ({
-      roleComposite: state.user.roleComposite,
-    }),
-    mapDispatchToProps
-  )(Header)
-)

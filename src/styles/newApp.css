@@ -138,12 +138,12 @@ h6 {
   box-shadow: 0px 40px 50px 30px rgba(0, 0, 0, 0.2);
 }
 
-.mb-60{
+.mb-60 {
   margin-bottom: 60px;
 }
 
-.icons-bullets{
-  color: #0F71CB;
+.icons-bullets {
+  color: #0f71cb;
   font-size: 25px;
 }
 
@@ -299,7 +299,7 @@ input[type='search'] {
   padding-left: 5px;
 }
 
-.regular-radio{
+.regular-radio {
   width: 2%;
   height: 13px;
 }
@@ -375,7 +375,7 @@ textarea {
   padding-right: 30px;
 }
 
-.mandatory-asterisk{
+.mandatory-asterisk {
   color: var(--input-error-color);
 }
 
@@ -849,11 +849,11 @@ textarea {
   margin-top: -60px;
 }
 
-.fw-bold-600{
-  font-weight: 600!important;
+.fw-bold-600 {
+  font-weight: 600 !important;
 }
-.fw-font-12{
-  font-size: 12px!important;
+.fw-font-12 {
+  font-size: 12px !important;
 }
 
 @keyframes spin {

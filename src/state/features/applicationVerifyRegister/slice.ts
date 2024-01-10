@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
+import { RootState } from '../store'
 import { fetchRegistrationData, saveRegistration } from './actions'
 import { RegistrationState, InitialRegistrationValue } from './types'
 

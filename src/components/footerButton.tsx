@@ -30,7 +30,7 @@ export const FooterButton = ({
   tooltip = null,
   disabled = false,
   loading = false,
-  helpUrl
+  helpUrl,
 }: {
   labelBack?: string
   labelNext: string
@@ -56,7 +56,9 @@ export const FooterButton = ({
           <Button
             label={labelNext}
             styleClass={
-              tooltip || disabled ? 'button btn-disabledCax' : 'button btn-primaryCax'
+              tooltip || disabled
+                ? 'button btn-disabledCax'
+                : 'button btn-primaryCax'
             }
             handleClick={handleNextClick}
             showTooltip={tooltip ? true : false}

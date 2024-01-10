@@ -18,12 +18,8 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-export interface RegistrationState {
-  registrationData: RegistrationDetails | null
-  loading: boolean
-  success: boolean
-  error: string
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export type AgreementData = {
   agreementId: string
@@ -58,24 +54,22 @@ export type RegistrationDetails = {
   uniqueIds: Array<IdentifierData>
 }
 
-export const InitialRegistrationValue = {
-  companyId: '',
-  bpn: '',
-  name: '',
-  shortName: '',
-  city: '',
-  region: '',
-  streetAdditional: '',
-  streetName: '',
-  streetNumber: '',
-  zipCode: '',
-  countryAlpha2Code: '',
-  taxId: '',
-  companyRoles: [],
-  agreements: [],
-  documents: [],
-  uniqueIds: [],
-}
+export const apiSlice = createApi({
+  reducerPath: 'rtk/applicationVerifyRegister',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    fetchRegistrationData: builder.query<RegistrationDetails, string>({
+      query: (applicationId) =>
+        `/api/registration/application/${applicationId}/registrationData`,
+    }),
+    updateRegistration: builder.mutation<string, string>({
+      query: (applicationId) => ({
+        url: `/api/registration/application/${applicationId}/submitRegistration`,
+        method: 'POST',
+      }),
+    }),
+  }),
+})
 
-export const ADD_COMPANY_DATA = 'ADD_COMPANY_DATA'
-export const CREATED = 'CREATED'
+export const { useFetchRegistrationDataQuery, useUpdateRegistrationMutation } =
+  apiSlice

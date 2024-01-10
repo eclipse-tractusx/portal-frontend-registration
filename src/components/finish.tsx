@@ -20,10 +20,10 @@
 
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { AiOutlineMail } from 'react-icons/ai'
 import { BsCheck2Circle, BsArrowCounterclockwise } from 'react-icons/bs'
-import Header from './cax-header'
+import { Header } from './cax-header'
 import Footer from './footer'
 
 export const Finish = () => {
@@ -40,32 +40,29 @@ export const Finish = () => {
             <h6 className="col-8">{t('finish.heading1')}</h6>
             <Row className="content">
               <Col>
-              {[
-                {
-                  "icon": AiOutlineMail,
-                  "text": t('finish.point1')
-                },
-                {
-                  "icon": BsCheck2Circle,
-                  "text": t('finish.point2')
-                },
-                {
-                  "icon": BsArrowCounterclockwise,
-                  "text": t('finish.point3')
-                }
-              ].map(item => (
-                <div className="content-items" key={item.text}>
-                  <div className="row">
-                    <div className="col-1">
-                      <item.icon className='icons-bullets' />
-                    </div>
-                    <div className="col-11 bullet-points">
-                      { item.text }
+                {[
+                  {
+                    icon: AiOutlineMail,
+                    text: t('finish.point1'),
+                  },
+                  {
+                    icon: BsCheck2Circle,
+                    text: t('finish.point2'),
+                  },
+                  {
+                    icon: BsArrowCounterclockwise,
+                    text: t('finish.point3'),
+                  },
+                ].map((item) => (
+                  <div className="content-items" key={item.text}>
+                    <div className="row">
+                      <div className="col-1">
+                        <item.icon className="icons-bullets" />
+                      </div>
+                      <div className="col-11 bullet-points">{item.text}</div>
                     </div>
                   </div>
-                </div>
-              ))
-              }
+                ))}
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
                 <img src="/registration/mail.png" alt="" />
@@ -75,8 +72,17 @@ export const Finish = () => {
           <div className="mx-auto col-9 d-flex align-items-center justify-content-center info small-info">
             <span className="">
               {t('landing.footerText1')}{' '}
-              <a href={window.location.pathname.replace(window.location.pathname, '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F07.+FAQ.md#what-will-happen-after-the-registration')}
-                target="_blank" rel='noreferrer'> {t('landing.footerText2')}.</a>
+              <a
+                href={window.location.pathname.replace(
+                  window.location.pathname,
+                  '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F07.+FAQ.md#what-will-happen-after-the-registration'
+                )}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {' '}
+                {t('landing.footerText2')}.
+              </a>
             </span>
           </div>
         </Col>

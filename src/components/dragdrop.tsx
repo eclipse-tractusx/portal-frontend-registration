@@ -22,34 +22,33 @@ import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { useEffect, useState } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IState } from '../state/features/user/redux.store.types'
-import { addCurrentStep } from '../state/features/user/action'
-import { withRouter } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
 import DragdropLayout from './dragdropLayout'
 import DragdropInput from './dragdropInput'
 import DragdropContent from './dragdropContent'
-import { applicationSelector } from '../state/features/application/slice'
-import { stateSelector } from '../state/features/applicationDocuments/slice'
-import {
-  fetchDocuments,
-  saveDocument,
-  deleteDocument,
-  fetchDocumentByDocumentId,
-} from '../state/features/applicationDocuments/actions'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
-import { FileStatus, FileStatusValue, RequestState } from '../types/MainTypes'
+import { FileStatus, FileStatusValue } from '../types/MainTypes'
 import { VERIFY } from '../state/features/application/types'
-import { updateStatus } from '../state/features/application/actions'
 import { v4 as uuidv4 } from 'uuid'
-
-interface DragDropProps {
-  currentActiveStep: number
-}
+import {
+  useFetchApplicationsQuery,
+  useUpdateStatusMutation,
+} from '../state/features/application/applicationApiSlice'
+import {
+  addCurrentStep,
+  getCurrentStep,
+} from '../state/features/user/userApiSlice'
+import {
+  useFetchDocumentByDocumentIdMutation,
+  useFetchDocumentsQuery,
+  useRemoveDocumentMutation,
+  useUpdateDocumentMutation,
+} from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
+import { downloadDocument } from '../helpers/utils'
 
 const getClassNameByStatus = (status: string) => {
   switch (status) {
@@ -73,44 +72,33 @@ const getStatusText = (status: string) => {
   }
 }
 
-export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
+export const DragDrop = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { status, error } = useSelector(applicationSelector)
-  const [fileError, setFileError] = useState('')
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
-  if (error) {
-    toast.error(error)
-  }
+  const [fileError, setFileError] = useState('')
 
-  const { documents, uploadRequest, deleteRequest, error: documentError } = useSelector(stateSelector)
+  const currentActiveStep = useSelector(getCurrentStep)
+  const { data: documents } = useFetchDocumentsQuery(applicationId)
+  const [fetchDocumentByDocumentId] = useFetchDocumentByDocumentIdMutation()
+  const [updateStatus] = useUpdateStatusMutation()
+  const [updateDocument] = useUpdateDocumentMutation()
+  const [removeDocument] = useRemoveDocumentMutation()
 
-  if (deleteRequest === RequestState.OK) {
-    toast.success(t('documentUpload.deleteSuccess'))
-  } else if (deleteRequest === RequestState.ERROR) {
-    toast.error(t('documentUpload.deleteError'))
-  }
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
-  useEffect(() => {
-    if(!error && !documentError){
-      dispatch(fetchDocuments(applicationId))
-    }
-  }, [dispatch, deleteRequest, uploadRequest])
-
-  const manageFileStatus = (fileDetails: FileStatus) => {
+  const manageFileStatus = async (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
       case 'done':
         setFileError('')
-        dispatch(
-          saveDocument({
-            applicationId,
-            document: fileDetails.file,
-            temporaryId: uuidv4(),
-          })
-        )
+        await updateDocument({
+          applicationId,
+          body: { file: fileDetails.file },
+        }).unwrap()
         break
       case 'rejected_file_type':
         setFileError(t('documentUpload.dragDropDocumentTypeErrorMsg'))
@@ -136,23 +124,40 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
     dispatch(addCurrentStep(currentActiveStep - 1))
   }
 
-  const nextClick = () => {
+  const nextClick = async () => {
     if (obj) {
       const statusData = { id: obj['applicationId'], status: VERIFY }
-      dispatch(updateStatus(statusData))
+      await updateStatus(statusData).unwrap()
     }
     dispatch(addCurrentStep(currentActiveStep + 1))
   }
 
-  const deleteDocumentFn = (documentId) => {
-    dispatch(deleteDocument(documentId))
+  const deleteDocumentFn = async (documentId) => {
+    await removeDocument(documentId)
+      .unwrap()
+      .then(() => {
+        toast.success(t('documentUpload.deleteSuccess'))
+      })
+      .catch((errors: any) => {
+        console.log('errors', errors)
+        toast.error(t('documentUpload.deleteError'))
+      })
   }
 
   const handleDownloadDocument = async (
     documentId: string,
     documentName: string
   ) => {
-    dispatch(fetchDocumentByDocumentId({ documentId, documentName }))
+    //dispatch(fetchDocumentByDocumentId({ documentId, documentName }))
+    try {
+      const response = await fetchDocumentByDocumentId(documentId).unwrap()
+      const fileType = response.headers.get('content-type')
+      const file = response.data
+
+      downloadDocument(file, fileType, documentName)
+    } catch (error) {
+      console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
+    }
   }
 
   return (
@@ -173,7 +178,11 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
           <Dropzone
             onChangeStatus={handleChangeStatus}
             LayoutComponent={(props) => (
-              <DragdropLayout {...props} error={fileError} documentError={documentError} />
+              <DragdropLayout
+                {...props}
+                error={fileError}
+                documentError={'documentError'}
+              />
             )}
             inputContent={<DragdropContent />}
             inputWithFilesContent={t('documentUpload.title')}
@@ -186,20 +195,20 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
           />
         </div>
         <div className="documentsData mx-auto col-9 mt-4">
-          {documents.map((document: DocumentData) => (
+          {documents?.map((document: DocumentData) => (
             <div className="dropzone-overview-files" key={uuidv4()}>
               <div className="dropzone-overview-file">
                 <div
+                  className="dropzone-overview-file-name"
                   onClick={() =>
                     handleDownloadDocument(
                       document.documentId,
                       document.documentName
                     )
                   }
-                  onKeyUp={() => {
+                  onKeyDown={() => {
                     // do nothing
                   }}
-                  className="dropzone-overview-file-name"
                 >
                   {document.documentName}
                 </div>
@@ -226,7 +235,7 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
               <div
                 className="dropzone-overview-remove"
                 onClick={() => deleteDocumentFn(document.documentId)}
-                onKeyUp={() => {
+                onKeyDown={() => {
                   // do nothing
                 }}
               ></div>
@@ -239,14 +248,10 @@ export const DragDrop = ({ currentActiveStep }: DragDropProps) => {
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
-        helpUrl={'/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'}
+        helpUrl={
+          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'
+        }
       />
     </>
   )
 }
-
-export default withRouter(
-  connect((state: IState) => ({
-    currentActiveStep: state.user.currentStep,
-  }))(DragDrop)
-)

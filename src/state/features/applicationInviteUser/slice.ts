@@ -20,7 +20,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RequestState } from '../../../types/MainTypes'
-import { RootState } from '../../store'
+import { RootState } from '../store'
 import { fetchInvited, fetchRolesComposite, sendInvite } from './actions'
 import { InviteUserState, InitialInvitedUser } from './types'
 

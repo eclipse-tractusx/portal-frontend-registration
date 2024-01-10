@@ -21,42 +21,38 @@
 import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { withRouter, useHistory, Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { withRouter, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Footer from './footer'
 import BulletList from './bulletList'
-import Header from './cax-header'
+import { Header } from './cax-header'
 import Button from './button'
-import {
-  fetchId,
-  updateStatus,
-  updateInvitation,
-} from '../state/features/application/actions'
-import { applicationSelector } from '../state/features/application/slice'
 import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
+import {
+  useFetchApplicationsQuery,
+  useUpdateInvitationMutation,
+  useUpdateStatusMutation,
+} from '../state/features/application/applicationApiSlice'
 
 export const Landing = () => {
   const { t } = useTranslation()
   const history = useHistory()
-  const dispatch = useDispatch()
 
-  const { status, error } = useSelector(applicationSelector)
+  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const [updateInvitation] = useUpdateInvitationMutation()
+  const [updateStatus] = useUpdateStatusMutation()
 
-  if (error) {
-    toast.error(error)
-  }
+  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   useEffect(() => {
-    dispatch(updateInvitation())
-    dispatch(fetchId())
-  }, [dispatch])
+    updateInvitation().unwrap()
+  }, [])
 
-  const onClick = () => {
+  const onClick = async () => {
     const obj = status.find((o) => o['applicationStatus'] === CREATED)
     if (obj) {
       const statusData = { id: obj['applicationId'], status: ADD_COMPANY_DATA }
-      dispatch(updateStatus(statusData))
+      await updateStatus(statusData)
     }
     history.push('/form')
   }
@@ -85,11 +81,20 @@ export const Landing = () => {
               </Col>
             </Row>
           </div>
-          <div className="mx-auto col-9 d-flex align-items-center justify-content-center info small-info">
-            <span className="">
+          <div className="mx-auto col-9 d-flex align-items-center justify-content-center small-info info">
+            <span>
               {t('landing.footerText1')}{' '}
-              <a href={window.location.pathname.replace(window.location.pathname, '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration')}
-                target="_blank" rel='noreferrer'> {t('landing.footerText2')}.</a>
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href={window.location.pathname.replace(
+                  window.location.pathname,
+                  '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration'
+                )}
+              >
+                {' '}
+                { t('landing.footerText2') }.
+              </a>
             </span>
           </div>
         </Col>
