@@ -33,6 +33,7 @@ import {
   useUpdateInvitationMutation,
   useUpdateStatusMutation,
 } from '../state/features/application/applicationApiSlice'
+import { getAssetBase } from '../services/EnvironmentService'
 
 export const Landing = () => {
   const { t } = useTranslation()
@@ -77,7 +78,7 @@ export const Landing = () => {
                 />
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <img src="/registration/ID_Card.png" alt="" />
+                <img src={`${getAssetBase()}/images/registration/ID_Card.png`} alt="" />
               </Col>
             </Row>
           </div>

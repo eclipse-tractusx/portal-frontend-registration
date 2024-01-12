@@ -20,20 +20,11 @@
 
 import {
   getApiBase,
-  getBpdmApiBase,
 } from '../../../src/services/EnvironmentService'
 import UserService from '../../../src/services/UserService'
 
 export const apiBaseQuery = () => ({
   baseUrl: getApiBase(),
-  prepareHeaders: (headers: Headers) => {
-    headers.set('authorization', `Bearer ${UserService.getToken()}`)
-    return headers
-  },
-})
-
-export const apiBpdmQuery = () => ({
-  baseUrl: getBpdmApiBase(),
   prepareHeaders: (headers: Headers) => {
     headers.set('authorization', `Bearer ${UserService.getToken()}`)
     return headers
