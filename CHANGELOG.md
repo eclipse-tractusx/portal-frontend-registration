@@ -4,7 +4,7 @@ New features, fixed bugs, known defects and other noteworthy changes to each rel
 
 ### Unreleased
 - Change API calls to RTK queries
-
+- Fix Consent Data Submission
 
 ## 1.5.4
 

@@ -88,15 +88,11 @@ export const CompanyDataCax = () => {
   const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
     useAddCompanyDetailsWithAddressMutation()
 
-  nextClicked &&
-    !isLoading &&
-    (saveError
-      ? toast.error(t('registrationStepOne.submitError'))
-      : dispatch(addCurrentStep(currentActiveStep + 1)))
-
   useEffect(() => {
-    nextClicked && dispatch(addCurrentStep(currentActiveStep + 1))
-  }, [nextClicked, currentActiveStep])
+    nextClicked && !isLoading && (
+      saveError ? toast.error(t('registrationStepOne.submitError')) : dispatch(addCurrentStep(currentActiveStep + 1))
+    )
+  }, [nextClicked, isLoading, saveError, currentActiveStep])
 
   const {
     data: identifierData,
@@ -276,9 +272,9 @@ export const CompanyDataCax = () => {
     setIdentifierNumber(value)
     const countryCode =
       country === 'DE' ||
-      country === 'FR' ||
-      country === 'IN' ||
-      country === 'MX'
+        country === 'FR' ||
+        country === 'IN' ||
+        country === 'MX'
         ? country
         : 'Worldwide'
     if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
@@ -569,9 +565,8 @@ export const CompanyDataCax = () => {
                 </Row>
                 <Row className="mx-auto col-9">
                   <div
-                    className={`form-data ${
-                      errors.identifierNumber && 'error'
-                    }`}
+                    className={`form-data ${errors.identifierNumber && 'error'
+                      }`}
                   >
                     <label>
                       {t('registrationStepOne.identifierNumber')}{' '}
