@@ -206,11 +206,13 @@ export const CompanyRoleCax = () => {
     const companyRoles = Object.keys(companyRoleChecked).filter(
       (item) => companyRoleChecked[item]
     )
-    const agreements = Object.keys(agreementChecked).map((agreementId) => {
+
+    const agreements = Object.keys(agreementChecked)
+    .filter(agreementId => agreementChecked[agreementId])
+    .map((agreementId) => {
       return {
         agreementId: agreementId,
-        consentStatus:
-          agreementChecked[agreementId] === true ? 'ACTIVE' : 'INACTIVE',
+        consentStatus: 'ACTIVE'
       }
     })
 
