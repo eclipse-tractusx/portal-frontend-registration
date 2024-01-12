@@ -42,4 +42,4 @@ jobs:
         run: yarn test:ci
   
       - name: Build Application
-        run: yarn build
+        run: yarn build:dirty
