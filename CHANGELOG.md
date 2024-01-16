@@ -2,9 +2,22 @@
 
 New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
 
-### Unreleased
-- Change API calls to RTK queries
-- Fix Consent Data Submission
+## 1.6.0-RC1
+
+### Change
+- changed API calls to RTK queries
+
+### Bugfix
+- adjusted company registration step 'Company Roles' frontend logic to post consent data - unsuccessful calls have been saved inside the redux store and used as basis for next api POST consent call
+
+### Technical Support
+- upgraded dependencies for vulnerabilities in axios, follow-redirects, postcss, @adobe/css-tools and serialize-javascript
+- added build check at pull request
+- updated file header template
+- added additional image tags of type semver to release workflows
+
+### Known Knowns
+- /registration url provided via the registration email is not directing the user to the registration form as expected; instead the new registration status is displayed where the user can jump via hyperlink to the registration form
 
 ## 1.5.4
 
