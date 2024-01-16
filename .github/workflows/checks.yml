@@ -40,3 +40,6 @@ jobs:
 
       - name: Unit Tests
         run: yarn test:ci
+  
+      - name: Build Application
+        run: yarn build:dirty
