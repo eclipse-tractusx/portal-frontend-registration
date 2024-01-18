@@ -1,6 +1,6 @@
 # Changelog
 
-New features, fixed bugs, known defects and other noteworthy changes to each release of the Catena-X Portal Frontend Registration.
+- Fix Verification step display issue 
 
 ## 1.6.0-RC1
 
