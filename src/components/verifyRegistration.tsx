@@ -87,7 +87,7 @@ export const VerifyRegistration = () => {
     return null
   }
 
-  const hasRoles = () => registrationData.companyRoles.length > 0
+  const hasRoles = () => registrationData?.companyRoles.length > 0
 
   const hasDocuments = () => documents && documents.length > 0
 
