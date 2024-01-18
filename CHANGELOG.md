@@ -1,6 +1,9 @@
 # Changelog
 
-- Fix Verification step display issue 
+## 1.6.0-RC2
+
+### Bugfix
+- fixed blank page when accessing verification step
 
 ## 1.6.0-RC1
 
