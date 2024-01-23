@@ -57,12 +57,12 @@ export const PageSnackbar = ({
   showIcon = true,
   ...props
 }: PageSnackbarProps) => {
-  const [isOpen, setOpen] = useState(open)
+  const [isOpen, setIsOpen] = useState(open)
 
   const autoCloseTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
   useEffect(() => {
-    setOpen(open)
+    setIsOpen(open)
   }, [open])
 
   const cancelAutoClose = useCallback(() => {
@@ -71,7 +71,7 @@ export const PageSnackbar = ({
 
   const doClose = useCallback(() => {
     cancelAutoClose()
-    setOpen(false)
+    setIsOpen(false)
 
     onCloseNotification?.()
   }, [cancelAutoClose, onCloseNotification])
