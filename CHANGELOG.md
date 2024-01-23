@@ -1,6 +1,7 @@
 # Changelog
 
-## 1.6.0-RC2
+## 1.6.0-RC3
+- Add error handling of api errors
 
 ### Bugfix
 - fixed blank page when accessing verification step
