@@ -25,7 +25,6 @@ import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
 import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
 import { useFetchDocumentsQuery } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
 import {
@@ -36,6 +35,7 @@ import {
   useFetchRegistrationDataQuery,
   useUpdateRegistrationMutation,
 } from '../state/features/applicationVerifyRegister/applicationVerifyRegisterApiSlice'
+import { Notify } from './Snackbar'
 
 export const VerifyRegistration = () => {
   const { t } = useTranslation()
@@ -45,17 +45,16 @@ export const VerifyRegistration = () => {
   const currentActiveStep = useSelector(getCurrentStep)
 
   const [loading, setLoading] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
 
-  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const { data: status } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
-  
-  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
-  const { data: registrationData } =
+  const { data: registrationData, error: dataError } =
     useFetchRegistrationDataQuery(applicationId)
-  const { data: documents } = useFetchDocumentsQuery(applicationId)
+  const { data: documents, error: documentsError } = useFetchDocumentsQuery(applicationId)
   const [updateRegistration] = useUpdateRegistrationMutation()
 
   const backClick = () => {
@@ -73,7 +72,7 @@ export const VerifyRegistration = () => {
       .catch((errors: any) => {
         console.log('errors', errors)
         setLoading(false)
-        toast.error(t('verifyRegistration.submitErrorMessage'))
+        setSubmitError(true)
       })
   }
 
@@ -87,9 +86,17 @@ export const VerifyRegistration = () => {
     return null
   }
 
-  const hasRoles = () => registrationData.companyRoles.length > 0
+  const hasRoles = () => registrationData?.companyRoles.length > 0
 
   const hasDocuments = () => documents && documents.length > 0
+
+  const renderSnackbar = () => {
+    let message = t('registration.apiError')
+    if(submitError) message = t('verifyRegistration.submitErrorMessage')
+    return (
+      <Notify message={message} />
+    )
+  }
 
   return (
     <>
@@ -229,9 +236,10 @@ export const VerifyRegistration = () => {
             </ul>
           </Row>
         </div>
-        <ToastContainer />
       </div>
-
+      {(dataError || documentsError || submitError) &&
+        renderSnackbar()
+      }
       <FooterButton
         labelBack={t('button.back')}
         labelNext={loading ? t('button.submitting') : t('button.submit')}

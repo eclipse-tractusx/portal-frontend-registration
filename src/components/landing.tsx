@@ -22,7 +22,6 @@ import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { withRouter, useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import Footer from './footer'
 import BulletList from './bulletList'
 import { Header } from './cax-header'
@@ -39,11 +38,9 @@ export const Landing = () => {
   const { t } = useTranslation()
   const history = useHistory()
 
-  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const { data: status } = useFetchApplicationsQuery()
   const [updateInvitation] = useUpdateInvitationMutation()
   const [updateStatus] = useUpdateStatusMutation()
-
-  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   useEffect(() => {
     updateInvitation().unwrap()
