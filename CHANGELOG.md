@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Add error handling of api errors
+
 ## 1.6.0-RC2
 
 ### Bugfix
