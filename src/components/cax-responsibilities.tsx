@@ -276,7 +276,7 @@ export const ResponsibilitiesCax = () => {
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
         }
       />
     </>

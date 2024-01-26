@@ -607,7 +607,7 @@ export const CompanyDataCax = () => {
           errors.identifierNumber !== ''
         }
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
         }
       />
     </>
