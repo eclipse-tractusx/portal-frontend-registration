@@ -87,7 +87,7 @@ export const Landing = () => {
                 target="_blank"
                 href={window.location.pathname.replace(
                   window.location.pathname,
-                  '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration'
+                  '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration'
                 )}
               >
                 {' '}

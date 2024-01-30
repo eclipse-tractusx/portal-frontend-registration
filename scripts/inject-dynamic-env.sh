@@ -20,7 +20,7 @@
 ###############################################################
 
 custom_env_vars='{PORTAL_ASSETS_URL:"'$PORTAL_ASSETS_URL'",PORTAL_BACKEND_URL:"'$PORTAL_BACKEND_URL'",CENTRALIDP_URL:"'$CENTRALIDP_URL'"}'
-custom_env_vars_anchor='{PORTAL_ASSETS_URL:"http://localhost:3000/assets",PORTAL_BACKEND_URL:"https://portal-backend.dev.demo.catena-x.net",CENTRALIDP_URL:"https://centralidp.dev.demo.catena-x.net/auth"}'
+custom_env_vars_anchor='{PORTAL_ASSETS_URL:"http://localhost:3000/assets",PORTAL_BACKEND_URL:"https://portal-backend.example.org",CENTRALIDP_URL:"https://centralidp.example.org/auth"}'
 index_html_reference=`cat /usr/share/nginx/html/index.html.reference`
 index_html=${index_html_reference//$custom_env_vars_anchor/$custom_env_vars}
 echo "$index_html" > /usr/share/nginx/html/index.html
