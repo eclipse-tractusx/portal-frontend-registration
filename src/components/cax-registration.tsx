@@ -24,7 +24,6 @@ import Footer from './footer'
 import { Header } from './cax-header'
 import ReactTooltip from 'react-tooltip'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import 'react-datepicker/dist/react-datepicker.css'
 import { CompanyDataCax } from './cax-companyData'
 import { ResponsibilitiesCax } from './cax-responsibilities'
@@ -42,12 +41,8 @@ import { getCurrentStep } from '../state/features/user/userApiSlice'
 export const RegistrationCax = () => {
   const { t } = useTranslation()
   const currentActiveStep = useSelector(getCurrentStep)
-  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const { data: status } = useFetchApplicationsQuery()
   const [updateInvitation] = useUpdateInvitationMutation()
-
-  if (statusError) {
-    toast.error(t('registration.statusApplicationError'))
-  }
 
   useEffect(() => {
     if (status.length <= 0) {
