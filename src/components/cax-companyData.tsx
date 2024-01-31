@@ -26,7 +26,6 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import { isBPN, isCity, isStreet } from '../types/Patterns'
 import {
   useFetchApplicationsQuery,
@@ -40,6 +39,7 @@ import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
+import { Notify } from './Snackbar'
 
 const initialErrors = {
   legalEntity: '',
@@ -83,14 +83,20 @@ export const CompanyDataCax = () => {
   const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
 
-  const { data: companyDetails } =
+  const [submitError, setSubmitError] = useState(false)
+  const [identifierError, setIdentifierError] = useState(false)
+
+  const { data: companyDetails, error: companyDataError } =
     useFetchCompanyDetailsWithAddressQuery(applicationId)
   const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
     useAddCompanyDetailsWithAddressMutation()
 
   useEffect(() => {
+    setSubmitError(false)
     nextClicked && !isLoading && (
-      saveError ? toast.error(t('registrationStepOne.submitError')) : dispatch(addCurrentStep(currentActiveStep + 1))
+      saveError ?
+        setSubmitError(true) :
+        dispatch(addCurrentStep(currentActiveStep + 1))
     )
   }, [nextClicked, isLoading, saveError, currentActiveStep])
 
@@ -101,12 +107,13 @@ export const CompanyDataCax = () => {
   } = useFetchUniqueIdentifierQuery(country)
 
   useEffect(() => {
+    setIdentifierError(false)
     setIdentifierDetails(error ? [] : identifierData)
     if (identifierData?.length > 0) {
       setShowIdentifiers(!error)
     }
     if (country && country.length === 2 && error)
-      toast.error(t('registrationStepOne.identifierError'))
+      setIdentifierError(true)
   }, [identifierData, country, error])
 
   useEffect(() => {
@@ -318,6 +325,18 @@ export const CompanyDataCax = () => {
     //addCompanyData(companyData)
     addCompanyDetailsWithAddress({ applicationId, companyData })
     setNextClicked(true)
+  }
+
+  const renderSnackbar = () => {
+    let message = t('registration.apiError')
+    if(identifierError){
+      message = t('registrationStepOne.identifierError')
+    }else if(submitError){
+      message = t('registrationStepOne.submitError')
+    }
+    return (
+      <Notify message={message} />
+    )
   }
 
   return (
@@ -589,6 +608,7 @@ export const CompanyDataCax = () => {
           )}
         </div>
       </div>
+      {(companyDataError || submitError || identifierError) && renderSnackbar()}
       <FooterButton
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
@@ -607,7 +627,7 @@ export const CompanyDataCax = () => {
           errors.identifierNumber !== ''
         }
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
         }
       />
     </>

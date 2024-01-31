@@ -24,7 +24,6 @@ import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import { DragdropFiles } from './dragdropFiles'
 import DragdropLayout from './dragdropLayout'
 import DragdropInput from './dragdropInput'
@@ -49,6 +48,7 @@ import {
   useUpdateDocumentMutation,
 } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
 import { downloadDocument } from '../helpers/utils'
+import { Notify, SeverityType } from './Snackbar'
 
 const getClassNameByStatus = (status: string) => {
   switch (status) {
@@ -76,20 +76,19 @@ export const DragDrop = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const { data: status } = useFetchApplicationsQuery()
   const obj = status[status.length - 1]
   const applicationId = obj['applicationId']
 
   const [fileError, setFileError] = useState('')
+  const [deleteDocResponse, setDeleteDocResponse] = useState({severity: SeverityType.ERROR, message: ''})
 
   const currentActiveStep = useSelector(getCurrentStep)
-  const { data: documents } = useFetchDocumentsQuery(applicationId)
+  const { data: documents, error: documentError } = useFetchDocumentsQuery(applicationId)
   const [fetchDocumentByDocumentId] = useFetchDocumentByDocumentIdMutation()
   const [updateStatus] = useUpdateStatusMutation()
   const [updateDocument] = useUpdateDocumentMutation()
   const [removeDocument] = useRemoveDocumentMutation()
-
-  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   const manageFileStatus = async (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
@@ -133,14 +132,15 @@ export const DragDrop = () => {
   }
 
   const deleteDocumentFn = async (documentId) => {
+    setDeleteDocResponse({severity: SeverityType.ERROR, message: ''})
     await removeDocument(documentId)
       .unwrap()
       .then(() => {
-        toast.success(t('documentUpload.deleteSuccess'))
+        setDeleteDocResponse({severity: SeverityType.SUCCESS, message: t('documentUpload.deleteSuccess')})
       })
       .catch((errors: any) => {
         console.log('errors', errors)
-        toast.error(t('documentUpload.deleteError'))
+        setDeleteDocResponse({severity: SeverityType.ERROR, message: t('documentUpload.deleteError')})
       })
   }
 
@@ -148,7 +148,6 @@ export const DragDrop = () => {
     documentId: string,
     documentName: string
   ) => {
-    //dispatch(fetchDocumentByDocumentId({ documentId, documentName }))
     try {
       const response = await fetchDocumentByDocumentId(documentId).unwrap()
       const fileType = response.headers.get('content-type')
@@ -158,6 +157,14 @@ export const DragDrop = () => {
     } catch (error) {
       console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
     }
+  }
+
+  const renderSnackbar = () => {
+    let message = t('registration.apiError')
+    if(deleteDocResponse.message) message = deleteDocResponse.message
+    return (
+      <Notify message={message} />
+    )
   }
 
   return (
@@ -213,11 +220,10 @@ export const DragDrop = () => {
                   {document.documentName}
                 </div>
                 <div className="dropzone-overview-file-status">
-                  {`${getStatusText(document.status)} ${
-                    document.progress && document?.progress !== 100
+                  {`${getStatusText(document.status)} ${document.progress && document?.progress !== 100
                       ? document?.progress
                       : ''
-                  }`}
+                    }`}
                 </div>
                 <div className="progress">
                   <div
@@ -243,13 +249,16 @@ export const DragDrop = () => {
           ))}
         </div>
       </div>
+      {(documentError || deleteDocResponse.message) &&
+        renderSnackbar()
+      }
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'
         }
       />
     </>
