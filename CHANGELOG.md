@@ -1,7 +1,13 @@
 # Changelog
 
-## Unreleased
-- Add error handling of api errors
+## 1.6.0-RC3
+
+### Change
+- removed references to consortia environments
+- changed documentation/help links to updated directory structure in portal-assets
+
+### Bugfix
+- fixed for all page components the error handling config to ensure that backend errors are displayed to the user in all cases
 
 ## 1.6.0-RC2
 
