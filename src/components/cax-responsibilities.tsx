@@ -23,7 +23,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { AiOutlineUser } from 'react-icons/ai'
 import Button from './button'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
-import { ToastContainer, toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -39,6 +38,7 @@ import {
   useFetchRolesCompositeQuery,
   useUpdateInviteNewUserMutation,
 } from '../state/features/applicationInviteUser/applicationInviteUserApiSlice'
+import { Notify, SeverityType } from './Snackbar'
 
 export const ResponsibilitiesCax = () => {
   const { t } = useTranslation()
@@ -55,21 +55,20 @@ export const ResponsibilitiesCax = () => {
     role: '',
     personalNote: '',
   })
-  const [loading, setLoading] = useState<boolean>()
-
   const dispatch = useDispatch()
   const currentActiveStep = useSelector(getCurrentStep)
 
-  const { data: status, error: statusError } = useFetchApplicationsQuery()
+  const [loading, setLoading] = useState<boolean>()
+  const [invitedResponse, setInvitedResponse] = useState({severity: SeverityType.ERROR, message: ''})
+
+  const { data: status } = useFetchApplicationsQuery()
 
   const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
   const applicationId = obj['applicationId']
-  
-  if (statusError) toast.error(toast.error(t('registration.statusApplicationError')))
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
-  const { data: rolesComposite } = useFetchRolesCompositeQuery()
-  const { data: invitedUsers, refetch } =
+  const { data: rolesComposite, error: rolesError } = useFetchRolesCompositeQuery()
+  const { data: invitedUsers, error: invitedUsersError, refetch } =
     useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
@@ -91,6 +90,7 @@ export const ResponsibilitiesCax = () => {
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
   const handleSendInvite = () => {
+    setInvitedResponse({severity: SeverityType.ERROR, message: ''})
     if (email && validateEmail(email)) {
       setLoading(true)
       const user = {
@@ -108,11 +108,11 @@ export const ResponsibilitiesCax = () => {
           setEmail('')
           setMessage('')
           refetch()
-          toast.success(t('Responsibility.sendInviteSuccessMsg'))
+          setInvitedResponse({severity: SeverityType.SUCCESS, message: t('Responsibility.sendInviteSuccessMsg')})
           setLoading(false)
         })
         .catch((errors: any) => {
-          toast.error(errors.data.errors.unknown[0])
+          setInvitedResponse({severity: SeverityType.ERROR, message: errors.data.errors.unknown[0]})
           setLoading(false)
         })
     }
@@ -152,6 +152,14 @@ export const ResponsibilitiesCax = () => {
 
   const nextClick = () => {
     dispatch(addCurrentStep(currentActiveStep + 1))
+  }
+
+  const renderSnackbar = () => {
+    let message = t('registration.apiError')
+    if(invitedResponse.message) message = invitedResponse.message
+    return (
+      <Notify message={message} />
+    )
   }
 
   return (
@@ -228,7 +236,6 @@ export const ResponsibilitiesCax = () => {
                 loading={loading}
               />
             </div>
-            <ToastContainer />
           </Row>
 
           {invitedUsers?.length > 0 && invitedUsers && (
@@ -270,13 +277,17 @@ export const ResponsibilitiesCax = () => {
           )}
         </div>
       </div>
+      {
+        (rolesError || invitedUsersError || invitedResponse.message) &&
+        renderSnackbar()
+      }
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.next')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F03.+Add+Additional+User%28s%29.md'
         }
       />
     </>

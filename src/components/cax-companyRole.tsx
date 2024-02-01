@@ -22,14 +22,13 @@ import { useState, useEffect } from 'react'
 import { Row } from 'react-bootstrap'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { companyRole } from '../state/features/applicationCompanyRole/types'
 import { download } from '../helpers/utils'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
-import '../styles/newApp.css'
+import { Notify } from './Snackbar'
 import {
   useFetchAgreementConsentsQuery,
   useFetchAgreementDataQuery,
@@ -40,6 +39,7 @@ import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
+import '../styles/newApp.css'
 
 export const CompanyRoleCax = () => {
   const { t, i18n } = useTranslation()
@@ -48,6 +48,7 @@ export const CompanyRoleCax = () => {
   const currentActiveStep = useSelector(getCurrentStep)
   const [companyRoleChecked, setCompanyRoleChecked] = useState({})
   const [agreementChecked, setAgreementChecked] = useState({})
+  const [submitError, setSubmitError] = useState(false)
 
   const { data: status } = useFetchApplicationsQuery()
 
@@ -56,21 +57,13 @@ export const CompanyRoleCax = () => {
 
   const {
     data: allConsentData,
-    error: allConsentError,
-    isLoading: allConsentLoading,
+    error: allConsentError
   } = useFetchAgreementDataQuery()
   const {
     data: consentData,
     error: consentError,
-    isLoading: consentLoading,
   } = useFetchAgreementConsentsQuery(applicationId)
   const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
-
-  if (
-    (allConsentLoading && allConsentError) ||
-    (consentLoading && consentError)
-  )
-    toast.error('')
 
   useEffect(() => {
     updateSelectedRolesAndAgreement()
@@ -208,13 +201,13 @@ export const CompanyRoleCax = () => {
     )
 
     const agreements = Object.keys(agreementChecked)
-    .filter(agreementId => agreementChecked[agreementId])
-    .map((agreementId) => {
-      return {
-        agreementId: agreementId,
-        consentStatus: 'ACTIVE'
-      }
-    })
+      .filter(agreementId => agreementChecked[agreementId])
+      .map((agreementId) => {
+        return {
+          agreementId: agreementId,
+          consentStatus: 'ACTIVE'
+        }
+      })
 
     const data = {
       companyRoles: companyRoles,
@@ -228,8 +221,14 @@ export const CompanyRoleCax = () => {
       })
       .catch((errors) => {
         console.log('errors', errors)
-        toast.error(t('companyRole.submitError'))
+        setSubmitError(true)
       })
+  }
+
+  const renderSnackbar = (message: string) => {
+    return (
+      <Notify message={message} />
+    )
   }
 
   return (
@@ -270,13 +269,19 @@ export const CompanyRoleCax = () => {
           ))}
         </div>
       </div>
+      {
+        (consentError || allConsentError) && renderSnackbar(t('registration.apiError'))
+      }
+      {
+        submitError && renderSnackbar(t('companyRole.submitError'))
+      }
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
         handleNextClick={() => nextClick()}
         helpUrl={
-          '/documentation/?path=docs%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'
         }
       />
     </>

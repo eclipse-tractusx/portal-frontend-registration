@@ -33,7 +33,8 @@
     "companyRole": "Company Role",
     "uploadDocument": "Documents",
     "verifyEntries": "Verify & Submit",
-    "statusApplicationError": "Application ID not existing. Please contact the administrator."
+    "statusApplicationError": "Application ID not existing. Please contact the administrator.",
+    "apiError": "Something went wrong. Please try again later or contact the administrator."
   },
   "registrationStepOne": {
     "verifyCompayDataHeading": "Add your company data",
