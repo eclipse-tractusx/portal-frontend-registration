@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0-RC4 (unreleased)
+
+### Change
+
+- enabled container for readOnlyRootFilesystem with symlink to tmp for index.html
+
 ## 1.6.0-RC3
 
 ### Change
