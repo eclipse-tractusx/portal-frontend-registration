@@ -35,11 +35,14 @@ import {
   UniqueIdentifier,
   useAddCompanyDetailsWithAddressMutation,
   Identifier,
+  useFetchCountryListQuery,
 } from '../state/features/application/applicationApiSlice'
 import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
+import { Autocomplete, TextField } from '@mui/material'
+import i18n from '../i18n'
 
 const initialErrors = {
   legalEntity: '',
@@ -83,7 +86,7 @@ export const CompanyDataCax = () => {
   const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
 
-  const { data: companyDetails } =
+  const { data: companyDetails, refetch: refetchCompanyData } =
     useFetchCompanyDetailsWithAddressQuery(applicationId)
   const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
     useAddCompanyDetailsWithAddressMutation()
@@ -99,8 +102,25 @@ export const CompanyDataCax = () => {
     error,
     refetch,
   } = useFetchUniqueIdentifierQuery(country)
+  let { data: countryList } = useFetchCountryListQuery()
+
+  const [countryArr, setCountryArr] = useState([])
 
   useEffect(() => {
+    const index = i18n.language === 'de' ? 0 : 1
+    countryList = countryList?.map((country) => (
+      {
+        id: country.alpha2Code,
+        label: country.countryName[index]?.value + ' (' + country.alpha2Code + ')'
+      }
+    ))
+    setCountryArr(countryList)
+  }, [countryList, i18n.language])
+
+  const defaultSelectedCountry = countryArr?.filter((code) => code.id === country)[0]
+
+  useEffect(() => {
+    refetchCompanyData()
     setIdentifierDetails(error ? [] : identifierData)
     if (identifierData?.length > 0) {
       setShowIdentifiers(!error)
@@ -131,7 +151,6 @@ export const CompanyDataCax = () => {
     setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
-    setIdentifierDetails(companyDetails?.uniqueIdentifier)
   }, [companyDetails])
 
   const fetchData = async (expr: string) => {
@@ -237,8 +256,8 @@ export const CompanyDataCax = () => {
 
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
-    setCountry(value.toUpperCase())
-    if (!PATTERNS.countryPattern.test(value.trim())) {
+    setCountry(value?.toUpperCase())
+    if (!PATTERNS.countryPattern.test(value?.trim())) {
       setShowIdentifiers(false)
       return setErrors((prevState) => ({
         ...prevState,
@@ -476,12 +495,21 @@ export const CompanyDataCax = () => {
                 {t('registrationStepOne.country')}{' '}
                 <span className="mandatory-asterisk">*</span>
               </label>
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => validateCountry(e.target.value)}
-                maxLength={2}
-              />
+              {
+                ((countryArr?.length && defaultSelectedCountry) || errors.country) &&
+                <Autocomplete
+                  id="selectList"
+                  options={countryArr}
+                  defaultValue={defaultSelectedCountry}
+                  renderInput={(params) => <TextField variant="standard" {...params} />}
+                  onChange={(e, values) => validateCountry(values?.id)}
+                  sx={{
+                    '.MuiInput-input': {
+                      height: '31px'
+                    },
+                  }}
+                />
+              }
               {errors.country && (
                 <label>{t(`registrationStepOne.${errors.country}`)}</label>
               )}

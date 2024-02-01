@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.0-RC4
+- Change country input to country select list in step 1
+
 ## 1.6.0-RC2
 
 ### Bugfix
