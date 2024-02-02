@@ -132,7 +132,7 @@ export const CompanyDataCax = () => {
     if (identifierData?.length > 0) {
       setShowIdentifiers(!error)
     }
-    if (country && country.length === 2 && error)
+    if (country?.length === 2 && error)
       setIdentifierError(true)
   }, [identifierData, country, error])
 
