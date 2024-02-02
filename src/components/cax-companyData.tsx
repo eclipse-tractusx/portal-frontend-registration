@@ -55,7 +55,7 @@ const initialErrors = {
   identifierNumber: '',
 }
 
-export const CompanyDataCax = () => {
+export function CompanyDataCax() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
