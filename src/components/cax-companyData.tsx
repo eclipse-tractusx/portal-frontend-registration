@@ -55,7 +55,7 @@ const initialErrors = {
   identifierNumber: '',
 }
 
-export function CompanyDataCax() {
+export const CompanyDataCax = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -88,6 +88,7 @@ export function CompanyDataCax() {
 
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
+  const [notifyError, setNotifyError] = useState(false)
 
   const { data: companyDetails, error: companyDataError, refetch: refetchCompanyData } =
     useFetchCompanyDetailsWithAddressQuery(applicationId)
@@ -159,6 +160,12 @@ export function CompanyDataCax() {
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
   }, [companyDetails])
+
+  useEffect(() => {
+    if (companyDataError || submitError || identifierError) {
+      setNotifyError(true)
+    }
+  },[companyDataError, submitError, identifierError])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
@@ -348,9 +355,9 @@ export function CompanyDataCax() {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(identifierError){
+    if (identifierError) {
       message = t('registrationStepOne.identifierError')
-    }else if(submitError){
+    } else if (submitError) {
       message = t('registrationStepOne.submitError')
     }
     return (
@@ -600,12 +607,12 @@ export function CompanyDataCax() {
                         {t('registrationStepOne.pleaseSelect')}
                       </option>
                       {identifierDetails?.map((identifier) => (
-                          <option key={identifier.id} value={identifier.label}>
-                            {t(
-                              `registrationStepOne.identifierTypes.${identifier.label}`
-                            )}
-                          </option>
-                        ))}
+                        <option key={identifier.id} value={identifier.label}>
+                          {t(
+                            `registrationStepOne.identifierTypes.${identifier.label}`
+                          )}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </Row>
@@ -635,7 +642,7 @@ export function CompanyDataCax() {
           )}
         </div>
       </div>
-      {(companyDataError || submitError || identifierError) && renderSnackbar()}
+      {notifyError && renderSnackbar()}
       <FooterButton
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}
