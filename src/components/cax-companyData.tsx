@@ -547,7 +547,7 @@ export const CompanyDataCax = () => {
             </div>
           </Row>
 
-          {uniqueIds && uniqueIds.length > 1 ? (
+          {uniqueIds?.length > 1 ? (
             <>
               <Row className="mx-auto col-9">
                 <span className="form-heading">
@@ -599,8 +599,7 @@ export const CompanyDataCax = () => {
                       <option value="">
                         {t('registrationStepOne.pleaseSelect')}
                       </option>
-                      {identifierDetails &&
-                        identifierDetails.map((identifier) => (
+                      {identifierDetails?.map((identifier) => (
                           <option key={identifier.id} value={identifier.label}>
                             {t(
                               `registrationStepOne.identifierTypes.${identifier.label}`
