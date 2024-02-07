@@ -5,6 +5,7 @@
 ### Change
 
 - enabled container for readOnlyRootFilesystem with symlink to tmp for index.html
+- handle login navigation as per applicationType and applicationStatus
 
 ## 1.6.0-RC3
 

@@ -26,13 +26,31 @@ export type ApplicationChecklist = {
   typeId: string
 }
 
+export enum ApplicationStatus {
+  CREATED = 'CREATED',
+  ADD_COMPANY_DATA = 'ADD_COMPANY_DATA',
+  INVITE_USER = 'INVITE_USER',
+  SELECT_COMPANY_ROLE = 'SELECT_COMPANY_ROLE',
+  UPLOAD_DOCUMENTS = 'UPLOAD_DOCUMENTS',
+  VERIFY = 'VERIFY',
+  SUBMITTED = 'SUBMITTED',
+  DECLINED = 'DECLINED',
+  APPROVED = 'APPROVED'
+}
+
+export enum ApplicationType {
+  INTERNAL = 'INTERNAL',
+  EXTERNAL = 'EXTERNAL'
+}
+
 export type ApplicationResponse = {
   applicationChecklist: ApplicationChecklist[]
   applicationId: string
-  applicationStatus: string
+  applicationStatus: ApplicationStatus
+  applicationType: ApplicationType
 }
 
-export type ApplicationStatus = {
+export type ApplicationStatusType = {
   id: string
   status: string
 }
@@ -77,7 +95,7 @@ export const apiSlice = createApi({
         method: 'PUT',
       }),
     }),
-    updateStatus: builder.mutation<string, ApplicationStatus>({
+    updateStatus: builder.mutation<string, ApplicationStatusType>({
       query: (status) => ({
         url: `/api/registration/application/${status.id}/status?status=${status.status}`,
         method: 'PUT',
