@@ -31,9 +31,9 @@ import DragdropContent from './dragdropContent'
 import '../styles/newApp.css'
 import { DocumentData } from '../state/features/applicationDocuments/types'
 import { FileStatus, FileStatusValue } from '../types/MainTypes'
-import { VERIFY } from '../state/features/application/types'
 import { v4 as uuidv4 } from 'uuid'
 import {
+  ApplicationStatus,
   useFetchApplicationsQuery,
   useUpdateStatusMutation,
 } from '../state/features/application/applicationApiSlice'
@@ -125,7 +125,7 @@ export const DragDrop = () => {
 
   const nextClick = async () => {
     if (obj) {
-      const statusData = { id: obj['applicationId'], status: VERIFY }
+      const statusData = { id: obj['applicationId'], status: ApplicationStatus.VERIFY }
       await updateStatus(statusData).unwrap()
     }
     dispatch(addCurrentStep(currentActiveStep + 1))

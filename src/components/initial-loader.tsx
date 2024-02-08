@@ -33,7 +33,7 @@ export const InitialLoader = () => {
   useEffect(() => {
     status &&
       status.length > 0 &&
-      handleStatusRedirect(status[0]['applicationStatus'], history)
+      handleStatusRedirect(status[0]['applicationStatus'], status[0]['applicationType'], history)
   }, [status])
 
   return error ? <ErrorPage /> : <div className="initial-loader"></div>
