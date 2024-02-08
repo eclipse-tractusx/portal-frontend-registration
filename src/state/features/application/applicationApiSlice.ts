@@ -111,6 +111,9 @@ export const apiSlice = createApi({
         return `/api/registration/company/country/${alpha2Code}/uniqueidentifiers`
       },
     }),
+    fetchCountryList: builder.query<any, void>({
+      query: () => '/api/registration/staticdata/countrylist',
+    }),
     addCompanyDetailsWithAddress: builder.mutation<
       string,
       {
@@ -133,5 +136,6 @@ export const {
   useUpdateStatusMutation,
   useFetchCompanyDetailsWithAddressQuery,
   useFetchUniqueIdentifierQuery,
+  useFetchCountryListQuery,
   useAddCompanyDetailsWithAddressMutation,
 } = apiSlice
