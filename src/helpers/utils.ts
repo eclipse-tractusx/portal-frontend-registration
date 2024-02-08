@@ -273,7 +273,7 @@ export function handleStatusRedirect(
   applicationType: ApplicationType,
   history: RouteComponentProps['history']
 ) {
-  if ([ApplicationStatus.SUBMITTED, ApplicationStatus.APPROVED, ApplicationStatus.DECLINED].includes(status))
+  if ([ApplicationStatus.SUBMITTED, ApplicationStatus.CONFIRMED, ApplicationStatus.DECLINED].includes(status))
     location.href = '/'
   else if (Object.values(ApplicationStatus).includes(status) && !location.search.includes('overlay=consent_osp')) {
     if (applicationType === ApplicationType.INTERNAL)
