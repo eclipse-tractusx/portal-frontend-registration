@@ -275,10 +275,10 @@ export function handleStatusRedirect(
 ) {
   if ([ApplicationStatus.SUBMITTED, ApplicationStatus.CONFIRMED, ApplicationStatus.DECLINED].includes(status))
     location.href = '/'
-  else if (Object.values(ApplicationStatus).includes(status) && !location.search.includes('overlay=consent_osp')) {
+  else if (Object.values(ApplicationStatus).includes(status)) {
     if (applicationType === ApplicationType.INTERNAL)
       history.push('/landing')
     else
-      location.href = '/'
+    location.href = '/?overlay=consent_osp'
   } else history.push('/landing')
 }
