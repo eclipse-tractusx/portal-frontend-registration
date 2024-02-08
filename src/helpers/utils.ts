@@ -273,8 +273,9 @@ export function handleStatusRedirect(
   applicationType: ApplicationType,
   history: RouteComponentProps['history']
 ) {
-  if (([ApplicationStatus.SUBMITTED, ApplicationStatus.DECLINED, ApplicationStatus.APPROVED].indexOf(status) === -1) && Object.values(ApplicationStatus).includes(status))
-    (applicationType === ApplicationType.INTERNAL) ? history.push('/landing') : history.push('/?overlay=consent_osp')
-  else if ([ApplicationStatus.SUBMITTED, ApplicationStatus.APPROVED, ApplicationStatus.DECLINED].indexOf(status) !== -1)      window.location.replace('/home')
-  else history.push('/landing')
+  if([ApplicationStatus.SUBMITTED, ApplicationStatus.APPROVED, ApplicationStatus.DECLINED].includes(status))      
+    location.href ='/'
+  else if(Object.values(ApplicationStatus).includes(status) && !location.search.includes('overlay=consent_osp')){
+    (applicationType === ApplicationType.INTERNAL) ? history.push('/landing') : location.href ='/'
+  }else history.push('/landing')
 }

@@ -36,6 +36,6 @@ export const InitialLoader = () => {
       handleStatusRedirect(status[0]['applicationStatus'], status[0]['applicationType'], history)
   }, [status])
 
-  return (error || !status?.length) ? <ErrorPage /> : <div className="initial-loader"></div>
+  return error ? <ErrorPage /> : <div className="initial-loader"></div>
 }
 export default withRouter(InitialLoader)
