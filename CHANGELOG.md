@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0-RC5
+
+### Change
+
+- updated keycloak package to fix logout redirect error
+
 ## 1.6.0-RC4
 
 ### Change
