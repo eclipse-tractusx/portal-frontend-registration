@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0-RC5
+
+### Change
+
+- added asterisk to identifier type in step 1
+
 ## 1.6.0-RC4
 
 ### Change
