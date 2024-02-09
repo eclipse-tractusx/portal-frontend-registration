@@ -7,6 +7,7 @@
 - enabled container for readOnlyRootFilesystem with symlink to tmp for index.html
 - handle login navigation as per applicationType and applicationStatus
 - changed country input to country select list in step 1
+- added asterisk to identifier type in step 1
 
 ## 1.6.0-RC3
 
