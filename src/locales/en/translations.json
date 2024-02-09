@@ -232,16 +232,6 @@
   "footerPages": {
     "Back": "Back"
   },
-  "registrationValidation": {
-    "heading1": "Your registration has already been submitted and under validation. We are now reviewing the application.",
-    "heading2": "As soon as this is finished you will receive an email with the access to the Catena-X Portal.",
-    "close": "Close"
-  },
-  "registrationClosed": {
-    "heading1": "Your registration has been declined and closed. You can resubmit your application.",
-    "heading2": "",
-    "close": "Close"
-  },
   "errorPage": {
     "heading": "500 Internal Server Error",
     "title": "Oops, Something went wrong.",

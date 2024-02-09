@@ -23,11 +23,7 @@ import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
 import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
-import {
-  SUBMITTED,
-  CONFIRMED,
-  DECLINED,
-} from '../state/features/application/types'
+import { ApplicationStatus, ApplicationType } from '../state/features/application/applicationApiSlice'
 
 export function getCompanyDetails(
   oneId: string
@@ -273,17 +269,16 @@ export function download(file: Blob, fileType: string, fileName: string) {
 }
 
 export function handleStatusRedirect(
-  status: string,
+  status: ApplicationStatus,
+  applicationType: ApplicationType,
   history: RouteComponentProps['history']
 ) {
-  switch (status) {
-    case SUBMITTED:
-      return history.push('/registration-closed?param=validate')
-    case CONFIRMED:
-      return window.location.replace('/home')
-    case DECLINED:
-      return history.push('/registration-closed')
-    default:
-      return history.push('/landing')
-  }
+  if ([ApplicationStatus.SUBMITTED, ApplicationStatus.CONFIRMED, ApplicationStatus.DECLINED].includes(status))
+    location.href = '/'
+  else if (Object.values(ApplicationStatus).includes(status)) {
+    if (applicationType === ApplicationType.INTERNAL)
+      history.push('/landing')
+    else
+    location.href = '/?overlay=consent_osp'
+  } else history.push('/landing')
 }
