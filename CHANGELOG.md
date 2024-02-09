@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.6.0-RC4
+
+### Change
+
+- handle login navigation as per applicationType and applicationStatus
+- changed country input to country select list in step 1 with auto-complete
+
+### Technical Support
+
+- enabled container for readOnlyRootFilesystem with symlink to tmp for index.html
+
 ## 1.6.0-RC3
 
 ### Change

@@ -45,7 +45,6 @@ import Imprint from './components/imprint'
 import Privacy from './components/privacy'
 import TermsOfService from './components/termsOfService'
 import CookiePolicy from './components/cookiePolicy'
-import RegistrationClosed from './components/registrationClosed'
 import About from './components/about'
 
 createBrowserHistory()
@@ -90,10 +89,6 @@ const App = () => {
         <Route path="/termsOfService" component={() => <TermsOfService />} />
         <Route path="/cookiePolicy" component={() => <CookiePolicy />} />
         <Route path="/about" component={() => <About />} />
-        <Route
-          path="/registration-closed"
-          component={() => <RegistrationClosed />}
-        />
       </Switch>
     </BrowserRouter>
   )

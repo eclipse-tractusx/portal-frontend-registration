@@ -34,11 +34,14 @@ import {
   UniqueIdentifier,
   useAddCompanyDetailsWithAddressMutation,
   Identifier,
+  useFetchCountryListQuery,
 } from '../state/features/application/applicationApiSlice'
 import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
+import { Autocomplete, TextField } from '@mui/material'
+import i18n from '../i18n'
 import { Notify } from './Snackbar'
 
 const initialErrors = {
@@ -85,8 +88,9 @@ export const CompanyDataCax = () => {
 
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
+  const [notifyError, setNotifyError] = useState(false)
 
-  const { data: companyDetails, error: companyDataError } =
+  const { data: companyDetails, error: companyDataError, refetch: refetchCompanyData } =
     useFetchCompanyDetailsWithAddressQuery(applicationId)
   const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
     useAddCompanyDetailsWithAddressMutation()
@@ -105,14 +109,31 @@ export const CompanyDataCax = () => {
     error,
     refetch,
   } = useFetchUniqueIdentifierQuery(country)
+  let { data: countryList } = useFetchCountryListQuery()
+
+  const [countryArr, setCountryArr] = useState([])
 
   useEffect(() => {
+    const index = i18n.language === 'de' ? 0 : 1
+    countryList = countryList?.map((country) => (
+      {
+        id: country.alpha2Code,
+        label: country.countryName[index]?.value + ' (' + country.alpha2Code + ')'
+      }
+    ))
+    setCountryArr(countryList)
+  }, [countryList, i18n.language])
+
+  const defaultSelectedCountry = countryArr?.filter((code) => code.id === country)[0]
+
+  useEffect(() => {
+    refetchCompanyData()
     setIdentifierError(false)
     setIdentifierDetails(error ? [] : identifierData)
     if (identifierData?.length > 0) {
       setShowIdentifiers(!error)
     }
-    if (country && country.length === 2 && error)
+    if (country?.length === 2 && error)
       setIdentifierError(true)
   }, [identifierData, country, error])
 
@@ -138,8 +159,13 @@ export const CompanyDataCax = () => {
     setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
-    setIdentifierDetails(companyDetails?.uniqueIdentifier)
   }, [companyDetails])
+
+  useEffect(() => {
+    if (companyDataError || submitError || identifierError) {
+      setNotifyError(true)
+    }
+  },[companyDataError, submitError, identifierError])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
@@ -244,8 +270,8 @@ export const CompanyDataCax = () => {
 
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
-    setCountry(value.toUpperCase())
-    if (!PATTERNS.countryPattern.test(value.trim())) {
+    setCountry(value?.toUpperCase())
+    if (!PATTERNS.countryPattern.test(value?.trim())) {
       setShowIdentifiers(false)
       return setErrors((prevState) => ({
         ...prevState,
@@ -329,9 +355,9 @@ export const CompanyDataCax = () => {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(identifierError){
+    if (identifierError) {
       message = t('registrationStepOne.identifierError')
-    }else if(submitError){
+    } else if (submitError) {
       message = t('registrationStepOne.submitError')
     }
     return (
@@ -495,12 +521,21 @@ export const CompanyDataCax = () => {
                 {t('registrationStepOne.country')}{' '}
                 <span className="mandatory-asterisk">*</span>
               </label>
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => validateCountry(e.target.value)}
-                maxLength={2}
-              />
+              {
+                ((countryArr?.length) || errors.country) &&
+                <Autocomplete
+                  id="selectList"
+                  options={countryArr}
+                  defaultValue={defaultSelectedCountry ?? ''}
+                  renderInput={(params) => <TextField variant="standard" {...params} />}
+                  onChange={(e, values) => validateCountry(values?.id)}
+                  sx={{
+                    '.MuiInput-input': {
+                      height: '31px'
+                    },
+                  }}
+                />
+              }
               {errors.country && (
                 <label>{t(`registrationStepOne.${errors.country}`)}</label>
               )}
@@ -519,7 +554,7 @@ export const CompanyDataCax = () => {
             </div>
           </Row>
 
-          {uniqueIds && uniqueIds.length > 1 ? (
+          {uniqueIds?.length > 1 ? (
             <>
               <Row className="mx-auto col-9">
                 <span className="form-heading">
@@ -571,14 +606,13 @@ export const CompanyDataCax = () => {
                       <option value="">
                         {t('registrationStepOne.pleaseSelect')}
                       </option>
-                      {identifierDetails &&
-                        identifierDetails.map((identifier) => (
-                          <option key={identifier.id} value={identifier.label}>
-                            {t(
-                              `registrationStepOne.identifierTypes.${identifier.label}`
-                            )}
-                          </option>
-                        ))}
+                      {identifierDetails?.map((identifier) => (
+                        <option key={identifier.id} value={identifier.label}>
+                          {t(
+                            `registrationStepOne.identifierTypes.${identifier.label}`
+                          )}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </Row>
@@ -608,7 +642,7 @@ export const CompanyDataCax = () => {
           )}
         </div>
       </div>
-      {(companyDataError || submitError || identifierError) && renderSnackbar()}
+      {notifyError && renderSnackbar()}
       <FooterButton
         labelNext={t('button.confirm')}
         handleBackClick={() => backClick()}

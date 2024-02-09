@@ -26,8 +26,8 @@ import Footer from './footer'
 import BulletList from './bulletList'
 import { Header } from './cax-header'
 import Button from './button'
-import { ADD_COMPANY_DATA, CREATED } from '../state/features/application/types'
 import {
+  ApplicationStatus,
   useFetchApplicationsQuery,
   useUpdateInvitationMutation,
   useUpdateStatusMutation,
@@ -47,9 +47,9 @@ export const Landing = () => {
   }, [])
 
   const onClick = async () => {
-    const obj = status.find((o) => o['applicationStatus'] === CREATED)
+    const obj = status.find((o) => o['applicationStatus'] === ApplicationStatus.CREATED)
     if (obj) {
-      const statusData = { id: obj['applicationId'], status: ADD_COMPANY_DATA }
+      const statusData = { id: obj['applicationId'], status: ApplicationStatus.ADD_COMPANY_DATA }
       await updateStatus(statusData)
     }
     history.push('/form')
