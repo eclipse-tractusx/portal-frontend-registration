@@ -124,7 +124,7 @@ export const CompanyDataCax = () => {
     setCountryArr(countryList)
   }, [countryList, i18n.language])
 
-  const defaultSelectedCountry = countryArr?.filter((code) => code.id === country)[0]
+  const defaultSelectedCountry = countryArr?.filter((code) => code.id === (country))[0]
 
   useEffect(() => {
     refetchCompanyData()
@@ -522,11 +522,11 @@ export const CompanyDataCax = () => {
                 <span className="mandatory-asterisk">*</span>
               </label>
               {
-                ((countryArr?.length && defaultSelectedCountry) || errors.country) &&
+                ((countryArr?.length) || errors.country) &&
                 <Autocomplete
                   id="selectList"
                   options={countryArr}
-                  defaultValue={defaultSelectedCountry}
+                  defaultValue={defaultSelectedCountry ?? ''}
                   renderInput={(params) => <TextField variant="standard" {...params} />}
                   onChange={(e, values) => validateCountry(values?.id)}
                   sx={{
