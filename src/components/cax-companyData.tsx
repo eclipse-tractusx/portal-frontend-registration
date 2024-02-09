@@ -124,7 +124,7 @@ export const CompanyDataCax = () => {
     setCountryArr(countryList)
   }, [countryList, i18n.language])
 
-  const defaultSelectedCountry = countryArr?.filter((code) => code.id === (country))[0]
+  const defaultSelectedCountry = countryArr?.filter((code) => code.id === country)[0]
 
   useEffect(() => {
     refetchCompanyData()
