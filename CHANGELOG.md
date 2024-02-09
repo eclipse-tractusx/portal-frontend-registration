@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.6.0-RC5
+## unreleased 1.6.0-RC5
 
 ### Change
 
 - updated keycloak package to fix logout redirect error
+- added asterisk to identifier type in step 1
 
 ## 1.6.0-RC4
 
