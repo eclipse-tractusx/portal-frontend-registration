@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0-RC5
+
+### Bugfix
+- added asterisk to identifier type select field
+- user logout redirect fixed
+
 ## 1.6.0-RC4
 
 ### Change

@@ -310,7 +310,7 @@ export const CompanyDataCax = () => {
         country === 'MX'
         ? country
         : 'Worldwide'
-    if (!PATTERNS[countryCode][identifierType].test(value.trim())) {
+    if (identifierType && !PATTERNS[countryCode][identifierType].test(value.trim())) {
       return setErrors((prevState) => ({
         ...prevState,
         identifierNumber: countryCode + '_' + identifierType,
@@ -598,7 +598,10 @@ export const CompanyDataCax = () => {
                 </Row>
                 <Row className="mx-auto col-9">
                   <div className={`form-data`}>
-                    <label> {t('registrationStepOne.identifierType')} </label>
+                    <label> 
+                      {t('registrationStepOne.identifierType')}{' '}
+                      <span className="mandatory-asterisk">*</span>
+                    </label>
                     <select
                       value={identifierType}
                       onChange={(e) => onIdentifierTypeChange(e)}
