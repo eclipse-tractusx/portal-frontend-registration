@@ -1,5 +1,10 @@
 # Changelog
 
+## unreleased
+
+- Pattern updates
+  - Support special characters in the registration form - Name, street, region, city and postal code
+
 ## 1.6.0-RC5
 
 ### Bugfix
