@@ -218,10 +218,10 @@ export const PATTERNS = {
   legalEntityPattern:
     /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
   registeredNamePattern:
-    /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+  /^[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
-  regionPattern: /^[a-zA-Z0-9,"\s()'-]*$/,
-  postalCodePattern: /^(?=[a-zA-Z\d]*[-\s]?[a-zA-Z\d]*$)[a-zA-Z\d-\s]{2,10}$/,
+  regionPattern: /^[a-zA-Z0-9À-ÿŚął,"\s()'-]*$/,
+  postalCodePattern: /^(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   IN: {
     COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
