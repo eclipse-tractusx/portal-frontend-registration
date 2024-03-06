@@ -5,53 +5,31 @@
 - Pattern updates
   - Support special characters in the registration form - Name, street, region, city and postal code
 
-## 1.6.0-RC5
-
-### Bugfix
-- added asterisk to identifier type select field
-- user logout redirect fixed
-
-## 1.6.0-RC4
+## 1.6.0
 
 ### Change
-
-- handle login navigation as per applicationType and applicationStatus
-- changed country input to country select list in step 1 with auto-complete
+- Changed API calls to use RTK queries for improved performance and code organization
+- Removed references to consortia environments
+- Updated documentation and help links to reflect the updated directory structure in portal-assets
+- Implemented login navigation based on application type and status for a more customized user experience
+- Replaced the country input field in step 1 with a country select list; including an auto-complete functionality
 
 ### Technical Support
-
-- enabled container for readOnlyRootFilesystem with symlink to tmp for index.html
-
-## 1.6.0-RC3
-
-### Change
-- removed references to consortia environments
-- changed documentation/help links to updated directory structure in portal-assets
-
-### Bugfix
-- fixed for all page components the error handling config to ensure that backend errors are displayed to the user in all cases
-
-## 1.6.0-RC2
+- Upgraded dependencies to address vulnerabilities in axios, follow-redirects, postcss, @adobe/css-tools, and serialize-javascript
+- Added a build check at pull request to ensure code quality and prevent issues in the future
+- Updated the file header template
+- Added additional image tags of type semver to release workflows for better version control and tracking
+- Enabled container for readOnlyRootFilesystem with a symlink to tmp for index.html
+- Changed portal-cd references to portal due to repository renaming
+- Updated README.md
+  - mentioned `docs` folder in portal-assets repository
+  - referenced docker notice files in notice section instead of duplicating the content
 
 ### Bugfix
-- fixed blank page when accessing verification step
-
-## 1.6.0-RC1
-
-### Change
-- changed API calls to RTK queries
-
-### Bugfix
-- adjusted company registration step 'Company Roles' frontend logic to post consent data - unsuccessful calls have been saved inside the redux store and used as basis for next api POST consent call
-
-### Technical Support
-- upgraded dependencies for vulnerabilities in axios, follow-redirects, postcss, @adobe/css-tools and serialize-javascript
-- added build check at pull request
-- updated file header template
-- added additional image tags of type semver to release workflows
-
-### Known Knowns
-- /registration url provided via the registration email is not directing the user to the registration form as expected; instead the new registration status is displayed where the user can jump via hyperlink to the registration form
+- Added an asterisk to the identifier type select field to indicate the required field
+- Fixed the user logout redirect; ensuring users are properly redirected after logging out
+- Fixed error handling configuration for all page components to display backend errors to the user in all cases
+- Adjusted the frontend logic for the 'Company Roles' step in the company registration process to properly handle unsuccessful API calls. The failed calls are now saved in the redux store and used as a basis for the next API POST consent call
 
 ## 1.5.4
 
