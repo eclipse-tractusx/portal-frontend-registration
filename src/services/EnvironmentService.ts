@@ -18,21 +18,24 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: any
+declare const ENV: Record<string,string>
 
-export const getApiBase = () =>
-  typeof ENV === 'undefined' ? '' : ENV.PORTAL_BACKEND_URL
+export const getApiBase = () => ENV.PORTAL_BACKEND_URL ?? ''
 
-export const getAssetBase = () =>
-  typeof ENV === 'undefined' ? '' : ENV.PORTAL_ASSETS_URL
+export const getAssetBase = () => ENV.PORTAL_ASSETS_URL ?? ''
 
-export const getCentralIdp = () =>
-  typeof ENV === 'undefined' ? '' : ENV.CENTRALIDP_URL
+export const getCentralIdp = () => ENV.CENTRALIDP_URL ?? ''
+
+export const getRealm = () => ENV.REALM ?? 'CX-Central'
+
+export const getClientIdRegistration = () => ENV.CLIENT_ID_REGISTRATION ?? 'Cl1-CX-Registration'
 
 const EnvironmentService = {
+  getRealm,
+  getClientIdRegistration,
+  getCentralIdp,
   getApiBase,
   getAssetBase,
-  getCentralIdp,
 }
 
 export default EnvironmentService
