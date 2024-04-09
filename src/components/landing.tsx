@@ -47,9 +47,16 @@ export const Landing = () => {
   }, [])
 
   const onClick = async () => {
-    const obj = status.find((o) => o['applicationStatus'] === ApplicationStatus.CREATED)
+    if (!status)
+      return
+    const obj = status.find(
+      (o) => o.applicationStatus === ApplicationStatus.CREATED
+    )
     if (obj) {
-      const statusData = { id: obj['applicationId'], status: ApplicationStatus.ADD_COMPANY_DATA }
+      const statusData = {
+        id: obj.applicationId,
+        status: ApplicationStatus.ADD_COMPANY_DATA,
+      }
       await updateStatus(statusData)
     }
     history.push('/form')
@@ -75,7 +82,10 @@ export const Landing = () => {
                 />
               </Col>
               <Col className="d-flex align-items-center justify-content-center">
-                <img src={`${getAssetBase()}/images/registration/ID_Card.png`} alt="" />
+                <img
+                  src={`${getAssetBase()}/images/registration/ID_Card.png`}
+                  alt=""
+                />
               </Col>
             </Row>
           </div>
@@ -91,7 +101,7 @@ export const Landing = () => {
                 )}
               >
                 {' '}
-                { t('landing.footerText2') }.
+                {t('landing.footerText2')}.
               </a>
             </span>
           </div>

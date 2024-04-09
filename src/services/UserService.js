@@ -18,7 +18,11 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { getCentralIdp, getClientIdRegistration, getRealm } from './EnvironmentService'
+import {
+  getCentralIdp,
+  getClientIdRegistration,
+  getRealm,
+} from './EnvironmentService'
 import Keycloak from 'keycloak-js'
 
 const searchParams = new URLSearchParams(window.location.search)
@@ -34,10 +38,10 @@ localStorage.setItem('company', realm)
 const searchParamsClientId = new URLSearchParams(window.location.search)
 let clientId = searchParamsClientId.get('clientId')
 if (!clientId) {
-  clientId = localStorage.getItem('clientId')
+  clientId = localStorage.getItem('clientId') ?? ''
 }
 if (!clientId || clientId === 'null') {
-  clientId = getClientIdRegistration()
+  clientId = getClientIdRegistration() ?? ''
 }
 localStorage.setItem('clientId', clientId)
 
@@ -76,15 +80,15 @@ const doLogin = _kc.login
 
 const doLogout = _kc.logout
 
-//forward as header "authentication: Bearer ${getToken()}"
+// forward as header "authentication: Bearer ${getToken()}"
 const getToken = () => _kc.token
 
 const getParsedToken = () => _kc.tokenParsed
 
 const isLoggedIn = () => !!_kc.token
 
-const updateToken = (successCallback) =>
-  _kc.updateToken(5).then(successCallback).catch(doLogin)
+const updateToken = async (successCallback) =>
+  await _kc.updateToken(5).then(successCallback).catch(doLogin)
 
 const getUsername = () =>
   `${_kc.tokenParsed?.given_name} ${_kc.tokenParsed?.family_name}`
@@ -99,7 +103,8 @@ const getInitials = () =>
 
 const getDomain = () => realm
 
-const getRoles = () => _kc.tokenParsed?.resource_access[getClientIdRegistration()]?.roles
+const getRoles = () =>
+  _kc.tokenParsed?.resource_access[getClientIdRegistration()]?.roles
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role))
 

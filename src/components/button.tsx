@@ -19,7 +19,7 @@
  ********************************************************************************/
 
 import { AiOutlineMail } from 'react-icons/ai'
-import ReactTooltip from 'react-tooltip'
+import { Tooltip } from 'react-tooltip'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const Button = ({
@@ -66,14 +66,9 @@ const Button = ({
     <>
       {showTooltip ? (
         <>
-          <ReactTooltip
-            className="tooltip"
-            id="tooltipBtn"
-            place="top"
-            effect="solid"
-          >
+          <Tooltip className="tooltip" id="tooltipBtn" place="top">
             {tooltipText}
-          </ReactTooltip>
+          </Tooltip>
           <div data-tip data-for="tooltipBtn">
             <button
               className={styleClass}

@@ -18,12 +18,18 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { RouteComponentProps } from 'react-router-dom'
-import { CompanyRole, ConsentForCompanyRoles } from '../data/companyDetails'
-import { FetchBusinessPartnerDto } from '../data/companyDetailsById'
+import { type RouteComponentProps } from 'react-router-dom'
+import {
+  type CompanyRole,
+  type ConsentForCompanyRoles,
+} from '../data/companyDetails'
+import { type FetchBusinessPartnerDto } from '../data/companyDetailsById'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
-import { ApplicationStatus, ApplicationType } from '../state/features/application/applicationApiSlice'
+import {
+  ApplicationStatus,
+  ApplicationType,
+} from '../state/features/application/applicationApiSlice'
 
 export function getCompanyDetails(
   oneId: string
@@ -218,7 +224,7 @@ export const PATTERNS = {
   legalEntityPattern:
     /^[a-zA-ZÀ-ÿ\d][a-zA-ZÀ-ÿ\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,50}$/,
   registeredNamePattern:
-  /^[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
+    /^[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d !#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   streetHouseNumberPattern: /^[a-zÀ-ÿA-Z\d][a-zA-ZÀ-ÿ\d -]{2,60}$/,
   regionPattern: /^[a-zA-Z0-9À-ÿŚął,"\s()'-]*$/,
   postalCodePattern: /^(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
@@ -260,7 +266,7 @@ export const PATTERNS = {
   },
 }
 
-export function download(file: Blob, fileType: string, fileName: string) {
+export function download(file: Blob, _fileType: string, fileName: string) {
   const url = URL.createObjectURL(file)
   const a = document.createElement('a')
   a.href = window.encodeURIComponent(url)
@@ -273,12 +279,16 @@ export function handleStatusRedirect(
   applicationType: ApplicationType,
   history: RouteComponentProps['history']
 ) {
-  if ([ApplicationStatus.SUBMITTED, ApplicationStatus.CONFIRMED, ApplicationStatus.DECLINED].includes(status))
+  if (
+    [
+      ApplicationStatus.SUBMITTED,
+      ApplicationStatus.CONFIRMED,
+      ApplicationStatus.DECLINED,
+    ].includes(status)
+  )
     location.href = '/'
   else if (Object.values(ApplicationStatus).includes(status)) {
-    if (applicationType === ApplicationType.INTERNAL)
-      history.push('/landing')
-    else
-    location.href = '/?overlay=consent_osp'
+    if (applicationType === ApplicationType.INTERNAL) history.push('/landing')
+    else location.href = '/?overlay=consent_osp'
   } else history.push('/landing')
 }

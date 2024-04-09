@@ -18,7 +18,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { ApplicationInvitedUsers, ApplicationInvitedFormUsers } from './types'
+import {
+  type ApplicationInvitedUsers,
+  type ApplicationInvitedFormUsers,
+} from './types'
 
 export const inviteUsersData = (
   data: ApplicationInvitedUsers

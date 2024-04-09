@@ -18,14 +18,13 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import * as React from 'react'
 import { useEffect } from 'react'
 import { createBrowserHistory } from 'history'
 import {
   BrowserRouter,
-  Redirect,
+  Navigate,
   Route,
-  Switch,
+  Routes,
   useLocation,
 } from 'react-router-dom'
 import './styles/newApp.css'
@@ -58,8 +57,7 @@ const App = () => {
 
   return (
     <BrowserRouter basename="/registration">
-      <Switch>
-        <Redirect path="/" exact to="/load" />
+      <Routes>
         <ProtectedRoute
           path="/load"
           rolesAllowedForTheRoute={['view_registration']}
@@ -80,16 +78,17 @@ const App = () => {
           rolesAllowedForTheRoute={['view_registration']}
           component={(props) => <Finish {...props} />}
         />
-        <Route path="/authinfo" component={() => <Authinfo />} />
-        <Route path="/403" component={() => <UnauthorisedPage />} />
-        <Route path="/help" component={() => <Help />} />
-        <Route path="/contact" component={() => <Contact />} />
-        <Route path="/imprint" component={() => <Imprint />} />
-        <Route path="/privacy" component={() => <Privacy />} />
-        <Route path="/termsOfService" component={() => <TermsOfService />} />
-        <Route path="/cookiePolicy" component={() => <CookiePolicy />} />
-        <Route path="/about" component={() => <About />} />
-      </Switch>
+        <Route path="/authinfo" children={<Authinfo />} />
+        <Route path="/403" children={<UnauthorisedPage />} />
+        <Route path="/help" children={<Help />} />
+        <Route path="/contact" children={<Contact />} />
+        <Route path="/imprint" children={<Imprint />} />
+        <Route path="/privacy" children={<Privacy />} />
+        <Route path="/termsOfService" children={<TermsOfService />} />
+        <Route path="/cookiePolicy" children={<CookiePolicy />} />
+        <Route path="/about" children={<About />} />
+        <Route path="/" children={<Navigate replace to="/load" />} />
+      </Routes>
     </BrowserRouter>
   )
 }

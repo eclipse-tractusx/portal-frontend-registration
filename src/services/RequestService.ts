@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { RawAxiosRequestHeaders, ResponseType } from 'axios'
+import { type RawAxiosRequestHeaders, type ResponseType } from 'axios'
 import UserService from './UserService'
 
 export const getHeaders = (): { headers: RawAxiosRequestHeaders } => ({

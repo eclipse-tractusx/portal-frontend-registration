@@ -24,7 +24,6 @@ import Footer from './footer'
 import { Header } from './cax-header'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Box } from '@mui/material'
-import { withRouter } from 'react-router-dom'
 
 export const About = () => {
   const { t } = useTranslation()
@@ -52,4 +51,4 @@ export const About = () => {
   )
 }
 
-export default withRouter(About)
+export default About

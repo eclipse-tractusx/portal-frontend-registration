@@ -31,9 +31,9 @@ import {
   useFetchApplicationsQuery,
   useFetchCompanyDetailsWithAddressQuery,
   useFetchUniqueIdentifierQuery,
-  UniqueIdentifier,
+  type UniqueIdentifier,
   useAddCompanyDetailsWithAddressMutation,
-  Identifier,
+  type Identifier,
   useFetchCountryListQuery,
 } from '../state/features/application/applicationApiSlice'
 import {
@@ -41,8 +41,13 @@ import {
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
 import { Autocomplete, TextField } from '@mui/material'
-import i18n from '../i18n'
+import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
+
+type CountryType {
+  id: string,
+  label: string,
+}
 
 const initialErrors = {
   legalEntity: '',
@@ -67,8 +72,8 @@ export const CompanyDataCax = () => {
 
   const { data: status } = useFetchApplicationsQuery()
 
-  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj?.applicationId ?? ''
 
   const [bpn, setBpn] = useState('')
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
@@ -90,18 +95,21 @@ export const CompanyDataCax = () => {
   const [identifierError, setIdentifierError] = useState(false)
   const [notifyError, setNotifyError] = useState(false)
 
-  const { data: companyDetails, error: companyDataError, refetch: refetchCompanyData } =
-    useFetchCompanyDetailsWithAddressQuery(applicationId)
+  const {
+    data: companyDetails,
+    error: companyDataError,
+    refetch: refetchCompanyData,
+  } = useFetchCompanyDetailsWithAddressQuery(applicationId)
   const [addCompanyDetailsWithAddress, { error: saveError, isLoading }] =
     useAddCompanyDetailsWithAddressMutation()
 
   useEffect(() => {
     setSubmitError(false)
-    nextClicked && !isLoading && (
-      saveError ?
-        setSubmitError(true) :
-        dispatch(addCurrentStep(currentActiveStep + 1))
-    )
+    nextClicked &&
+      !isLoading &&
+      (saveError
+        ? setSubmitError(true)
+        : dispatch(addCurrentStep(currentActiveStep + 1)))
   }, [nextClicked, isLoading, saveError, currentActiveStep])
 
   const {
@@ -111,30 +119,30 @@ export const CompanyDataCax = () => {
   } = useFetchUniqueIdentifierQuery(country)
   let { data: countryList } = useFetchCountryListQuery()
 
-  const [countryArr, setCountryArr] = useState([])
+  const [countryArr, setCountryArr] = useState<CountryType[]>([])
 
   useEffect(() => {
     const index = i18n.language === 'de' ? 0 : 1
-    countryList = countryList?.map((country) => (
-      {
-        id: country.alpha2Code,
-        label: country.countryName[index]?.value + ' (' + country.alpha2Code + ')'
-      }
-    ))
+    countryList = countryList?.map((country) => ({
+      id: country.alpha2Code,
+      label:
+        country.countryName[index]?.value + ' (' + country.alpha2Code + ')',
+    }))
     setCountryArr(countryList)
   }, [countryList, i18n.language])
 
-  const defaultSelectedCountry = countryArr?.filter((code) => code.id === country)[0]
+  const defaultSelectedCountry = countryArr?.filter(
+    (code) => code.id === country
+  )[0]
 
   useEffect(() => {
     refetchCompanyData()
     setIdentifierError(false)
     setIdentifierDetails(error ? [] : identifierData)
-    if (identifierData?.length > 0) {
+    if (identifierData && identifierData.length > 0) {
       setShowIdentifiers(!error)
     }
-    if (country?.length === 2 && error)
-      setIdentifierError(true)
+    if (country?.length === 2 && error) setIdentifierError(true)
   }, [identifierData, country, error])
 
   useEffect(() => {
@@ -162,27 +170,27 @@ export const CompanyDataCax = () => {
   }, [companyDetails])
 
   useEffect(() => {
-    if (companyDataError || submitError || identifierError) {
+    if (companyDataError ?? submitError ?? identifierError) {
       setNotifyError(true)
     }
-  },[companyDataError, submitError, identifierError])
+  }, [companyDataError, submitError, identifierError])
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
-    setBpn(details['bpn'])
-    setLegalEntity(details['name'])
-    setRegisteredName(details['name'])
-    setStreetHouseNumber(details['streetName'])
-    setRegion(details['region'])
-    setPostalCode(details['zipcode'])
-    setCity(details['city'])
-    setCountry(details['countryAlpha2Code'])
-    setUniqueIds(details['uniqueIds'])
+    setBpn(details.bpn)
+    setLegalEntity(details.name)
+    setRegisteredName(details.name)
+    setStreetHouseNumber(details.streetName)
+    setRegion(details.region)
+    setPostalCode(details.zipcode)
+    setCity(details.city)
+    setCountry(details.countryAlpha2Code)
+    setUniqueIds(details.uniqueIds)
     setIdentifierNumber(
-      details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['value'] : ''
+      details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
     )
     setIdentifierType(
-      details['uniqueIds'].length > 0 ? details['uniqueIds'][0]['type'] : ''
+      details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
     )
   }
 
@@ -204,68 +212,75 @@ export const CompanyDataCax = () => {
     setLegalEntity(value)
 
     if (!PATTERNS.legalEntityPattern.test(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         legalEntity: 'legalEntityError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, legalEntity: '' }))
+    setErrors((prevState) => ({ ...prevState, legalEntity: '' }))
   }
 
   const validateRegisteredName = (value: string) => {
     setRegisteredName(value)
 
     if (!PATTERNS.registeredNamePattern.test(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         registeredName: 'registerdNameError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, registeredName: '' }))
+    setErrors((prevState) => ({ ...prevState, registeredName: '' }))
   }
 
   const validateStreetHouseNumber = (value: string) => {
     setStreetHouseNumber(value)
 
     if (!isStreet(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         streetHouseNumber: 'streetHouseNumberError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, streetHouseNumber: '' }))
+    setErrors((prevState) => ({ ...prevState, streetHouseNumber: '' }))
   }
 
   const validatePostalCode = (value: string) => {
     setPostalCode(value)
 
-    if (!value)
-      return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+    if (!value) {
+      setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+      return
+    }
 
     if (!PATTERNS.postalCodePattern.test(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         postalCode: 'postalCodeError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, postalCode: '' }))
+    setErrors((prevState) => ({ ...prevState, postalCode: '' }))
   }
 
   const validateCity = (value: string) => {
     setCity(value)
 
     if (!isCity(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, city: '' }))
+    setErrors((prevState) => ({ ...prevState, city: '' }))
   }
 
   const validateCountry = (value: string) => {
@@ -273,31 +288,34 @@ export const CompanyDataCax = () => {
     setCountry(value?.toUpperCase())
     if (!PATTERNS.countryPattern.test(value?.trim())) {
       setShowIdentifiers(false)
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         country: 'countryError',
       }))
+      return
     }
-    return setErrors((prevState) => ({ ...prevState, country: '' }))
+    setErrors((prevState) => ({ ...prevState, country: '' }))
   }
 
   const validateRegion = (value: string) => {
     setRegion(value)
 
     if (!value && (country === 'MX' || country === 'CZ' || country === 'US')) {
-      return setErrors((prevState) => ({ ...prevState, region: 'regionError' }))
+      setErrors((prevState) => ({ ...prevState, region: 'regionError' }))
+      return
     } else {
       setErrors((prevState) => ({ ...prevState, region: '' }))
     }
 
     if (value && !PATTERNS.regionPattern.test(value.trim())) {
-      return setErrors((prevState) => ({
+      setErrors((prevState) => ({
         ...prevState,
         region: 'regionError',
       }))
+      return
     }
 
-    return setErrors((prevState) => ({ ...prevState, region: '' }))
+    setErrors((prevState) => ({ ...prevState, region: '' }))
   }
 
   const validateIdentifierNumber = (value) => {
@@ -305,18 +323,22 @@ export const CompanyDataCax = () => {
     setIdentifierNumber(value)
     const countryCode =
       country === 'DE' ||
-        country === 'FR' ||
-        country === 'IN' ||
-        country === 'MX'
+      country === 'FR' ||
+      country === 'IN' ||
+      country === 'MX'
         ? country
         : 'Worldwide'
-    if (identifierType && !PATTERNS[countryCode][identifierType].test(value.trim())) {
-      return setErrors((prevState) => ({
+    if (
+      identifierType &&
+      !PATTERNS[countryCode][identifierType].test(value.trim())
+    ) {
+      setErrors((prevState) => ({
         ...prevState,
         identifierNumber: countryCode + '_' + identifierType,
       }))
+      return
     }
-    return setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+    setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
   }
 
   const handleIdentifierSelect = (type, value) => {
@@ -360,9 +382,7 @@ export const CompanyDataCax = () => {
     } else if (submitError) {
       message = t('registrationStepOne.submitError')
     }
-    return (
-      <Notify message={message} />
-    )
+    return <Notify message={message} />
   }
 
   return (
@@ -386,7 +406,9 @@ export const CompanyDataCax = () => {
               <SearchInput
                 className="search-input"
                 value={''}
-                onChange={(expr) => onSearchChange(expr)}
+                onChange={(expr) => {
+                  onSearchChange(expr)
+                }}
               />
               <label className="error-message">{bpnErrorMsg}</label>
             </div>
@@ -433,7 +455,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={legalEntity}
-                onChange={(e) => validateLegalEntity(e.target.value)}
+                onChange={(e) => {
+                  validateLegalEntity(e.target.value)
+                }}
               />
               {errors.legalEntity && (
                 <label>{t(`registrationStepOne.${errors.legalEntity}`)}</label>
@@ -451,7 +475,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={registeredName}
-                onChange={(e) => validateRegisteredName(e.target.value)}
+                onChange={(e) => {
+                  validateRegisteredName(e.target.value)
+                }}
               />
               {errors.registeredName && (
                 <label>
@@ -476,7 +502,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={streetHouseNumber}
-                onChange={(e) => validateStreetHouseNumber(e.target.value)}
+                onChange={(e) => {
+                  validateStreetHouseNumber(e.target.value)
+                }}
               />
               {errors.streetHouseNumber && (
                 <label>
@@ -492,7 +520,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={postalCode}
-                onChange={(e) => validatePostalCode(e.target.value)}
+                onChange={(e) => {
+                  validatePostalCode(e.target.value)
+                }}
               />
               {errors.postalCode && (
                 <label>{t(`registrationStepOne.${errors.postalCode}`)}</label>
@@ -507,7 +537,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={city}
-                onChange={(e) => validateCity(e.target.value)}
+                onChange={(e) => {
+                  validateCity(e.target.value)
+                }}
               />
               {errors.city && (
                 <label>{t(`registrationStepOne.${errors.city}`)}</label>
@@ -521,21 +553,24 @@ export const CompanyDataCax = () => {
                 {t('registrationStepOne.country')}{' '}
                 <span className="mandatory-asterisk">*</span>
               </label>
-              {
-                ((countryArr?.length) || errors.country) &&
+              {(countryArr?.length || errors.country) && (
                 <Autocomplete
                   id="selectList"
                   options={countryArr}
                   defaultValue={defaultSelectedCountry ?? ''}
-                  renderInput={(params) => <TextField variant="standard" {...params} />}
-                  onChange={(e, values) => validateCountry(values?.id)}
+                  renderInput={(params) => (
+                    <TextField variant="standard" {...params} />
+                  )}
+                  onChange={(e, values) => {
+                    validateCountry(values?.id)
+                  }}
                   sx={{
                     '.MuiInput-input': {
-                      height: '31px'
+                      height: '31px',
                     },
                   }}
                 />
-              }
+              )}
               {errors.country && (
                 <label>{t(`registrationStepOne.${errors.country}`)}</label>
               )}
@@ -546,7 +581,9 @@ export const CompanyDataCax = () => {
               <input
                 type="text"
                 value={region}
-                onChange={(e) => validateRegion(e.target.value)}
+                onChange={(e) => {
+                  validateRegion(e.target.value)
+                }}
               />
               {errors.region && (
                 <label>{t(`registrationStepOne.${errors.region}`)}</label>
@@ -573,9 +610,9 @@ export const CompanyDataCax = () => {
                         name="uniqueIds"
                         value={id.type}
                         className="regular-radio agreement-check"
-                        onChange={() =>
+                        onChange={() => {
                           handleIdentifierSelect(id.type, id.value)
-                        }
+                        }}
                         defaultChecked={uniqueIds[0].type === id.type}
                       />
                       <label>
@@ -597,14 +634,16 @@ export const CompanyDataCax = () => {
                   </span>
                 </Row>
                 <Row className="mx-auto col-9">
-                  <div className={`form-data`}>
-                    <label> 
+                  <div className={'form-data'}>
+                    <label>
                       {t('registrationStepOne.identifierType')}{' '}
                       <span className="mandatory-asterisk">*</span>
                     </label>
                     <select
                       value={identifierType}
-                      onChange={(e) => onIdentifierTypeChange(e)}
+                      onChange={(e) => {
+                        onIdentifierTypeChange(e)
+                      }}
                     >
                       <option value="">
                         {t('registrationStepOne.pleaseSelect')}
@@ -621,8 +660,9 @@ export const CompanyDataCax = () => {
                 </Row>
                 <Row className="mx-auto col-9">
                   <div
-                    className={`form-data ${errors.identifierNumber && 'error'
-                      }`}
+                    className={`form-data ${
+                      errors.identifierNumber && 'error'
+                    }`}
                   >
                     <label>
                       {t('registrationStepOne.identifierNumber')}{' '}
@@ -631,7 +671,9 @@ export const CompanyDataCax = () => {
                     <input
                       type="text"
                       value={identifierNumber}
-                      onChange={(e) => validateIdentifierNumber(e.target.value)}
+                      onChange={(e) => {
+                        validateIdentifierNumber(e.target.value)
+                      }}
                     />
                     {errors.identifierNumber && (
                       <label>
@@ -648,8 +690,12 @@ export const CompanyDataCax = () => {
       {notifyError && renderSnackbar()}
       <FooterButton
         labelNext={t('button.confirm')}
-        handleBackClick={() => backClick()}
-        handleNextClick={() => nextClick()}
+        handleBackClick={() => {
+          backClick()
+        }}
+        handleNextClick={() => {
+          nextClick()
+        }}
         disabled={
           !legalEntity ||
           !registeredName ||

@@ -41,10 +41,7 @@ export const ErrorPage = () => {
           minWidth: '400px',
         }}
       >
-        <img
-          src="/registration/robot-sw.925342207cc863d3ed2cc9c65ffb7c33.svg"
-          alt=""
-        />
+        <img src="/registration/robot-sw.svg" alt="Error" />
       </Box>
       <Box>
         <Typography
@@ -87,7 +84,9 @@ export const ErrorPage = () => {
           <Button
             label={t('button.reload')}
             styleClass="button btn-default"
-            handleClick={() => location.reload()}
+            handleClick={() => {
+              location.reload()
+            }}
           />
         </Box>
       </Box>

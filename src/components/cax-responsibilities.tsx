@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { setUserToInvite } from '../state/features/applicationInviteUser/actions'
 import {
   addCurrentStep,
   getCurrentStep,
@@ -45,7 +44,7 @@ export const ResponsibilitiesCax = () => {
   const [email, setEmail] = useState<string | null>('')
   const [role, setRole] = useState<string | null>('')
   const [message, setMessage] = useState<string | null>('')
-  const [availableUserRoles, setavailableUserRoles] = useState([])
+  const [availableUserRoles, setavailableUserRoles] = useState<string[]>([])
   const [appError, setError] = useState<{
     email: string
     role: string
@@ -63,8 +62,8 @@ export const ResponsibilitiesCax = () => {
 
   const { data: status } = useFetchApplicationsQuery()
 
-  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj?.applicationId ?? ''
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
   const { data: rolesComposite, error: rolesError } = useFetchRolesCompositeQuery()
@@ -72,7 +71,7 @@ export const ResponsibilitiesCax = () => {
     useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
-    setavailableUserRoles(rolesComposite)
+    setavailableUserRoles(rolesComposite ?? [])
     if (rolesComposite && rolesComposite.length > 0) setRole(rolesComposite[0])
   }, [rolesComposite])
 
@@ -94,11 +93,10 @@ export const ResponsibilitiesCax = () => {
     if (email && validateEmail(email)) {
       setLoading(true)
       const user = {
-        email: email,
-        roles: [role],
-        message: message,
+        email: email ?? '',
+        roles: [role ?? ''],
+        message: message ?? '',
       }
-      dispatch(setUserToInvite(user))
       updateInviteNewUser({
         applicationId,
         user,
@@ -133,17 +131,21 @@ export const ResponsibilitiesCax = () => {
   const validatePersonalNoteOnChange = (note: string) => {
     setMessage(note)
 
-    if (note.length === 0)
-      return setError((prevState) => ({ ...prevState, personalNote: '' }))
+    if (note.length === 0) {
+      setError((prevState) => ({ ...prevState, personalNote: '' }))
+      return
+    }
 
     if (!validatePersonalNote(note)) {
-      return setError((prevState) => ({
+      setError((prevState) => ({
         ...prevState,
         personalNote: t('Responsibility.personalNoteError'),
       }))
+      return
     }
 
-    return setError((prevState) => ({ ...prevState, personalNote: '' }))
+    setError((prevState) => ({ ...prevState, personalNote: '' }))
+    return
   }
 
   const backClick = () => {
@@ -189,7 +191,7 @@ export const ResponsibilitiesCax = () => {
               <input
                 type="text"
                 name="email"
-                value={email}
+                value={email ?? ''}
                 onChange={(e) => validateEmailOnChange(e.target.value)}
               />
               <AiOutlineExclamationCircle className="error-icon" />
@@ -200,7 +202,7 @@ export const ResponsibilitiesCax = () => {
           <Row className="mx-auto col-9">
             <div className="form-data">
               <label>{t('Responsibility.role')}</label>
-              <select value={role} onChange={(e) => onRoleChange(e)}>
+              <select value={role ?? ''} onChange={(e) => onRoleChange(e)}>
                 {availableUserRoles &&
                   availableUserRoles.map((role, index) => (
                     <option key={index} value={role}>
@@ -216,7 +218,7 @@ export const ResponsibilitiesCax = () => {
               <label>{t('Responsibility.note')}</label>
               <textarea
                 name="message"
-                value={message}
+                value={message ?? ''}
                 onChange={(e) => validatePersonalNoteOnChange(e.target.value)}
               />
               <div className="error-message">{appError.personalNote}</div>
@@ -238,7 +240,7 @@ export const ResponsibilitiesCax = () => {
             </div>
           </Row>
 
-          {invitedUsers?.length > 0 && invitedUsers && (
+          {invitedUsers && invitedUsers?.length > 0 && (
             <Row className="mx-auto col-9 send-invite">
               <h5>{t('Responsibility.titleInvite')}</h5>
               <Row>

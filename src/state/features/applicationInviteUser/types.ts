@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { RequestState } from '../../../types/MainTypes'
+import { type RequestState } from '../../../types/MainTypes'
 
 export type InviteNewUser = {
   userName?: string

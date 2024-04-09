@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { RequestState } from '../../../types/MainTypes'
+import { type RequestState } from '../../../types/MainTypes'
 
 export const DocumentType = {
   CX_FRAME_CONTRACT: 'CX_FRAME_CONTRACT',

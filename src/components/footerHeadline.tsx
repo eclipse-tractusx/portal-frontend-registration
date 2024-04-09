@@ -29,7 +29,7 @@ export const FooterHeadline = ({ helpUrl }: { helpUrl?: string }) => {
       <a
         href={window.location.pathname.replace(
           window.location.pathname,
-          helpUrl
+          helpUrl ?? ''
         )}
         target="_blank"
         rel="noreferrer"

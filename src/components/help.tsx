@@ -70,7 +70,9 @@ export const Help = () => {
         <SearchInput
           className="input-search"
           value={search}
-          onChange={(value) => onSearchChange(value)}
+          onChange={(value) => {
+            onSearchChange(value)
+          }}
         />
       </Row>
       <Row>
@@ -87,7 +89,9 @@ export const Help = () => {
                           className={`${
                             visibleSection === item.section ? 'selected' : ''
                           } help-menu`}
-                          onClick={() => scrollTo(item.ref)}
+                          onClick={() => {
+                            scrollTo(item.ref)
+                          }}
                         >
                           {t(`helpLink.link${index + 1}`)}
                         </Nav.Link>

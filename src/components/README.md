@@ -48,7 +48,7 @@ Registration "Closed" Status screen for companies where the registration is alre
 
 ### unauthorized
 
-Error page if user is unaothrized for the page/service
+Error page if user is unauthorized for the page/service
 
 ### verifyRegistration
 

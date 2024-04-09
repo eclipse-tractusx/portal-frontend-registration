@@ -1,6 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
- * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2024 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,35 +17,29 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import svgr from 'vite-plugin-svgr'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), svgr(), tsconfigPaths()],
+  optimizeDeps: { exclude: ['fsevents'] },
+  build: {
+    outDir: 'build',
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          let extType = assetInfo?.name?.split('.').at(1)
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType ?? '')) {
+            extType = 'img'
+          }
+          return `static/${extType}/[name]-[hash][extname]`
         },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+      },
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "react/react-in-jsx-scope": "off",
-        "react/prop-types": "off"
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
-    }
-}
+  },
+})
