@@ -239,7 +239,7 @@ npm/npmjs/-/error-stack-parser/2.1.4, MIT, approved, clearlydefined
 npm/npmjs/-/es-abstract/1.22.2, MIT, approved, #9656
 npm/npmjs/-/es-array-method-boxes-properly/1.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/es-get-iterator/1.1.3, MIT, approved, clearlydefined
-npm/npmjs/-/es-iterator-helpers/1.0.15, MIT, approved, clearlydefined
+npm/npmjs/-/es-iterator-helpers/1.0.15, MIT, approved, #13907
 npm/npmjs/-/es-module-lexer/1.3.1, MIT, approved, #8964
 npm/npmjs/-/es-set-tostringtag/2.0.1, MIT, approved, #6218
 npm/npmjs/-/es-shim-unscopables/1.0.0, MIT, approved, clearlydefined
@@ -778,7 +778,7 @@ npm/npmjs/-/reduce-reducers/0.4.3, MIT, approved, clearlydefined
 npm/npmjs/-/redux-actions/2.6.5, MIT, approved, clearlydefined
 npm/npmjs/-/redux-thunk/2.4.2, MIT, approved, clearlydefined
 npm/npmjs/-/redux/4.2.1, CC0-1.0 AND MIT, approved, #7046
-npm/npmjs/-/reflect.getprototypeof/1.0.4, MIT, approved, clearlydefined
+npm/npmjs/-/reflect.getprototypeof/1.0.4, MIT, approved, #13910
 npm/npmjs/-/regenerate-unicode-properties/10.1.1, MIT, approved, #10903
 npm/npmjs/-/regenerate/1.4.2, MIT, approved, clearlydefined
 npm/npmjs/-/regenerator-runtime/0.13.11, MIT, approved, #4978
@@ -1332,7 +1332,7 @@ npm/npmjs/@types/parse-json/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/@types/prettier/2.7.3, MIT, approved, #9030
 npm/npmjs/@types/prop-types/15.7.8, MIT, approved, clearlydefined
 npm/npmjs/@types/q/1.5.6, MIT, approved, clearlydefined
-npm/npmjs/@types/qs/6.9.8, MIT, approved, clearlydefined
+npm/npmjs/@types/qs/6.9.8, MIT, approved, #13991
 npm/npmjs/@types/range-parser/1.2.5, MIT, approved, #10795
 npm/npmjs/@types/react-dom/18.2.11, MIT, approved, #8256
 npm/npmjs/@types/react-redux/7.1.27, MIT, approved, #10970
