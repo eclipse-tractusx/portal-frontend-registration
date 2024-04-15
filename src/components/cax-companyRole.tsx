@@ -154,8 +154,8 @@ export const CompanyRoleCax = () => {
                 checked={agreementChecked?.[id]}
               />
               {allConsentData?.agreements.map((agreement) => {
-                if (agreement.agreementId == id)
-                  return (
+                return agreement.agreementId == id
+                  ? (
                     <p className="agreement-text" key={agreement.agreementId}>
                       {agreement.documentId ? (
                         <>
@@ -183,6 +183,7 @@ export const CompanyRoleCax = () => {
                       )}
                     </p>
                   )
+                  : <></>
               })}
             </li>
           ))}

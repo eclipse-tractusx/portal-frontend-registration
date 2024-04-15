@@ -25,8 +25,20 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './state/features/store'
 
-UserService.initKeycloak(() => {
-  const rootDiv = document.getElementById('root')!
+/*
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+ReactDOM.createRoot(document.getElementById('app')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+*/
+console.log('index')
+
+//UserService.initKeycloak(() => 
+{
+  const rootDiv = document.getElementById('app')!
   /* eslint react/no-deprecated: off */
   ReactDOM.render(
     <Provider store={store}>
@@ -36,4 +48,4 @@ UserService.initKeycloak(() => {
     </Provider>,
     rootDiv
   )
-})
+}

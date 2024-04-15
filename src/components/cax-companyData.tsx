@@ -44,7 +44,7 @@ import { Autocomplete, TextField } from '@mui/material'
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 
-type CountryType {
+type CountryType = {
   id: string,
   label: string,
 }
@@ -156,14 +156,14 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setBpn(companyDetails?.bpn)
-    setLegalEntity(companyDetails?.name)
-    setRegisteredName(companyDetails?.name)
-    setStreetHouseNumber(companyDetails?.streetName)
-    setRegion(companyDetails?.region)
-    setPostalCode(companyDetails?.zipCode)
-    setCity(companyDetails?.city)
-    setCountry(companyDetails?.countryAlpha2Code)
+    setBpn(companyDetails?.bpn ?? '')
+    setLegalEntity(companyDetails?.name ?? '')
+    setRegisteredName(companyDetails?.name ?? '')
+    setStreetHouseNumber(companyDetails?.streetName ?? '')
+    setRegion(companyDetails?.region ?? '')
+    setPostalCode(companyDetails?.zipCode ?? '')
+    setCity(companyDetails?.city ?? '')
+    setCountry(companyDetails?.countryAlpha2Code ?? '')
     setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
@@ -177,20 +177,31 @@ export const CompanyDataCax = () => {
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
+    // @ts-expect-error keep for compatibility
     setBpn(details.bpn)
+    // @ts-expect-error keep for compatibility
     setLegalEntity(details.name)
+    // @ts-expect-error keep for compatibility
     setRegisteredName(details.name)
+    // @ts-expect-error keep for compatibility
     setStreetHouseNumber(details.streetName)
+    // @ts-expect-error keep for compatibility
     setRegion(details.region)
+    // @ts-expect-error keep for compatibility
     setPostalCode(details.zipcode)
+    // @ts-expect-error keep for compatibility
     setCity(details.city)
+    // @ts-expect-error keep for compatibility
     setCountry(details.countryAlpha2Code)
+    // @ts-expect-error keep for compatibility
     setUniqueIds(details.uniqueIds)
     setIdentifierNumber(
-      details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
+    // @ts-expect-error keep for compatibility
+    details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
     )
     setIdentifierType(
-      details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
+    // @ts-expect-error keep for compatibility
+    details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
     )
   }
 
@@ -366,8 +377,8 @@ export const CompanyDataCax = () => {
     companyData.countryAlpha2Code = country
     companyData.uniqueIds = [
       {
-        type: identifierType,
-        value: identifierNumber,
+        type: identifierType ?? '',
+        value: identifierNumber ?? '',
       },
     ]
     //addCompanyData(companyData)
@@ -561,7 +572,8 @@ export const CompanyDataCax = () => {
                   renderInput={(params) => (
                     <TextField variant="standard" {...params} />
                   )}
-                  onChange={(e, values) => {
+                  onChange={(_e, values) => {
+                    // @ts-expect-error keep for compatibility
                     validateCountry(values?.id)
                   }}
                   sx={{
@@ -591,7 +603,7 @@ export const CompanyDataCax = () => {
             </div>
           </Row>
 
-          {uniqueIds?.length > 1 ? (
+          {(uniqueIds && uniqueIds?.length > 1) ? (
             <>
               <Row className="mx-auto col-9">
                 <span className="form-heading">
@@ -603,7 +615,7 @@ export const CompanyDataCax = () => {
               </Row>
               <Row className="mx-auto col-9">
                 <ul className="agreement-check-list">
-                  {uniqueIds.map((id) => (
+                  {uniqueIds?.map((id) => (
                     <li key={id.type} className="agreement-li">
                       <input
                         type="radio"

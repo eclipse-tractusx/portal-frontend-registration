@@ -1,6 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
- * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021, 2024 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -18,13 +17,14 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+import * as React from 'react'
 import { useEffect } from 'react'
 import { createBrowserHistory } from 'history'
 import {
   BrowserRouter,
-  Navigate,
+  Redirect,
   Route,
-  Routes,
+  Switch,
   useLocation,
 } from 'react-router-dom'
 import './styles/newApp.css'
@@ -57,7 +57,8 @@ const App = () => {
 
   return (
     <BrowserRouter basename="/registration">
-      <Routes>
+      <Switch>
+        <Redirect path="/" exact to="/load" />
         <ProtectedRoute
           path="/load"
           rolesAllowedForTheRoute={['view_registration']}
@@ -78,17 +79,16 @@ const App = () => {
           rolesAllowedForTheRoute={['view_registration']}
           component={(props) => <Finish {...props} />}
         />
-        <Route path="/authinfo" children={<Authinfo />} />
-        <Route path="/403" children={<UnauthorisedPage />} />
-        <Route path="/help" children={<Help />} />
-        <Route path="/contact" children={<Contact />} />
-        <Route path="/imprint" children={<Imprint />} />
-        <Route path="/privacy" children={<Privacy />} />
-        <Route path="/termsOfService" children={<TermsOfService />} />
-        <Route path="/cookiePolicy" children={<CookiePolicy />} />
-        <Route path="/about" children={<About />} />
-        <Route path="/" children={<Navigate replace to="/load" />} />
-      </Routes>
+        <Route path="/authinfo" component={() => <Authinfo />} />
+        <Route path="/403" component={() => <UnauthorisedPage />} />
+        <Route path="/help" component={() => <Help />} />
+        <Route path="/contact" component={() => <Contact />} />
+        <Route path="/imprint" component={() => <Imprint />} />
+        <Route path="/privacy" component={() => <Privacy />} />
+        <Route path="/termsOfService" component={() => <TermsOfService />} />
+        <Route path="/cookiePolicy" component={() => <CookiePolicy />} />
+        <Route path="/about" component={() => <About />} />
+      </Switch>
     </BrowserRouter>
   )
 }
