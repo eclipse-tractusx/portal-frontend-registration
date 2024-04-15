@@ -45,7 +45,7 @@ Note: if you'd like to run the complete frontend application, follow the `Run fr
 
 This application provides container images for demonstration purposes.
 
-See [Docker notice](.conf/notice-registration.md) for more information.
+See [Docker notice](.conf/docker-notice-registration.md) for more information.
 
 ## License
 

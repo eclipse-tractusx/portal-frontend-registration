@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { getCentralIdp } from './EnvironmentService'
+import { getCentralIdp, getClientIdRegistration, getRealm } from './EnvironmentService'
 import Keycloak from 'keycloak-js'
 
 const searchParams = new URLSearchParams(window.location.search)
@@ -27,7 +27,7 @@ if (!realm) {
   realm = localStorage.getItem('company')
 }
 if (!realm) {
-  realm = 'CX-Central'
+  realm = getRealm()
 }
 localStorage.setItem('company', realm)
 
@@ -37,16 +37,14 @@ if (!clientId) {
   clientId = localStorage.getItem('clientId')
 }
 if (!clientId || clientId === 'null') {
-  clientId = 'Cl1-CX-Registration'
+  clientId = getClientIdRegistration()
 }
 localStorage.setItem('clientId', clientId)
 
-const CX_CLIENT = 'Cl1-CX-Registration'
-
 const _kc = new Keycloak({
   url: getCentralIdp(),
-  realm: realm,
-  clientId: clientId,
+  realm,
+  clientId,
   'ssl-required': 'external',
   'public-client': true,
 })
@@ -101,7 +99,7 @@ const getInitials = () =>
 
 const getDomain = () => realm
 
-const getRoles = () => _kc.tokenParsed?.resource_access[CX_CLIENT]?.roles
+const getRoles = () => _kc.tokenParsed?.resource_access[getClientIdRegistration()]?.roles
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role))
 
