@@ -96,7 +96,7 @@ npm/npmjs/-/camelcase/5.3.1, MIT, approved, clearlydefined
 npm/npmjs/-/camelcase/6.3.0, MIT, approved, clearlydefined
 npm/npmjs/-/camelize/1.0.1, MIT, approved, clearlydefined
 npm/npmjs/-/caniuse-api/3.0.0, MIT, approved, clearlydefined
-npm/npmjs/-/caniuse-lite/1.0.30001546, CC-BY-4.0, approved, #1196
+npm/npmjs/-/caniuse-lite/1.0.30001610, CC-BY-4.0, approved, #1196
 npm/npmjs/-/case-sensitive-paths-webpack-plugin/2.4.0, MIT, approved, clearlydefined
 npm/npmjs/-/chalk/2.4.2, MIT, approved, clearlydefined
 npm/npmjs/-/chalk/3.0.0, MIT, approved, clearlydefined
@@ -982,7 +982,7 @@ npm/npmjs/-/web-vitals/2.1.4, Apache-2.0, approved, clearlydefined
 npm/npmjs/-/webidl-conversions/4.0.2, BSD-2-Clause, approved, clearlydefined
 npm/npmjs/-/webidl-conversions/5.0.0, BSD-2-Clause, approved, clearlydefined
 npm/npmjs/-/webidl-conversions/6.1.0, BSD-2-Clause, approved, clearlydefined
-npm/npmjs/-/webpack-dev-middleware/5.3.3, MIT, approved, clearlydefined
+npm/npmjs/-/webpack-dev-middleware/5.3.4, MIT, approved, clearlydefined
 npm/npmjs/-/webpack-dev-server/4.15.1, MIT, approved, #8400
 npm/npmjs/-/webpack-manifest-plugin/4.1.1, MIT, approved, clearlydefined
 npm/npmjs/-/webpack-sources/1.4.3, MIT, approved, clearlydefined
