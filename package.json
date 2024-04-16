@@ -113,7 +113,7 @@
     "pretty": "prettier --write \"./src/**/*.{ts,tsx,js,jsx,json,css,sass,scss,xml,md}\"",
     "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\" --report-unused-disable-directives --max-warnings 0",
     "start": "vite --host --port 3002",
-    "build": "yarn build:copy-legal-info && tsc && vite build && mkdir registration && mv build/* registration && mv registration build/",
+    "build": "yarn build:copy-legal-info && tsc && vite build",
     "build:legal-notice": "bash scripts/legal-notice.sh",
     "build:copy-legal-info": "cp LICENSE NOTICE.md DEPENDENCIES SECURITY.md public/",
     "test": "jest",
