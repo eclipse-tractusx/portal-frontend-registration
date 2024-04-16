@@ -18,34 +18,22 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import ReactDOM from 'react-dom'
+import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 import UserService from './services/UserService'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './state/features/store'
 
-/*
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-ReactDOM.createRoot(document.getElementById('app')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
-*/
-console.log('index')
-
-//UserService.initKeycloak(() => 
-{
-  const rootDiv = document.getElementById('app')!
-  /* eslint react/no-deprecated: off */
-  ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
-    rootDiv
+UserService.initKeycloak(() => {
+  ReactDOM.createRoot(document.getElementById('app')!).render(
+    <StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </StrictMode>
   )
-}
+})

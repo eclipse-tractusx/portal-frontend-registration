@@ -154,36 +154,36 @@ export const CompanyRoleCax = () => {
                 checked={agreementChecked?.[id]}
               />
               {allConsentData?.agreements.map((agreement) => {
-                return agreement.agreementId == id
-                  ? (
-                    <p className="agreement-text" key={agreement.agreementId}>
-                      {agreement.documentId ? (
-                        <>
-                          {t('companyRole.TermsAndCondSpan1')}{' '}
-                          <span
-                            className={
-                              agreement.documentId ? 'agreement-span' : ''
-                            }
-                            onClick={() =>
-                              handleDownloadClick(
-                                agreement.documentId,
-                                agreement.name
-                              )
-                            }
-                            onKeyDown={() => {
-                              // do nothing
-                            }}
-                          >
-                            {agreement.name}
-                          </span>{' '}
-                          {t('companyRole.TermsAndCondSpan3')}
-                        </>
-                      ) : (
-                        <span>{agreement.name}</span>
-                      )}
-                    </p>
-                  )
-                  : <></>
+                return agreement.agreementId == id ? (
+                  <p className="agreement-text" key={agreement.agreementId}>
+                    {agreement.documentId ? (
+                      <>
+                        {t('companyRole.TermsAndCondSpan1')}{' '}
+                        <span
+                          className={
+                            agreement.documentId ? 'agreement-span' : ''
+                          }
+                          onClick={() =>
+                            handleDownloadClick(
+                              agreement.documentId,
+                              agreement.name
+                            )
+                          }
+                          onKeyDown={() => {
+                            // do nothing
+                          }}
+                        >
+                          {agreement.name}
+                        </span>{' '}
+                        {t('companyRole.TermsAndCondSpan3')}
+                      </>
+                    ) : (
+                      <span>{agreement.name}</span>
+                    )}
+                  </p>
+                ) : (
+                  <></>
+                )
               })}
             </li>
           ))}

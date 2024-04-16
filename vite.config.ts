@@ -24,6 +24,7 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/registration/',
   plugins: [react(), svgr(), tsconfigPaths()],
   optimizeDeps: { exclude: ['fsevents'] },
   build: {

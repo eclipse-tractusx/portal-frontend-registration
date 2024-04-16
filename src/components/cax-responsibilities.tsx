@@ -58,7 +58,10 @@ export const ResponsibilitiesCax = () => {
   const currentActiveStep = useSelector(getCurrentStep)
 
   const [loading, setLoading] = useState<boolean>()
-  const [invitedResponse, setInvitedResponse] = useState({severity: SeverityType.ERROR, message: ''})
+  const [invitedResponse, setInvitedResponse] = useState({
+    severity: SeverityType.ERROR,
+    message: '',
+  })
 
   const { data: status } = useFetchApplicationsQuery()
 
@@ -66,9 +69,13 @@ export const ResponsibilitiesCax = () => {
   const applicationId = obj?.applicationId ?? ''
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
-  const { data: rolesComposite, error: rolesError } = useFetchRolesCompositeQuery()
-  const { data: invitedUsers, error: invitedUsersError, refetch } =
-    useFetchInvitedUsersQuery(applicationId)
+  const { data: rolesComposite, error: rolesError } =
+    useFetchRolesCompositeQuery()
+  const {
+    data: invitedUsers,
+    error: invitedUsersError,
+    refetch,
+  } = useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
     setavailableUserRoles(rolesComposite ?? [])
@@ -89,7 +96,7 @@ export const ResponsibilitiesCax = () => {
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
   const handleSendInvite = () => {
-    setInvitedResponse({severity: SeverityType.ERROR, message: ''})
+    setInvitedResponse({ severity: SeverityType.ERROR, message: '' })
     if (email && validateEmail(email)) {
       setLoading(true)
       const user = {
@@ -106,11 +113,17 @@ export const ResponsibilitiesCax = () => {
           setEmail('')
           setMessage('')
           refetch()
-          setInvitedResponse({severity: SeverityType.SUCCESS, message: t('Responsibility.sendInviteSuccessMsg')})
+          setInvitedResponse({
+            severity: SeverityType.SUCCESS,
+            message: t('Responsibility.sendInviteSuccessMsg'),
+          })
           setLoading(false)
         })
         .catch((errors: any) => {
-          setInvitedResponse({severity: SeverityType.ERROR, message: errors.data.errors.unknown[0]})
+          setInvitedResponse({
+            severity: SeverityType.ERROR,
+            message: errors.data.errors.unknown[0],
+          })
           setLoading(false)
         })
     }
@@ -158,10 +171,8 @@ export const ResponsibilitiesCax = () => {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(invitedResponse.message) message = invitedResponse.message
-    return (
-      <Notify message={message} />
-    )
+    if (invitedResponse.message) message = invitedResponse.message
+    return <Notify message={message} />
   }
 
   return (
@@ -279,10 +290,8 @@ export const ResponsibilitiesCax = () => {
           )}
         </div>
       </div>
-      {
-        (rolesError || invitedUsersError || invitedResponse.message) &&
-        renderSnackbar()
-      }
+      {(rolesError || invitedUsersError || invitedResponse.message) &&
+        renderSnackbar()}
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.next')}

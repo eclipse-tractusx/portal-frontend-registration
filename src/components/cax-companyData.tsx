@@ -45,8 +45,8 @@ import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 
 type CountryType = {
-  id: string,
-  label: string,
+  id: string
+  label: string
 }
 
 const initialErrors = {
@@ -196,12 +196,12 @@ export const CompanyDataCax = () => {
     // @ts-expect-error keep for compatibility
     setUniqueIds(details.uniqueIds)
     setIdentifierNumber(
-    // @ts-expect-error keep for compatibility
-    details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
+      // @ts-expect-error keep for compatibility
+      details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
     )
     setIdentifierType(
-    // @ts-expect-error keep for compatibility
-    details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
+      // @ts-expect-error keep for compatibility
+      details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
     )
   }
 
@@ -603,7 +603,7 @@ export const CompanyDataCax = () => {
             </div>
           </Row>
 
-          {(uniqueIds && uniqueIds?.length > 1) ? (
+          {uniqueIds && uniqueIds?.length > 1 ? (
             <>
               <Row className="mx-auto col-9">
                 <span className="form-heading">

@@ -23,13 +23,12 @@ import {
   getClientIdRegistration,
   getRealm,
 } from './EnvironmentService'
-
 import Keycloak from 'keycloak-js'
 
 const _kc = new Keycloak({
   url: getCentralIdp(),
   realm: getRealm(),
-  clientId:  getClientIdRegistration(),
+  clientId: getClientIdRegistration(),
   'ssl-required': 'external',
   'public-client': true,
 })
@@ -40,7 +39,6 @@ const _kc = new Keycloak({
  * @param onAuthenticatedCallback
  */
 const initKeycloak = (onAuthenticatedCallback) => {
-  console.log('init')
   const url =
     window.location.pathname === '/registration/help'
       ? '/registration/help'
@@ -102,8 +100,6 @@ const UserService = {
   getInitials,
   getDomain,
   hasRole,
-  realm,
-  clientId,
   getTenant,
   getRoles,
 }

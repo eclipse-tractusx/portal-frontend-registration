@@ -18,7 +18,6 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-
 import { Redirect, Route } from 'react-router-dom'
 import UserService from '../../services/UserService'
 

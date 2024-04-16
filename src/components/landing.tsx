@@ -47,8 +47,7 @@ export const Landing = () => {
   }, [])
 
   const onClick = async () => {
-    if (!status)
-      return
+    if (!status) return
     const obj = status.find(
       (o) => o.applicationStatus === ApplicationStatus.CREATED
     )
