@@ -100,9 +100,9 @@ export const ResponsibilitiesCax = () => {
     if (email && validateEmail(email)) {
       setLoading(true)
       const user = {
-        email: email ?? '',
-        roles: [role ?? ''],
-        message: message ?? '',
+        email,
+        message,
+        roles: [role],
       }
       updateInviteNewUser({
         applicationId,
