@@ -94,7 +94,7 @@ npm/npmjs/-/dayjs/1.11.10, MIT, approved, #9149
 npm/npmjs/-/debug/3.2.7, MIT, approved, clearlydefined
 npm/npmjs/-/debug/4.3.4, MIT, approved, clearlydefined
 npm/npmjs/-/decimal.js/10.4.3, MIT, approved, clearlydefined
-npm/npmjs/-/dedent/1.5.3, MIT AND (JSON AND MIT), restricted, #14381
+npm/npmjs/-/dedent/1.5.3, MIT, approved, #14381
 npm/npmjs/-/deep-equal/2.2.3, MIT, approved, #8406
 npm/npmjs/-/deep-is/0.1.4, MIT, approved, #2130
 npm/npmjs/-/deepmerge/4.3.1, MIT, approved, #7032
@@ -415,7 +415,7 @@ npm/npmjs/-/pure-rand/6.1.0, MIT, approved, clearlydefined
 npm/npmjs/-/qs/6.12.1, BSD-3-Clause, approved, #14380
 npm/npmjs/-/querystringify/2.2.0, MIT, approved, clearlydefined
 npm/npmjs/-/queue-microtask/1.2.3, MIT, approved, clearlydefined
-npm/npmjs/-/react-bootstrap/2.10.2, MIT AND CC-PDDC, restricted, #14382
+npm/npmjs/-/react-bootstrap/2.10.2, MIT AND BSD-3-Clause AND Apache-2.0 AND CC-PDDC, approved, #14382
 npm/npmjs/-/react-datepicker/6.8.0, MIT AND BSD-3-Clause, approved, #14379
 npm/npmjs/-/react-dom/18.2.0, MIT, approved, clearlydefined
 npm/npmjs/-/react-dropzone-uploader/2.11.0, MIT, approved, clearlydefined
@@ -710,21 +710,21 @@ npm/npmjs/@reduxjs/toolkit/2.2.3, MIT AND (BSD-2-Clause AND ISC AND MIT) AND Apa
 npm/npmjs/@restart/hooks/0.4.16, MIT, approved, #7049
 npm/npmjs/@restart/ui/1.6.8, MIT, approved, clearlydefined
 npm/npmjs/@rollup/pluginutils/5.1.0, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-android-arm-eabi/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-android-arm64/4.14.3, MIT, approved, clearlydefined
+npm/npmjs/@rollup/rollup-android-arm-eabi/4.14.3, MIT AND (ISC AND MIT), approved, #14395
+npm/npmjs/@rollup/rollup-android-arm64/4.14.3, MIT AND (ISC AND MIT), approved, #14399
 npm/npmjs/@rollup/rollup-darwin-arm64/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-darwin-x64/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-arm-gnueabihf/4.14.3, MIT, approved, clearlydefined
+npm/npmjs/@rollup/rollup-darwin-x64/4.14.3, MIT AND (ISC AND MIT), approved, #14394
+npm/npmjs/@rollup/rollup-linux-arm-gnueabihf/4.14.3, MIT AND (ISC AND MIT), approved, #14398
 npm/npmjs/@rollup/rollup-linux-arm-musleabihf/4.14.3, MIT, approved, clearlydefined
 npm/npmjs/@rollup/rollup-linux-arm64-gnu/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-arm64-musl/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-powerpc64le-gnu/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-riscv64-gnu/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-s390x-gnu/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-linux-x64-gnu/4.14.3, MIT, approved, clearlydefined
+npm/npmjs/@rollup/rollup-linux-arm64-musl/4.14.3, MIT AND (ISC AND MIT), approved, #14396
+npm/npmjs/@rollup/rollup-linux-powerpc64le-gnu/4.14.3, MIT AND (ISC AND MIT), approved, #14403
+npm/npmjs/@rollup/rollup-linux-riscv64-gnu/4.14.3, MIT AND (ISC AND MIT), approved, #14397
+npm/npmjs/@rollup/rollup-linux-s390x-gnu/4.14.3, MIT AND (ISC AND MIT), approved, #14402
+npm/npmjs/@rollup/rollup-linux-x64-gnu/4.14.3, MIT AND (ISC AND MIT), approved, #14400
 npm/npmjs/@rollup/rollup-linux-x64-musl/4.14.3, MIT AND (ISC AND MIT), approved, #14391
 npm/npmjs/@rollup/rollup-win32-arm64-msvc/4.14.3, MIT, approved, clearlydefined
-npm/npmjs/@rollup/rollup-win32-ia32-msvc/4.14.3, MIT, approved, clearlydefined
+npm/npmjs/@rollup/rollup-win32-ia32-msvc/4.14.3, MIT AND (ISC AND MIT), approved, #14393
 npm/npmjs/@rollup/rollup-win32-x64-msvc/4.14.3, MIT AND (ISC AND MIT), approved, #14392
 npm/npmjs/@sinclair/typebox/0.27.8, MIT, approved, clearlydefined
 npm/npmjs/@sinonjs/commons/3.0.1, BSD-3-Clause, approved, #12905
