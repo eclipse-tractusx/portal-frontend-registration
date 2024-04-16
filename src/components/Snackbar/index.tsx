@@ -162,7 +162,6 @@ export const PageSnackbar = ({
   )
 }
 
-
 export const Notify = ({ message }: { message: string }) => {
   return (
     <PageSnackbar

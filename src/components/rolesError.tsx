@@ -17,7 +17,6 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 function RolesError({ retry }) {
@@ -28,7 +27,7 @@ function RolesError({ retry }) {
       <h4>{t('companyRole.NoRolesError1')}</h4>
       <h4>
         {t('companyRole.Please')}{' '}
-        <span 
+        <span
           onClick={retry}
           onKeyUp={() => {
             // do nothing

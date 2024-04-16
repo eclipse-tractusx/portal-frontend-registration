@@ -78,7 +78,7 @@ jobs:
         run: yarn build:legal-notice
 
       - name: Build Application
-        run: yarn build:dirty
+        run: yarn build
 
       - name: Unit Tests
         run: yarn test:ci

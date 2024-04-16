@@ -56,13 +56,13 @@ export const FooterButton = ({
           <Button
             label={labelNext}
             styleClass={
-              tooltip || disabled
+              tooltip ?? disabled
                 ? 'button btn-disabledCax'
                 : 'button btn-primaryCax'
             }
             handleClick={handleNextClick}
             showTooltip={tooltip ? true : false}
-            tooltipText={tooltip}
+            tooltipText={tooltip ?? ''}
             disabled={disabled}
             loading={loading}
           />

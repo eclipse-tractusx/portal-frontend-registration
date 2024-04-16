@@ -38,12 +38,15 @@ const TESTDATA = {
       'Toronto',
       'San Francisco',
       'St. Catharines',
+      // eslint-disable-next-line
       "Val-d'Or",
+      // eslint-disable-next-line
       "Presqu'ile",
       'Niagara on the Lake',
       'Niagara-on-the-Lake',
       'München',
       'Villes du Québec',
+      // eslint-disable-next-line
       "Provence-Alpes-Côte d'Azur",
       'Île-de-France',
       'Kópavogur',
@@ -58,6 +61,7 @@ const TESTDATA = {
       '.',
       '--',
       'Niagara--on-the-Lake',
+      // eslint-disable-next-line
       "Presqu''ile",
     ],
   },
@@ -76,7 +80,9 @@ const TESTDATA = {
       '2000 PENNSYLVANIA AVENUE, N.W.',
       'Gertrud-Grunow-Str. 09',
       'Gertrud-Grunow-Straße 09',
+      // eslint-disable-next-line
       "Rue d'Alger",
+      // eslint-disable-next-line
       "Rue de l'Amiral-de-Coligny",
       'Allée André-Breton',
       'Vlašská 19',
@@ -89,18 +95,29 @@ const TESTDATA = {
       '.',
       '--',
       'Finken  weg',
+      // eslint-disable-next-line
       "Rue de l''este",
     ],
   },
 }
 
 const validate = (data, check) => {
-  data.valid.forEach((expr) => expect(check(expr)).toBe(true))
-  data.invalid.forEach((expr) => expect(check(expr)).toBe(false))
+  data.valid.forEach((expr) => {
+    expect(check(expr)).toBe(true)
+  })
+  data.invalid.forEach((expr) => {
+    expect(check(expr)).toBe(false)
+  })
 }
 
 describe('Input Pattern Tests', () => {
-  it('validates BPNs', () => validate(TESTDATA.BPN, isBPN))
-  it('validates cities', () => validate(TESTDATA.CITY, isCity))
-  it('validates streets', () => validate(TESTDATA.STREET, isStreet))
+  it('validates BPNs', () => {
+    validate(TESTDATA.BPN, isBPN)
+  })
+  it('validates cities', () => {
+    validate(TESTDATA.CITY, isCity)
+  })
+  it('validates streets', () => {
+    validate(TESTDATA.STREET, isStreet)
+  })
 })

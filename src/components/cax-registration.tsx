@@ -22,7 +22,7 @@ import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Footer from './footer'
 import { Header } from './cax-header'
-import ReactTooltip from 'react-tooltip'
+import { Tooltip } from 'react-tooltip'
 import { useSelector } from 'react-redux'
 import 'react-datepicker/dist/react-datepicker.css'
 import { CompanyDataCax } from './cax-companyData'
@@ -45,7 +45,7 @@ export const RegistrationCax = () => {
   const [updateInvitation] = useUpdateInvitationMutation()
 
   useEffect(() => {
-    if (status.length <= 0) {
+    if (status && status.length <= 0) {
       updateInvitation()
     }
   }, [])
@@ -54,7 +54,7 @@ export const RegistrationCax = () => {
     <Container>
       <Header />
       <Row>
-        {status && status[0] && (
+        {status?.[0] && (
           <Col>
             <div className="mx-auto col-9 registration-header">
               <h4>{t('registration.registration')}</h4>
@@ -77,7 +77,7 @@ export const RegistrationCax = () => {
         )}
       </Row>
       <Footer />
-      <ReactTooltip />
+      <Tooltip />
     </Container>
   )
 }

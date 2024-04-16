@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { Dispatch } from 'redux'
+import { type Dispatch } from 'redux'
 
 export enum FileUploadStatus {
   DONE = 'done',

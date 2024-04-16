@@ -18,8 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import React from 'react'
-import { IInputProps } from 'react-dropzone-uploader'
+import { type IInputProps } from 'react-dropzone-uploader'
 
 function DragdropInput({
   labelClassName,

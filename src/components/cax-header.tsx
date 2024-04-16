@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import i18n from '../i18n'
+import i18n from '../services/I18nService'
 import { Row, Col } from 'react-bootstrap'
 import UserService from '../services/UserService'
 import { getClientRolesComposite } from '../helpers/utils'
@@ -27,7 +27,6 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DataErrorCodes } from '../helpers/DataError'
 import { ToastContainer, toast } from 'react-toastify'
-import { addrolesComposite } from '../state/features/user/action'
 
 export const Header = () => {
   const { t } = useTranslation()
@@ -54,11 +53,11 @@ export const Header = () => {
       .catch((errorCode: number) => {
         const message = DataErrorCodes.includes(errorCode)
           ? t(`ErrorMessage.${errorCode}`)
-          : t(`ErrorMessage.default`)
+          : t('ErrorMessage.default')
 
         toast.error(message)
       })
-  }, [tokenRoles, addrolesComposite, t])
+  }, [tokenRoles, t])
 
   const changeLanguage = (lng) => {
     setlanguage(lng)
@@ -77,7 +76,9 @@ export const Header = () => {
           <div className="profile-lang">
             <span
               className={language === 'en' ? 'lang-sel' : ''}
-              onClick={() => changeLanguage('en')}
+              onClick={() => {
+                changeLanguage('en')
+              }}
               onKeyDown={() => {
                 // do nothing
               }}
@@ -89,7 +90,9 @@ export const Header = () => {
           <div className="profile-lang">
             <span
               className={language === 'de' ? 'lang-sel' : ''}
-              onClick={() => changeLanguage('de')}
+              onClick={() => {
+                changeLanguage('de')
+              }}
               onKeyDown={() => {
                 // do nothing
               }}

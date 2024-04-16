@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { ILayoutProps } from 'react-dropzone-uploader'
+import { type ILayoutProps } from 'react-dropzone-uploader'
 import { useTranslation } from 'react-i18next'
 
 interface CustomLayoutProps extends ILayoutProps {

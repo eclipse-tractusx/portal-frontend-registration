@@ -35,12 +35,12 @@ export enum ApplicationStatus {
   VERIFY = 'VERIFY',
   SUBMITTED = 'SUBMITTED',
   DECLINED = 'DECLINED',
-  CONFIRMED = 'CONFIRMED'
+  CONFIRMED = 'CONFIRMED',
 }
 
 export enum ApplicationType {
   INTERNAL = 'INTERNAL',
-  EXTERNAL = 'EXTERNAL'
+  EXTERNAL = 'EXTERNAL',
 }
 
 export type ApplicationResponse = {
@@ -107,7 +107,7 @@ export const apiSlice = createApi({
     }),
     fetchUniqueIdentifier: builder.query<UniqueIdentifier[], string>({
       query: (alpha2Code) => {
-        if (!alpha2Code || alpha2Code.length < 2) return
+        if (!alpha2Code || alpha2Code.length < 2) return ''
         return `/api/registration/company/country/${alpha2Code}/uniqueidentifiers`
       },
     }),

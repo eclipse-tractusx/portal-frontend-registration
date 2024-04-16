@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { CompanyDetails } from '../application/types'
+import { type CompanyDetails } from '../application/types'
 
 export interface IUserItem {
   uiId: string
@@ -30,7 +30,7 @@ export interface IUserItem {
 export interface IUserData {
   userInviteList: IUserItem[]
   currentStep: number
-  companyData: CompanyDetails
+  companyData?: CompanyDetails
   roleComposite: string[]
   fileNames: string[]
 }

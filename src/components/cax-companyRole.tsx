@@ -24,7 +24,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { companyRole } from '../state/features/applicationCompanyRole/types'
+import { type companyRole } from '../state/features/applicationCompanyRole/types'
 import { download } from '../helpers/utils'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
@@ -52,17 +52,13 @@ export const CompanyRoleCax = () => {
 
   const { data: status } = useFetchApplicationsQuery()
 
-  const obj = status[status.length - 1]
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1]
+  const applicationId = obj?.applicationId
 
-  const {
-    data: allConsentData,
-    error: allConsentError
-  } = useFetchAgreementDataQuery()
-  const {
-    data: consentData,
-    error: consentError,
-  } = useFetchAgreementConsentsQuery(applicationId)
+  const { data: allConsentData, error: allConsentError } =
+    useFetchAgreementDataQuery()
+  const { data: consentData, error: consentError } =
+    useFetchAgreementConsentsQuery(applicationId ?? '')
   const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
 
   useEffect(() => {
@@ -99,7 +95,7 @@ export const CompanyRoleCax = () => {
       )
 
       const updatedAgreementIds = allConsentData?.companyRoles[
-        companyRoleIndex
+        companyRoleIndex ?? ''
       ].agreementIds.reduce((prev, next) => {
         return { ...prev, [next]: false }
       }, {})
@@ -131,9 +127,11 @@ export const CompanyRoleCax = () => {
         .then(async (res) => {
           const fileType = res.headers.get('content-type')
           const file = await res.blob()
-          return download(file, fileType, documentName)
+          download(file, fileType ?? '', documentName)
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          console.log(error)
+        })
     } catch (error) {
       console.error(error, 'ERROR WHILE FETCHING DOCUMENT')
     }
@@ -150,39 +148,42 @@ export const CompanyRoleCax = () => {
                 type="checkbox"
                 name={id}
                 className="regular-checkbox agreement-check"
-                onChange={() => handleAgreementCheck(id)}
+                onChange={() => {
+                  handleAgreementCheck(id)
+                }}
                 checked={agreementChecked?.[id]}
               />
               {allConsentData?.agreements.map((agreement) => {
-                if (agreement.agreementId == id)
-                  return (
-                    <p className="agreement-text" key={agreement.agreementId}>
-                      {agreement.documentId ? (
-                        <>
-                          {t('companyRole.TermsAndCondSpan1')}{' '}
-                          <span
-                            className={
-                              agreement.documentId ? 'agreement-span' : ''
-                            }
-                            onClick={() =>
-                              handleDownloadClick(
-                                agreement.documentId,
-                                agreement.name
-                              )
-                            }
-                            onKeyDown={() => {
-                              // do nothing
-                            }}
-                          >
-                            {agreement.name}
-                          </span>{' '}
-                          {t('companyRole.TermsAndCondSpan3')}
-                        </>
-                      ) : (
-                        <span>{agreement.name}</span>
-                      )}
-                    </p>
-                  )
+                return agreement.agreementId == id ? (
+                  <p className="agreement-text" key={agreement.agreementId}>
+                    {agreement.documentId ? (
+                      <>
+                        {t('companyRole.TermsAndCondSpan1')}{' '}
+                        <span
+                          className={
+                            agreement.documentId ? 'agreement-span' : ''
+                          }
+                          onClick={() =>
+                            handleDownloadClick(
+                              agreement.documentId,
+                              agreement.name
+                            )
+                          }
+                          onKeyDown={() => {
+                            // do nothing
+                          }}
+                        >
+                          {agreement.name}
+                        </span>{' '}
+                        {t('companyRole.TermsAndCondSpan3')}
+                      </>
+                    ) : (
+                      <span>{agreement.name}</span>
+                    )}
+                  </p>
+                ) : (
+                  <></>
+                )
               })}
             </li>
           ))}
@@ -201,20 +202,20 @@ export const CompanyRoleCax = () => {
     )
 
     const agreements = Object.keys(agreementChecked)
-      .filter(agreementId => agreementChecked[agreementId])
+      .filter((agreementId) => agreementChecked[agreementId])
       .map((agreementId) => {
         return {
-          agreementId: agreementId,
-          consentStatus: 'ACTIVE'
+          agreementId,
+          consentStatus: 'ACTIVE',
         }
       })
 
     const data = {
-      companyRoles: companyRoles,
-      agreements: agreements,
+      companyRoles,
+      agreements,
     }
 
-    await updateAgreementConsents({ applicationId, data })
+    await updateAgreementConsents({ applicationId: applicationId ?? '', data })
       .unwrap()
       .then(() => {
         dispatch(addCurrentStep(currentActiveStep + 1))
@@ -226,9 +227,7 @@ export const CompanyRoleCax = () => {
   }
 
   const renderSnackbar = (message: string) => {
-    return (
-      <Notify message={message} />
-    )
+    return <Notify message={message} />
   }
 
   return (
@@ -254,7 +253,9 @@ export const CompanyRoleCax = () => {
                     type="checkbox"
                     name={role.companyRole}
                     className="regular-checkbox"
-                    onChange={() => handleCompanyRoleCheck(role.companyRole)}
+                    onChange={() => {
+                      handleCompanyRoleCheck(role.companyRole)
+                    }}
                     checked={companyRoleChecked?.[role.companyRole]}
                   />
                 </div>
@@ -269,16 +270,15 @@ export const CompanyRoleCax = () => {
           ))}
         </div>
       </div>
-      {
-        (consentError || allConsentError) && renderSnackbar(t('registration.apiError'))
-      }
-      {
-        submitError && renderSnackbar(t('companyRole.submitError'))
-      }
+      {(consentError ?? allConsentError) &&
+        renderSnackbar(t('registration.apiError'))}
+      {submitError && renderSnackbar(t('companyRole.submitError'))}
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.confirm')}
-        handleBackClick={() => backClick()}
+        handleBackClick={() => {
+          backClick()
+        }}
         handleNextClick={() => nextClick()}
         helpUrl={
           '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F04.+Company+Role+%26+Consent.md'

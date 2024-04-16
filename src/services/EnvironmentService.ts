@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-declare const ENV: Record<string,string>
+declare const ENV: Record<string, string>
 
 export const getApiBase = () => ENV.PORTAL_BACKEND_URL ?? ''
 

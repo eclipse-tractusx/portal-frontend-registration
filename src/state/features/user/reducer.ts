@@ -18,16 +18,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import produce from 'immer'
+import { produce } from 'immer'
 import { handleActions } from 'redux-actions'
 import userActions, {
-  addToInviteListAction,
-  addCurrentStepAction,
-  removeFromInviteListAction,
-  addCompanyDataAction,
-  addrolesCompositeAction,
+  type addToInviteListAction,
+  type addCurrentStepAction,
+  type removeFromInviteListAction,
+  type addCompanyDataAction,
+  type addrolesCompositeAction,
 } from './action'
-import { IUserData } from './types'
+import { type IUserData } from './types'
 
 // empty userInvite list
 export const initialState = {
