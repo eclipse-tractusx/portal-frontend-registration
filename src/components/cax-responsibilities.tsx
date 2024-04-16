@@ -44,7 +44,7 @@ export const ResponsibilitiesCax = () => {
   const [email, setEmail] = useState<string | null>('')
   const [role, setRole] = useState<string | null>('')
   const [message, setMessage] = useState<string | null>('')
-  const [availableUserRoles, setavailableUserRoles] = useState<string[]>([])
+  const [availableUserRoles, setAvailableUserRoles] = useState<string[]>([])
   const [appError, setError] = useState<{
     email: string
     role: string
@@ -78,7 +78,7 @@ export const ResponsibilitiesCax = () => {
   } = useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
-    setavailableUserRoles(rolesComposite ?? [])
+    setAvailableUserRoles(rolesComposite ?? [])
     if (rolesComposite && rolesComposite.length > 0) setRole(rolesComposite[0])
   }, [rolesComposite])
 
@@ -158,7 +158,6 @@ export const ResponsibilitiesCax = () => {
     }
 
     setError((prevState) => ({ ...prevState, personalNote: '' }))
-    return
   }
 
   const backClick = () => {
