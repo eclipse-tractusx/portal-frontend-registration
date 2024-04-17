@@ -73,7 +73,7 @@ export const CompanyDataCax = () => {
   const { data: status } = useFetchApplicationsQuery()
 
   const obj = status?.[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj?.applicationId ?? ''
+  const applicationId = obj?.applicationId
 
   const [bpn, setBpn] = useState('')
   const [bpnErrorMsg, setBpnErrorMessage] = useState('')
@@ -156,14 +156,14 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setBpn(companyDetails?.bpn ?? '')
-    setLegalEntity(companyDetails?.name ?? '')
-    setRegisteredName(companyDetails?.name ?? '')
-    setStreetHouseNumber(companyDetails?.streetName ?? '')
-    setRegion(companyDetails?.region ?? '')
-    setPostalCode(companyDetails?.zipCode ?? '')
-    setCity(companyDetails?.city ?? '')
-    setCountry(companyDetails?.countryAlpha2Code ?? '')
+    setBpn(companyDetails?.bpn)
+    setLegalEntity(companyDetails?.name)
+    setRegisteredName(companyDetails?.name)
+    setStreetHouseNumber(companyDetails?.streetName)
+    setRegion(companyDetails?.region)
+    setPostalCode(companyDetails?.zipCode)
+    setCity(companyDetails?.city)
+    setCountry(companyDetails?.countryAlpha2Code)
     setUniqueIds(companyDetails?.uniqueIds)
     setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
     setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
@@ -377,8 +377,8 @@ export const CompanyDataCax = () => {
     companyData.countryAlpha2Code = country
     companyData.uniqueIds = [
       {
-        type: identifierType ?? '',
-        value: identifierNumber ?? '',
+        type: identifierType,
+        value: identifierNumber,
       },
     ]
     //addCompanyData(companyData)
@@ -568,12 +568,11 @@ export const CompanyDataCax = () => {
                 <Autocomplete
                   id="selectList"
                   options={countryArr}
-                  defaultValue={defaultSelectedCountry ?? ''}
+                  defaultValue={defaultSelectedCountry}
                   renderInput={(params) => (
                     <TextField variant="standard" {...params} />
                   )}
                   onChange={(_e, values) => {
-                    // @ts-expect-error keep for compatibility
                     validateCountry(values?.id)
                   }}
                   sx={{

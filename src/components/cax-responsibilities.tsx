@@ -66,7 +66,7 @@ export const ResponsibilitiesCax = () => {
   const { data: status } = useFetchApplicationsQuery()
 
   const obj = status?.[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj?.applicationId ?? ''
+  const applicationId = obj?.applicationId
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
   const { data: rolesComposite, error: rolesError } =
@@ -201,7 +201,7 @@ export const ResponsibilitiesCax = () => {
               <input
                 type="text"
                 name="email"
-                value={email ?? ''}
+                value={email}
                 onChange={(e) => validateEmailOnChange(e.target.value)}
               />
               <AiOutlineExclamationCircle className="error-icon" />
@@ -212,7 +212,7 @@ export const ResponsibilitiesCax = () => {
           <Row className="mx-auto col-9">
             <div className="form-data">
               <label>{t('Responsibility.role')}</label>
-              <select value={role ?? ''} onChange={(e) => onRoleChange(e)}>
+              <select value={role} onChange={(e) => onRoleChange(e)}>
                 {availableUserRoles &&
                   availableUserRoles.map((role, index) => (
                     <option key={index} value={role}>
@@ -228,7 +228,7 @@ export const ResponsibilitiesCax = () => {
               <label>{t('Responsibility.note')}</label>
               <textarea
                 name="message"
-                value={message ?? ''}
+                value={message}
                 onChange={(e) => validatePersonalNoteOnChange(e.target.value)}
               />
               <div className="error-message">{appError.personalNote}</div>

@@ -50,7 +50,7 @@ export const VerifyRegistration = () => {
   const { data: status } = useFetchApplicationsQuery()
 
   const obj = status?.[status.length - 1]
-  const applicationId = obj?.applicationId ?? ''
+  const applicationId = obj?.applicationId
 
   const { data: registrationData, error: dataError } =
     useFetchRegistrationDataQuery(applicationId)
@@ -87,7 +87,7 @@ export const VerifyRegistration = () => {
     return null
   }
 
-  const hasRoles = () => (registrationData?.companyRoles.length ?? 0) > 0
+  const hasRoles = () => registrationData?.companyRoles.length > 0
 
   const hasDocuments = () => documents && documents.length > 0
 
