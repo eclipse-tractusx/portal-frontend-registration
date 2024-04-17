@@ -58,7 +58,7 @@ export const CompanyRoleCax = () => {
   const { data: allConsentData, error: allConsentError } =
     useFetchAgreementDataQuery()
   const { data: consentData, error: consentError } =
-    useFetchAgreementConsentsQuery(applicationId ?? '')
+    useFetchAgreementConsentsQuery(applicationId)
   const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export const CompanyRoleCax = () => {
       )
 
       const updatedAgreementIds = allConsentData?.companyRoles[
-        companyRoleIndex ?? ''
+        companyRoleIndex
       ].agreementIds.reduce((prev, next) => {
         return { ...prev, [next]: false }
       }, {})
@@ -127,7 +127,7 @@ export const CompanyRoleCax = () => {
         .then(async (res) => {
           const fileType = res.headers.get('content-type')
           const file = await res.blob()
-          download(file, fileType ?? '', documentName)
+          download(file, fileType, documentName)
         })
         .catch((error) => {
           console.log(error)
@@ -215,7 +215,7 @@ export const CompanyRoleCax = () => {
       agreements,
     }
 
-    await updateAgreementConsents({ applicationId: applicationId ?? '', data })
+    await updateAgreementConsents({ applicationId, data })
       .unwrap()
       .then(() => {
         dispatch(addCurrentStep(currentActiveStep + 1))

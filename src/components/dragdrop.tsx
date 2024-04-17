@@ -78,7 +78,7 @@ export const DragDrop = () => {
 
   const { data: status } = useFetchApplicationsQuery()
   const obj = status?.[status.length - 1]
-  const applicationId = obj?.applicationId ?? ''
+  const applicationId = obj?.applicationId
 
   const [fileError, setFileError] = useState('')
   const [deleteDocResponse, setDeleteDocResponse] = useState({
@@ -231,7 +231,7 @@ export const DragDrop = () => {
                   {document.documentName}
                 </div>
                 <div className="dropzone-overview-file-status">
-                  {`${getStatusText(document.status ?? '')} ${
+                  {`${getStatusText(document.status)} ${
                     document.progress && document?.progress !== 100
                       ? document?.progress
                       : ''
@@ -241,7 +241,7 @@ export const DragDrop = () => {
                   <div
                     role="progressbar"
                     className={`progress-bar bg-${getClassNameByStatus(
-                      document.status ?? ''
+                      document.status
                     )}`}
                     style={{
                       width: `${document?.progress}%`,

@@ -62,7 +62,7 @@ export const FooterButton = ({
             }
             handleClick={handleNextClick}
             showTooltip={tooltip ? true : false}
-            tooltipText={tooltip ?? ''}
+            tooltipText={tooltip}
             disabled={disabled}
             loading={loading}
           />
