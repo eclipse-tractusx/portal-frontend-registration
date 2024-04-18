@@ -1,10 +1,14 @@
 # Changelog
 
-## 1.7.0-RC1
+## 2.0.0-RC1
 
 ### Change
+- Migrated from Create React App (webpack) to Vite (rollup)
+  - Switched from deprecated CRA to new framework for build scripts and development server
+  - Use React 18 instead of 17
+  - Upgraded dependencies
 - Pattern updates
-  - added support of special characters in the registration form - Name, street, region, city and postal code
+  - Support special characters in the registration form - Name, street, region, city and postal code
   - updated company region field to accept hyphens
 - upgraded keycloak-js dependency to v23.0.7
 - move config values from code to config (clientID, realm name, etc.)
@@ -12,6 +16,7 @@
 ### Technical Support
 - set node version explicitly
 - introduced codeql scan
+- introduced dependabot.yml
 - removed veracode workflow
 - upgraded gh actions and change to pinned actions full length commit sha
 - CONTRIBUTING.md: linked to contribution details

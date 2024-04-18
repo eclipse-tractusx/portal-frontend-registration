@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import Dropzone, { IFileWithMeta } from 'react-dropzone-uploader'
+import Dropzone, { type IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
@@ -29,8 +29,8 @@ import DragdropLayout from './dragdropLayout'
 import DragdropInput from './dragdropInput'
 import DragdropContent from './dragdropContent'
 import '../styles/newApp.css'
-import { DocumentData } from '../state/features/applicationDocuments/types'
-import { FileStatus, FileStatusValue } from '../types/MainTypes'
+import { type DocumentData } from '../state/features/applicationDocuments/types'
+import { type FileStatus, type FileStatusValue } from '../types/MainTypes'
 import { v4 as uuidv4 } from 'uuid'
 import {
   ApplicationStatus,
@@ -77,14 +77,18 @@ export const DragDrop = () => {
   const dispatch = useDispatch()
 
   const { data: status } = useFetchApplicationsQuery()
-  const obj = status[status.length - 1]
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1]
+  const applicationId = obj?.applicationId
 
   const [fileError, setFileError] = useState('')
-  const [deleteDocResponse, setDeleteDocResponse] = useState({severity: SeverityType.ERROR, message: ''})
+  const [deleteDocResponse, setDeleteDocResponse] = useState({
+    severity: SeverityType.ERROR,
+    message: '',
+  })
 
   const currentActiveStep = useSelector(getCurrentStep)
-  const { data: documents, error: documentError } = useFetchDocumentsQuery(applicationId)
+  const { data: documents, error: documentError } =
+    useFetchDocumentsQuery(applicationId)
   const [fetchDocumentByDocumentId] = useFetchDocumentByDocumentIdMutation()
   const [updateStatus] = useUpdateStatusMutation()
   const [updateDocument] = useUpdateDocumentMutation()
@@ -125,22 +129,31 @@ export const DragDrop = () => {
 
   const nextClick = async () => {
     if (obj) {
-      const statusData = { id: obj['applicationId'], status: ApplicationStatus.VERIFY }
+      const statusData = {
+        id: obj.applicationId,
+        status: ApplicationStatus.VERIFY,
+      }
       await updateStatus(statusData).unwrap()
     }
     dispatch(addCurrentStep(currentActiveStep + 1))
   }
 
   const deleteDocumentFn = async (documentId) => {
-    setDeleteDocResponse({severity: SeverityType.ERROR, message: ''})
+    setDeleteDocResponse({ severity: SeverityType.ERROR, message: '' })
     await removeDocument(documentId)
       .unwrap()
       .then(() => {
-        setDeleteDocResponse({severity: SeverityType.SUCCESS, message: t('documentUpload.deleteSuccess')})
+        setDeleteDocResponse({
+          severity: SeverityType.SUCCESS,
+          message: t('documentUpload.deleteSuccess'),
+        })
       })
       .catch((errors: any) => {
         console.log('errors', errors)
-        setDeleteDocResponse({severity: SeverityType.ERROR, message: t('documentUpload.deleteError')})
+        setDeleteDocResponse({
+          severity: SeverityType.ERROR,
+          message: t('documentUpload.deleteError'),
+        })
       })
   }
 
@@ -161,10 +174,8 @@ export const DragDrop = () => {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(deleteDocResponse.message) message = deleteDocResponse.message
-    return (
-      <Notify message={message} />
-    )
+    if (deleteDocResponse.message) message = deleteDocResponse.message
+    return <Notify message={message} />
   }
 
   return (
@@ -220,10 +231,11 @@ export const DragDrop = () => {
                   {document.documentName}
                 </div>
                 <div className="dropzone-overview-file-status">
-                  {`${getStatusText(document.status)} ${document.progress && document?.progress !== 100
+                  {`${getStatusText(document.status)} ${
+                    document.progress && document?.progress !== 100
                       ? document?.progress
                       : ''
-                    }`}
+                  }`}
                 </div>
                 <div className="progress">
                   <div
@@ -249,13 +261,13 @@ export const DragDrop = () => {
           ))}
         </div>
       </div>
-      {(documentError || deleteDocResponse.message) &&
-        renderSnackbar()
-      }
+      {(documentError ?? deleteDocResponse.message) && renderSnackbar()}
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.next')}
-        handleBackClick={() => backClick()}
+        handleBackClick={() => {
+          backClick()
+        }}
         handleNextClick={() => nextClick()}
         helpUrl={
           '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'

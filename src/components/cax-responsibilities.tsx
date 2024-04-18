@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { setUserToInvite } from '../state/features/applicationInviteUser/actions'
 import {
   addCurrentStep,
   getCurrentStep,
@@ -45,7 +44,7 @@ export const ResponsibilitiesCax = () => {
   const [email, setEmail] = useState<string | null>('')
   const [role, setRole] = useState<string | null>('')
   const [message, setMessage] = useState<string | null>('')
-  const [availableUserRoles, setavailableUserRoles] = useState([])
+  const [availableUserRoles, setAvailableUserRoles] = useState<string[]>([])
   const [appError, setError] = useState<{
     email: string
     role: string
@@ -59,20 +58,27 @@ export const ResponsibilitiesCax = () => {
   const currentActiveStep = useSelector(getCurrentStep)
 
   const [loading, setLoading] = useState<boolean>()
-  const [invitedResponse, setInvitedResponse] = useState({severity: SeverityType.ERROR, message: ''})
+  const [invitedResponse, setInvitedResponse] = useState({
+    severity: SeverityType.ERROR,
+    message: '',
+  })
 
   const { data: status } = useFetchApplicationsQuery()
 
-  const obj = status[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1] //.find(o => o['applicationStatus'] === CREATED);
+  const applicationId = obj?.applicationId
 
   const [updateInviteNewUser] = useUpdateInviteNewUserMutation()
-  const { data: rolesComposite, error: rolesError } = useFetchRolesCompositeQuery()
-  const { data: invitedUsers, error: invitedUsersError, refetch } =
-    useFetchInvitedUsersQuery(applicationId)
+  const { data: rolesComposite, error: rolesError } =
+    useFetchRolesCompositeQuery()
+  const {
+    data: invitedUsers,
+    error: invitedUsersError,
+    refetch,
+  } = useFetchInvitedUsersQuery(applicationId)
 
   useEffect(() => {
-    setavailableUserRoles(rolesComposite)
+    setAvailableUserRoles(rolesComposite ?? [])
     if (rolesComposite && rolesComposite.length > 0) setRole(rolesComposite[0])
   }, [rolesComposite])
 
@@ -90,15 +96,14 @@ export const ResponsibilitiesCax = () => {
     /^[a-zA-Z][a-zA-Z0-9 !#'$@&%()*+\r\n,\-_./:;=<>?[\]\\^]{0,255}$/.test(note)
 
   const handleSendInvite = () => {
-    setInvitedResponse({severity: SeverityType.ERROR, message: ''})
+    setInvitedResponse({ severity: SeverityType.ERROR, message: '' })
     if (email && validateEmail(email)) {
       setLoading(true)
       const user = {
-        email: email,
+        email,
+        message,
         roles: [role],
-        message: message,
       }
-      dispatch(setUserToInvite(user))
       updateInviteNewUser({
         applicationId,
         user,
@@ -108,11 +113,17 @@ export const ResponsibilitiesCax = () => {
           setEmail('')
           setMessage('')
           refetch()
-          setInvitedResponse({severity: SeverityType.SUCCESS, message: t('Responsibility.sendInviteSuccessMsg')})
+          setInvitedResponse({
+            severity: SeverityType.SUCCESS,
+            message: t('Responsibility.sendInviteSuccessMsg'),
+          })
           setLoading(false)
         })
         .catch((errors: any) => {
-          setInvitedResponse({severity: SeverityType.ERROR, message: errors.data.errors.unknown[0]})
+          setInvitedResponse({
+            severity: SeverityType.ERROR,
+            message: errors.data.errors.unknown[0],
+          })
           setLoading(false)
         })
     }
@@ -133,17 +144,20 @@ export const ResponsibilitiesCax = () => {
   const validatePersonalNoteOnChange = (note: string) => {
     setMessage(note)
 
-    if (note.length === 0)
-      return setError((prevState) => ({ ...prevState, personalNote: '' }))
+    if (note.length === 0) {
+      setError((prevState) => ({ ...prevState, personalNote: '' }))
+      return
+    }
 
     if (!validatePersonalNote(note)) {
-      return setError((prevState) => ({
+      setError((prevState) => ({
         ...prevState,
         personalNote: t('Responsibility.personalNoteError'),
       }))
+      return
     }
 
-    return setError((prevState) => ({ ...prevState, personalNote: '' }))
+    setError((prevState) => ({ ...prevState, personalNote: '' }))
   }
 
   const backClick = () => {
@@ -156,10 +170,8 @@ export const ResponsibilitiesCax = () => {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(invitedResponse.message) message = invitedResponse.message
-    return (
-      <Notify message={message} />
-    )
+    if (invitedResponse.message) message = invitedResponse.message
+    return <Notify message={message} />
   }
 
   return (
@@ -238,7 +250,7 @@ export const ResponsibilitiesCax = () => {
             </div>
           </Row>
 
-          {invitedUsers?.length > 0 && invitedUsers && (
+          {invitedUsers && invitedUsers?.length > 0 && (
             <Row className="mx-auto col-9 send-invite">
               <h5>{t('Responsibility.titleInvite')}</h5>
               <Row>
@@ -277,10 +289,8 @@ export const ResponsibilitiesCax = () => {
           )}
         </div>
       </div>
-      {
-        (rolesError || invitedUsersError || invitedResponse.message) &&
-        renderSnackbar()
-      }
+      {(rolesError || invitedUsersError || invitedResponse.message) &&
+        renderSnackbar()}
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.next')}

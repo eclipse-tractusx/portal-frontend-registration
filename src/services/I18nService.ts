@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 BMW Group AG
+ * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
  * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -18,23 +18,31 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { combineReducers } from 'redux'
-import applicationSlice from './application/slice'
-import inviteSlice from './applicationInviteUser/slice'
-import documentSlice from './applicationDocuments/slice'
-import user from './user/reducer'
-import roleSlice from './applicationCompanyRole/slice'
-import registrationData from './applicationVerifyRegister/slice'
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
 
-export const reducers = {
-  application: applicationSlice.reducer,
-  role: roleSlice.reducer,
-  invite: inviteSlice.reducer,
-  document: documentSlice.reducer,
-  registrationData: registrationData.reducer,
-  user,
+import en from '../locales/en/translations.json'
+import de from '../locales/de/translations.json'
+import helpEN from '../locales/en/help.json'
+import helpDE from '../locales/de/help.json'
+
+const resources = {
+  de: {
+    translation: de,
+    help: helpDE,
+  },
+  en: {
+    translation: en,
+    help: helpEN,
+  },
 }
 
-const rootReducer = combineReducers(reducers)
+i18n.use(initReactI18next).init({
+  resources,
+  lng: 'en',
+  interpolation: {
+    escapeValue: false,
+  },
+})
 
-export default rootReducer
+export default i18n

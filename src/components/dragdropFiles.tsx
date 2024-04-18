@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { IPreviewProps } from 'react-dropzone-uploader'
+import { type IPreviewProps } from 'react-dropzone-uploader'
 import { ProgressBar } from 'react-bootstrap'
 import { FileUploadStatus, FileUploadVariant } from '../types/MainTypes'
 import { useTranslation } from 'react-i18next'

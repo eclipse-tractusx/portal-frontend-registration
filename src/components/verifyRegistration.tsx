@@ -49,12 +49,13 @@ export const VerifyRegistration = () => {
 
   const { data: status } = useFetchApplicationsQuery()
 
-  const obj = status[status.length - 1]
-  const applicationId = obj['applicationId']
+  const obj = status?.[status.length - 1]
+  const applicationId = obj?.applicationId
 
   const { data: registrationData, error: dataError } =
     useFetchRegistrationDataQuery(applicationId)
-  const { data: documents, error: documentsError } = useFetchDocumentsQuery(applicationId)
+  const { data: documents, error: documentsError } =
+    useFetchDocumentsQuery(applicationId)
   const [updateRegistration] = useUpdateRegistrationMutation()
 
   const backClick = () => {
@@ -92,10 +93,8 @@ export const VerifyRegistration = () => {
 
   const renderSnackbar = () => {
     let message = t('registration.apiError')
-    if(submitError) message = t('verifyRegistration.submitErrorMessage')
-    return (
-      <Notify message={message} />
-    )
+    if (submitError) message = t('verifyRegistration.submitErrorMessage')
+    return <Notify message={message} />
   }
 
   return (
@@ -237,14 +236,14 @@ export const VerifyRegistration = () => {
           </Row>
         </div>
       </div>
-      {(dataError || documentsError || submitError) &&
-        renderSnackbar()
-      }
+      {(dataError ?? documentsError ?? submitError) && renderSnackbar()}
       <FooterButton
         labelBack={t('button.back')}
         labelNext={loading ? t('button.submitting') : t('button.submit')}
         loading={loading}
-        handleBackClick={() => backClick()}
+        handleBackClick={() => {
+          backClick()
+        }}
         handleNextClick={() => nextClick()}
         tooltip={getTooltip()}
         helpUrl={

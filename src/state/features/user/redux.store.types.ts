@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { IUserData } from './types'
+import { type IUserData } from './types'
 
 export interface IState {
   user: IUserData
