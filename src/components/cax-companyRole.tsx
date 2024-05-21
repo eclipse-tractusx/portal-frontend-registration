@@ -249,7 +249,6 @@ export const CompanyRoleCax = () => {
           dispatch(addCurrentStep(currentActiveStep + 1))
         })
         .catch((errors) => {
-          console.log('errors', errors)
           setSubmitError(true)
         })
     } else setSubmitError(true)
