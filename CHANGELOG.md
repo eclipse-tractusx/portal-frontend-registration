@@ -1,5 +1,8 @@
 # Changelog
 
+- Company Role
+  - Support optional agreements for company role
+
 ## 2.0.0-RC1
 
 ### Change

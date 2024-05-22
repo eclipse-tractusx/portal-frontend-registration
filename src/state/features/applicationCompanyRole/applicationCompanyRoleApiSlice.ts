@@ -35,6 +35,7 @@ export type AgreementData = {
   name: string
   agreementLink: string
   documentId: string
+  mandatory: boolean
 }
 
 export type AgreementResponse = {
