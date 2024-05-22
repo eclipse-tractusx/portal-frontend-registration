@@ -305,7 +305,7 @@ npm/npmjs/-/jest-validate/29.7.0, MIT, approved, clearlydefined
 npm/npmjs/-/jest-watcher/29.7.0, MIT, approved, clearlydefined
 npm/npmjs/-/jest-worker/29.7.0, MIT, approved, clearlydefined
 npm/npmjs/-/jest/29.7.0, MIT, approved, clearlydefined
-npm/npmjs/-/js-sha256/0.11.0, MIT, approved, clearlydefined
+npm/npmjs/-/js-sha256/0.10.1, MIT, approved, clearlydefined
 npm/npmjs/-/js-tokens/4.0.0, MIT, approved, #2401
 npm/npmjs/-/js-yaml/3.14.1, MIT, approved, clearlydefined
 npm/npmjs/-/js-yaml/4.1.0, MIT, approved, clearlydefined
@@ -320,7 +320,7 @@ npm/npmjs/-/json5/2.2.3, MIT, approved, #2126
 npm/npmjs/-/jsx-ast-utils/3.3.5, MIT, approved, #9209
 npm/npmjs/-/just-curry-it/5.3.0, MIT, approved, clearlydefined
 npm/npmjs/-/jwt-decode/4.0.0, MIT, approved, clearlydefined
-npm/npmjs/-/keycloak-js/24.0.2, Apache-2.0 AND MIT AND EPL-1.0 AND W3C-19980720 AND W3C-20150513 AND (AFL-2.1 OR LGPL-2.0-only) AND LicenseRef-scancode-oasis-ws-security-spec AND LicenseRef-scancode-ws-policy-specification AND  LicenseRef-Public-domain AND (Apache-2.0 AND MIT) AND (Apache-2.0 AND MIT), approved, #14715
+npm/npmjs/-/keycloak-js/23.0.7, Apache-2.0 AND MIT AND EPL-1.0 AND LicenseRef-scancode-oasis-ws-security-spec AND W3C AND LicenseRef-scancode-ws-policy-specification AND W3C AND W3C-19980720 AND (AFL-2.1 OR LGPL-2.0-only) AND (Apache-2.0 AND MIT) AND (Apache-2.0 AND MIT), approved, #11737
 npm/npmjs/-/keyv/4.5.4, MIT, approved, #4674
 npm/npmjs/-/kleur/3.0.3, MIT, approved, clearlydefined
 npm/npmjs/-/leven/3.1.0, MIT, approved, clearlydefined
