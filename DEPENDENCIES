@@ -42,7 +42,7 @@ npm/npmjs/-/binary-extensions/2.3.0, MIT, approved, #13867
 npm/npmjs/-/bootstrap/5.3.3, MIT AND CC-BY-3.0, approved, #9867
 npm/npmjs/-/brace-expansion/1.1.11, MIT, approved, clearlydefined
 npm/npmjs/-/brace-expansion/2.0.1, MIT, approved, clearlydefined
-npm/npmjs/-/braces/3.0.2, MIT, approved, clearlydefined
+npm/npmjs/-/braces/3.0.2, MIT, approved, #14866
 npm/npmjs/-/browserslist/4.23.0, MIT, approved, clearlydefined
 npm/npmjs/-/bs-logger/0.2.6, MIT, approved, clearlydefined
 npm/npmjs/-/bser/2.1.1, Apache-2.0, approved, clearlydefined
@@ -320,7 +320,7 @@ npm/npmjs/-/json5/2.2.3, MIT, approved, #2126
 npm/npmjs/-/jsx-ast-utils/3.3.5, MIT, approved, #9209
 npm/npmjs/-/just-curry-it/5.3.0, MIT, approved, clearlydefined
 npm/npmjs/-/jwt-decode/4.0.0, MIT, approved, clearlydefined
-npm/npmjs/-/keycloak-js/24.0.2, Apache-2.0, approved, clearlydefined
+npm/npmjs/-/keycloak-js/24.0.2, Apache-2.0 AND MIT AND EPL-1.0 AND W3C-19980720 AND W3C-20150513 AND (AFL-2.1 OR LGPL-2.0-only) AND LicenseRef-scancode-oasis-ws-security-spec AND LicenseRef-scancode-ws-policy-specification AND  LicenseRef-Public-domain AND (Apache-2.0 AND MIT) AND (Apache-2.0 AND MIT), approved, #14715
 npm/npmjs/-/keyv/4.5.4, MIT, approved, #4674
 npm/npmjs/-/kleur/3.0.3, MIT, approved, clearlydefined
 npm/npmjs/-/leven/3.1.0, MIT, approved, clearlydefined
@@ -395,7 +395,7 @@ npm/npmjs/-/path-parse/1.0.7, MIT, approved, clearlydefined
 npm/npmjs/-/path-to-regexp/1.8.0, MIT, approved, clearlydefined
 npm/npmjs/-/path-type/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/phone/3.1.42, MIT, approved, #10500
-npm/npmjs/-/picocolors/1.0.0, ISC, approved, clearlydefined
+npm/npmjs/-/picocolors/1.0.0, ISC, approved, #14718
 npm/npmjs/-/picomatch/2.3.1, MIT, approved, clearlydefined
 npm/npmjs/-/pirates/4.0.6, MIT, approved, #680
 npm/npmjs/-/pkg-dir/4.2.0, MIT, approved, clearlydefined
@@ -469,9 +469,9 @@ npm/npmjs/-/safe-regex-test/1.0.3, MIT, approved, clearlydefined
 npm/npmjs/-/safer-buffer/2.1.2, MIT, approved, clearlydefined
 npm/npmjs/-/sass/1.75.0, MIT, approved, clearlydefined
 npm/npmjs/-/saxes/6.0.0, ISC, approved, clearlydefined
-npm/npmjs/-/scheduler/0.23.0, MIT, approved, clearlydefined
+npm/npmjs/-/scheduler/0.23.0, MIT, approved, #14589
 npm/npmjs/-/semver/6.3.1, ISC, approved, clearlydefined
-npm/npmjs/-/semver/7.6.0, ISC, approved, clearlydefined
+npm/npmjs/-/semver/7.6.0, ISC, approved, #14659
 npm/npmjs/-/set-function-length/1.2.2, MIT, approved, #12772
 npm/npmjs/-/set-function-name/2.0.2, MIT, approved, #10590
 npm/npmjs/-/shebang-command/2.0.0, MIT, approved, clearlydefined
