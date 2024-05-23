@@ -1,5 +1,15 @@
 # Changelog
 
+
+## 2.0.0-RC2
+
+### Change
+- Company Role
+  - added support for optional terms
+
+### Technical Support
+- reworked year in file header
+
 ## 2.0.0-RC1
 
 ### Change

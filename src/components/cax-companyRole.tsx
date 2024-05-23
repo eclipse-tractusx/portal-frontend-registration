@@ -1,6 +1,6 @@
 /********************************************************************************
- * Copyright (c) 2021, 2023 Microsoft and BMW Group AG
- * Copyright (c) 2021, 2023 Contributors to the Eclipse Foundation
+ * Copyright (c) 2022 Microsoft and BMW Group AG
+ * Copyright (c) 2022 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -176,9 +176,17 @@ export const CompanyRoleCax = () => {
                           {agreement.name}
                         </span>{' '}
                         {t('companyRole.TermsAndCondSpan3')}
+                        <span style={{ color: 'red' }}>
+                          {agreement.mandatory ? ' *' : ''}
+                        </span>
                       </>
                     ) : (
-                      <span>{agreement.name}</span>
+                      <>
+                        <span>{agreement.name}</span>
+                        <span style={{ color: 'red' }}>
+                          {agreement.mandatory ? ' *' : ''}
+                        </span>
+                      </>
                     )}
                   </p>
                 ) : (
@@ -197,33 +205,53 @@ export const CompanyRoleCax = () => {
   }
 
   const nextClick = async () => {
+    setSubmitError(false)
     const companyRoles = Object.keys(companyRoleChecked).filter(
       (item) => companyRoleChecked[item]
     )
 
-    const agreements = Object.keys(agreementChecked)
-      .filter((agreementId) => agreementChecked[agreementId])
-      .map((agreementId) => {
-        return {
-          agreementId,
-          consentStatus: 'ACTIVE',
-        }
-      })
+    const agreementsToBeChecked = allConsentData.companyRoles
+      .filter((item) => companyRoles.includes(item.companyRole))
+      .map((i) => i.agreementIds)
+      .flat()
 
-    const data = {
-      companyRoles,
-      agreements,
-    }
+    const checkedAgreements = Object.keys(agreementChecked).filter(
+      (i) => agreementChecked[i]
+    )
 
-    await updateAgreementConsents({ applicationId, data })
-      .unwrap()
-      .then(() => {
-        dispatch(addCurrentStep(currentActiveStep + 1))
-      })
-      .catch((errors) => {
-        console.log('errors', errors)
-        setSubmitError(true)
-      })
+    const mandatoryAgreementsToBeChecked = allConsentData.agreements
+      .filter((item) => agreementsToBeChecked.includes(item.agreementId))
+      .filter((i) => i.mandatory)
+      .map((agreement) => agreement.agreementId)
+
+    const valid = mandatoryAgreementsToBeChecked.every((i) =>
+      checkedAgreements.includes(i)
+    )
+
+    if (valid) {
+      const agreements = Object.keys(agreementChecked)
+        .filter((agreementId) => agreementChecked[agreementId])
+        .map((agreementId) => {
+          return {
+            agreementId,
+            consentStatus: 'ACTIVE',
+          }
+        })
+
+      const data = {
+        companyRoles,
+        agreements,
+      }
+
+      await updateAgreementConsents({ applicationId, data })
+        .unwrap()
+        .then(() => {
+          dispatch(addCurrentStep(currentActiveStep + 1))
+        })
+        .catch((errors) => {
+          setSubmitError(true)
+        })
+    } else setSubmitError(true)
   }
 
   const renderSnackbar = (message: string) => {
