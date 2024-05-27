@@ -1,29 +1,22 @@
 # Changelog
 
 
-## 2.0.0-RC2
+## 2.0.0
 
 ### Change
-- Company Role
-  - added support for optional terms
-
-### Technical Support
-- reworked year in file header
-
-## 2.0.0-RC1
-
-### Change
-- Migrated from Create React App (webpack) to Vite (rollup)
-  - Switched from deprecated CRA to new framework for build scripts and development server
-  - Use React 18 instead of 17
-  - Upgraded dependencies
 - Pattern updates
   - Support special characters in the registration form - Name, street, region, city and postal code
   - updated company region field to accept hyphens
-- upgraded keycloak-js dependency to v23.0.7
-- move config values from code to config (clientID, realm name, etc.)
-
+ 
+### Feature
+- Registration Step "Select Company Role"
+  - added support for optional and inactive agreements based on received backend response ![Tag](https://img.shields.io/static/v1?label=&message=Pre-Release&color=grey&style=flat)
+ 
 ### Technical Support
+- migrated from Create React App (webpack) to Vite (rollup)
+  - switched from deprecated CRA to new framework for build scripts and development server
+  - use React 18 instead of 17
+  - upgraded dependencies
 - set node version explicitly
 - introduced codeql scan
 - introduced dependabot.yml
@@ -31,7 +24,10 @@
 - upgraded gh actions and change to pinned actions full length commit sha
 - CONTRIBUTING.md: linked to contribution details
 - renamed docker notice file
-* updated eclipse dash tool for dependencies check
+- updated eclipse dash tool for dependencies check
+- reworked year in file header
+- upgraded keycloak-js dependency to v23.0.7
+- move config values from code to config (clientID, realm name, etc.)
 
 ## 1.6.0
 
