@@ -8,7 +8,7 @@ __Portal Frontend Registration__
 
 - GitHub: https://github.com/eclipse-tractusx/portal-frontend-registration
 - Project home: https://projects.eclipse.org/projects/automotive.tractusx
-- Dockerfile: https://github.com/eclipse-tractusx/portal-frontend-registration/blob/main/.conf/Dockerfile
+- Dockerfile: https://github.com/eclipse-tractusx/portal-frontend-registration/blob/main/.conf/Dockerfile.prebuilt
 - Project license: [Apache License, Version 2.0](https://github.com/eclipse-tractusx/portal-frontend-registration/blob/main/LICENSE)
 
 __Used base images__
