@@ -19,11 +19,7 @@
 
 export const VAT_TEST_DATA = {
   GERMAN_VAT: {
-    valid: [
-      'DE123456789',
-      'DE987654321',
-      'DE000000000',
-    ],
+    valid: ['DE123456789', 'DE987654321', 'DE000000000'],
     invalid: [
       'DE1234567890', // too long
       'DE12345678', // too short
@@ -35,11 +31,7 @@ export const VAT_TEST_DATA = {
     ],
   },
   FRENCH_VAT: {
-    valid: [
-      'FR12345678901',
-      'FR98765432109',
-      'FR00000000000',
-    ],
+    valid: ['FR12345678901', 'FR98765432109', 'FR00000000000'],
     invalid: [
       'FR12345678901 ', // trailing space
       ' FR12345678901', // leading space

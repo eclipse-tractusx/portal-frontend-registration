@@ -37,16 +37,24 @@ describe('Input Pattern Tests', () => {
   it('validates BPN pattern', () => {
     validate(BPN_TEST_DATA.BPN, (expr: string) => isPattern(Patterns.BPN, expr))
   }),
-  it('validates City pattern', () => {
-    validate(CITY_TEST_DATA.CITY, (expr: string) => isPattern(Patterns.CITY, expr))
-  }),
-  it('validates Street pattern', () => {
-    validate(STREET_TEST_DATA.STREET, (expr: string) => isPattern(Patterns.STREET, expr))
-  }),
-  it('validates German VAT', () => {
-    validate(VAT_TEST_DATA.GERMAN_VAT, (expr: string) => isPattern(Patterns.DE.VAT_ID, expr))
-  })
+    it('validates City pattern', () => {
+      validate(CITY_TEST_DATA.CITY, (expr: string) =>
+        isPattern(Patterns.CITY, expr)
+      )
+    }),
+    it('validates Street pattern', () => {
+      validate(STREET_TEST_DATA.STREET, (expr: string) =>
+        isPattern(Patterns.STREET, expr)
+      )
+    }),
+    it('validates German VAT', () => {
+      validate(VAT_TEST_DATA.GERMAN_VAT, (expr: string) =>
+        isPattern(Patterns.DE.VAT_ID, expr)
+      )
+    })
   it('validates French VAT', () => {
-    validate(VAT_TEST_DATA.FRENCH_VAT, (expr) => isPattern(Patterns.FR.VAT_ID, expr))
+    validate(VAT_TEST_DATA.FRENCH_VAT, (expr) =>
+      isPattern(Patterns.FR.VAT_ID, expr)
+    )
   })
 })
