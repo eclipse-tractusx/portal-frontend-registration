@@ -19,14 +19,14 @@
  ********************************************************************************/
 
 import { Row } from 'react-bootstrap'
-import { getCompanyDetails, PATTERNS } from '../helpers/utils'
+import { getCompanyDetails } from '../helpers/utils'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { isBPN, isCity, isStreet } from '../types/Patterns'
+import { isBPN, isCity, isStreet, Patterns } from '../types/Patterns'
 import {
   useFetchApplicationsQuery,
   useFetchCompanyDetailsWithAddressQuery,
@@ -222,7 +222,7 @@ export const CompanyDataCax = () => {
   const validateLegalEntity = (value: string) => {
     setLegalEntity(value)
 
-    if (!PATTERNS.legalEntityPattern.test(value)) {
+    if (!Patterns.legalEntityPattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         legalEntity: 'legalEntityError',
@@ -236,7 +236,7 @@ export const CompanyDataCax = () => {
   const validateRegisteredName = (value: string) => {
     setRegisteredName(value)
 
-    if (!PATTERNS.registeredNamePattern.test(value)) {
+    if (!Patterns.registeredNamePattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         registeredName: 'registerdNameError',
@@ -269,7 +269,7 @@ export const CompanyDataCax = () => {
       return
     }
 
-    if (!PATTERNS.postalCodePattern.test(value)) {
+    if (!Patterns.postalCodePattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         postalCode: 'postalCodeError',
@@ -297,7 +297,7 @@ export const CompanyDataCax = () => {
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
     setCountry(value?.toUpperCase())
-    if (!PATTERNS.countryPattern.test(value)) {
+    if (!Patterns.countryPattern.test(value)) {
       setShowIdentifiers(false)
       setErrors((prevState) => ({
         ...prevState,
@@ -318,7 +318,7 @@ export const CompanyDataCax = () => {
       setErrors((prevState) => ({ ...prevState, region: '' }))
     }
 
-    if (value && !PATTERNS.regionPattern.test(value)) {
+    if (value && !Patterns.regionPattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         region: 'regionError',
@@ -341,7 +341,7 @@ export const CompanyDataCax = () => {
         : 'Worldwide'
     if (
       identifierType &&
-      !PATTERNS[countryCode][identifierType].test(value)
+      !Patterns[countryCode][identifierType].test(value)
     ) {
       setErrors((prevState) => ({
         ...prevState,
