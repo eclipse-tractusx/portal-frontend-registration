@@ -206,7 +206,7 @@ export const CompanyDataCax = () => {
   }
 
   const onSearchChange = (expr: string) => {
-    if (isBPN(expr.trim())) {
+    if (isBPN(expr)) {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
@@ -222,7 +222,7 @@ export const CompanyDataCax = () => {
   const validateLegalEntity = (value: string) => {
     setLegalEntity(value)
 
-    if (!PATTERNS.legalEntityPattern.test(value.trim())) {
+    if (!PATTERNS.legalEntityPattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         legalEntity: 'legalEntityError',
@@ -236,7 +236,7 @@ export const CompanyDataCax = () => {
   const validateRegisteredName = (value: string) => {
     setRegisteredName(value)
 
-    if (!PATTERNS.registeredNamePattern.test(value.trim())) {
+    if (!PATTERNS.registeredNamePattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         registeredName: 'registerdNameError',
@@ -250,7 +250,7 @@ export const CompanyDataCax = () => {
   const validateStreetHouseNumber = (value: string) => {
     setStreetHouseNumber(value)
 
-    if (!isStreet(value.trim())) {
+    if (!isStreet(value)) {
       setErrors((prevState) => ({
         ...prevState,
         streetHouseNumber: 'streetHouseNumberError',
@@ -269,7 +269,7 @@ export const CompanyDataCax = () => {
       return
     }
 
-    if (!PATTERNS.postalCodePattern.test(value.trim())) {
+    if (!PATTERNS.postalCodePattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         postalCode: 'postalCodeError',
@@ -283,7 +283,7 @@ export const CompanyDataCax = () => {
   const validateCity = (value: string) => {
     setCity(value)
 
-    if (!isCity(value.trim())) {
+    if (!isCity(value)) {
       setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',
@@ -297,7 +297,7 @@ export const CompanyDataCax = () => {
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
     setCountry(value?.toUpperCase())
-    if (!PATTERNS.countryPattern.test(value?.trim())) {
+    if (!PATTERNS.countryPattern.test(value)) {
       setShowIdentifiers(false)
       setErrors((prevState) => ({
         ...prevState,
@@ -318,7 +318,7 @@ export const CompanyDataCax = () => {
       setErrors((prevState) => ({ ...prevState, region: '' }))
     }
 
-    if (value && !PATTERNS.regionPattern.test(value.trim())) {
+    if (value && !PATTERNS.regionPattern.test(value)) {
       setErrors((prevState) => ({
         ...prevState,
         region: 'regionError',
@@ -341,7 +341,7 @@ export const CompanyDataCax = () => {
         : 'Worldwide'
     if (
       identifierType &&
-      !PATTERNS[countryCode][identifierType].test(value.trim())
+      !PATTERNS[countryCode][identifierType].test(value)
     ) {
       setErrors((prevState) => ({
         ...prevState,
