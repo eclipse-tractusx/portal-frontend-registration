@@ -17,6 +17,10 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
+#
+# Dockerfile with full build after checkout
+#
+
 # Step 1
 FROM node:21-alpine as build-step
 ARG http_proxy=$http_proxy
