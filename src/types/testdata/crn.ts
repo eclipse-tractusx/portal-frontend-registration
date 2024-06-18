@@ -17,64 +17,55 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-export const VAT_TEST_DATA = {
+export const CRN_TEST_DATA = {
   DE: {
     valid: [
-      'DE123456789',
-      'DE987654321',
-      'DE000000000',
+      'HRA 12345 B',
+      'HRB 178881 B',
+      'HRA 350654',
     ],
     invalid: [
-      'DE1234567890', // too long
-      'DE12345678', // too short
-      'DE123456789 ', // trailing space
-      ' DE123456789', // leading space
-      'DE12345678A', // invalid character
-      'DE12345678-', // invalid character
-      'FR123456789', // invalid country code
+      'HRA 12345 B ', // trailing space
+      ' HRA 12345 B', // leading space
     ],
   },
   FR: {
     valid: [
-      'FR12345678901',
-      'FR98765432109',
-      'FR00000000000',
+      'RCS PARIS 453 983 245',
+      'RC NANTES 234 987 456',
     ],
     invalid: [
-      'FR12345678901 ', // trailing space
-      ' FR12345678901', // leading space
+      'RCS PARIS 453 983 245 ', // trailing space
+      ' RCS PARIS 453 983 245', // leading space
     ],
   },
   MX: {
     valid: [
-      'AAGB860519G31',
-      'P&G851223B24',
+      'ABC20010101AAA',
+      'XYZ19991231Z5A',
     ],
     invalid: [
-      'AAGB860519G31 ', // trailing space
-      ' AAGB860519G31', // leading space
-      'AAGB86051', // too short
-      'AAGB860519G3123456789', // too long
+      'ABC20010101AAA ', // trailing space
+      ' ABC20010101AAA', // leading space
     ],
   },
   IN: {
     valid: [
-      '22AAAAA0000A1Z5',
-      '1234567890123Z1',
+      '27AAAAC1234F1Z5',
+      '10BBBCH5678G1Z9',
+      '36DDDEE9012H1Z1',
     ],
     invalid: [
-      '22AAAAA0000A1Z5 ', // trailing space
-      ' 22AAAAA0000A1Z5', // leading space
-      '22AAAAA0000A1Z51', // too long
-      '22AAAAA0000A1Z', // too short
+      '27AAAAC1234F1Z5 ', // trailing space
+      ' 27AAAAC1234F1Z5', // leading space
     ],
   },
   Worldwide: {
     valid: [
       'DE123456789',
       'FR12345678901',
-      'AAGB860519G31',
-      '22AAAAA0000A1Z5',
+      'ABC20010101AAA',
+      '10BBBCH5678G1Z9',
     ],
     invalid: [
       ' DE123456789', // leading space

@@ -19,7 +19,11 @@
 
 export const BPN_TEST_DATA = {
   BPN: {
-    valid: ['BPNL000000015OHJ', 'bpnl000000000001', 'bpnlaaaaaaaaaaaa'],
+    valid: [
+      'BPNL000000015OHJ',
+      'bpnl000000000001',
+      'bpnlaaaaaaaaaaaa'
+    ],
     invalid: [
       '',
       'word',

@@ -17,68 +17,54 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-export const VAT_TEST_DATA = {
+export const VIES_TEST_DATA = {
   DE: {
     valid: [
       'DE123456789',
-      'DE987654321',
-      'DE000000000',
+      'DE999999999'
     ],
     invalid: [
-      'DE1234567890', // too long
-      'DE12345678', // too short
       'DE123456789 ', // trailing space
       ' DE123456789', // leading space
-      'DE12345678A', // invalid character
-      'DE12345678-', // invalid character
-      'FR123456789', // invalid country code
     ],
   },
   FR: {
     valid: [
-      'FR12345678901',
-      'FR98765432109',
-      'FR00000000000',
+      "FRXX999999999",
     ],
     invalid: [
-      'FR12345678901 ', // trailing space
-      ' FR12345678901', // leading space
+      'FRXX999999999 ', // trailing space
+      ' FRXX999999999', // leading space
     ],
   },
   MX: {
     valid: [
-      'AAGB860519G31',
-      'P&G851223B24',
+      "AAGB860519G31",
+      "P&G851223B24",
     ],
     invalid: [
       'AAGB860519G31 ', // trailing space
       ' AAGB860519G31', // leading space
-      'AAGB86051', // too short
-      'AAGB860519G3123456789', // too long
     ],
   },
   IN: {
     valid: [
-      '22AAAAA0000A1Z5',
-      '1234567890123Z1',
+      "1234567890123Z1",
+      "22AAAAA0000A1Z5",
     ],
     invalid: [
       '22AAAAA0000A1Z5 ', // trailing space
       ' 22AAAAA0000A1Z5', // leading space
-      '22AAAAA0000A1Z51', // too long
-      '22AAAAA0000A1Z', // too short
     ],
   },
   Worldwide: {
     valid: [
-      'DE123456789',
-      'FR12345678901',
-      'AAGB860519G31',
-      '22AAAAA0000A1Z5',
+      "GB123456789012345",
+      "GB987654321098765",
     ],
     invalid: [
-      ' DE123456789', // leading space
-      'DE123456789 ', // trailing space
+      'GB123456789012345 ', // trailing space
+      ' GB123456789012345', // leading space
     ],
   },
 }
