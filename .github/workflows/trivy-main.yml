@@ -20,11 +20,11 @@
 # Depending on the location of your Docker container
 # you need to change the path to the specific Docker registry.
 #
-name: "Trivy Dev"
+name: "Trivy Main"
 
 on:
   push:
-    branches: [ dev ]
+    branches: [main]
   # pull_request:
   # The branches below must be a subset of the branches above
   # branches: [ main, master ]
@@ -89,7 +89,7 @@ jobs:
         uses: aquasecurity/trivy-action@d710430a6722f083d3b36b8339ff66b32f22ee55 # v0.19.0
         with:
           # Path to Docker image
-          image-ref: "${{ env.IMAGE_NAMESPACE}}/${{ env.IMAGE_NAME }}:dev"
+          image-ref: "${{ env.IMAGE_NAMESPACE}}/${{ env.IMAGE_NAME }}:main"
           format: "sarif"
           output: "trivy-results2.sarif"
           vuln-type: "os,library"
