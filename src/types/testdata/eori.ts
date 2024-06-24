@@ -38,26 +38,6 @@ export const EORI_TEST_DATA = {
       ' FR123456789012345', // leading space
     ],
   },
-  MX: {
-    valid: [
-      "MX123456789012345",
-      "MX987654321098765",
-    ],
-    invalid: [
-      'MX123456789012345 ', // trailing space
-      ' MX123456789012345', // leading space
-    ],
-  },
-  IN: {
-    valid: [
-      "IN123456789012345",
-      "IN987654321098765",
-    ],
-    invalid: [
-      'IN123456789012345 ', // trailing space
-      ' IN123456789012345', // leading space
-    ],
-  },
   Worldwide: {
     valid: [
       "GB123456789012345",

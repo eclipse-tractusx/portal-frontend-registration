@@ -18,49 +18,21 @@
  ********************************************************************************/
 
 export const LEI_TEST_DATA = {
-  DE: {
-    valid: [
-      "529900T8BM49AURSDO55",
-    ],
-    invalid: [
-      '529900T8BM49AURSDO55 ', // trailing space
-      ' 529900T8BM49AURSDO55', // leading space
-    ],
-  },
-  FR: {
-    valid: [
-      "529900T8BM49AURSDO55",
-    ],
-    invalid: [
-      '529900T8BM49AURSDO55 ', // trailing space
-      ' 529900T8BM49AURSDO55', // leading space
-    ],
-  },
-  MX: {
-    valid: [
-      "529900T8BM49AURSDO55",
-    ],
-    invalid: [
-      '529900T8BM49AURSDO55 ', // trailing space
-      ' 529900T8BM49AURSDO55', // leading space
-    ],
-  },
-  IN: {
-    valid: [
-      "529900T8BM49AURSDO55",
-    ],
-    invalid: [
-      '529900T8BM49AURSDO55 ', // trailing space
-      ' 529900T8BM49AURSDO55', // leading space
-    ],
-  },
   Worldwide: {
     valid: [
-      "529900T8BM49AURSDO55",
+      '529900T8BM49AURSDO55',
+      '9845009B47543D8A1C80',
+      '254900YLJPCHO7RQVJ69',
     ],
     invalid: [
       '529900T8BM49AURSDO55 ', // trailing space
       ' 529900T8BM49AURSDO55', // leading space
+      '529900T8BM49AURSDO5', // too short
+      '529900T8BM49AURSDO550', // too long
+      '529900T8BM49 URSDO55', // invalid character
+      '529900T8B-49AURSDO55', // invalid character
+      '52990//8BM49AURSDO55', // invalid character
+      '529900T8BM49AURSDO55\n', // invalid character
     ],
   },
 }

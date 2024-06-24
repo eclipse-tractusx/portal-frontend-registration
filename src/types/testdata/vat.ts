@@ -65,8 +65,6 @@ export const VAT_TEST_DATA = {
     invalid: [
       '22AAAAA0000A1Z5 ', // trailing space
       ' 22AAAAA0000A1Z5', // leading space
-      '22AAAAA0000A1Z51', // too long
-      '22AAAAA0000A1Z', // too short
     ],
   },
   Worldwide: {

@@ -43,7 +43,7 @@ const validatePattern = (
   testData: any
 ) => {
   it(`validates ${country} ${patternType}`, () => {
-    validate(testData[country], (expr) =>
+    validate(testData[country], (expr: string) =>
       isPattern(Patterns[country][patternType], expr)
     )
   })
@@ -66,36 +66,26 @@ describe('Input Pattern Tests', () => {
 
   // Germany
   validatePattern('DE', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('DE', 'EORI', EORI_TEST_DATA)
-  validatePattern('DE', 'LEI_CODE', LEI_TEST_DATA)
   validatePattern('DE', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
   validatePattern('DE', 'VIES', VIES_TEST_DATA)
 
   // France
   validatePattern('FR', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('FR', 'EORI', EORI_TEST_DATA)
-  validatePattern('FR', 'LEI_CODE', LEI_TEST_DATA)
   validatePattern('FR', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
   validatePattern('FR', 'VIES', VIES_TEST_DATA)
 
   // Mexico
   validatePattern('MX', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('MX', 'EORI', EORI_TEST_DATA)
-  validatePattern('MX', 'LEI_CODE', LEI_TEST_DATA)
   validatePattern('MX', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('MX', 'VIES', VIES_TEST_DATA)
 
   // India
   validatePattern('IN', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('IN', 'EORI', EORI_TEST_DATA)
-  validatePattern('IN', 'LEI_CODE', LEI_TEST_DATA)
   validatePattern('IN', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('IN', 'VIES', VIES_TEST_DATA)
 
   // Worldwide
   validatePattern('Worldwide', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('Worldwide', 'EORI', EORI_TEST_DATA)
+  validatePattern('Worldwide', 'EORI', EORI_TEST_DATA) // Europe
+  validatePattern('Worldwide', 'VIES', VIES_TEST_DATA) // Europe
   validatePattern('Worldwide', 'LEI_CODE', LEI_TEST_DATA)
   validatePattern('Worldwide', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('Worldwide', 'VIES', VIES_TEST_DATA)
 })

@@ -18,6 +18,25 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+// Generic Identifier Pattern Definitions
+const LEI = /^[A-Za-z0-9]{20}$/ // same for all countries
+const EORI = {
+  EUROPE: /^[A-Z]{2}[A-Za-z0-9]{1,15}$/, // generic pattern for Europe
+}
+const VAT_ID = {
+  EUROPE: /^[A-Z]{2}[A-Za-z0-9]{1,15}$/, // generic pattern for Europe
+  DE: /^DE\d{9}$/,
+  IN: /^[a-zA-Z\d-]{5,6}$/, // TODO: update pattern
+  MX: /^[a-zA-Z\d-&]{12,13}$/,
+  Worldwide: /^(?!.*\s$)([A-Za-z0-9-]\s?){5,15}$/, // generic pattern
+}
+const COMMERCIAL_REG_NUMBER = {
+  Worldwide: /^[A-Za-z0-9-]{6,21}$/, // generic pattern
+  DE: /^(?!.*\s$)([A-Za-z0-9-]\s?){9}$/,
+  FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
+}
+
+// Pattern List
 export const Patterns = {
   BPN: /^BPNL[a-z0-9]{12}$/i,
   CITY: /^[A-ZÀ-ÿ0-9Śął](([ .'-]|\. )?[A-Za-zÀ-ÿ0-9Śął]{1,40}){1,10}$/,
@@ -33,40 +52,41 @@ export const Patterns = {
     /^(?!.*\s\s)(?!^\s)(?!.*\s$)(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
   IN: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
-    VAT_ID: /^[a-zA-Z\d-]{5,6}$/,
-    LEI_CODE: /^[a-zA-Z\d]{20}$/,
-    VIES: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
-    EORI: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
+    VAT_ID: VAT_ID.Worldwide,
+    LEI_CODE: LEI,
+    VIES: VAT_ID.EUROPE,
+    EORI: EORI.EUROPE,
   },
   DE: {
-    COMMERCIAL_REG_NUMBER: /^(?!.*\s\s)(?!^\s)(?!.*\s$)[a-zA-Z\d-\s]{9}$/,
-    VAT_ID: /^DE\d{9}$/,
-    LEI_CODE: /^[a-zA-Z\d]{20}$/,
-    VIES: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
-    EORI: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.DE,
+    VAT_ID: VAT_ID.DE,
+    LEI_CODE: LEI,
+    VIES: VAT_ID.DE,
+    EORI: EORI.EUROPE,
   },
   FR: {
-    COMMERCIAL_REG_NUMBER: /^(?!.*\s\s)(?!^\s)(?!.*\s$)[a-zA-Z\d\s]{14,17}$/,
-    VAT_ID: /^(?!.*\s\s)(?!^\s)(?!.*\s$)[a-zA-Z\d-\s]{8,15}$/,
-    LEI_CODE: /^[a-zA-Z\d]{20}$/,
-    VIES: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
-    EORI: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.FR,
+    VAT_ID: VAT_ID.EUROPE,
+    LEI_CODE: LEI,
+    VIES: VAT_ID.EUROPE,
+    EORI: EORI.EUROPE,
   },
   MX: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d-]{6,21}$/,
-    VAT_ID: /^[a-zA-Z\d-&]{12,13}$/,
-    LEI_CODE: /^[a-zA-Z\d]{20}$/,
-    VIES: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
-    EORI: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
+    VAT_ID: VAT_ID.MX,
+    LEI_CODE: LEI,
+    VIES: VAT_ID.EUROPE,
+    EORI: EORI.EUROPE,
   },
   Worldwide: {
-    COMMERCIAL_REG_NUMBER: /^[a-zA-Z\d]{6,21}$/,
-    VAT_ID: /^(?!.*\s\s)(?!^\s)(?!.*\s$)[a-zA-Z\d-\s]{8,15}$/,
-    LEI_CODE: /^[a-zA-Z\d]{20}$/,
-    VIES: /^(?!.*\s\s)(?!^\s)(?!.*\s$).*$/,
-    EORI: /^(?!.*\s\s)(?!^\s)(?!.*\s$)[a-zA-Z\d\s]{18}$/,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
+    VAT_ID: VAT_ID.Worldwide,
+    LEI_CODE: LEI,
+    VIES: VAT_ID.EUROPE,
+    EORI: EORI.EUROPE,
   },
+  
 }
 
 export const isBPN = (expr: string) => Patterns.BPN.test(expr)

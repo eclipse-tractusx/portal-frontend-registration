@@ -23,6 +23,8 @@ export const CRN_TEST_DATA = {
       'HRA 12345 B',
       'HRB 178881 B',
       'HRA 350654',
+      'HRB 12712',
+      'VR 9277',
     ],
     invalid: [
       'HRA 12345 B ', // trailing space
