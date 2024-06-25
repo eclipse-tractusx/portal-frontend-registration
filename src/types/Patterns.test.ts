@@ -64,28 +64,26 @@ describe('Input Pattern Tests', () => {
     )
   })
 
-  // Germany
-  validatePattern('DE', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('DE', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('DE', 'VIES', VIES_TEST_DATA)
+  // EORI: Same Pattern for all countries
+  validatePattern('Worldwide', 'EORI', EORI_TEST_DATA)
 
-  // France
-  validatePattern('FR', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('FR', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('FR', 'VIES', VIES_TEST_DATA)
-
-  // Mexico
-  validatePattern('MX', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('MX', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-
-  // India
-  validatePattern('IN', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('IN', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-
-  // Worldwide
-  validatePattern('Worldwide', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('Worldwide', 'EORI', EORI_TEST_DATA) // Europe
-  validatePattern('Worldwide', 'VIES', VIES_TEST_DATA) // Europe
+  // LEI: Same Pattern for all countries
   validatePattern('Worldwide', 'LEI_CODE', LEI_TEST_DATA)
+
+  // VAT ID
+  validatePattern('DE', 'VAT_ID', VAT_TEST_DATA)
+  validatePattern('FR', 'VAT_ID', VAT_TEST_DATA)
+  validatePattern('MX', 'VAT_ID', VAT_TEST_DATA)
+  validatePattern('IN', 'VAT_ID', VAT_TEST_DATA)
+  validatePattern('Worldwide', 'VAT_ID', VAT_TEST_DATA)
+
+  // VIES: Covered by VAT ID tests
+
+  // Commercial Registration Number
+  validatePattern('DE', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
+  validatePattern('FR', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
+  validatePattern('MX', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
+  validatePattern('IN', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
   validatePattern('Worldwide', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
+
 })

@@ -19,30 +19,39 @@
 
 export const CRN_TEST_DATA = {
   DE: {
-    valid: [
-      'HRA 12345 B',
-      'HRB 178881 B',
-      'HRA 350654',
-      'HRB 12712',
+    valid: [ // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
+      'HRB 209459',
+      'HRB 86891',
+      'HRA 5778',
+      'HRB 112676',
+      'HRB 92821',
       'VR 9277',
+      'HRB 42', // Südzucker AG 
+      'HRA 3679 FL'
     ],
     invalid: [
-      'HRA 12345 B ', // trailing space
-      ' HRA 12345 B', // leading space
+      '', // empty
+      ' ', // whitespace
+      'HRB 209459 ', // trailing whitespace
+      ' HRB 209459', // leading whitespace
+      'HRB  2094590', // invalid character (double whitespace)
     ],
   },
   FR: {
-    valid: [
-      'RCS PARIS 453 983 245',
-      'RC NANTES 234 987 456',
+    valid: [ // Valid records found at https://www.sirene.fr/sirene/public/recherche
+      '83449681200035',
+      '44306184100047',
+      '38347481400100',
     ],
     invalid: [
-      'RCS PARIS 453 983 245 ', // trailing space
-      ' RCS PARIS 453 983 245', // leading space
+      '', // empty
+      ' ', // whitespace
+      '83449681200035 ', // trailing whitespace
+      ' 83449681200035', // leading whitespace
     ],
   },
   MX: {
-    valid: [
+    valid: [ // No valid records found
       'ABC20010101AAA',
       'XYZ19991231Z5A',
     ],
@@ -52,14 +61,13 @@ export const CRN_TEST_DATA = {
     ],
   },
   IN: {
-    valid: [
-      '27AAAAC1234F1Z5',
-      '10BBBCH5678G1Z9',
-      '36DDDEE9012H1Z1',
+    valid: [ // Valid GST found at https://services.gst.gov.in/services/searchtp
+      '27AASCS2460H1Z0',
+      '37AAACP2678Q1ZP',
     ],
     invalid: [
-      '27AAAAC1234F1Z5 ', // trailing space
-      ' 27AAAAC1234F1Z5', // leading space
+      '27AASCS2460H1Z0 ', // trailing space
+      ' 27AASCS2460H1Z0', // leading space
     ],
   },
   Worldwide: {
@@ -68,6 +76,10 @@ export const CRN_TEST_DATA = {
       'FR12345678901',
       'ABC20010101AAA',
       '10BBBCH5678G1Z9',
+      '37AAACP2678Q1ZP',
+      'CHE-123.456.788 TVA', // Swiss TVA ??
+      'CHE-116.281.710 MWST', // Swiss MWST ??
+      'CHE-105.909.036' // Swiss UID ??
     ],
     invalid: [
       ' DE123456789', // leading space

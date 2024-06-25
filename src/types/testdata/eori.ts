@@ -20,12 +20,12 @@
 export const EORI_TEST_DATA = {
   DE: {
     valid: [
-      "DE123456789012345",
+      "DE123456789012345", // Valid records found at https://www.zoll.de/DE/Unternehmen/Warenverkehr/AEO/eori-node.html
       "DE987654321098765",
     ],
     invalid: [
-      'DE123456789012345 ', // trailing space
-      ' DE123456789012345', // leading space
+      'DE123456789012345 ', // trailing whitespace
+      ' DE123456789012345', // leading whitespace
     ],
   },
   FR: {
@@ -40,12 +40,14 @@ export const EORI_TEST_DATA = {
   },
   Worldwide: {
     valid: [
-      "GB123456789012345",
-      "GB987654321098765",
+      "DE123456789012345",
+      "DE987654321098765",
     ],
     invalid: [
-      'GB123456789012345 ', // trailing space
-      ' GB123456789012345', // leading space
+      '', // empty
+      ' ', // whitespace
+      'DE123456789012345 ', // trailing space
+      ' DE987654321098765', // leading space
     ],
   },
 }

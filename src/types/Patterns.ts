@@ -24,14 +24,14 @@ const EORI = {
   EUROPE: /^[A-Z]{2}[A-Za-z0-9]{1,15}$/, // generic pattern for Europe
 }
 const VAT_ID = {
-  EUROPE: /^[A-Z]{2}[A-Za-z0-9]{1,15}$/, // generic pattern for Europe
+  Worldwide: /^(?!.*\s$)([A-Za-z0-9-./]\s?){5,15}$/, // generic pattern
+  VIES: /^[A-Z]{2}[A-Za-z0-9]{1,15}$/, // VIES pattern
   DE: /^DE\d{9}$/,
   IN: /^[a-zA-Z\d-]{5,6}$/, // TODO: update pattern
   MX: /^[a-zA-Z\d-&]{12,13}$/,
-  Worldwide: /^(?!.*\s$)([A-Za-z0-9-]\s?){5,15}$/, // generic pattern
 }
 const COMMERCIAL_REG_NUMBER = {
-  Worldwide: /^[A-Za-z0-9-]{6,21}$/, // generic pattern
+  Worldwide: /^(?!.*\s$)([A-Za-z0-9-]\s?){4,21}$/, // generic pattern
   DE: /^(?!.*\s$)([A-Za-z0-9-]\s?){9}$/,
   FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
 }
@@ -55,11 +55,11 @@ export const Patterns = {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
     VAT_ID: VAT_ID.Worldwide,
     LEI_CODE: LEI,
-    VIES: VAT_ID.EUROPE,
+    VIES: VAT_ID.VIES,
     EORI: EORI.EUROPE,
   },
   DE: {
-    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.DE,
+    COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
     VAT_ID: VAT_ID.DE,
     LEI_CODE: LEI,
     VIES: VAT_ID.DE,
@@ -67,23 +67,23 @@ export const Patterns = {
   },
   FR: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.FR,
-    VAT_ID: VAT_ID.EUROPE,
+    VAT_ID: VAT_ID.VIES,
     LEI_CODE: LEI,
-    VIES: VAT_ID.EUROPE,
+    VIES: VAT_ID.VIES,
     EORI: EORI.EUROPE,
   },
   MX: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
     VAT_ID: VAT_ID.MX,
     LEI_CODE: LEI,
-    VIES: VAT_ID.EUROPE,
+    VIES: VAT_ID.VIES,
     EORI: EORI.EUROPE,
   },
   Worldwide: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
     VAT_ID: VAT_ID.Worldwide,
     LEI_CODE: LEI,
-    VIES: VAT_ID.EUROPE,
+    VIES: VAT_ID.VIES,
     EORI: EORI.EUROPE,
   },
   

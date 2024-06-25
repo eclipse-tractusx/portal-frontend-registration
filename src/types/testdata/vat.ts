@@ -58,13 +58,13 @@ export const VAT_TEST_DATA = {
     ],
   },
   IN: {
-    valid: [
-      '22AAAAA0000A1Z5',
-      '1234567890123Z1',
+    valid: [ // Valid GST found at https://services.gst.gov.in/services/searchtp
+      '27AASCS2460H1Z0',
+      '37AAACP2678Q1ZP',
     ],
     invalid: [
-      '22AAAAA0000A1Z5 ', // trailing space
-      ' 22AAAAA0000A1Z5', // leading space
+      '27AASCS2460H1Z0 ', // trailing space
+      ' 27AASCS2460H1Z0', // leading space
     ],
   },
   Worldwide: {
@@ -73,6 +73,8 @@ export const VAT_TEST_DATA = {
       'FR12345678901',
       'AAGB860519G31',
       '22AAAAA0000A1Z5',
+      'CHE-116.281.710', // Swiss
+      'CHE-116.281.710 MWST', // Swiss with MWST
     ],
     invalid: [
       ' DE123456789', // leading space
