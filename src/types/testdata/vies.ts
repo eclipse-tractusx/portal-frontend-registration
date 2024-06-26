@@ -24,6 +24,8 @@ export const VIES_TEST_DATA = {
       'DE999999999'
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'DE123456789 ', // trailing space
       ' DE123456789', // leading space
     ],
@@ -33,6 +35,8 @@ export const VIES_TEST_DATA = {
       "FRXX999999999",
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'FRXX999999999 ', // trailing space
       ' FRXX999999999', // leading space
     ],
@@ -43,6 +47,8 @@ export const VIES_TEST_DATA = {
       "FRXX999999999",
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'DE123456789 ', // trailing space
       ' DE123456789', // leading space
       'DE123 456789', // invalid character (whitespace)

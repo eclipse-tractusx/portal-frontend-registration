@@ -20,7 +20,7 @@
 export const EORI_TEST_DATA = {
   DE: {
     valid: [
-      "DE123456789012345", // Valid records found at https://www.zoll.de/DE/Unternehmen/Warenverkehr/AEO/eori-node.html
+      "DE123456789012345",
       "DE987654321098765",
     ],
     invalid: [

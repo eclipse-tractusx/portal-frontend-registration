@@ -29,19 +29,18 @@ const EORI = {
 
 // Pattern definition from https://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl
 const VIES = {
-  EUROPE: /^[A-Z]{2}([A-Za-z0-9](\+|\*|\.)?){2,12}$/, // VIES pattern
+  EUROPE: /^[A-Z]{2}[0-9A-Za-z\+\*\.]{2,12}$/, // VIES pattern
 }
 
 const VAT_ID = {
   Worldwide: /^(?!.*\s$)([A-Za-z0-9](\.|\s|-|\/)?){5,18}$/, // generic pattern
-  FR: /^(?!.*\s$)([a-zA-Z0-9](-|\s)?){8,15}$/,
   DE: /^DE\d{9}$/,
-  IN: /^[a-zA-Z\d-]{5,6}$/,
+  IN: /^[a-zA-Z\d-]{5,15}$/,
   MX: /^[a-zA-Z\d-&]{12,13}$/,
 }
 const COMMERCIAL_REG_NUMBER = {
-  Worldwide: /^(?!.*\s$)([A-Za-z0-9](-|\s|\.)?){4,21}$/, // generic pattern
-  DE: /^(?!.*\s$)([A-Za-z0-9](-|\s)?){9}$/,
+  Worldwide: /^(?!.*\s$)([A-Za-z0-9](\.|\s|-)?){4,21}$/, // generic pattern
+  DE: /^(?!.*\s$)([A-Za-z0-9](\s|-)?){9}$/,
   FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
 }
 
@@ -60,7 +59,7 @@ export const Patterns = {
   postalCodePattern:
     /^(?!.*\s$)(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
-  IN: {
+  Worldwide: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
     VAT_ID: VAT_ID.Worldwide,
     LEI_CODE: LEI,
@@ -76,7 +75,7 @@ export const Patterns = {
   },
   FR: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.FR,
-    VAT_ID: VAT_ID.FR,
+    VAT_ID: VAT_ID.Worldwide,
     LEI_CODE: LEI,
     VIES: VIES.EUROPE,
     EORI: EORI.EUROPE,
@@ -88,14 +87,13 @@ export const Patterns = {
     VIES: VIES.EUROPE,
     EORI: EORI.EUROPE,
   },
-  Worldwide: {
+  IN: {
     COMMERCIAL_REG_NUMBER: COMMERCIAL_REG_NUMBER.Worldwide,
-    VAT_ID: VAT_ID.Worldwide,
+    VAT_ID: VAT_ID.IN,
     LEI_CODE: LEI,
     VIES: VIES.EUROPE,
     EORI: EORI.EUROPE,
   },
-  
 }
 
 export const isBPN = (expr: string) => Patterns.BPN.test(expr)
