@@ -64,7 +64,8 @@ export const VAT_TEST_DATA = {
     ],
   },
   IN: {
-    valid: [ // Valid GST found at https://services.gst.gov.in/services/searchtp
+    valid: [
+      // Valid GST found at https://services.gst.gov.in/services/searchtp
       '27AASCS2460H1Z0',
       '37AAACP2678Q1ZP',
     ],

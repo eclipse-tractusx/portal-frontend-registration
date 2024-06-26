@@ -19,7 +19,8 @@
 
 export const LEI_TEST_DATA = {
   Worldwide: {
-    valid: [ // Valid records found at https://search.gleif.org/
+    valid: [
+      // Valid records found at https://search.gleif.org/
       '529900T8BM49AURSDO55',
       '9845009B47543D8A1C80',
       '254900YLJPCHO7RQVJ69',

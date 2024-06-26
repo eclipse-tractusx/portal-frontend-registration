@@ -19,7 +19,7 @@
 
 export const CRN_TEST_DATA = {
   DE: {
-    valid: [ 
+    valid: [
       '123456789',
       '987654321',
       '000000000',
@@ -30,7 +30,7 @@ export const CRN_TEST_DATA = {
       // 'HRB 112676',
       // 'HRB 92821',
       // 'VR 9277',
-      // 'HRB 42', // Südzucker AG 
+      // 'HRB 42', // Südzucker AG
       // 'HRA 3679 FL'
     ],
     invalid: [
@@ -45,7 +45,8 @@ export const CRN_TEST_DATA = {
     ],
   },
   FR: {
-    valid: [ // Valid records found at https://www.sirene.fr/sirene/public/recherche
+    valid: [
+      // Valid records found at https://www.sirene.fr/sirene/public/recherche
       '83449681200035',
       '44306184100047',
       '38347481400100',
@@ -58,7 +59,8 @@ export const CRN_TEST_DATA = {
     ],
   },
   MX: {
-    valid: [ // No valid records found
+    valid: [
+      // No valid records found
       'ABC20010101AAA',
       'XYZ19991231Z5A',
     ],
@@ -70,7 +72,8 @@ export const CRN_TEST_DATA = {
     ],
   },
   IN: {
-    valid: [ // Valid GST found at https://services.gst.gov.in/services/searchtp
+    valid: [
+      // Valid GST found at https://services.gst.gov.in/services/searchtp
       '27AASCS2460H1Z0',
       '37AAACP2678Q1ZP',
     ],
@@ -88,9 +91,8 @@ export const CRN_TEST_DATA = {
       'ABC20010101AAA',
       '10BBBCH5678G1Z9',
       '37AAACP2678Q1ZP',
-      'CHE-123.456.788 TVA', // Swiss TVA ??
-      'CHE-116.281.710 MWST', // Swiss MWST ??
-      'CHE-105.909.036', // Swiss UID ??
+      'CHE-123.456.788', // Swiss
+      'CHE-116.281.710', // Swiss
     ],
     invalid: [
       '', // empty
