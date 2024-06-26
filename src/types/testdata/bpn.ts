@@ -27,7 +27,8 @@ export const BPN_TEST_DATA = {
     invalid: [
       ' BPNL000000015OHJ', // leading space
       'BPNL000000015OHJ ', // trailing space
-      '',
+      '', // empty
+      ' ', // whitespace
       'word',
       'some string',
       '    BPNL000000000001  ',

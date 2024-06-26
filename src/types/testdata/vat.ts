@@ -25,6 +25,8 @@ export const VAT_TEST_DATA = {
       'DE000000000',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'DE1234567890', // too long
       'DE12345678', // too short
       'DE123456789 ', // trailing space
@@ -41,6 +43,8 @@ export const VAT_TEST_DATA = {
       'FR00000000000',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'FR12345678901 ', // trailing space
       ' FR12345678901', // leading space
     ],
@@ -51,6 +55,8 @@ export const VAT_TEST_DATA = {
       'P&G851223B24',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'AAGB860519G31 ', // trailing space
       ' AAGB860519G31', // leading space
       'AAGB86051', // too short
@@ -63,6 +69,8 @@ export const VAT_TEST_DATA = {
       '37AAACP2678Q1ZP',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       '27AASCS2460H1Z0 ', // trailing space
       ' 27AASCS2460H1Z0', // leading space
     ],
@@ -77,6 +85,8 @@ export const VAT_TEST_DATA = {
       'CHE-116.281.710 MWST', // Swiss with MWST
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       ' DE123456789', // leading space
       'DE123456789 ', // trailing space
     ],

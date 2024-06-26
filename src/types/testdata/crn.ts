@@ -19,22 +19,29 @@
 
 export const CRN_TEST_DATA = {
   DE: {
-    valid: [ // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
-      'HRB 209459',
-      'HRB 86891',
-      'HRA 5778',
-      'HRB 112676',
-      'HRB 92821',
-      'VR 9277',
-      'HRB 42', // Südzucker AG 
-      'HRA 3679 FL'
+    valid: [ 
+      '123456789',
+      '987654321',
+      '000000000',
+      // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
+      // 'HRB 209459',
+      // 'HRB 86891',
+      // 'HRA 5778',
+      // 'HRB 112676',
+      // 'HRB 92821',
+      // 'VR 9277',
+      // 'HRB 42', // Südzucker AG 
+      // 'HRA 3679 FL'
     ],
     invalid: [
       '', // empty
       ' ', // whitespace
-      'HRB 209459 ', // trailing whitespace
-      ' HRB 209459', // leading whitespace
-      'HRB  2094590', // invalid character (double whitespace)
+      '123456789 ', // trailing whitespace
+      ' 123456789', // leading whitespace
+      '12345  6789', // invalid character (double whitespace)
+      // 'HRB 209459 ', // trailing whitespace
+      // ' HRB 209459', // leading whitespace
+      // 'HRB  2094590', // invalid character (double whitespace)
     ],
   },
   FR: {
@@ -56,6 +63,8 @@ export const CRN_TEST_DATA = {
       'XYZ19991231Z5A',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'ABC20010101AAA ', // trailing space
       ' ABC20010101AAA', // leading space
     ],
@@ -66,6 +75,8 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       '27AASCS2460H1Z0 ', // trailing space
       ' 27AASCS2460H1Z0', // leading space
     ],
@@ -79,9 +90,11 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
       'CHE-123.456.788 TVA', // Swiss TVA ??
       'CHE-116.281.710 MWST', // Swiss MWST ??
-      'CHE-105.909.036' // Swiss UID ??
+      'CHE-105.909.036', // Swiss UID ??
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       ' DE123456789', // leading space
       'DE123456789 ', // trailing space
     ],

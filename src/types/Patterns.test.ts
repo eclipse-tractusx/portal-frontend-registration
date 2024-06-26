@@ -77,7 +77,10 @@ describe('Input Pattern Tests', () => {
   validatePattern('IN', 'VAT_ID', VAT_TEST_DATA)
   validatePattern('Worldwide', 'VAT_ID', VAT_TEST_DATA)
 
-  // VIES: Covered by VAT ID tests
+  // VIES only exists in Europe
+  validatePattern('DE', 'VIES', VIES_TEST_DATA)
+  validatePattern('FR', 'VIES', VIES_TEST_DATA)
+  validatePattern('Worldwide', 'VIES', VIES_TEST_DATA)
 
   // Commercial Registration Number
   validatePattern('DE', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)

@@ -24,6 +24,8 @@ export const EORI_TEST_DATA = {
       "DE987654321098765",
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'DE123456789012345 ', // trailing whitespace
       ' DE123456789012345', // leading whitespace
     ],
@@ -34,6 +36,8 @@ export const EORI_TEST_DATA = {
       "FR987654321098765",
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       'FR123456789012345 ', // trailing space
       ' FR123456789012345', // leading space
     ],

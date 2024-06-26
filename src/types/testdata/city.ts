@@ -41,6 +41,8 @@ export const CITY_TEST_DATA = {
       'Þorlákshöfn',
     ],
     invalid: [
+      '', // empty
+      ' ', // whitespace
       ' Munich', // leading whitespace
       'Munich ', // trailing whitespace
       ',',

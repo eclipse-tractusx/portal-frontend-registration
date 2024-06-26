@@ -37,34 +37,15 @@ export const VIES_TEST_DATA = {
       ' FRXX999999999', // leading space
     ],
   },
-  MX: {
-    valid: [
-      "AAGB860519G31",
-      "P&G851223B24",
-    ],
-    invalid: [
-      'AAGB860519G31 ', // trailing space
-      ' AAGB860519G31', // leading space
-    ],
-  },
-  IN: {
-    valid: [
-      "1234567890123Z1",
-      "22AAAAA0000A1Z5",
-    ],
-    invalid: [
-      '22AAAAA0000A1Z5 ', // trailing space
-      ' 22AAAAA0000A1Z5', // leading space
-    ],
-  },
   Worldwide: {
     valid: [
-      "GB123456789012345",
-      "GB987654321098765",
+      "DE123456789",
+      "FRXX999999999",
     ],
     invalid: [
-      'GB123456789012345 ', // trailing space
-      ' GB123456789012345', // leading space
+      'DE123456789 ', // trailing space
+      ' DE123456789', // leading space
+      'DE123 456789', // invalid character (whitespace)
     ],
   },
 }
