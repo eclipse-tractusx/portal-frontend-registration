@@ -37,14 +37,11 @@ const validate = (data, check) => {
   })
 }
 
-const validatePattern = (
-  country: string,
-  patternType: string,
-  testData: any
-) => {
-  it(`validates ${country} ${patternType}`, () => {
+// Validate pattern with test data for each matching country in the test data
+const validateIdentifierPattern = (pattern: string, testData: any) => {
+  it.each(Object.keys(testData))('validate pattern for %s', (country) => {
     validate(testData[country], (expr: string) =>
-      isPattern(Patterns[country][patternType], expr)
+      isPattern(Patterns[country][pattern], expr)
     )
   })
 }
@@ -64,29 +61,25 @@ describe('Input Pattern Tests', () => {
     )
   })
 
-  // EORI: Same Pattern for all countries
-  validatePattern('Worldwide', 'EORI', EORI_TEST_DATA)
+  // Same Pattern for all European countries
+  describe('validates EORI pattern', () => {
+    validateIdentifierPattern('EORI', EORI_TEST_DATA)
+  })
 
-  // LEI: Same Pattern for all countries
-  validatePattern('Worldwide', 'LEI_CODE', LEI_TEST_DATA)
+  // Same Pattern for all countries
+  describe('validates LEI pattern', () => {
+    validateIdentifierPattern('LEI_CODE', LEI_TEST_DATA)
+  })
 
-  // VAT ID
-  validatePattern('DE', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('FR', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('MX', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('IN', 'VAT_ID', VAT_TEST_DATA)
-  validatePattern('Worldwide', 'VAT_ID', VAT_TEST_DATA)
+  describe('validates VAT ID pattern', () => {
+    validateIdentifierPattern('VAT_ID', VAT_TEST_DATA)
+  })
 
-  // VIES only exists in Europe
-  validatePattern('DE', 'VIES', VIES_TEST_DATA)
-  validatePattern('FR', 'VIES', VIES_TEST_DATA)
-  validatePattern('Worldwide', 'VIES', VIES_TEST_DATA)
+  describe('validates VIES pattern', () => {
+    validateIdentifierPattern('VIES', VIES_TEST_DATA)
+  })
 
-  // Commercial Registration Number
-  validatePattern('DE', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('FR', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('MX', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('IN', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-  validatePattern('Worldwide', 'COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
-
+  describe('validates Commercial Registration Number pattern', () => {
+    validateIdentifierPattern('COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
+  })
 })
