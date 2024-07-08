@@ -289,6 +289,6 @@ export function handleStatusRedirect(
     location.href = '/'
   else if (Object.values(ApplicationStatus).includes(status)) {
     if (applicationType === ApplicationType.INTERNAL) history.push('/landing')
-    else location.href = '/?overlay=consent_osp'
+    else location.href = '/consent_osp'
   } else history.push('/landing')
 }
