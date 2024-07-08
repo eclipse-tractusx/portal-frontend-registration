@@ -531,7 +531,7 @@ npm/npmjs/-/typed-array-buffer/1.0.2, MIT, approved, #9658
 npm/npmjs/-/typed-array-byte-length/1.0.1, MIT, approved, #9659
 npm/npmjs/-/typed-array-byte-offset/1.0.2, MIT, approved, #9407
 npm/npmjs/-/typed-array-length/1.0.6, MIT, approved, #6246
-npm/npmjs/-/typescript/5.4.5, Apache-2.0 AND MIT AND CC-BY-4.0 AND Unicode-DFS-2016 AND W3C-20150513, approved, #13647
+npm/npmjs/-/typescript/5.4.5, Apache-2.0 AND (CC-BY-4.0 AND LicenseRef-Unicode AND MIT AND W3C-20150513) AND BSD-3-Clause AND ODbL-1.0 AND MIT, approved, #15244
 npm/npmjs/-/unbox-primitive/1.0.2, MIT, approved, clearlydefined
 npm/npmjs/-/uncontrollable/7.2.1, MIT AND BSD-3-Clause, approved, #3025
 npm/npmjs/-/uncontrollable/8.0.4, MIT, approved, clearlydefined
