@@ -29,7 +29,7 @@ const EORI = {
 
 // Pattern definition from https://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl
 const VIES = {
-  EUROPE: /^[A-Z]{2}[0-9A-Za-z\+\*\.]{2,12}$/, // VIES pattern
+  EUROPE: /^[A-Z]{2}[0-9A-Za-z+*.]{2,12}$/, // VIES pattern
 }
 
 const VAT_ID = {

@@ -20,8 +20,8 @@
 export const EORI_TEST_DATA = {
   DE: {
     valid: [
-      "DE123456789012345",
-      "DE987654321098765",
+      'DE123456789012345',
+      'DE987654321098765',
     ],
     invalid: [
       '', // empty
@@ -32,8 +32,8 @@ export const EORI_TEST_DATA = {
   },
   FR: {
     valid: [
-      "FR123456789012345",
-      "FR987654321098765",
+      'FR123456789012345',
+      'FR987654321098765',
     ],
     invalid: [
       '', // empty
@@ -44,8 +44,8 @@ export const EORI_TEST_DATA = {
   },
   Worldwide: {
     valid: [
-      "DE123456789012345",
-      "DE987654321098765",
+      'DE123456789012345',
+      'DE987654321098765',
     ],
     invalid: [
       '', // empty

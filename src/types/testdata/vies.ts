@@ -32,7 +32,7 @@ export const VIES_TEST_DATA = {
   },
   FR: {
     valid: [
-      "FRXX999999999",
+      'FRXX999999999',
     ],
     invalid: [
       '', // empty
@@ -43,8 +43,8 @@ export const VIES_TEST_DATA = {
   },
   Worldwide: {
     valid: [
-      "DE123456789",
-      "FRXX999999999",
+      'DE123456789',
+      'FRXX999999999',
     ],
     invalid: [
       '', // empty
