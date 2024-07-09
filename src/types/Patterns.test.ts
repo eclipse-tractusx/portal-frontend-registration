@@ -18,88 +18,15 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { isBPN, isCity, isStreet } from './Patterns'
-
-const TESTDATA = {
-  BPN: {
-    valid: ['BPNL000000015OHJ', 'bpnl000000000001', 'bpnlaaaaaaaaaaaa'],
-    invalid: [
-      '',
-      'word',
-      'some string',
-      '    BPNL000000000001  ',
-      'BPNL00000000000015OHJ',
-      'BPNL01',
-    ],
-  },
-  CITY: {
-    valid: [
-      'Munich',
-      'Toronto',
-      'San Francisco',
-      'St. Catharines',
-      // eslint-disable-next-line
-      "Val-d'Or",
-      // eslint-disable-next-line
-      "Presqu'ile",
-      'Niagara on the Lake',
-      'Niagara-on-the-Lake',
-      'München',
-      'Villes du Québec',
-      // eslint-disable-next-line
-      "Provence-Alpes-Côte d'Azur",
-      'Île-de-France',
-      'Kópavogur',
-      'Garðabær',
-      'Sauðárkrókur',
-      'Þorlákshöfn',
-    ],
-    invalid: [
-      ' Munich',
-      'Munich ',
-      ',',
-      '.',
-      '--',
-      'Niagara--on-the-Lake',
-      // eslint-disable-next-line
-      "Presqu''ile",
-    ],
-  },
-  STREET: {
-    valid: [
-      'Dorfstraße',
-      'Hauptstrasse',
-      'Bahnhofstr.',
-      'Gmeiner Weg',
-      '701 FIFTH AVE',
-      'HOLLYWOOD, FL 33022-2480',
-      '111 MONUMENT CIRCLE, SUITE 3700',
-      'P.O. BOX 2903',
-      'P.O. Box 12345 Los Angeles',
-      '1441 SEAMIST DR.',
-      '2000 PENNSYLVANIA AVENUE, N.W.',
-      'Gertrud-Grunow-Str. 09',
-      'Gertrud-Grunow-Straße 09',
-      // eslint-disable-next-line
-      "Rue d'Alger",
-      // eslint-disable-next-line
-      "Rue de l'Amiral-de-Coligny",
-      'Allée André-Breton',
-      'Vlašská 19',
-    ],
-    invalid: [
-      ' Hauptstr',
-      'Einbahnstr. ',
-      'Rotkehlchenweg ',
-      ',',
-      '.',
-      '--',
-      'Finken  weg',
-      // eslint-disable-next-line
-      "Rue de l''este",
-    ],
-  },
-}
+import { isPattern, Patterns } from './Patterns'
+import { BPN_TEST_DATA } from './testdata/bpn'
+import { CITY_TEST_DATA } from './testdata/city'
+import { STREET_TEST_DATA } from './testdata/street'
+import { VAT_TEST_DATA } from './testdata/vat'
+import { EORI_TEST_DATA } from './testdata/eori'
+import { LEI_TEST_DATA } from './testdata/lei'
+import { VIES_TEST_DATA } from './testdata/vies'
+import { CRN_TEST_DATA } from './testdata/crn'
 
 const validate = (data, check) => {
   data.valid.forEach((expr) => {
@@ -110,14 +37,49 @@ const validate = (data, check) => {
   })
 }
 
+// Validate pattern with test data for each matching country in the test data
+const validateIdentifierPattern = (pattern: string, testData: any) => {
+  it.each(Object.keys(testData))('validate pattern for %s', (country) => {
+    validate(testData[country], (expr: string) =>
+      isPattern(Patterns[country][pattern], expr)
+    )
+  })
+}
+
 describe('Input Pattern Tests', () => {
-  it('validates BPNs', () => {
-    validate(TESTDATA.BPN, isBPN)
+  it('validates BPN pattern', () => {
+    validate(BPN_TEST_DATA.BPN, (expr: string) => isPattern(Patterns.BPN, expr))
   })
-  it('validates cities', () => {
-    validate(TESTDATA.CITY, isCity)
+  it('validates City pattern', () => {
+    validate(CITY_TEST_DATA.CITY, (expr: string) =>
+      isPattern(Patterns.CITY, expr)
+    )
   })
-  it('validates streets', () => {
-    validate(TESTDATA.STREET, isStreet)
+  it('validates Street pattern', () => {
+    validate(STREET_TEST_DATA.STREET, (expr: string) =>
+      isPattern(Patterns.STREET, expr)
+    )
+  })
+
+  // Same Pattern for all European countries
+  describe('validates EORI pattern', () => {
+    validateIdentifierPattern('EORI', EORI_TEST_DATA)
+  })
+
+  // Same Pattern for all countries
+  describe('validates LEI pattern', () => {
+    validateIdentifierPattern('LEI_CODE', LEI_TEST_DATA)
+  })
+
+  describe('validates VAT ID pattern', () => {
+    validateIdentifierPattern('VAT_ID', VAT_TEST_DATA)
+  })
+
+  describe('validates VIES pattern', () => {
+    validateIdentifierPattern('VIES', VIES_TEST_DATA)
+  })
+
+  describe('validates Commercial Registration Number pattern', () => {
+    validateIdentifierPattern('COMMERCIAL_REG_NUMBER', CRN_TEST_DATA)
   })
 })
