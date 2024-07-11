@@ -59,7 +59,7 @@ export const VerifyRegistration = () => {
   const [updateRegistration] = useUpdateRegistrationMutation()
 
   useEffect(() => {
-    refetch();
+    refetch()
   }, [])
   
   const backClick = () => {
