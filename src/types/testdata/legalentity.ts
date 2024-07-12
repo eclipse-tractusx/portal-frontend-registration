@@ -22,6 +22,10 @@ export const LEGAL_ENTITY_DATA = {
     valid: [
       'A', // 1 characters
       '1234567890'.repeat(16), // 160 characters
+      // https://find-and-update.company-information.service.gov.uk/company/03249311
+      'CENTRE FOR HEALTH SCIENCES, TRAINING, RESEARCH AND DEVELOPMENT (CHESTRAD) INTERNATIONAL.',
+      // https://find-and-update.company-information.service.gov.uk/company/04120480
+      'THIS IS THE COMPANY WITH THE LONGEST NAME SO FAR INCORPORATED AT THE REGISTRY OF COMPANIES IN ENGLAND AND WALES AND ENCOMPASSING THE REGISTRIES BASED IN SCOTLAN',
       'Bayerische Motoren Werke Aktiengesellschaft',
       '7-ELEVEN INTERNATIONAL LLC',
       '5N Plus Lübeck GmbH',
