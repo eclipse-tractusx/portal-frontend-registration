@@ -57,9 +57,16 @@ export const CompanyRoleCax = () => {
 
   const { data: allConsentData, error: allConsentError } =
     useFetchAgreementDataQuery()
-  const { data: consentData, error: consentError } =
-    useFetchAgreementConsentsQuery(applicationId)
+  const {
+    data: consentData,
+    error: consentError,
+    refetch,
+  } = useFetchAgreementConsentsQuery(applicationId)
   const [updateAgreementConsents] = useUpdateAgreementConsentsMutation()
+
+  useEffect(() => {
+    refetch()
+  }, [companyRoleChecked])
 
   useEffect(() => {
     updateSelectedRolesAndAgreement()
