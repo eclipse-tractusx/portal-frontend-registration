@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1-RC2
+
+### Technical Support
+
+- **Upgraded dependencies**
+  - bumped braces from 3.0.2 to 3.0.3 [#927](https://github.com/eclipse-tractusx/portal-frontend/pull/927)
+  - bumped ws from 8.16.0 to 8.18.0 [#928](https://github.com/eclipse-tractusx/portal-frontend/pull/928)
+
 ## 2.0.1-RC1
 
 ### Change
