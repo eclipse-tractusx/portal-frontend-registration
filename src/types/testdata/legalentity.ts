@@ -36,6 +36,8 @@ export const LEGAL_ENTITY_DATA = {
       'Currency £$€¥¢',
       'Brackets []()',
       'Punctuation !?,.;:',
+      'Double "Quote" Company S.A.', // special character "" in name
+      'Single \'Quote\' Company LLC', // special character '' in name
       'Special Characters ^&%#@*/_-\\',
       'German: ÄÖÜß',
       'French: ÀÉÈÊË',
