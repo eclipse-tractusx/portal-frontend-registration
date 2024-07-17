@@ -50,8 +50,12 @@ export const Patterns = {
   CITY: /^[A-ZÀ-ÿ0-9Śął](([ .'-]|\. )?[A-Za-zÀ-ÿ0-9Śął]{1,40}){1,10}$/,
   STREET:
     /^(?!.*\s$)([a-zA-Z0-9À-ÿšŚął]{1,40}( ?[.,'/-] ?| )?){1,10}[a-zA-Z0-9À-ÿšŚął.]$/,
+  // legalEntityPattern
+  // \w covers A-Za-z0-9 and _
+  // \s whitespace
+  // \x22 double quote
   legalEntityPattern:
-    /^(?!.*\s$)([\wÀ-ÿ\d#'£$€¥¢@&%()*+,\-_./:;=<>!?^[\]\\]\s?){1,160}$/,
+    /^(?!.*\s$)([\wÀ-ÿ£$€¥¢@%*+\-/\\,.:;=<>!?&^#'\x22()[\]]\s?){1,160}$/,
   registeredNamePattern:
     /^(?!.*\s$)[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d\s!#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   regionPattern: /^(?!.*\s$)([a-zA-Z0-9À-ÿŚął,"()'-]\s?)*$/,

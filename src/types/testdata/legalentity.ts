@@ -74,6 +74,8 @@ export const LEGAL_ENTITY_DATA = {
       ' Bayerische Motoren Werke Aktiengesellschaft', // leading space
       'Bayerische Motoren Werke Aktiengesellschaft ', // trailing space
       'Bayerische Motoren Werke  Aktiengesellschaft', // double space
+      'Bayerische Motoren Werke Aktiengesellschaft\n', // newline
+      'W'.repeat(161), // 161 characters
       '', // empty
     ],
   },
