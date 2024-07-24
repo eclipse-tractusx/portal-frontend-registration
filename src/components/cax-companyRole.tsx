@@ -85,17 +85,10 @@ export const CompanyRoleCax = () => {
     setAgreementChecked(updatedMap)
   }
 
-  const isNextBtnDisabled = () => {
-    if (companyRoleChecked && agreementChecked) {
-      if (
-        isObjectEmptyOrFalsy(companyRoleChecked) ||
-        isObjectEmptyOrFalsy(agreementChecked)
-      ) {
-        return true
-      }
-    }
-  }
-
+  const isNextBtnDisabled = 
+    isObjectEmptyOrFalsy(companyRoleChecked) ||
+    isObjectEmptyOrFalsy(agreementChecked)
+  
   const handleCompanyRoleCheck = (id) => {
     const updatedMap = { ...companyRoleChecked }
     updatedMap[id] = !updatedMap[id]
@@ -315,7 +308,7 @@ export const CompanyRoleCax = () => {
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.confirm')}
-        disabled={isNextBtnDisabled()}
+        disabled={isNextBtnDisabled}
         handleBackClick={() => {
           backClick()
         }}

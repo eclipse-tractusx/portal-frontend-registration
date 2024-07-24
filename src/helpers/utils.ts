@@ -249,7 +249,7 @@ export function handleStatusRedirect(
 
 export const isObjectEmptyOrFalsy = (obj) => {
   // Check if the object is empty
-  if (Object.keys(obj).length === 0) {
+  if (!obj || Object.keys(obj).length === 0) {
     return true
   }
 
