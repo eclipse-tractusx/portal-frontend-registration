@@ -268,6 +268,7 @@ export const DragDrop = () => {
         handleBackClick={() => {
           backClick()
         }}
+        disabled={documents?.length === 0}
         handleNextClick={() => nextClick()}
         helpUrl={
           '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F05.+Document+Upload.md'

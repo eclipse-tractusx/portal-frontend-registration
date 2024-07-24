@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { type companyRole } from '../state/features/applicationCompanyRole/types'
-import { download } from '../helpers/utils'
+import { download, isObjectEmptyOrFalsy } from '../helpers/utils'
 import UserService from '../services/UserService'
 import { getApiBase } from '../services/EnvironmentService'
 import { Notify } from './Snackbar'
@@ -92,6 +92,10 @@ export const CompanyRoleCax = () => {
     setAgreementChecked(updatedMap)
   }
 
+  const isNextBtnDisabled = 
+    isObjectEmptyOrFalsy(companyRoleChecked) ||
+    isObjectEmptyOrFalsy(agreementChecked)
+  
   const handleCompanyRoleCheck = (id) => {
     const updatedMap = { ...companyRoleChecked }
     updatedMap[id] = !updatedMap[id]
@@ -311,6 +315,7 @@ export const CompanyRoleCax = () => {
       <FooterButton
         labelBack={t('button.back')}
         labelNext={t('button.confirm')}
+        disabled={isNextBtnDisabled}
         handleBackClick={() => {
           backClick()
         }}
