@@ -123,12 +123,14 @@ export const CompanyDataCax = () => {
 
   useEffect(() => {
     const index = i18n.language === 'de' ? 0 : 1
-    countryList = countryList?.map((country) => ({
-      id: country.alpha2Code,
-      label:
-        country.countryName[index]?.value + ' (' + country.alpha2Code + ')',
-    }))
-    setCountryArr(countryList)
+    if (countryList && Array.isArray(countryList[0].countryName)) {
+      countryList = countryList?.map((country) => ({
+        id: country.alpha2Code,
+        label:
+          country.countryName[index]?.value + ' (' + country.alpha2Code + ')',
+      }))
+      setCountryArr(countryList)
+    }
   }, [countryList, i18n.language])
 
   const defaultSelectedCountry = countryArr?.filter(
@@ -568,7 +570,7 @@ export const CompanyDataCax = () => {
                 <Autocomplete
                   id="selectList"
                   options={countryArr}
-                  defaultValue={defaultSelectedCountry}
+                  value={defaultSelectedCountry}
                   renderInput={(params) => (
                     <TextField variant="standard" {...params} />
                   )}
