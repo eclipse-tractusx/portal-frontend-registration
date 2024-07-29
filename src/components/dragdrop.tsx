@@ -22,7 +22,7 @@ import Dropzone, { type IFileWithMeta } from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { DragdropFiles } from './dragdropFiles'
 import DragdropLayout from './dragdropLayout'
@@ -79,7 +79,7 @@ export const DragDrop = () => {
   const { data: status } = useFetchApplicationsQuery()
   const obj = status?.[status.length - 1]
   const applicationId = obj?.applicationId
-  const MAX_FILES = 3;
+  const MAX_FILES = 3
   const [fileError, setFileError] = useState('')
   const [deleteDocResponse, setDeleteDocResponse] = useState({
     severity: SeverityType.ERROR,
@@ -93,9 +93,20 @@ export const DragDrop = () => {
   const [updateStatus] = useUpdateStatusMutation()
   const [updateDocument] = useUpdateDocumentMutation()
   const [removeDocument] = useRemoveDocumentMutation()
-  const [maxFiles, setMaxFiles] = useState(
-    documents?.length > 0 ? MAX_FILES - documents.length : MAX_FILES
-  )
+  const [maxFiles, setMaxFiles] = useState(MAX_FILES)
+
+  useEffect(() => {
+    if (documents?.length >= 0) {
+      const currentMaxFiles =
+        documents?.length > 0 ? MAX_FILES - documents?.length : MAX_FILES
+      setMaxFiles(currentMaxFiles)
+
+      documents?.length === MAX_FILES &&
+        setFileError(
+          t('documentUpload.dragDropExceedFilesCountErrorMsg', { MAX_FILES })
+        )
+    }
+  }, [documents])
 
   const manageFileStatus = async (fileDetails: FileStatus) => {
     switch (fileDetails.stats) {
@@ -152,6 +163,7 @@ export const DragDrop = () => {
           message: t('documentUpload.deleteSuccess'),
         })
         setMaxFiles((prev) => prev + 1)
+        setFileError('')
       })
       .catch((errors: any) => {
         console.log('errors', errors)
