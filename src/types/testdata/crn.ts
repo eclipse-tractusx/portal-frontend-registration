@@ -24,14 +24,15 @@ export const CRN_TEST_DATA = {
       '987654321',
       '000000000',
       // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
-      // 'HRB 209459',
-      // 'HRB 86891',
-      // 'HRA 5778',
-      // 'HRB 112676',
-      // 'HRB 92821',
-      // 'VR 9277',
-      // 'HRB 42', // Südzucker AG
-      // 'HRA 3679 FL'
+      'HRB 209459',
+      'HRB 86891',
+      'HRA 5778',
+      'HRB 112676',
+      'HRB 92821',
+      'VR 9277',
+      'HRB 42', // Südzucker AG
+      'HRA 3679 FL',
+      'HRB 209459 B',
     ],
     invalid: [
       '', // empty
@@ -39,9 +40,6 @@ export const CRN_TEST_DATA = {
       '123456789 ', // trailing whitespace
       ' 123456789', // leading whitespace
       '12345  6789', // invalid character (double whitespace)
-      // 'HRB 209459 ', // trailing whitespace
-      // ' HRB 209459', // leading whitespace
-      // 'HRB  2094590', // invalid character (double whitespace)
     ],
   },
   FR: {
@@ -56,6 +54,7 @@ export const CRN_TEST_DATA = {
       ' ', // whitespace
       '83449681200035 ', // trailing whitespace
       ' 83449681200035', // leading whitespace
+      '8344968  1200035', // invalid character (double whitespace)
     ],
   },
   MX: {
@@ -69,6 +68,7 @@ export const CRN_TEST_DATA = {
       ' ', // whitespace
       'ABC20010101AAA ', // trailing space
       ' ABC20010101AAA', // leading space
+      'ABC200  10101AAA', // invalid character (double whitespace)
     ],
   },
   IN: {
@@ -82,6 +82,7 @@ export const CRN_TEST_DATA = {
       ' ', // whitespace
       '27AASCS2460H1Z0 ', // trailing space
       ' 27AASCS2460H1Z0', // leading space
+      '27AASCS  2460H1Z0', // invalid character (double whitespace)
     ],
   },
   Worldwide: {
@@ -99,6 +100,7 @@ export const CRN_TEST_DATA = {
       ' ', // whitespace
       ' DE123456789', // leading space
       'DE123456789 ', // trailing space
+      'DE  123456789', // invalid character (double whitespace)
     ],
   },
 }

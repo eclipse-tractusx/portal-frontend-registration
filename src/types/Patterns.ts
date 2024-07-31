@@ -40,7 +40,7 @@ const VAT_ID = {
 }
 const COMMERCIAL_REG_NUMBER = {
   Worldwide: /^(?!.*\s$)([A-Za-z0-9](\.|\s|-)?){4,21}$/, // generic pattern
-  DE: /^(?!.*\s$)([A-Za-z0-9](\s|-)?){9}$/,
+  DE: /^(?!.*\s$)([A-Za-z0-9](\s|-)?){4,21}$/,
   FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
 }
 
