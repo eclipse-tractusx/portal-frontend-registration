@@ -683,7 +683,7 @@ export const CompanyDataCax = () => {
                       type="text"
                       value={identifierNumber}
                       onChange={(e) => {
-                        validateIdentifierNumber(e.target.value)
+                        validateIdentifierNumber(e.target.value.trim())
                       }}
                     />
                     {errors.identifierNumber && (
