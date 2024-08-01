@@ -19,7 +19,6 @@
  ********************************************************************************/
 
 import { type ILayoutProps } from 'react-dropzone-uploader'
-import { useTranslation } from 'react-i18next'
 
 interface CustomLayoutProps extends ILayoutProps {
   error: string
@@ -27,8 +26,6 @@ interface CustomLayoutProps extends ILayoutProps {
 }
 
 function DragdropLayout(props: CustomLayoutProps) {
-  const { t } = useTranslation()
-
   return (
     <div>
       <div {...props.dropzoneProps}>{props.input}</div>
