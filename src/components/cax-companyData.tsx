@@ -123,7 +123,7 @@ export const CompanyDataCax = () => {
 
   useEffect(() => {
     const index = i18n.language === 'de' ? 0 : 1
-    if (countryList && Array.isArray(countryList[0].countryName)) {
+    if (countryList.length > 0 && Array.isArray(countryList[0].countryName)) {
       countryList = countryList?.map((country) => ({
         id: country.alpha2Code,
         label:
