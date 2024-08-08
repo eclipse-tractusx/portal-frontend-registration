@@ -208,7 +208,7 @@ export const CompanyDataCax = () => {
   }
 
   const onSearchChange = (expr: string) => {
-    if (isBPN(expr)) {
+    if (isBPN(expr?.trim())) {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
@@ -224,7 +224,7 @@ export const CompanyDataCax = () => {
   const validateLegalEntity = (value: string) => {
     setLegalEntity(value)
 
-    if (!Patterns.legalEntityPattern.test(value)) {
+    if (!Patterns.legalEntityPattern.test(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         legalEntity: 'legalEntityError',
@@ -238,7 +238,7 @@ export const CompanyDataCax = () => {
   const validateRegisteredName = (value: string) => {
     setRegisteredName(value)
 
-    if (!Patterns.registeredNamePattern.test(value)) {
+    if (!Patterns.registeredNamePattern.test(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         registeredName: 'registerdNameError',
@@ -252,7 +252,7 @@ export const CompanyDataCax = () => {
   const validateStreetHouseNumber = (value: string) => {
     setStreetHouseNumber(value)
 
-    if (!isStreet(value)) {
+    if (!isStreet(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         streetHouseNumber: 'streetHouseNumberError',
@@ -271,7 +271,7 @@ export const CompanyDataCax = () => {
       return
     }
 
-    if (!Patterns.postalCodePattern.test(value)) {
+    if (!Patterns.postalCodePattern.test(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         postalCode: 'postalCodeError',
@@ -285,7 +285,7 @@ export const CompanyDataCax = () => {
   const validateCity = (value: string) => {
     setCity(value)
 
-    if (!isCity(value)) {
+    if (!isCity(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         city: 'cityError',
@@ -299,7 +299,7 @@ export const CompanyDataCax = () => {
   const validateCountry = (value: string) => {
     setChangedCountryValue(true)
     setCountry(value?.toUpperCase())
-    if (!Patterns.countryPattern.test(value)) {
+    if (!Patterns.countryPattern.test(value?.trim())) {
       setShowIdentifiers(false)
       setErrors((prevState) => ({
         ...prevState,
@@ -320,7 +320,7 @@ export const CompanyDataCax = () => {
       setErrors((prevState) => ({ ...prevState, region: '' }))
     }
 
-    if (value && !Patterns.regionPattern.test(value)) {
+    if (value && !Patterns.regionPattern.test(value?.trim())) {
       setErrors((prevState) => ({
         ...prevState,
         region: 'regionError',
@@ -343,7 +343,7 @@ export const CompanyDataCax = () => {
         : 'Worldwide'
     if (
       identifierType &&
-      !Patterns[countryCode][identifierType].test(value)
+      !Patterns[countryCode][identifierType].test(value?.trim())
     ) {
       setErrors((prevState) => ({
         ...prevState,
@@ -369,18 +369,18 @@ export const CompanyDataCax = () => {
 
   const nextClick = () => {
     const companyData = { ...companyDetails }
-    companyData.bpn = bpn
-    companyData.name = legalEntity
-    companyData.shortName = registeredName
-    companyData.streetName = streetHouseNumber
-    companyData.region = region
-    companyData.city = city
-    companyData.zipCode = postalCode
-    companyData.countryAlpha2Code = country
+    companyData.bpn = bpn?.trim()
+    companyData.name = legalEntity?.trim()
+    companyData.shortName = registeredName?.trim()
+    companyData.streetName = streetHouseNumber?.trim()
+    companyData.region = region?.trim()
+    companyData.city = city?.trim()
+    companyData.zipCode = postalCode?.trim()
+    companyData.countryAlpha2Code = country?.trim()
     companyData.uniqueIds = [
       {
         type: identifierType,
-        value: identifierNumber,
+        value: identifierNumber?.trim(),
       },
     ]
     //addCompanyData(companyData)
@@ -421,6 +421,9 @@ export const CompanyDataCax = () => {
                 value={''}
                 onChange={(expr) => {
                   onSearchChange(expr)
+                }}
+                onBlur={(e) => {
+                  setBpn(e.target.value.trim())
                 }}
               />
               <label className="error-message">{bpnErrorMsg}</label>
@@ -471,6 +474,9 @@ export const CompanyDataCax = () => {
                 onChange={(e) => {
                   validateLegalEntity(e.target.value)
                 }}
+                onBlur={(e) => {
+                  setLegalEntity(e.target.value.trim())
+                }}
               />
               {errors.legalEntity && (
                 <label>{t(`registrationStepOne.${errors.legalEntity}`)}</label>
@@ -490,6 +496,9 @@ export const CompanyDataCax = () => {
                 value={registeredName}
                 onChange={(e) => {
                   validateRegisteredName(e.target.value)
+                }}
+                onBlur={(e) => {
+                  setRegisteredName(e.target.value.trim())
                 }}
               />
               {errors.registeredName && (
@@ -518,6 +527,9 @@ export const CompanyDataCax = () => {
                 onChange={(e) => {
                   validateStreetHouseNumber(e.target.value)
                 }}
+                onBlur={(e) => {
+                  setStreetHouseNumber(e.target.value.trim())
+                }}
               />
               {errors.streetHouseNumber && (
                 <label>
@@ -536,6 +548,9 @@ export const CompanyDataCax = () => {
                 onChange={(e) => {
                   validatePostalCode(e.target.value)
                 }}
+                onBlur={(e) => {
+                  setPostalCode(e.target.value.trim())
+                }}
               />
               {errors.postalCode && (
                 <label>{t(`registrationStepOne.${errors.postalCode}`)}</label>
@@ -552,6 +567,9 @@ export const CompanyDataCax = () => {
                 value={city}
                 onChange={(e) => {
                   validateCity(e.target.value)
+                }}
+                onBlur={(e) => {
+                  setCity(e.target.value.trim())
                 }}
               />
               {errors.city && (
@@ -597,6 +615,9 @@ export const CompanyDataCax = () => {
                 onChange={(e) => {
                   validateRegion(e.target.value)
                 }}
+                onBlur={(e) => {
+                  setRegion(e.target.value.trim())
+                }}
               />
               {errors.region && (
                 <label>{t(`registrationStepOne.${errors.region}`)}</label>
@@ -625,6 +646,9 @@ export const CompanyDataCax = () => {
                         className="regular-radio agreement-check"
                         onChange={() => {
                           handleIdentifierSelect(id.type, id.value)
+                        }}
+                        onBlur={(e) => {
+                          setIdentifierNumber(e.target.value.trim())
                         }}
                         defaultChecked={uniqueIds[0].type === id.type}
                       />
@@ -686,6 +710,9 @@ export const CompanyDataCax = () => {
                       value={identifierNumber}
                       onChange={(e) => {
                         validateIdentifierNumber(e.target.value)
+                      }}
+                      onBlur={(e) => {
+                        setIdentifierNumber(e.target.value.trim())
                       }}
                     />
                     {errors.identifierNumber && (

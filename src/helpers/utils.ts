@@ -246,3 +246,19 @@ export function handleStatusRedirect(
     else location.href = '/consent_osp'
   } else history.push('/landing')
 }
+
+export const isObjectEmptyOrFalsy = (obj) => {
+  // Check if the object is empty
+  if (!obj || Object.keys(obj).length === 0) {
+    return true
+  }
+
+  // Check if all values are false
+  for (const key in obj) {
+    if (obj[key]) {
+      return false
+    }
+  }
+
+  return true
+}

@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFetchApplicationsQuery } from '../state/features/application/applicationApiSlice'
 import { useFetchDocumentsQuery } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
 import {
@@ -52,12 +52,19 @@ export const VerifyRegistration = () => {
   const obj = status?.[status.length - 1]
   const applicationId = obj?.applicationId
 
-  const { data: registrationData, error: dataError } =
-    useFetchRegistrationDataQuery(applicationId)
+  const {
+    data: registrationData,
+    error: dataError,
+    refetch,
+  } = useFetchRegistrationDataQuery(applicationId)
   const { data: documents, error: documentsError } =
     useFetchDocumentsQuery(applicationId)
   const [updateRegistration] = useUpdateRegistrationMutation()
-
+  
+  useEffect(() => {
+    refetch()
+  }, [])
+  
   const backClick = () => {
     dispatch(addCurrentStep(currentActiveStep - 1))
   }

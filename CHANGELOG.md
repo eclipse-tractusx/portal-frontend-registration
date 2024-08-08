@@ -6,6 +6,28 @@
 
 - country value is not updating if user moves back and forth between steps [#232](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/232)
 
+## 2.0.1
+
+### Change
+
+- improved white space handling in company data [#210](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/210)
+- updated identifier error messages [#210](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/210)
+
+### Technical Support
+
+- bumped braces from 3.0.2 to 3.0.3 [#927](https://github.com/eclipse-tractusx/portal-frontend/pull/927)
+- bumped ws from 8.16.0 to 8.18.0 [#928](https://github.com/eclipse-tractusx/portal-frontend/pull/928)
+- dev-flow: maintain latest changes in main branch [#198](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/198)
+- TRG-7: update licensing and legal docs [#197](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/197)
+- add full dockerfile containing yarn step [#187](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/187)
+- upgraded GitHub actions [#213](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/213)
+
+### Bugfix
+
+- updated the roles state when user navigates between the steps [#215](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/215)
+- pattern validation: prevented wrong white spaces in company data [#196](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/196)
+- consent osp: fixed redirect to portal page instead of overlay [#209](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/209)
+
 ## 2.0.0
 
 ### Change
