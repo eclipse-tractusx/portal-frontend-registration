@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Bugfix
+
+- updated the logic for maxFiles count in upload docs step [#234](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/234)
+
 ## 2.0.1
 
 ### Change
