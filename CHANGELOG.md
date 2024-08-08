@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Bugfix
+
+- country value is not updating if user moves back and forth between steps [#232](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/232)
+
 ## 2.0.1
 
 ### Change
