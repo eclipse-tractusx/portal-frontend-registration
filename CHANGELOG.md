@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Bugfix
+
+- remove code that always displays error message on screen [#230](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/230)
+
 ## 2.0.1
 
 ### Change
