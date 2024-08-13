@@ -4,6 +4,8 @@
 
 ### Bugfix
 
+- country value is not updating if user moves back and forth between steps [#232](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/232)
+- remove code that always displays error message on screen [#230](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/230)
 - updated the logic for maxFiles count in upload docs step [#234](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/234)
 
 ## 2.0.1

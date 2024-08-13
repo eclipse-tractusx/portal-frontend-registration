@@ -216,7 +216,6 @@ export const DragDrop = () => {
               <DragdropLayout
                 {...props}
                 error={fileError}
-                documentError={'documentError'}
               />
             )}
             inputContent={<DragdropContent />}
