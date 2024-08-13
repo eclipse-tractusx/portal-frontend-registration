@@ -129,6 +129,7 @@
     "dragDropSpanCaption": "browse files",
     "dragDropExceedSizeErrorMsg": "Please select another document. The maximum upload size is limited to 1MB",
     "dragDropDocumentTypeErrorMsg": "The selected document type is not supported. Please upload a document with the type .pdf",
+    "dragDropExceedFilesCountErrorMsg": "You can only upload up to {{MAX_FILES}} documents.",
     "or": "or",
     "upload": "Upload",
     "uploadStatusDone": "Done",
