@@ -94,6 +94,7 @@ export const CompanyDataCax = () => {
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
   const [notifyError, setNotifyError] = useState(false)
+  const [defaultSelectedCountry, setDefaultSelectedCountry] = useState(null)
 
   const {
     data: companyDetails,
@@ -133,9 +134,16 @@ export const CompanyDataCax = () => {
     }
   }, [countryList, i18n.language])
 
-  const defaultSelectedCountry = countryArr?.filter(
-    (code) => code.id === country
-  )[0]
+  useEffect(() => {
+    if (country) {
+      const countryCodeValue = countryArr?.find((code) => code.id === country)
+      if (countryCodeValue) {
+        setDefaultSelectedCountry(countryCodeValue)
+      }
+    } else {
+      setDefaultSelectedCountry(null)
+    }
+  }, [country, countryArr])
 
   useEffect(() => {
     refetchCompanyData()
@@ -158,17 +166,19 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setBpn(companyDetails?.bpn)
-    setLegalEntity(companyDetails?.name)
-    setRegisteredName(companyDetails?.name)
-    setStreetHouseNumber(companyDetails?.streetName)
-    setRegion(companyDetails?.region)
-    setPostalCode(companyDetails?.zipCode)
-    setCity(companyDetails?.city)
-    setCountry(companyDetails?.countryAlpha2Code)
-    setUniqueIds(companyDetails?.uniqueIds)
-    setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
-    setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
+    if (!bpn) {
+      setBpn(companyDetails?.bpn)
+      setLegalEntity(companyDetails?.name)
+      setRegisteredName(companyDetails?.name)
+      setStreetHouseNumber(companyDetails?.streetName)
+      setRegion(companyDetails?.region)
+      setPostalCode(companyDetails?.zipCode ?? '')
+      setCity(companyDetails?.city)
+      setCountry(companyDetails?.countryAlpha2Code)
+      setUniqueIds(companyDetails?.uniqueIds)
+      setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
+      setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
+    }
   }, [companyDetails])
 
   useEffect(() => {
@@ -190,7 +200,7 @@ export const CompanyDataCax = () => {
     // @ts-expect-error keep for compatibility
     setRegion(details.region)
     // @ts-expect-error keep for compatibility
-    setPostalCode(details.zipcode)
+    setPostalCode(details.zipCode)
     // @ts-expect-error keep for compatibility
     setCity(details.city)
     // @ts-expect-error keep for compatibility
