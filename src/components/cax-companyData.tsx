@@ -179,7 +179,7 @@ export const CompanyDataCax = () => {
       setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
       setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
     }
-  }, [companyDetails])
+  }, [companyDetails, bpn])
 
   useEffect(() => {
     if (companyDataError ?? submitError ?? identifierError) {
