@@ -647,9 +647,6 @@ export const CompanyDataCax = () => {
                         onChange={() => {
                           handleIdentifierSelect(id.type, id.value)
                         }}
-                        onBlur={(e) => {
-                          setIdentifierNumber(e.target.value.trim())
-                        }}
                         defaultChecked={uniqueIds[0].type === id.type}
                       />
                       <label>
