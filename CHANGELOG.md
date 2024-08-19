@@ -5,7 +5,7 @@
 ### Bugfix
 
 - remove logic that sets bpn before validation [#253](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/253)
-
+- fixed company data invalidation when receiving multiple identifier [247](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/247)
 
 ## 2.1.0-alpha.1
 
