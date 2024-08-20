@@ -33,7 +33,11 @@ export const LEGAL_ENTITY_DATA = {
       '+SEN Inc.', // leading special character
       'La Poste S.A.',
       'JPMORGAN ASIA-PACIFIC ADVANTAGE HYBRID FUND (QDII)',
-      'Currency £$€¥¢',
+      '摩根亚太优势混合型证券投资基金 (QDII)',
+      'Adis Tachov, zpracování plastů s.r.o.',
+      'BURY SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
+      'GAMMO Europe Korlátolt Felelősségű Társaság',
+      'Currency £$€¥¢₫฿',
       'Brackets []()',
       'Punctuation !?,.;:',
       'Double "Quote" Company S.A.', // special character "" in name
@@ -51,26 +55,29 @@ export const LEGAL_ENTITY_DATA = {
       'Icelandic: ÆÐÞ',
       'Dutch: ÏËÏ',
       // -- not supported by the pattern
-      // 'ACE 9 SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
-      // '摩根亚太优势混合型证券投资基金 (QDII)',
-      // '삼성', // Samsung
-      // '三', // Samsung
-      // 'Czech: ČĎŇŘŠŤŽ',
-      // 'Estonian: ÄÖÜŠŽ',
-      // 'Slovak: ĽĹŔŠŤŽ',
-      // 'Polish: ĄĆĘŁŃÓŚŹŻ',
-      // 'Hungarian: ÁÉÍÓÖŐÚÜŰ',
-      // 'Romanian: ÂÎŞŢ',
-      // 'Bulgarian: ЙЪЬ',
-      // 'Greek: ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
-      // 'Turkish: ÇĞİıÖŞÜ',
-      // 'Arabic: ابتثجحخدذرزسشصضطظعغفقكلمنهوي',
-      // 'Hebrew: שלום עולם',
-      // 'Hindi: अआइईउऊऋएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषस',
-      // 'Japanese: あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん',
-      // 'Chinese: 你好 世界',
-      // 'Korean: 안녕하세요 세계',
-      // 'Thai: สวัสดีชาวโลก', // Thai does not seem to work even with /p{L}
+      'ACE 9 SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
+      '摩根亚太优势混合型证券投资基金 (QDII)',
+      '삼성', // Samsung
+      '三', // Samsung
+      'Czech: ČĎŇŘŠŤŽ',
+      'Estonian: ÄÖÜŠŽ',
+      'Slovak: ĽĹŔŠŤŽ',
+      'Polish: ĄĆĘŁŃÓŚŹŻ',
+      'Hungarian: ÁÉÍÓÖŐÚÜŰ',
+      'Romanian: ÂÎŞŢ',
+      'Bulgarian: ЙЪЬ',
+      'Greek: ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
+      'Turkish: ÇĞİıÖŞÜ',
+      'Arabic: ابتثجحخدذرزسشصضطظعغفقكلمنهوي',
+      'Hebrew: שלום עולם',
+      'Hindi: अआइईउऊऋएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषस',
+      'Tamil: அஆஇஈஉஊஎஏஐஒஓஔகஙசஞடணதநனபமயரலவழளஷஸஹ',
+      'Japanese: あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん',
+      'Chinese: 你好 世界',
+      'Korean: 안녕하세요 세계',
+      'Thai: สวัสดีชาวโลก', // Thai does not seem to work even with /p{L} and required additional range
+      'Vietnamese: ăâắáấàằầảẳẩãẵẫạặậđêéếèềẻểẽễẹệíìỉĩịôơóốớòồờỏổởõỗỡọộợưúứùừủửũữụựýỳỷỹỵ',
+      'Singapore: 你好 世界',
     ],
     invalid: [
       ' Bayerische Motoren Werke Aktiengesellschaft', // leading space
