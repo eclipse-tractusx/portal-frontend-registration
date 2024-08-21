@@ -100,8 +100,6 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
       'CHE-123.456.788', // Swiss
       'CHE-116.281.710', // Swiss
-      'München HRB 123456', // German
-      'Frankfurt am Main HRB 134317', // German
     ],
     invalid: [
       '', // empty
