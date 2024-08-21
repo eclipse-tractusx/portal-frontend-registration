@@ -33,6 +33,12 @@ export const CRN_TEST_DATA = {
       'HRB 42', // Südzucker AG
       'HRA 3679 FL',
       'HRB 209459 B',
+      'München HRB 175450',
+      'Frankfurt am Main HRB 134317',
+      'Oldenburg (Oldenburg) VR 1706',
+      'Ludwigshafen a.Rhein (Ludwigshafen) VR 60423',
+      'Weiden i. d. OPf. HRB 4339',
+      'Berlin-Charlottenburg HRB 98814',
     ],
     invalid: [
       '', // empty
@@ -94,6 +100,8 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
       'CHE-123.456.788', // Swiss
       'CHE-116.281.710', // Swiss
+      'München HRB 123456', // German
+      'Frankfurt am Main HRB 134317', // German
     ],
     invalid: [
       '', // empty

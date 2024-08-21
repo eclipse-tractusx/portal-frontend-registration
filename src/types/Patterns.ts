@@ -39,8 +39,8 @@ const VAT_ID = {
   MX: /^[a-zA-Z\d-&]{12,13}$/,
 }
 const COMMERCIAL_REG_NUMBER = {
-  Worldwide: /^(?!.*\s$)([A-Za-z0-9](\.|\s|-)?){4,21}$/, // generic pattern
-  DE: /^(?!.*\s$)([A-Za-z0-9](\s|-)?){4,21}$/,
+  Worldwide: /^(?!.*\s$)([A-Za-zÀ-ÿ0-9.()](\.|\s|-)?){4,50}$/, // generic pattern
+  DE: /^(?!.*\s$)([A-Za-zÀ-ÿ0-9.()](\s|-)?){4,50}$/,
   FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
 }
 
