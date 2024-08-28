@@ -54,7 +54,6 @@ export const LEGAL_ENTITY_DATA = {
       'Finnish: ÄÖ',
       'Icelandic: ÆÐÞ',
       'Dutch: ÏËÏ',
-      // -- not supported by the pattern
       'ACE 9 SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ',
       '摩根亚太优势混合型证券投资基金 (QDII)',
       '삼성', // Samsung
