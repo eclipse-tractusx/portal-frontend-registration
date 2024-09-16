@@ -70,10 +70,10 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^9.3.4",
-    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.13",
     "@types/lodash": "^4.17.7",
     "@types/lodash.debounce": "^4.0.9",
     "@types/lodash.uniq": "^4.5.9",
