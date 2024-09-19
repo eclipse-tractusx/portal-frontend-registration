@@ -2,6 +2,9 @@
 
 ## unreleased
 
+### Change
+- adjusted german and worldwide CRN REGEX to allow court names [#250](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/250)
+
 ### Bugfix
 
 - country value is not updating if user moves back and forth between steps [#232](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/232)
