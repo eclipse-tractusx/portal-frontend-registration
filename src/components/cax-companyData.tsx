@@ -158,18 +158,22 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setBpn(companyDetails?.bpn)
-    setLegalEntity(companyDetails?.name)
-    setRegisteredName(companyDetails?.name)
-    setStreetHouseNumber(companyDetails?.streetName)
-    setRegion(companyDetails?.region)
-    setPostalCode(companyDetails?.zipCode)
-    setCity(companyDetails?.city)
-    setCountry(companyDetails?.countryAlpha2Code)
-    setUniqueIds(companyDetails?.uniqueIds)
-    setIdentifierNumber(companyDetails?.uniqueIds?.[0]?.value)
-    setIdentifierType(companyDetails?.uniqueIds?.[0]?.type)
+    setFields(companyDetails);
   }, [companyDetails])
+
+  const setFields = (bpnDetails: any) =>{
+    setBpn(bpnDetails? bpnDetails?.bpn : '')
+    setLegalEntity(bpnDetails? bpnDetails?.name : '')
+    setRegisteredName(bpnDetails? bpnDetails?.name : '')
+    setStreetHouseNumber(bpnDetails? bpnDetails?.streetName : '')
+    setRegion(bpnDetails? bpnDetails?.region : '')
+    setPostalCode(bpnDetails? bpnDetails?.zipCode : '')
+    setCity(bpnDetails? bpnDetails?.city : '')
+    setCountry(bpnDetails? bpnDetails?.countryAlpha2Code : '')
+    setUniqueIds(bpnDetails? bpnDetails?.uniqueIds : '')
+    setIdentifierNumber(bpnDetails? bpnDetails?.uniqueIds?.[0]?.value : '')
+    setIdentifierType(bpnDetails? bpnDetails?.uniqueIds?.[0]?.type : '')
+  }
 
   useEffect(() => {
     if (companyDataError ?? submitError ?? identifierError) {
@@ -179,32 +183,7 @@ export const CompanyDataCax = () => {
 
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
-    // @ts-expect-error keep for compatibility
-    setBpn(details.bpn)
-    // @ts-expect-error keep for compatibility
-    setLegalEntity(details.name)
-    // @ts-expect-error keep for compatibility
-    setRegisteredName(details.name)
-    // @ts-expect-error keep for compatibility
-    setStreetHouseNumber(details.streetName)
-    // @ts-expect-error keep for compatibility
-    setRegion(details.region)
-    // @ts-expect-error keep for compatibility
-    setPostalCode(details.zipcode)
-    // @ts-expect-error keep for compatibility
-    setCity(details.city)
-    // @ts-expect-error keep for compatibility
-    setCountry(details.countryAlpha2Code)
-    // @ts-expect-error keep for compatibility
-    setUniqueIds(details.uniqueIds)
-    setIdentifierNumber(
-      // @ts-expect-error keep for compatibility
-      details.uniqueIds.length > 0 ? details.uniqueIds[0].value : ''
-    )
-    setIdentifierType(
-      // @ts-expect-error keep for compatibility
-      details.uniqueIds.length > 0 ? details.uniqueIds[0].type : ''
-    )
+    setFields(details)
   }
 
   const onSearchChange = (expr: string) => {
@@ -212,6 +191,7 @@ export const CompanyDataCax = () => {
       fetchData(expr)
         // make sure to catch any error
         .catch((errorCode: number) => {
+          setFields(null)
           console.log('errorCode', errorCode)
           setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
         })
