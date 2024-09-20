@@ -162,17 +162,17 @@ export const CompanyDataCax = () => {
   }, [companyDetails])
 
   const setFields = (bpnDetails: any) =>{
-    setBpn(bpnDetails? bpnDetails?.bpn : '')
-    setLegalEntity(bpnDetails? bpnDetails?.name : '')
-    setRegisteredName(bpnDetails? bpnDetails?.name : '')
-    setStreetHouseNumber(bpnDetails? bpnDetails?.streetName : '')
-    setRegion(bpnDetails? bpnDetails?.region : '')
-    setPostalCode(bpnDetails? bpnDetails?.zipCode : '')
-    setCity(bpnDetails? bpnDetails?.city : '')
-    setCountry(bpnDetails? bpnDetails?.countryAlpha2Code : '')
-    setUniqueIds(bpnDetails? bpnDetails?.uniqueIds : '')
-    setIdentifierNumber(bpnDetails? bpnDetails?.uniqueIds?.[0]?.value : '')
-    setIdentifierType(bpnDetails? bpnDetails?.uniqueIds?.[0]?.type : '')
+    setBpn(bpnDetails?.bpn ?? '')
+    setLegalEntity(bpnDetails?.name ?? '')
+    setRegisteredName(bpnDetails?.name ?? '')
+    setStreetHouseNumber(bpnDetails?.streetName ?? '')
+    setRegion(bpnDetails?.region ?? '')
+    setPostalCode(bpnDetails?.zipCode ?? '')
+    setCity(bpnDetails?.city ?? '')
+    setCountry(bpnDetails?.countryAlpha2Code ?? '')
+    setUniqueIds(bpnDetails?.uniqueIds ?? '')
+    setIdentifierNumber(bpnDetails?.uniqueIds?.[0]?.value ?? '')
+    setIdentifierType(bpnDetails?.uniqueIds?.[0]?.type ?? '')
   }
 
   useEffect(() => {
