@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Change
+
+- adjust legalEntityPattern REGEX to allow all language characters and update ES version [#250](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/250)
+
 ## 2.1.0-alpha.1
 
 ### Change
