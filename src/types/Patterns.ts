@@ -51,11 +51,14 @@ export const Patterns = {
   STREET:
     /^(?!.*\s$)([a-zA-Z0-9À-ÿšŚął]{1,40}( ?[.,'/-] ?| )?){1,10}[a-zA-Z0-9À-ÿšŚął.]$/,
   // legalEntityPattern
-  // \w covers A-Za-z0-9 and _
+  // \p{L} or \p{Letter} covers all letters in any language (Thai does not work)
+  // \p{Sc} or \p{Currency_Symbol} covers currency symbols
+  // \u0E00-\u0E7Fa covers Thai characters
+  // \d digits
   // \s whitespace
   // \x22 double quote
   legalEntityPattern:
-    /^(?!.*\s$)([\wÀ-ÿ£$€¥¢@%*+\-/\\,.:;=<>!?&^#'\x22()[\]]\s?){1,160}$/,
+    /^(?!.*\s$)([\p{L}\u0E00-\u0E7F\d\p{Sc}@%*+_\-/\\,.:;=<>!?&^#'\x22()[\]]\s?){1,160}$/u,
   registeredNamePattern:
     /^(?!.*\s$)[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d\s!#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
   regionPattern: /^(?!.*\s$)([a-zA-Z0-9À-ÿŚął,"()'-]\s?)*$/,
