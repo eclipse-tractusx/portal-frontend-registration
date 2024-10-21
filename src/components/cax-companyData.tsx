@@ -94,6 +94,7 @@ export const CompanyDataCax = () => {
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
   const [notifyError, setNotifyError] = useState(false)
+  const [defaultSelectedCountry, setDefaultSelectedCountry] = useState(null)
 
   const {
     data: companyDetails,
@@ -133,9 +134,16 @@ export const CompanyDataCax = () => {
     }
   }, [countryList, i18n.language])
 
-  const defaultSelectedCountry = countryArr?.filter(
-    (code) => code.id === country
-  )[0]
+  useEffect(() => {
+    if (country) {
+      const countryCodeValue = countryArr?.find((code) => code.id === country)
+      if (countryCodeValue) {
+        setDefaultSelectedCountry(countryCodeValue)
+      }
+    } else {
+      setDefaultSelectedCountry(null)
+    }
+  }, [country, countryArr])
 
   useEffect(() => {
     refetchCompanyData()
@@ -401,9 +409,6 @@ export const CompanyDataCax = () => {
                 value={''}
                 onChange={(expr) => {
                   onSearchChange(expr)
-                }}
-                onBlur={(e) => {
-                  setBpn(e.target.value.trim())
                 }}
               />
               <label className="error-message">{bpnErrorMsg}</label>
