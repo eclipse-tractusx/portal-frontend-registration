@@ -422,9 +422,6 @@ export const CompanyDataCax = () => {
                 onChange={(expr) => {
                   onSearchChange(expr)
                 }}
-                onBlur={(e) => {
-                  setBpn(e.target.value.trim())
-                }}
               />
               <label className="error-message">{bpnErrorMsg}</label>
             </div>
