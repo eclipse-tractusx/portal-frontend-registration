@@ -391,7 +391,7 @@ npm/npmjs/-/path-exists/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/path-is-absolute/1.0.1, MIT, approved, clearlydefined
 npm/npmjs/-/path-key/3.1.1, MIT, approved, clearlydefined
 npm/npmjs/-/path-parse/1.0.7, MIT, approved, clearlydefined
-npm/npmjs/-/path-to-regexp/1.8.0, MIT, approved, clearlydefined
+npm/npmjs/-/path-to-regexp/1.9.0, MIT, approved, #16188
 npm/npmjs/-/path-type/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/phone/3.1.42, MIT, approved, #10500
 npm/npmjs/-/picocolors/1.0.0, ISC, approved, #14718
