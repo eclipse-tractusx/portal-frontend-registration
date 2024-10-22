@@ -531,7 +531,7 @@ npm/npmjs/-/typed-array-buffer/1.0.2, MIT, approved, #9658
 npm/npmjs/-/typed-array-byte-length/1.0.1, MIT, approved, #9659
 npm/npmjs/-/typed-array-byte-offset/1.0.2, MIT, approved, #9407
 npm/npmjs/-/typed-array-length/1.0.6, MIT, approved, #6246
-npm/npmjs/-/typescript/5.6.2, Apache-2.0 AND (CC-BY-4.0 AND LicenseRef-Unicode AND MIT AND W3C-20150513) AND BSD-3-Clause AND ODbL-1.0 AND MIT, approved, #16106
+npm/npmjs/-/typescript/5.6.3, Apache-2.0 AND (CC-BY-4.0 AND LicenseRef-Unicode AND MIT AND W3C-20150513) AND BSD-3-Clause AND ODbL-1.0 AND MIT, approved, #16106
 npm/npmjs/-/unbox-primitive/1.0.2, MIT, approved, clearlydefined
 npm/npmjs/-/uncontrollable/7.2.1, MIT AND BSD-3-Clause, approved, #3025
 npm/npmjs/-/uncontrollable/8.0.4, MIT, approved, clearlydefined
@@ -765,18 +765,18 @@ npm/npmjs/@types/jsdom/20.0.1, MIT, approved, clearlydefined
 npm/npmjs/@types/json5/0.0.29, MIT, approved, clearlydefined
 npm/npmjs/@types/lodash.debounce/4.0.9, MIT, approved, clearlydefined
 npm/npmjs/@types/lodash.uniq/4.5.9, MIT, approved, #13930
-npm/npmjs/@types/lodash/4.17.9, MIT, approved, clearlydefined
-npm/npmjs/@types/node/20.16.10, MIT, approved, #16051
+npm/npmjs/@types/lodash/4.17.12, MIT, approved, clearlydefined
+npm/npmjs/@types/node/20.16.14, MIT, approved, #16051
 npm/npmjs/@types/node/22.7.4, MIT, approved, #16398
-npm/npmjs/@types/papaparse/5.3.14, MIT, approved, #10964
+npm/npmjs/@types/papaparse/5.3.15, MIT, approved, #10964
 npm/npmjs/@types/parse-json/4.0.2, MIT, approved, clearlydefined
 npm/npmjs/@types/prop-types/15.7.13, MIT, approved, #16176
 npm/npmjs/@types/qs/6.9.16, MIT, approved, #14071
-npm/npmjs/@types/react-dom/18.3.0, MIT, approved, clearlydefined
+npm/npmjs/@types/react-dom/18.3.1, MIT, approved, clearlydefined
 npm/npmjs/@types/react-redux/7.1.34, MIT, approved, #10970
 npm/npmjs/@types/react-slick/0.23.13, MIT, approved, #11666
 npm/npmjs/@types/react-transition-group/4.4.11, MIT, approved, #8416
-npm/npmjs/@types/react/18.3.10, MIT, approved, #16412
+npm/npmjs/@types/react/18.3.11, MIT, approved, #16412
 npm/npmjs/@types/redux-actions/2.6.5, MIT, approved, #10989
 npm/npmjs/@types/stack-utils/2.0.3, MIT, approved, clearlydefined
 npm/npmjs/@types/tough-cookie/4.0.5, MIT, approved, #10798
@@ -798,4 +798,4 @@ npm/npmjs/@typescript-eslint/utils/7.18.0, BSD-2-Clause AND MIT AND (BSD-2-Claus
 npm/npmjs/@typescript-eslint/visitor-keys/6.21.0, MIT, approved, clearlydefined
 npm/npmjs/@typescript-eslint/visitor-keys/7.18.0, MIT, approved, clearlydefined
 npm/npmjs/@ungap/structured-clone/1.2.0, ISC, approved, clearlydefined
-npm/npmjs/@vitejs/plugin-react/4.3.2, MIT, approved, #14877
+npm/npmjs/@vitejs/plugin-react/4.3.3, MIT, approved, #14877
