@@ -2,14 +2,24 @@
 
 ## Unreleased
 
-### Bugfix
-
-- remove logic that sets bpn before validation [#253](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/253)
-- fixed company data invalidation when receiving multiple identifier [247](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/247)
+## 2.1.0-RC1
 
 ### Change
 
-- adjust legalEntityPattern REGEX to allow all language characters and update ES version [#250](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/250)
+- adjusted legalEntityPattern REGEX to allow all language characters and update ES version [#250](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/250)
+- upgraded keycloak-js library to version 25 to align with Keycloak server version [#286](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/286)
+
+### Technical Support
+
+- upgraded app dependencies [#272](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/272)
+
+### Bugfix
+
+- removed logic that sets bpn before validation [#253](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/253)
+- fixed company data invalidation when receiving multiple identifier [247](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/247)
+- fixed clearing of form fields after non-existent bpn entered [#260](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/260)
+- fixed clearing of form fields after non-existent bpn entered [#260](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/260)
+- updated logic to handle prefilled values if BPN is present [#244](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/244)
 
 ## 2.1.0-alpha.1
 
@@ -22,7 +32,6 @@
 - fixed country value not updating if user moves back and forth between steps [#232](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/232)
 - removed code that always displays error message on screen [#230](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/230)
 - updated the logic for maxFiles count in upload docs step [#234](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/234)
-- clear form fields after non-existent bpn entered [#260](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/260)
 - fixed upload docs and role selection screen - next button required validation if no role/docs is selected [#228](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/228)
 - allowed for shorter and longer german commercial register number [#216](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/216)
 
