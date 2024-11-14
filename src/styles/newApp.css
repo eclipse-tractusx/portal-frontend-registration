@@ -493,6 +493,7 @@ textarea {
   color: #252525;
   font-size: 16px;
   font-family: 'Libre Franklin 400', sans-serif;
+  overflow-wrap: break-word;
 }
 
 .list-group-item-role {
