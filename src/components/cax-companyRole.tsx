@@ -40,6 +40,7 @@ import {
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
 import '../styles/newApp.css'
+import StepHeader from './StepHeader'
 
 export const CompanyRoleCax = () => {
   const { t, i18n } = useTranslation()
@@ -272,17 +273,11 @@ export const CompanyRoleCax = () => {
   return (
     <>
       <div className="mx-auto col-9 container-registration">
-        <div className="head-section">
-          <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            3
-          </div>
-          <h4 className="mx-auto d-flex align-items-center justify-content-center">
-            {t('companyRole.title')}
-          </h4>
-          <div className="mx-auto text-center col-9">
-            {t('companyRole.subTitle')}
-          </div>
-        </div>
+        <StepHeader 
+          step={currentActiveStep}
+          stepName={t('companyRole.title')}
+          stepDescription={t('companyRole.subTitle')}
+        />
         <div className="companydata-form mx-auto col-9">
           {allConsentData?.companyRoles.map((role, index) => (
             <div className="company-role-section" key={index}>
