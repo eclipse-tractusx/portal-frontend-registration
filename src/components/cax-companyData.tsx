@@ -43,6 +43,7 @@ import {
 import { Autocomplete, TextField } from '@mui/material'
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
+import StepHeader from './StepHeader'
 
 type CountryType = {
   id: string
@@ -389,17 +390,11 @@ export const CompanyDataCax = () => {
   return (
     <>
       <div className="mx-auto col-9 container-registration">
-        <div className="head-section">
-          <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            1
-          </div>
-          <h4 className="mx-auto d-flex align-items-center justify-content-center">
-            {t('registrationStepOne.verifyCompayDataHeading')}
-          </h4>
-          <div className="mx-auto text-center col-9">
-            {t('registrationStepOne.verifyCompayDataSubHeading')}
-          </div>
-        </div>
+        <StepHeader
+          step={currentActiveStep}
+          stepName={t('registrationStepOne.verifyCompayDataHeading')}
+          stepDescription={t('registrationStepOne.verifyCompayDataSubHeading')}
+        />
         <div className="companydata-form">
           <Row className="mx-auto col-9">
             <div className={`form-search ${bpnErrorMsg ? 'error' : ''}`}>
