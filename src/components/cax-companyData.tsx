@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { isBPN, Patterns } from '../types/Patterns'
+import { isBPN } from '../types/Patterns'
 import {
   useFetchApplicationsQuery,
   useFetchCompanyDetailsWithAddressQuery,
@@ -39,10 +39,7 @@ import {
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
-import {
-  validateLegalEntity,
-  validateRegisteredName,
-} from 'helpers/validation'
+import { validateLegalEntity, validateRegisteredName } from 'helpers/validation'
 import { CountryType } from 'types/MainTypes'
 import { initialErrors } from 'helpers/constants'
 import { IdentifierForm } from './CompanyData/Identiifier'
@@ -79,7 +76,6 @@ export const CompanyDataCax = () => {
   const [identifierNumber, setIdentifierNumber] = useState<string>()
   const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
-
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
   const [notifyError, setNotifyError] = useState(false)
@@ -124,14 +120,14 @@ export const CompanyDataCax = () => {
   }, [countryList, i18n.language])
 
   useEffect(() => {
-   if (country) {
-     const countryCodeValue = countryArr?.find((code) => code.id === country)
-     if (countryCodeValue) {
-       setDefaultSelectedCountry(countryCodeValue)
-     }
-   } else {
-     setDefaultSelectedCountry(null)
-   }
+    if (country) {
+      const countryCodeValue = countryArr?.find((code) => code.id === country)
+      if (countryCodeValue) {
+        setDefaultSelectedCountry(countryCodeValue)
+      }
+    } else {
+      setDefaultSelectedCountry(null)
+    }
   }, [country, countryArr])
 
   useEffect(() => {
@@ -143,16 +139,6 @@ export const CompanyDataCax = () => {
     }
     if (country?.length === 2 && error) setIdentifierError(true)
   }, [identifierData, country, error])
-
-  useEffect(() => {
-    if (errors.country === '' && country && changedCountryValue) {
-      refetch()
-      validateRegion(region)
-    }
-    identifierNumber &&
-      identifierType &&
-      validateIdentifierNumber(identifierNumber)
-  }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
     setFields(companyDetails)
@@ -192,62 +178,6 @@ export const CompanyDataCax = () => {
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
     setFields(details)
-  }
-
-  const onSearchChange = (expr: string) => {
-    if (isBPN(expr?.trim())) {
-      fetchData(expr).catch((errorCode: number) => {
-        setFields(null)
-        console.log('errorCode', errorCode)
-        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-      })
-      setBpnErrorMessage('')
-    } else {
-      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
-    }
-  }
-
-  const validateCountry = (value: string) => {
-    setChangedCountryValue(true)
-    setCountry(value?.toUpperCase())
-    if (!Patterns.countryPattern.test(value?.trim())) {
-      setShowIdentifiers(false)
-      setErrors((prevState) => ({ ...prevState, country: 'countryError' }))
-    } else {
-      setErrors((prevState) => ({ ...prevState, country: '' }))
-    }
-  }
-
-  const validateRegion = (value: string) => {
-    setRegion(value)
-    const isRequiredCountry = ['MX', 'CZ', 'US'].includes(country)
-    const isValidRegion = value && Patterns.regionPattern.test(value?.trim())
-    setErrors((prevState) => ({
-      ...prevState,
-      region:
-        (!value && isRequiredCountry) || (!isValidRegion && value)
-          ? 'regionError'
-          : '',
-    }))
-  }
-
-  const validateIdentifierNumber = (value) => {
-    setChangedCountryValue(false)
-    setIdentifierNumber(value)
-    const countryCode = ['DE', 'FR', 'IN', 'MX'].includes(country)
-      ? country
-      : 'Worldwide'
-    if (
-      identifierType &&
-      !Patterns[countryCode][identifierType].test(value?.trim())
-    ) {
-      setErrors((prevState) => ({
-        ...prevState,
-        identifierNumber: `${countryCode}_${identifierType}`,
-      }))
-    } else {
-      setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
-    }
   }
 
   const handleIdentifierSelect = (type, value) => {
@@ -310,14 +240,18 @@ export const CompanyDataCax = () => {
             legalEntity={legalEntity}
             registeredName={registeredName}
             errors={errors}
-            onSearchChange={onSearchChange}
             validateLegalEntity={validateLegalEntity}
             validateRegisteredName={validateRegisteredName}
             setLegalEntity={setLegalEntity}
             setRegisteredName={setRegisteredName}
             setErrors={setErrors}
+            isBPN={isBPN}
+            fetchData={fetchData}
+            setFields={setFields}
+            setBpnErrorMessage={setBpnErrorMessage}
           />
           <AddressForm
+            country={country}
             city={city}
             setCity={setCity}
             postalCode={postalCode}
@@ -328,10 +262,13 @@ export const CompanyDataCax = () => {
             defaultSelectedCountry={defaultSelectedCountry}
             setErrors={setErrors}
             errors={errors}
-            validateRegion={validateRegion}
-            validateCountry={validateCountry}
             setStreetHouseNumber={setStreetHouseNumber}
             streetHouseNumber={streetHouseNumber}
+            setShowIdentifiers={setShowIdentifiers}
+            setChangedCountryValue={setChangedCountryValue}
+            setCountry={setCountry}
+            refetch={refetch}
+            changedCountryValue={changedCountryValue}
           />
           <IdentifierForm
             uniqueIds={uniqueIds}
@@ -341,9 +278,11 @@ export const CompanyDataCax = () => {
             identifierNumber={identifierNumber}
             errors={errors}
             onIdentifierTypeChange={onIdentifierTypeChange}
-            validateIdentifierNumber={validateIdentifierNumber}
             setIdentifierNumber={setIdentifierNumber}
             identifierDetails={identifierDetails}
+            country={country}
+            setErrors={setErrors}
+            setChangedCountryValue={setChangedCountryValue}
           />
         </div>
       </div>
