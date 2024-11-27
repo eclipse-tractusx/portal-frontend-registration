@@ -17,11 +17,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-
-import { Row } from 'react-bootstrap'
 import { getCompanyDetails } from '../helpers/utils'
-import { AiOutlineQuestionCircle } from 'react-icons/ai'
-import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
@@ -40,20 +36,18 @@ import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
-import { Autocomplete, TextField } from '@mui/material'
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
 import {
-  validateCity,
   validateLegalEntity,
-  validatePostalCode,
   validateRegisteredName,
-  validateStreetHouseNumber,
 } from 'helpers/validation'
 import { CountryType } from 'types/MainTypes'
 import { initialErrors } from 'helpers/constants'
 import { IdentifierForm } from './CompanyData/Identiifier'
+import AddressForm from './CompanyData/AddressForm'
+import CompanyDataForm from './CompanyData/CompanyDataForm'
 
 export const CompanyDataCax = () => {
   const { t } = useTranslation()
@@ -130,8 +124,14 @@ export const CompanyDataCax = () => {
   }, [countryList, i18n.language])
 
   useEffect(() => {
-    const selectedCountry = countryArr?.find((code) => code.id === country)
-    setDefaultSelectedCountry(country ? selectedCountry : null)
+   if (country) {
+     const countryCodeValue = countryArr?.find((code) => code.id === country)
+     if (countryCodeValue) {
+       setDefaultSelectedCountry(countryCodeValue)
+     }
+   } else {
+     setDefaultSelectedCountry(null)
+   }
   }, [country, countryArr])
 
   useEffect(() => {
@@ -304,222 +304,35 @@ export const CompanyDataCax = () => {
           stepDescription={t('registrationStepOne.verifyCompayDataSubHeading')}
         />
         <div className="companydata-form">
-          <Row className="mx-auto col-9">
-            <div className={`form-search ${bpnErrorMsg ? 'error' : ''}`}>
-              <label> {t('registrationStepOne.seachDatabase')}</label>
-              <SearchInput
-                className="search-input"
-                value={''}
-                onChange={(expr) => {
-                  onSearchChange(expr)
-                }}
-              />
-              <label className="error-message">{bpnErrorMsg}</label>
-            </div>
-          </Row>
-
-          <Row className="col-9 mx-auto">
-            <div className="section-divider">
-              <span className="text-center">
-                {t('registrationStepOne.enterManualText')}
-              </span>
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className="form-data">
-              <label>
-                {' '}
-                {t('registrationStepOne.bpn')}{' '}
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  // tip data need to get moved to the locales files
-                  data-tip="Displays the bpn and can't get eddited."
-                />
-              </label>
-              <input type="text" disabled value={bpn} />
-              <div className="company-hint">
-                {t('registrationStepOne.helperText')}
-              </div>
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.legalEntity && 'error'}`}>
-              <label>
-                {' '}
-                {t('registrationStepOne.legalEntity')}{' '}
-                <span className="mandatory-asterisk">*</span>
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  // tip data need to get moved to the locales files
-                  data-tip="Legal Company Name"
-                />{' '}
-              </label>
-              <input
-                type="text"
-                value={legalEntity}
-                onChange={(e) => {
-                  validateLegalEntity(e.target.value, setLegalEntity, setErrors)
-                }}
-                onBlur={(e) => {
-                  setLegalEntity(e.target.value.trim())
-                }}
-              />
-              {errors.legalEntity && (
-                <label>{t(`registrationStepOne.${errors.legalEntity}`)}</label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.registeredName && 'error'}`}>
-              <label>
-                {' '}
-                {t('registrationStepOne.registeredName')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={registeredName}
-                onChange={(e) => {
-                  validateRegisteredName(
-                    e.target.value,
-                    setRegisteredName,
-                    setErrors
-                  )
-                }}
-                onBlur={(e) => {
-                  setRegisteredName(e.target.value.trim())
-                }}
-              />
-              {errors.registeredName && (
-                <label>
-                  {t(`registrationStepOne.${errors.registeredName}`)}
-                </label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <span className="form-heading">
-              {t('registrationStepOne.organizationAdd')}
-            </span>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
-              <label>
-                {t('registrationStepOne.streetHouseNumber')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={streetHouseNumber}
-                onChange={(e) => {
-                  validateStreetHouseNumber(
-                    e.target.value,
-                    setStreetHouseNumber,
-                    setErrors
-                  )
-                }}
-                onBlur={(e) => {
-                  setStreetHouseNumber(e.target.value.trim())
-                }}
-              />
-              {errors.streetHouseNumber && (
-                <label>
-                  {t(`registrationStepOne.${errors.streetHouseNumber}`)}
-                </label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`col-4 form-data ${errors.postalCode && 'error'}`}>
-              <label> {t('registrationStepOne.postalCode')} </label>
-              <input
-                type="text"
-                value={postalCode}
-                onChange={(e) => {
-                  validatePostalCode(e.target.value, setPostalCode, setErrors)
-                }}
-                onBlur={(e) => {
-                  setPostalCode(e.target.value.trim())
-                }}
-              />
-              {errors.postalCode && (
-                <label>{t(`registrationStepOne.${errors.postalCode}`)}</label>
-              )}
-            </div>
-
-            <div className={`col-8 form-data ${errors.city && 'error'}`}>
-              <label>
-                {t('registrationStepOne.city')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => {
-                  validateCity(e.target.value, setCity, setErrors)
-                }}
-                onBlur={(e) => {
-                  setCity(e.target.value.trim())
-                }}
-              />
-              {errors.city && (
-                <label>{t(`registrationStepOne.${errors.city}`)}</label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`col-4 form-data ${errors.country && 'error'}`}>
-              <label>
-                {t('registrationStepOne.country')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              {(countryArr?.length || errors.country) && (
-                <Autocomplete
-                  id="selectList"
-                  options={countryArr}
-                  value={defaultSelectedCountry}
-                  renderInput={(params) => (
-                    <TextField variant="standard" {...params} />
-                  )}
-                  onChange={(_e, values) => {
-                    validateCountry(values?.id)
-                  }}
-                  sx={{
-                    '.MuiInput-input': {
-                      height: '31px',
-                    },
-                  }}
-                />
-              )}
-              {errors.country && (
-                <label>{t(`registrationStepOne.${errors.country}`)}</label>
-              )}
-            </div>
-
-            <div className={`col-8 form-data ${errors.region && 'error'}`}>
-              <label> {t('registrationStepOne.region')} </label>
-              <input
-                type="text"
-                value={region}
-                onChange={(e) => {
-                  validateRegion(e.target.value)
-                }}
-                onBlur={(e) => {
-                  setRegion(e.target.value.trim())
-                }}
-              />
-              {errors.region && (
-                <label>{t(`registrationStepOne.${errors.region}`)}</label>
-              )}
-            </div>
-          </Row>
+          <CompanyDataForm
+            bpn={bpn}
+            bpnErrorMsg={bpnErrorMsg}
+            legalEntity={legalEntity}
+            registeredName={registeredName}
+            errors={errors}
+            onSearchChange={onSearchChange}
+            validateLegalEntity={validateLegalEntity}
+            validateRegisteredName={validateRegisteredName}
+            setLegalEntity={setLegalEntity}
+            setRegisteredName={setRegisteredName}
+            setErrors={setErrors}
+          />
+          <AddressForm
+            city={city}
+            setCity={setCity}
+            postalCode={postalCode}
+            setPostalCode={setPostalCode}
+            region={region}
+            setRegion={setRegion}
+            countryArr={countryArr}
+            defaultSelectedCountry={defaultSelectedCountry}
+            setErrors={setErrors}
+            errors={errors}
+            validateRegion={validateRegion}
+            validateCountry={validateCountry}
+            setStreetHouseNumber={setStreetHouseNumber}
+            streetHouseNumber={streetHouseNumber}
+          />
           <IdentifierForm
             uniqueIds={uniqueIds}
             handleIdentifierSelect={handleIdentifierSelect}
