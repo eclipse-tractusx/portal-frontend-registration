@@ -44,9 +44,16 @@ import { Autocomplete, TextField } from '@mui/material'
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
-import { validateCity, validateLegalEntity, validatePostalCode, validateRegisteredName, validateStreetHouseNumber } from 'helpers/validation'
+import {
+  validateCity,
+  validateLegalEntity,
+  validatePostalCode,
+  validateRegisteredName,
+  validateStreetHouseNumber,
+} from 'helpers/validation'
 import { CountryType } from 'types/MainTypes'
 import { initialErrors } from 'helpers/constants'
+import { IdentifierForm } from './CompanyData/Identiifier'
 
 export const CompanyDataCax = () => {
   const { t } = useTranslation()
@@ -148,7 +155,7 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setFields(companyDetails);
+    setFields(companyDetails)
   }, [companyDetails])
 
   const setFields = (bpnDetails: any) => {
@@ -189,12 +196,11 @@ export const CompanyDataCax = () => {
 
   const onSearchChange = (expr: string) => {
     if (isBPN(expr?.trim())) {
-      fetchData(expr)
-        .catch((errorCode: number) => {
-          setFields(null)
-          console.log('errorCode', errorCode)
-          setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-        })
+      fetchData(expr).catch((errorCode: number) => {
+        setFields(null)
+        console.log('errorCode', errorCode)
+        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
+      })
       setBpnErrorMessage('')
     } else {
       setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
@@ -377,7 +383,11 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={registeredName}
                 onChange={(e) => {
-                  validateRegisteredName(e.target.value, setRegisteredName, setErrors)
+                  validateRegisteredName(
+                    e.target.value,
+                    setRegisteredName,
+                    setErrors
+                  )
                 }}
                 onBlur={(e) => {
                   setRegisteredName(e.target.value.trim())
@@ -407,7 +417,11 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={streetHouseNumber}
                 onChange={(e) => {
-                  validateStreetHouseNumber(e.target.value, setStreetHouseNumber, setErrors)
+                  validateStreetHouseNumber(
+                    e.target.value,
+                    setStreetHouseNumber,
+                    setErrors
+                  )
                 }}
                 onBlur={(e) => {
                   setStreetHouseNumber(e.target.value.trim())
@@ -506,104 +520,18 @@ export const CompanyDataCax = () => {
               )}
             </div>
           </Row>
-
-          {uniqueIds && uniqueIds?.length > 1 ? (
-            <>
-              <Row className="mx-auto col-9">
-                <span className="form-heading">
-                  {t('registrationStepOne.countryIdentifier')}
-                  <div className="company-hint">
-                    {t('registrationStepOne.identifierhelperText')}
-                  </div>
-                </span>
-              </Row>
-              <Row className="mx-auto col-9">
-                <ul className="agreement-check-list">
-                  {uniqueIds?.map((id) => (
-                    <li key={id.type} className="agreement-li">
-                      <input
-                        type="radio"
-                        name="uniqueIds"
-                        value={id.type}
-                        className="regular-radio agreement-check"
-                        onChange={() => {
-                          handleIdentifierSelect(id.type, id.value)
-                        }}
-                        defaultChecked={uniqueIds[0].type === id.type}
-                      />
-                      <label>
-                        {t(`registrationStepOne.identifierTypes.${id.type}`) +
-                          ' : ' +
-                          id.value}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              </Row>
-            </>
-          ) : (
-            showIdentifiers && (
-              <>
-                <Row className="mx-auto col-9">
-                  <span className="form-heading">
-                    {t('registrationStepOne.countryIdentifier')}
-                  </span>
-                </Row>
-                <Row className="mx-auto col-9">
-                  <div className={'form-data'}>
-                    <label>
-                      {t('registrationStepOne.identifierType')}{' '}
-                      <span className="mandatory-asterisk">*</span>
-                    </label>
-                    <select
-                      value={identifierType}
-                      onChange={(e) => {
-                        onIdentifierTypeChange(e)
-                      }}
-                    >
-                      <option value="">
-                        {t('registrationStepOne.pleaseSelect')}
-                      </option>
-                      {identifierDetails?.map((identifier) => (
-                        <option key={identifier.id} value={identifier.label}>
-                          {t(
-                            `registrationStepOne.identifierTypes.${identifier.label}`
-                          )}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </Row>
-                <Row className="mx-auto col-9">
-                  <div
-                    className={`form-data ${
-                      errors.identifierNumber && 'error'
-                    }`}
-                  >
-                    <label>
-                      {t('registrationStepOne.identifierNumber')}{' '}
-                      <span className="mandatory-asterisk">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={identifierNumber}
-                      onChange={(e) => {
-                        validateIdentifierNumber(e.target.value)
-                      }}
-                      onBlur={(e) => {
-                        setIdentifierNumber(e.target.value.trim())
-                      }}
-                    />
-                    {errors.identifierNumber && (
-                      <label>
-                        {t(`registrationStepOne.${errors.identifierNumber}`)}
-                      </label>
-                    )}
-                  </div>
-                </Row>
-              </>
-            )
-          )}
+          <IdentifierForm
+            uniqueIds={uniqueIds}
+            handleIdentifierSelect={handleIdentifierSelect}
+            showIdentifiers={showIdentifiers}
+            identifierType={identifierType}
+            identifierNumber={identifierNumber}
+            errors={errors}
+            onIdentifierTypeChange={onIdentifierTypeChange}
+            validateIdentifierNumber={validateIdentifierNumber}
+            setIdentifierNumber={setIdentifierNumber}
+            identifierDetails={identifierDetails}
+          />
         </div>
       </div>
       {notifyError && renderSnackbar()}
