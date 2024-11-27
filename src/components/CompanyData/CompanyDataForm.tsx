@@ -17,42 +17,67 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-import { Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap'
 import SearchInput from 'react-search-input'
-import { AiOutlineQuestionCircle } from 'react-icons/ai'; // Assuming AiOutlineQuestionCircle is a separate component
-import { useTranslation } from 'react-i18next';
+import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { useTranslation } from 'react-i18next'
 
-interface Props {
-  bpn: string;
-  bpnErrorMsg: string | null;
-  legalEntity: string;
-  registeredName: string;
+interface CompanyDataFormProps {
+  bpn: string
+  bpnErrorMsg: string | null
+  legalEntity: string
+  registeredName: string
   errors: {
-    legalEntity: string | null;
-    registeredName: string | null;
-  };
-  onSearchChange: (expr: string) => void;
-  validateLegalEntity: (value: string, setLegalEntity: (value: string) => void, setErrors: (errors: any) => void) => void;
-  validateRegisteredName: (value: string, setRegisteredName: (value: string) => void, setErrors: (errors: any) => void) => void;
-  setLegalEntity: (value: string) => void;
-  setRegisteredName: (value: string) => void;
-  setErrors: (errors: any) => void;
+    legalEntity: string | null
+    registeredName: string | null
+  }
+  validateLegalEntity: (
+    value: string,
+    setLegalEntity: (value: string) => void,
+    setErrors: (errors: any) => void
+  ) => void
+  validateRegisteredName: (
+    value: string,
+    setRegisteredName: (value: string) => void,
+    setErrors: (errors: any) => void
+  ) => void
+  setLegalEntity: (value: string) => void
+  setRegisteredName: (value: string) => void
+  setErrors: (errors: any) => void
+  isBPN: (expr: string) => boolean
+  fetchData: (expr: string) => Promise<void>
+  setFields: (fields: any) => void
+  setBpnErrorMessage: (message: string) => void
 }
-const CompanyDataForm = ({
+const CompanyDataForm: React.FC<CompanyDataFormProps> = ({
   bpn,
   bpnErrorMsg,
   legalEntity,
   registeredName,
   errors,
-  onSearchChange,
   validateLegalEntity,
   validateRegisteredName,
   setLegalEntity,
   setRegisteredName,
   setErrors,
+  isBPN,
+  fetchData,
+  setFields,
+  setBpnErrorMessage,
 }) => {
   const { t } = useTranslation()
-
+  const onSearchChange = (expr: string) => {
+    if (isBPN(expr?.trim())) {
+      fetchData(expr).catch((errorCode: number) => {
+        setFields(null)
+        console.log('errorCode', errorCode)
+        setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
+      })
+      setBpnErrorMessage('')
+    } else {
+      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
+    }
+  }
   return (
     <>
       <Row className="mx-auto col-9">

@@ -17,38 +17,68 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { UniqueIdentifier } from 'state/features/application/applicationApiSlice';
+import { Patterns } from 'types/Patterns';
 
 interface IdentifierFormProps {
-  uniqueIds: { type: string; value: string }[];
-  handleIdentifierSelect: (type: string, value: string) => void;
-  showIdentifiers: boolean;
-  identifierType: string;
-  identifierNumber: string;
-  errors: { identifierNumber: string };
-  onIdentifierTypeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  validateIdentifierNumber: (value: string) => void;
-  setIdentifierNumber: (value: string) => void;
-  identifierDetails: UniqueIdentifier[];
+  uniqueIds: { type: string; value: string }[]
+  showIdentifiers: boolean
+  identifierType: string
+  identifierNumber: string
+  errors: { identifierNumber: string }
+  identifierDetails: UniqueIdentifier[]
+  country: string
+  onIdentifierTypeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  setIdentifierNumber: (value: string) => void
+  setChangedCountryValue: (value: boolean) => void
+  setErrors: (errors: any) => void
+  handleIdentifierSelect: (type: string, value: string) => void
 }
 
 export const IdentifierForm: React.FC<IdentifierFormProps> = ({
   uniqueIds,
-  handleIdentifierSelect,
   showIdentifiers,
   identifierType,
   identifierNumber,
   errors,
+   identifierDetails,
+  country,
   onIdentifierTypeChange,
-  validateIdentifierNumber,
   setIdentifierNumber,
-  identifierDetails,
+  setChangedCountryValue,
+  setErrors,
+  handleIdentifierSelect,
 }) => {
   const { t } = useTranslation();
 
+   const validateIdentifierNumber = (value) => {
+     setChangedCountryValue(false)
+     setIdentifierNumber(value)
+     const countryCode = ['DE', 'FR', 'IN', 'MX'].includes(country)
+       ? country
+       : 'Worldwide'
+     if (
+       identifierType &&
+       !Patterns[countryCode][identifierType].test(value?.trim())
+     ) {
+       setErrors((prevState) => ({
+         ...prevState,
+         identifierNumber: `${countryCode}_${identifierType}`,
+       }))
+     } else {
+       setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+     }
+   }
+
+    useEffect(() => {
+      identifierNumber &&
+        identifierType &&
+        validateIdentifierNumber(identifierNumber)
+    }, [identifierType, identifierNumber])
+    
   return (
     <>
       {uniqueIds && uniqueIds?.length > 1 ? (

@@ -18,47 +18,90 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import React from 'react';
-import { Row } from 'react-bootstrap';
-import { TextField, Autocomplete } from '@mui/material';
-import { validateCity, validatePostalCode, validateStreetHouseNumber } from 'helpers/validation';
-import { CountryType } from 'types/MainTypes';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from 'react'
+import { Row } from 'react-bootstrap'
+import { TextField, Autocomplete } from '@mui/material'
+import {
+  validateCity,
+  validatePostalCode,
+  validateStreetHouseNumber,
+} from 'helpers/validation'
+import { CountryType } from 'types/MainTypes'
+import { useTranslation } from 'react-i18next'
+import { Patterns } from 'types/Patterns'
 
 interface AddressFormProps {
+  country: string
   city: string
-  setCity: (city: string) => void
   postalCode: string
-  setPostalCode: (postalCode: string) => void
   region: string
-  setRegion: (region: string) => void
   countryArr: CountryType[]
   defaultSelectedCountry: CountryType | null
-  setErrors: (errors: any) => void
   errors: any
-  validateRegion: (value: string) => void
-  validateCountry: (value: string) => void
-  setStreetHouseNumber: (value: string) => void
   streetHouseNumber: string
+  changedCountryValue: boolean
+  setCity: (city: string) => void
+  setPostalCode: (postalCode: string) => void
+  setRegion: (region: string) => void
+  setErrors: (errors: any) => void
+  setStreetHouseNumber: (value: string) => void
+  setShowIdentifiers: (value: boolean) => void
+  setChangedCountryValue: (value: boolean) => void
+  setCountry: (value: string) => void
+  refetch: () => void
 }
 
 const AddressForm: React.FC<AddressFormProps> = ({
+  country,
   city,
-  setCity,
   postalCode,
-  setPostalCode,
   region,
-  setRegion,
   countryArr,
   defaultSelectedCountry,
-  setErrors,
   errors,
-  validateCountry,
-  validateRegion,
-  setStreetHouseNumber,
   streetHouseNumber,
-}) => { 
+  changedCountryValue,
+  setCity,
+  setPostalCode,
+  setRegion,
+  setErrors,
+  setStreetHouseNumber,
+  setShowIdentifiers,
+  setChangedCountryValue,
+  setCountry,
+  refetch,
+}) => {
   const { t } = useTranslation()
+  const validateCountry = (value: string) => {
+    setChangedCountryValue(true)
+    setCountry(value?.toUpperCase())
+    if (!Patterns.countryPattern.test(value?.trim())) {
+      setShowIdentifiers(false)
+      setErrors((prevState) => ({ ...prevState, country: 'countryError' }))
+    } else {
+      setErrors((prevState) => ({ ...prevState, country: '' }))
+    }
+  }
+
+  const validateRegion = (value: string) => {
+    setRegion(value)
+    const isRequiredCountry = ['MX', 'CZ', 'US'].includes(country)
+    const isValidRegion = value && Patterns.regionPattern.test(value?.trim())
+    setErrors((prevState) => ({
+      ...prevState,
+      region:
+        (!value && isRequiredCountry) || (!isValidRegion && value)
+          ? 'regionError'
+          : '',
+    }))
+  }
+
+  useEffect(() => {
+    if (errors.country === '' && country && changedCountryValue) {
+      refetch()
+      validateRegion(region)
+    }
+  }, [country])
 
   return (
     <>
@@ -67,7 +110,6 @@ const AddressForm: React.FC<AddressFormProps> = ({
           {t('registrationStepOne.organizationAdd')}
         </span>
       </Row>
-
       <Row className="mx-auto col-9">
         <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
           <label>
@@ -95,7 +137,6 @@ const AddressForm: React.FC<AddressFormProps> = ({
           )}
         </div>
       </Row>
-
       <Row className="mx-auto col-9">
         <div className={`col-4 form-data ${errors.postalCode && 'error'}`}>
           <label> {t('registrationStepOne.postalCode')} </label>
@@ -182,6 +223,6 @@ const AddressForm: React.FC<AddressFormProps> = ({
       </Row>
     </>
   )
-};
+}
 
-export default AddressForm;
+export default AddressForm
