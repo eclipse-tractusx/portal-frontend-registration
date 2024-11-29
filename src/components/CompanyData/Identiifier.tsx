@@ -17,11 +17,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-import React, { useEffect } from 'react';
-import { Row } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { UniqueIdentifier } from 'state/features/application/applicationApiSlice';
-import { Patterns } from 'types/Patterns';
+import React, { useEffect } from 'react'
+import { Row } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { UniqueIdentifier } from 'state/features/application/applicationApiSlice'
+import { Patterns } from 'types/Patterns'
 
 interface IdentifierFormProps {
   uniqueIds: { type: string; value: string }[]
@@ -44,7 +44,7 @@ export const IdentifierForm: React.FC<IdentifierFormProps> = ({
   identifierType,
   identifierNumber,
   errors,
-   identifierDetails,
+  identifierDetails,
   country,
   onIdentifierTypeChange,
   setIdentifierNumber,
@@ -52,33 +52,33 @@ export const IdentifierForm: React.FC<IdentifierFormProps> = ({
   setErrors,
   handleIdentifierSelect,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
-   const validateIdentifierNumber = (value) => {
-     setChangedCountryValue(false)
-     setIdentifierNumber(value)
-     const countryCode = ['DE', 'FR', 'IN', 'MX'].includes(country)
-       ? country
-       : 'Worldwide'
-     if (
-       identifierType &&
-       !Patterns[countryCode][identifierType].test(value?.trim())
-     ) {
-       setErrors((prevState) => ({
-         ...prevState,
-         identifierNumber: `${countryCode}_${identifierType}`,
-       }))
-     } else {
-       setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
-     }
-   }
+  const validateIdentifierNumber = (value) => {
+    setChangedCountryValue(false)
+    setIdentifierNumber(value)
+    const countryCode = ['DE', 'FR', 'IN', 'MX'].includes(country)
+      ? country
+      : 'Worldwide'
+    if (
+      identifierType &&
+      !Patterns[countryCode][identifierType].test(value?.trim())
+    ) {
+      setErrors((prevState) => ({
+        ...prevState,
+        identifierNumber: `${countryCode}_${identifierType}`,
+      }))
+    } else {
+      setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
+    }
+  }
 
-    useEffect(() => {
-      identifierNumber &&
-        identifierType &&
-        validateIdentifierNumber(identifierNumber)
-    }, [identifierType, identifierNumber])
-    
+  useEffect(() => {
+    identifierNumber &&
+      identifierType &&
+      validateIdentifierNumber(identifierNumber)
+  }, [identifierType, identifierNumber])
+
   return (
     <>
       {uniqueIds && uniqueIds?.length > 1 ? (
@@ -178,4 +178,4 @@ export const IdentifierForm: React.FC<IdentifierFormProps> = ({
       )}
     </>
   )
-};
+}
