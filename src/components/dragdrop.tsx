@@ -49,6 +49,7 @@ import {
 } from '../state/features/applicationDocuments/applicationDocumentsApiSlice'
 import { downloadDocument } from '../helpers/utils'
 import { Notify, SeverityType } from './Snackbar'
+import StepHeader from './StepHeader'
 
 const getClassNameByStatus = (status: string) => {
   switch (status) {
@@ -198,17 +199,11 @@ export const DragDrop = () => {
   return (
     <>
       <div className="mx-auto col-9 container-registration">
-        <div className="head-section">
-          <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            4
-          </div>
-          <h4 className="mx-auto d-flex align-items-center justify-content-center">
-            {t('documentUpload.title')}
-          </h4>
-          <div className="mx-auto text-center col-9">
-            {t('documentUpload.subTitle')}
-          </div>
-        </div>
+        <StepHeader
+          step={currentActiveStep}
+          stepName={t('documentUpload.title')}
+          stepDescription={t('documentUpload.subTitle')}
+        />
         <div className="companydata-form mx-auto col-9">
           <Dropzone
             onChangeStatus={handleChangeStatus}

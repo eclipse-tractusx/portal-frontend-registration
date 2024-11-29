@@ -36,6 +36,7 @@ import {
   useUpdateRegistrationMutation,
 } from '../state/features/applicationVerifyRegister/applicationVerifyRegisterApiSlice'
 import { Notify } from './Snackbar'
+import StepHeader from './StepHeader'
 
 export const VerifyRegistration = () => {
   const { t } = useTranslation()
@@ -107,17 +108,11 @@ export const VerifyRegistration = () => {
   return (
     <>
       <div className="mx-auto col-9 container-registration">
-        <div className="head-section">
-          <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">
-            5
-          </div>
-          <h4 className="mx-auto d-flex align-items-center justify-content-center">
-            {t('verifyRegistration.title')}
-          </h4>
-          <div className="mx-auto text-center col-9">
-            {t('verifyRegistration.subtitle')}
-          </div>
-        </div>
+        <StepHeader 
+          step={currentActiveStep}
+          stepName={t('verifyRegistration.title')}
+          stepDescription={t('verifyRegistration.subtitle')}
+        />
         <div className="companydata-form mx-auto col-9">
           <Row>
             <ul className="list-group-cax px-2">
