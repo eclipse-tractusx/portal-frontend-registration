@@ -723,6 +723,8 @@ export const CompanyDataCax = () => {
           errors.country !== '' ||
           errors.postalCode !== '' ||
           errors.region !== '' ||
+          !identifierType ||
+          identifierNumber.length === 0 ||
           !identifierDetails?.length ||
           errors.identifierNumber !== ''
         }
