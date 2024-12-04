@@ -65,3 +65,8 @@ export interface PostDocumentType {
   dispatch: Dispatch
   temporaryId: string
 }
+
+export type CountryType = {
+  id: string
+  label: string
+}
