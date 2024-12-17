@@ -4,7 +4,6 @@
 
 ### Bugfix
 
-- refactor, optimise and reorganise the code in cax-companyData.tsx file [#317](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/317)
 - created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
 
 ## 2.1.0

@@ -1,7 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 Microsoft and BMW Group AG
- * Copyright (c) 2022 Contributors to the Eclipse Foundation
- *
+ * Copyright (c) 2024 Contributors to the Eclipse Foundation
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -30,9 +28,9 @@ const validate = (
 
 export const validateLegalEntity = (
   value: string,
-  setLegalEntity: any,
-  setErrors: any
-) => {
+  setLegalEntity: (value: string) => void,
+  setErrors: (errors) => void
+): void => {
   setLegalEntity(value)
   validate(value, Patterns.legalEntityPattern, 'legalEntityError', (error) => {
     setErrors((prevState) => ({
@@ -44,8 +42,8 @@ export const validateLegalEntity = (
 
 export const validateRegisteredName = (
   value: string,
-  setRegisteredName: any,
-  setErrors: any
+  setRegisteredName: (value: string) => void,
+  setErrors: (errors) => void
 ) => {
   setRegisteredName(value)
   validate(
@@ -63,8 +61,8 @@ export const validateRegisteredName = (
 
 export const validatePostalCode = (
   value: string,
-  setPostalCode: any,
-  setErrors: any
+  setPostalCode: (value: string) => void,
+  setErrors: (errors) => void
 ) => {
   setPostalCode(value)
   validate(value, Patterns.postalCodePattern, 'postalCodeError', (error) => {
@@ -75,7 +73,7 @@ export const validatePostalCode = (
   })
 }
 
-export const validateCity = (value: string, setCity: any, setErrors: any) => {
+export const validateCity = (value: string, setCity: (value: string) => void, setErrors: (errors)=>void) => {
   setCity(value)
   validate(value, Patterns.CITY, 'cityError', (error) => {
     setErrors((prevState) => ({
@@ -87,8 +85,8 @@ export const validateCity = (value: string, setCity: any, setErrors: any) => {
 
 export const validateStreetHouseNumber = (
   value: string,
-  setStreetHouseNumber: any,
-  setErrors: any
+  setStreetHouseNumber: (value: string) => void,
+  setErrors: (errors) => void
 ) => {
   setStreetHouseNumber(value)
   validate(value, Patterns.STREET, 'streetHouseNumberError', (error) => {

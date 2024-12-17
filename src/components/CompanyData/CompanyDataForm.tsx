@@ -1,6 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2022 Microsoft and BMW Group AG
- * Copyright (c) 2022 Contributors to the Eclipse Foundation
+ * Copyright (c) 2024 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -70,7 +69,6 @@ const CompanyDataForm: React.FC<CompanyDataFormProps> = ({
     if (isBPN(expr?.trim())) {
       fetchData(expr).catch((errorCode: number) => {
         setFields(null)
-        console.log('errorCode', errorCode)
         setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
       })
       setBpnErrorMessage('')
@@ -109,8 +107,7 @@ const CompanyDataForm: React.FC<CompanyDataFormProps> = ({
             {t('registrationStepOne.bpn')}{' '}
             <AiOutlineQuestionCircle
               color="#939393"
-              // tip data need to get moved to the locales files
-              data-tip="Displays the bpn and can't get eddited."
+              data-tip={t('registrationStepOne.bpnTooltip')}
             />
           </label>
           <input type="text" disabled value={bpn} />
@@ -128,8 +125,7 @@ const CompanyDataForm: React.FC<CompanyDataFormProps> = ({
             <span className="mandatory-asterisk">*</span>
             <AiOutlineQuestionCircle
               color="#939393"
-              // tip data need to get moved to the locales files
-              data-tip="Legal Company Name"
+              data-tip={t('registrationStepOne.legalEntityTooltip')}
             />{' '}
           </label>
           <input

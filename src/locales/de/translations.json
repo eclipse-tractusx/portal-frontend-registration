@@ -64,7 +64,7 @@
     "bpnInvalidError": "The BPN is invalid, please enter a valid BPN or use the manual flow below. Hint: A BPN has 16-digits.",
     "bpnNotExistError": "This BPN doesn't exist, please enter a valid BPN or use the manual flow below.",
     "legalEntityError": "Bitte geben Sie einen gültigen Wert für die juristische Person ein.",
-    "registerdNameError": "Bitte geben Sie einen gültigen registrierten Namen ein.",
+    "registeredNameError": "Bitte geben Sie einen gültigen registrierten Namen ein.",
     "streetHouseNumberError": "Bitte geben Sie eine gültige Straße und Hausnummer ein.",
     "regionError": "Bitte geben Sie einen gültigen Region.",
     "postalCodeError": "Bitte geben Sie eine gültige Postleitzahl ein.",
