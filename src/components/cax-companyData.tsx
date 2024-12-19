@@ -216,13 +216,12 @@ export const CompanyDataCax = () => {
   }
 
   const renderSnackbar = () => {
-    const message = identifierError
-      ? t('registrationStepOne.identifierError')
-      : submitError
-        ? t('registrationStepOne.submitError')
-        : t('registration.apiError')
-
-    return <Notify message={message} />
+    const getMessage = () => {
+      if (identifierError) return t('registrationStepOne.identifierError')
+      if (submitError) return t('registrationStepOne.submitError')
+      return t('registration.apiError')
+    }
+    return <Notify message={getMessage()} />
   }
 
   return (
