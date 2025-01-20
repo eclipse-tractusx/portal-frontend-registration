@@ -393,7 +393,7 @@ npm/npmjs/-/minimatch/9.0.5, ISC, approved, #9190
 npm/npmjs/-/minimist/1.2.8, MIT, approved, #5886
 npm/npmjs/-/ms/2.1.3, MIT, approved, #5895
 npm/npmjs/-/nanoid/3.3.7, MIT, approved, #7571
-npm/npmjs/-/nanoid/5.0.7, MIT, approved, #17170
+npm/npmjs/-/nanoid/5.0.9, MIT, approved, #17170
 npm/npmjs/-/natural-compare/1.4.0, MIT, approved, clearlydefined
 npm/npmjs/-/no-case/3.0.4, MIT, approved, clearlydefined
 npm/npmjs/-/node-addon-api/7.1.1, MIT, approved, clearlydefined
@@ -497,7 +497,7 @@ npm/npmjs/-/resolve-from/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/resolve-from/5.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/resolve-pathname/3.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/resolve-pkg-maps/1.0.0, MIT, approved, clearlydefined
-npm/npmjs/-/resolve.exports/2.0.2, MIT, approved, clearlydefined
+npm/npmjs/-/resolve.exports/2.0.2, MIT, approved, #18688
 npm/npmjs/-/resolve/1.22.8, MIT AND ISC, approved, #15315
 npm/npmjs/-/resolve/2.0.0-next.5, MIT AND ISC, approved, #3078
 npm/npmjs/-/reusify/1.0.4, MIT, approved, clearlydefined
