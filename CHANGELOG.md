@@ -2,9 +2,15 @@
 
 ## Unreleased
 
+## 2.2.0-RC1
+
 ### Bugfix
 
-- created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
+- **Form Header**
+  - created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
+- **Registration Form**
+  - fixed disable confirm button issue for mandatory fields [#304](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/304)
+  - fixed email text break word issue [#305](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/305)
 
 ## 2.1.0
 
