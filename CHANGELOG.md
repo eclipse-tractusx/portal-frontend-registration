@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 2.2.0-RC1
+## 2.1.1-RC1
 
 ### Bugfix
 
