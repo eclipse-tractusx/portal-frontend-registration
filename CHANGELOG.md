@@ -15,7 +15,6 @@
 - **Registration Form**
   - fixed disable confirm button issue for mandatory fields [#304](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/304)
   - fixed email text break word issue [#305](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/305)
-  - updated validation of region code for tagus release [#1513](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
 
 ## 2.1.0
 
