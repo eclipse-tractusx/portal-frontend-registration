@@ -2,9 +2,12 @@
 
 ## Unreleased
 
-## 2.1.1-RC1
+## 2.2.0-RC1
 
 ### Bugfix
+
+- **Registration Form**
+  - updated validation of region code for tagus release [#1513](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
 
 - **Form Header**
   - created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
