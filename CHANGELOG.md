@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-## 2.1.1-RC1
+## 2.2.0-RC1
+
+### Feature
+
+- updated validation of region code for tagus release [#1513](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
 
 ### Bugfix
 

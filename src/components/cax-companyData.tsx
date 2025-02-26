@@ -588,7 +588,10 @@ export const CompanyDataCax = () => {
             </div>
 
             <div className={`col-8 form-data ${errors.region && 'error'}`}>
-              <label> {t('registrationStepOne.region')} </label>
+              <label>
+                {t('registrationStepOne.region')}{' '}
+                <span className="mandatory-asterisk">*</span>
+              </label>
               <input
                 type="text"
                 value={region}

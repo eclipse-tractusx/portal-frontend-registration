@@ -61,7 +61,7 @@ export const Patterns = {
     /^(?!.*\s$)([\p{L}\u0E00-\u0E7F\d\p{Sc}@%*+_\-/\\,.:;=<>!?&^#'\x22()[\]]\s?){1,160}$/u,
   registeredNamePattern:
     /^(?!.*\s$)[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d\s!#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
-  regionPattern: /^(?!.*\s$)([a-zA-Z0-9À-ÿŚął,"()'-]\s?)*$/,
+  regionPattern: /^[A-Z0-9]{1,3}$/,
   postalCodePattern:
     /^(?!.*\s$)(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
