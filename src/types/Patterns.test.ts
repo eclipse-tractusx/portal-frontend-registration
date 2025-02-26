@@ -50,29 +50,19 @@ const validateIdentifierPattern = (pattern: string, testData: any) => {
 
 describe('Input Pattern Tests', () => {
   it('validates BPN pattern', () => {
-    validate(BPN_TEST_DATA.BPN, (expr: string) =>
-      isBPN(expr)
-    )
+    validate(BPN_TEST_DATA.BPN, isBPN)
   })
   it('validates City pattern', () => {
-    validate(CITY_TEST_DATA.CITY, (expr: string) =>
-      isCity(expr)
-    )
+    validate(CITY_TEST_DATA.CITY, isCity)
   })
   it('validates Street pattern', () => {
-    validate(STREET_TEST_DATA.STREET, (expr: string) =>
-      isStreet(expr)
-    )
+    validate(STREET_TEST_DATA.STREET, isStreet)
   })
   it('validates legalEntityPattern pattern', () => {
-    validate(LEGAL_ENTITY_DATA.LEGAL_ENTITY, (expr: string) =>
-      isLegalEntity(expr)
-    )
+    validate(LEGAL_ENTITY_DATA.LEGAL_ENTITY, isLegalEntity)
   })
   it('validates Region pattern', () => {
-    validate(REGION_TEST_DATA.REGION, (expr: string) =>
-      isRegion(expr)
-    )
+    validate(REGION_TEST_DATA.REGION, isRegion)
   })
 
   // Same Pattern for all European countries
