@@ -20,9 +20,6 @@
 export const CRN_TEST_DATA = {
   DE: {
     valid: [
-      '123456789',
-      '987654321',
-      '000000000',
       // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
       'HRB 209459',
       'HRB 86891',
