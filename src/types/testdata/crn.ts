@@ -39,9 +39,9 @@ export const CRN_TEST_DATA = {
       'Ludwigshafen a.Rhein (Ludwigshafen) VR 60423',
       'Weiden i. d. OPf. HRB 4339',
       'Berlin-Charlottenburg HRB 98814',
-      'F1103R_HRB98814', // German CRN with court code
-      'F1103R_HRB241059', // German CRN with court code
-      'T2408V_HRB46288', // German CRN with court code
+      'F1103R_HRB98814',
+      'F1103R_HRB241059',
+      'T2408V_HRB46288',
     ],
     invalid: [
       '', // empty
