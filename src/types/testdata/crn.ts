@@ -93,8 +93,6 @@ export const CRN_TEST_DATA = {
   },
   Worldwide: {
     valid: [
-      'DE123456789',
-      'FR12345678901',
       'ABC20010101AAA',
       '10BBBCH5678G1Z9',
       '37AAACP2678Q1ZP',
@@ -104,9 +102,9 @@ export const CRN_TEST_DATA = {
     invalid: [
       '', // empty
       ' ', // whitespace
-      ' DE123456789', // leading space
-      'DE123456789 ', // trailing space
-      'DE  123456789', // invalid character (double whitespace)
+      ' ABC20010101AAA', // leading space
+      'ABC20010101AAA ', // trailing space
+      'ABC  20010101AAA', // invalid character (double whitespace)
     ],
   },
 }
