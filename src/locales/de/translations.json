@@ -76,7 +76,7 @@
     "IN_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with hyphen with 4 to 21 digits.",
     "IN_VAT_ID": "Please enter a valid number. Hint: Alphanumeric with hyphen with 5 to 15 digits.",
     "IN_LEI_CODE": "Please enter a valid number. Hint: Alphanumeric with exact 20 digits.",
-    "DE_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with hyphen, underscore and space.",
+    "DE_COMMERCIAL_REG_NUMBER": "Please enter a valid identifier. Hint: Starting with court name or code and followed by registered identifier.",
     "DE_VAT_ID": "Please enter a valid number. Hint: Starting with DE and followed by 9 digit numbers",
     "DE_LEI_CODE": "Please enter a valid number. Hint: Alphanumeric with exact 20 digits.",
     "FR_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with space with 14 to 17 digits.",

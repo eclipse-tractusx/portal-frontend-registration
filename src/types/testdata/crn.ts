@@ -21,6 +21,7 @@ export const CRN_TEST_DATA = {
   DE: {
     valid: [
       // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
+      // Identifier without court is discouraged - can lead to duplicate findings
       'HRB 209459',
       'HRB 86891',
       'HRA 5778',
@@ -30,12 +31,15 @@ export const CRN_TEST_DATA = {
       'HRB 42', // Südzucker AG
       'HRA 3679 FL',
       'HRB 209459 B',
+      // Identifier with court is recommended but has some chance of failing automatic validation
+      'Mannheim HRB 42', // Südzucker AG
       'München HRB 175450',
       'Frankfurt am Main HRB 134317',
       'Oldenburg (Oldenburg) VR 1706',
       'Ludwigshafen a.Rhein (Ludwigshafen) VR 60423',
       'Weiden i. d. OPf. HRB 4339',
       'Berlin-Charlottenburg HRB 98814',
+      // Identifier with unique court code has the highest probability of success
       'F1103R_HRB98814',
       'F1103R_HRB241059',
       'T2408V_HRB46288',
