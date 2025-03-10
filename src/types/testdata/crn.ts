@@ -47,6 +47,9 @@ export const CRN_TEST_DATA = {
     invalid: [
       '', // empty
       ' ', // whitespace
+      '123', // too short
+      'Ludwigshafen a.Rhein (Ludwigshafen) HRB1234567890123456789', // too long
+      '123456789', // numbers only
       '123456789 ', // trailing whitespace
       ' 123456789', // leading whitespace
       '12345  6789', // invalid character (double whitespace)
