@@ -167,10 +167,10 @@ export const CompanyDataCax = () => {
   }, [identifierType, identifierNumber, country])
 
   useEffect(() => {
-    setFields(companyDetails);
+    setFields(companyDetails)
   }, [companyDetails])
 
-  const setFields = (bpnDetails: any) =>{
+  const setFields = (bpnDetails: any) => {
     setBpn(bpnDetails?.bpn ?? '')
     setLegalEntity(bpnDetails?.name ?? '')
     setRegisteredName(bpnDetails?.name ?? '')
@@ -387,6 +387,10 @@ export const CompanyDataCax = () => {
     return <Notify message={message} />
   }
 
+  const utfNormalize = (value: string) => {
+    return value.normalize('NFC')
+  }
+
   return (
     <>
       <div className="mx-auto col-9 container-registration">
@@ -452,7 +456,7 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={legalEntity}
                 onChange={(e) => {
-                  validateLegalEntity(e.target.value)
+                  validateLegalEntity(utfNormalize(e.target.value))
                 }}
                 onBlur={(e) => {
                   setLegalEntity(e.target.value.trim())
@@ -475,7 +479,7 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={registeredName}
                 onChange={(e) => {
-                  validateRegisteredName(e.target.value)
+                  validateRegisteredName(utfNormalize(e.target.value))
                 }}
                 onBlur={(e) => {
                   setRegisteredName(e.target.value.trim())
@@ -505,7 +509,7 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={streetHouseNumber}
                 onChange={(e) => {
-                  validateStreetHouseNumber(e.target.value)
+                  validateStreetHouseNumber(utfNormalize(e.target.value))
                 }}
                 onBlur={(e) => {
                   setStreetHouseNumber(e.target.value.trim())
@@ -546,7 +550,7 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={city}
                 onChange={(e) => {
-                  validateCity(e.target.value)
+                  validateCity(utfNormalize(e.target.value))
                 }}
                 onBlur={(e) => {
                   setCity(e.target.value.trim())
@@ -596,7 +600,7 @@ export const CompanyDataCax = () => {
                 type="text"
                 value={region}
                 onChange={(e) => {
-                  validateRegion(e.target.value)
+                  validateRegion(utfNormalize(e.target.value))
                 }}
                 onBlur={(e) => {
                   setRegion(e.target.value.trim())
@@ -689,7 +693,7 @@ export const CompanyDataCax = () => {
                       type="text"
                       value={identifierNumber}
                       onChange={(e) => {
-                        validateIdentifierNumber(e.target.value)
+                        validateIdentifierNumber(utfNormalize(e.target.value))
                       }}
                       onBlur={(e) => {
                         setIdentifierNumber(e.target.value.trim())
