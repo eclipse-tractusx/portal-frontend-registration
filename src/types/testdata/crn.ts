@@ -28,11 +28,11 @@ export const CRN_TEST_DATA = {
       'HRB 112676',
       'HRB 92821',
       'VR 9277',
-      'HRB 42', // Südzucker AG
+      'HRB 42',
       'HRA 3679 FL',
       'HRB 209459 B',
       // Identifier with court is recommended but has some chance of failing automatic validation
-      'Mannheim HRB 42', // Südzucker AG
+      'Mannheim HRB 42',
       'München HRB 175450',
       'Frankfurt am Main HRB 134317',
       'Oldenburg (Oldenburg) VR 1706',
@@ -45,14 +45,14 @@ export const CRN_TEST_DATA = {
       'T2408V_HRB46288',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '123', // too short
-      'Ludwigshafen a.Rhein (Ludwigshafen) HRB1234567890123456789', // too long
-      '123456789', // numbers only
-      '123456789 ', // trailing whitespace
-      ' 123456789', // leading whitespace
-      '12345  6789', // invalid character (double whitespace)
+      '',
+      ' ',
+      '123',
+      'Ludwigshafen a.Rhein (Ludwigshafen) HRB1234567890123456789',
+      '123456789',
+      '123456789 ',
+      ' 123456789',
+      '12345  6789',
     ],
   },
   FR: {
@@ -63,13 +63,13 @@ export const CRN_TEST_DATA = {
       '383474814',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '38347481d', // letters are not allowed
-      '38347481400100', // too long
-      '83449681200035 ', // trailing whitespace
-      ' 83449681200035', // leading whitespace
-      '8344968  1200035', // invalid character (double whitespace)
+      '',
+      ' ',
+      '38347481d',
+      '38347481400100',
+      '83449681200035 ',
+      ' 83449681200035',
+      '8344968  1200035',
     ],
   },
   MX: {
@@ -79,11 +79,11 @@ export const CRN_TEST_DATA = {
       'XYZ19991231Z5A',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      'ABC20010101AAA ', // trailing space
-      ' ABC20010101AAA', // leading space
-      'ABC200  10101AAA', // invalid character (double whitespace)
+      '',
+      ' ',
+      'ABC20010101AAA ',
+      ' ABC20010101AAA',
+      'ABC200  10101AAA',
     ],
   },
   IN: {
@@ -93,11 +93,11 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '27AASCS2460H1Z0 ', // trailing space
-      ' 27AASCS2460H1Z0', // leading space
-      '27AASCS  2460H1Z0', // invalid character (double whitespace)
+      '',
+      ' ',
+      '27AASCS2460H1Z0 ',
+      ' 27AASCS2460H1Z0',
+      '27AASCS  2460H1Z0',
     ],
   },
   Worldwide: {
@@ -105,15 +105,15 @@ export const CRN_TEST_DATA = {
       'ABC20010101AAA',
       '10BBBCH5678G1Z9',
       '37AAACP2678Q1ZP',
-      'CHE-123.456.788', // Swiss
-      'CHE-116.281.710', // Swiss
+      'CHE-123.456.788',
+      'CHE-116.281.710',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      ' ABC20010101AAA', // leading space
-      'ABC20010101AAA ', // trailing space
-      'ABC  20010101AAA', // invalid character (double whitespace)
+      '',
+      ' ',
+      ' ABC20010101AAA',
+      'ABC20010101AAA ',
+      'ABC  20010101AAA',
     ],
   },
 }
