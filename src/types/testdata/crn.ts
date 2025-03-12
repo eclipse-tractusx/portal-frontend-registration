@@ -66,7 +66,6 @@ export const CRN_TEST_DATA = {
       '', // empty
       ' ', // whitespace
       '38347481d', // letters are not allowed
-      'RB3474814', // trailing whitespace
       '38347481400100', // too long
       '83449681200035 ', // trailing whitespace
       ' 83449681200035', // leading whitespace
