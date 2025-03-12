@@ -79,7 +79,7 @@
     "DE_COMMERCIAL_REG_NUMBER": "Please enter a valid identifier. Hint: Starting with court name or code and followed by registered identifier. Examples: Mannheim HRB 98814, München HRB 175450, F1103R_HRB98814.",
     "DE_VAT_ID": "Please enter a valid number. Hint: Starting with DE and followed by 9 digit numbers",
     "DE_LEI_CODE": "Please enter a valid number. Hint: Alphanumeric with exact 20 digits.",
-    "FR_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with space with 14 to 17 digits.",
+    "FR_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: SIREN with 9 digits. Examples: 383474814, 443061841",
     "FR_VAT_ID": "Please enter a valid number. Hint: Alphanumeric with hyphen and space with 8 to 15 digits.",
     "FR_LEI_CODE": "Please enter a valid number. Hint: Alphanumeric with exact 20 digits.",
     "MX_COMMERCIAL_REG_NUMBER": "Please enter a valid number. Hint: Alphanumeric with hyphen with 4 to 21 digits.",

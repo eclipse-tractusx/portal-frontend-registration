@@ -58,13 +58,16 @@ export const CRN_TEST_DATA = {
   FR: {
     valid: [
       // Valid records found at https://www.sirene.fr/sirene/public/recherche
-      '83449681200035',
-      '44306184100047',
-      '38347481400100',
+      '834496812',
+      '443061841',
+      '383474814',
     ],
     invalid: [
       '', // empty
       ' ', // whitespace
+      '38347481d', // invalid character
+      'RB3474814', // trailing whitespace
+      '38347481400100', // too long
       '83449681200035 ', // trailing whitespace
       ' 83449681200035', // leading whitespace
       '8344968  1200035', // invalid character (double whitespace)
