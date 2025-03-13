@@ -17,6 +17,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+const caseEmptyString = '';
+const caseWhitespace = ' ';
+const caseMultipleWhitespace = '12345  6789';
+const caseTrailingSpace = '123456789 ';
+const caseLeadingSpace = ' 123456789';
+const caseThreeCharacters = '123';
+const caseOnlyNumbers = '123456789';
+const caseNotOnlyNumbers = '123456789A';
+const caseFourteenNumbers = '12345678901234';
+
 export const CRN_TEST_DATA = {
   DE: {
     valid: [
@@ -45,14 +55,14 @@ export const CRN_TEST_DATA = {
       'T2408V_HRB46288',
     ],
     invalid: [
-      '',
-      ' ',
-      '123',
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
+      caseThreeCharacters,
       'Ludwigshafen a.Rhein (Ludwigshafen) HRB1234567890123456789',
-      '123456789',
-      '123456789 ',
-      ' 123456789',
-      '12345  6789',
+      caseOnlyNumbers,
     ],
   },
   FR: {
@@ -63,13 +73,14 @@ export const CRN_TEST_DATA = {
       '383474814',
     ],
     invalid: [
-      '',
-      ' ',
-      '38347481d',
-      '38347481400100',
-      '83449681200035 ',
-      ' 83449681200035',
-      '8344968  1200035',
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
+      caseThreeCharacters,
+      caseNotOnlyNumbers,
+      caseFourteenNumbers,
     ],
   },
   MX: {
@@ -79,11 +90,11 @@ export const CRN_TEST_DATA = {
       'XYZ19991231Z5A',
     ],
     invalid: [
-      '',
-      ' ',
-      'ABC20010101AAA ',
-      ' ABC20010101AAA',
-      'ABC200  10101AAA',
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
   IN: {
@@ -93,11 +104,11 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
     ],
     invalid: [
-      '',
-      ' ',
-      '27AASCS2460H1Z0 ',
-      ' 27AASCS2460H1Z0',
-      '27AASCS  2460H1Z0',
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
   Worldwide: {
@@ -109,11 +120,11 @@ export const CRN_TEST_DATA = {
       'CHE-116.281.710',
     ],
     invalid: [
-      '',
-      ' ',
-      ' ABC20010101AAA',
-      'ABC20010101AAA ',
-      'ABC  20010101AAA',
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
 }
