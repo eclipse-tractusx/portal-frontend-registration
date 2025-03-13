@@ -6,7 +6,8 @@
 
 ### Feature
 
-- updated validation of region code for tagus release [#1513](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
+- updated validation of region code for tagus release [#357](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
+- allow underscores and prevent numbers without letters in german commercial registration number [#364](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/364)
 
 ### Bugfix
 

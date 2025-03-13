@@ -17,50 +17,70 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
+const caseEmptyString = '';
+const caseWhitespace = ' ';
+const caseMultipleWhitespace = '12345  6789';
+const caseTrailingSpace = '123456789 ';
+const caseLeadingSpace = ' 123456789';
+const caseThreeCharacters = '123';
+const caseOnlyNumbers = '123456789';
+const caseNotOnlyNumbers = '123456789A';
+const caseFourteenNumbers = '12345678901234';
+
 export const CRN_TEST_DATA = {
   DE: {
     valid: [
-      '123456789',
-      '987654321',
-      '000000000',
       // Valid records found at https://www.unternehmensregister.de/ureg/ (German Handelsregister)
+      // Identifier without court is discouraged - can lead to duplicate findings
       'HRB 209459',
       'HRB 86891',
       'HRA 5778',
       'HRB 112676',
       'HRB 92821',
       'VR 9277',
-      'HRB 42', // Südzucker AG
+      'HRB 42',
       'HRA 3679 FL',
       'HRB 209459 B',
+      // Identifier with court is recommended but has some chance of failing automatic validation
+      'Mannheim HRB 42',
       'München HRB 175450',
       'Frankfurt am Main HRB 134317',
       'Oldenburg (Oldenburg) VR 1706',
       'Ludwigshafen a.Rhein (Ludwigshafen) VR 60423',
       'Weiden i. d. OPf. HRB 4339',
       'Berlin-Charlottenburg HRB 98814',
+      // Identifier with unique court code has the highest probability of success
+      'F1103R_HRB98814',
+      'F1103R_HRB241059',
+      'T2408V_HRB46288',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '123456789 ', // trailing whitespace
-      ' 123456789', // leading whitespace
-      '12345  6789', // invalid character (double whitespace)
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
+      caseThreeCharacters,
+      'Ludwigshafen a.Rhein (Ludwigshafen) HRB1234567890123456789',
+      caseOnlyNumbers,
     ],
   },
   FR: {
     valid: [
       // Valid records found at https://www.sirene.fr/sirene/public/recherche
-      '83449681200035',
-      '44306184100047',
-      '38347481400100',
+      '834496812',
+      '443061841',
+      '383474814',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '83449681200035 ', // trailing whitespace
-      ' 83449681200035', // leading whitespace
-      '8344968  1200035', // invalid character (double whitespace)
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
+      caseThreeCharacters,
+      caseNotOnlyNumbers,
+      caseFourteenNumbers,
     ],
   },
   MX: {
@@ -70,11 +90,11 @@ export const CRN_TEST_DATA = {
       'XYZ19991231Z5A',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      'ABC20010101AAA ', // trailing space
-      ' ABC20010101AAA', // leading space
-      'ABC200  10101AAA', // invalid character (double whitespace)
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
   IN: {
@@ -84,29 +104,27 @@ export const CRN_TEST_DATA = {
       '37AAACP2678Q1ZP',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      '27AASCS2460H1Z0 ', // trailing space
-      ' 27AASCS2460H1Z0', // leading space
-      '27AASCS  2460H1Z0', // invalid character (double whitespace)
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
   Worldwide: {
     valid: [
-      'DE123456789',
-      'FR12345678901',
       'ABC20010101AAA',
       '10BBBCH5678G1Z9',
       '37AAACP2678Q1ZP',
-      'CHE-123.456.788', // Swiss
-      'CHE-116.281.710', // Swiss
+      'CHE-123.456.788',
+      'CHE-116.281.710',
     ],
     invalid: [
-      '', // empty
-      ' ', // whitespace
-      ' DE123456789', // leading space
-      'DE123456789 ', // trailing space
-      'DE  123456789', // invalid character (double whitespace)
+      caseEmptyString,
+      caseWhitespace,
+      caseTrailingSpace,
+      caseLeadingSpace,
+      caseMultipleWhitespace,
     ],
   },
 }
