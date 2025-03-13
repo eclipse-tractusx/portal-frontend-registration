@@ -16,6 +16,7 @@
 - **Registration Form**
   - fixed disable confirm button issue for mandatory fields [#304](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/304)
   - fixed email text break word issue [#305](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/305)
+  - normalise utf codes on all text input fields [#367](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/367)
 
 ## 2.1.0
 
