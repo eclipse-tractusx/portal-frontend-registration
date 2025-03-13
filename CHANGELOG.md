@@ -2,7 +2,12 @@
 
 ## Unreleased
 
-## 2.1.1-RC1
+## 2.2.0-RC1
+
+### Feature
+
+- updated validation of region code for tagus release [#357](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
+- allow underscores and prevent numbers without letters in german commercial registration number [#364](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/364)
 
 ### Bugfix
 
@@ -11,6 +16,7 @@
 - **Registration Form**
   - fixed disable confirm button issue for mandatory fields [#304](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/304)
   - fixed email text break word issue [#305](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/305)
+  - normalise utf codes on all text input fields [#367](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/367)
 
 ## 2.1.0
 

@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-import { isBPN, isCity, isLegalEntity, isPattern, isStreet, Patterns } from './Patterns'
+import { isBPN, isCity, isLegalEntity, isPattern, isRegion, isStreet, Patterns } from './Patterns'
 import { BPN_TEST_DATA } from './testdata/bpn'
 import { CITY_TEST_DATA } from './testdata/city'
 import { STREET_TEST_DATA } from './testdata/street'
@@ -28,6 +28,7 @@ import { LEI_TEST_DATA } from './testdata/lei'
 import { VIES_TEST_DATA } from './testdata/vies'
 import { CRN_TEST_DATA } from './testdata/crn'
 import { LEGAL_ENTITY_DATA } from './testdata/legalentity'
+import { REGION_TEST_DATA } from './testdata/region'
 
 const validate = (data, check) => {
   data.valid.forEach((expr) => {
@@ -49,24 +50,19 @@ const validateIdentifierPattern = (pattern: string, testData: any) => {
 
 describe('Input Pattern Tests', () => {
   it('validates BPN pattern', () => {
-    validate(BPN_TEST_DATA.BPN, (expr: string) =>
-      isBPN(expr)
-    )
+    validate(BPN_TEST_DATA.BPN, isBPN)
   })
   it('validates City pattern', () => {
-    validate(CITY_TEST_DATA.CITY, (expr: string) =>
-      isCity(expr)
-    )
+    validate(CITY_TEST_DATA.CITY, isCity)
   })
   it('validates Street pattern', () => {
-    validate(STREET_TEST_DATA.STREET, (expr: string) =>
-      isStreet(expr)
-    )
+    validate(STREET_TEST_DATA.STREET, isStreet)
   })
   it('validates legalEntityPattern pattern', () => {
-    validate(LEGAL_ENTITY_DATA.LEGAL_ENTITY, (expr: string) =>
-      isLegalEntity(expr)
-    )
+    validate(LEGAL_ENTITY_DATA.LEGAL_ENTITY, isLegalEntity)
+  })
+  it('validates Region pattern', () => {
+    validate(REGION_TEST_DATA.REGION, isRegion)
   })
 
   // Same Pattern for all European countries

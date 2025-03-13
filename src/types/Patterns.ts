@@ -39,9 +39,9 @@ const VAT_ID = {
   MX: /^[a-zA-Z\d-&]{12,13}$/,
 }
 const COMMERCIAL_REG_NUMBER = {
-  Worldwide: /^(?!.*\s$)([A-Za-zÀ-ÿ0-9.()](\.|\s|-)?){4,50}$/, // generic pattern
-  DE: /^(?!.*\s$)([A-Za-zÀ-ÿ0-9.()](\s|-)?){4,50}$/,
-  FR: /^(?!.*\s$)([A-Za-z0-9]\s?){14,17}$/,
+  Worldwide: /^(?!.*\s$)([A-Za-zÀ-ÿ0-9.()](\.|\s|-|_)?){4,50}$/, // generic pattern
+  DE: /^(?!.*\s$)([A-Za-zÀ-ÿ])([A-Za-zÀ-ÿ0-9.()](\s|-|_)?){4,50}$/,
+  FR: /^\d{9}$/,
 }
 
 // Pattern List
@@ -61,7 +61,7 @@ export const Patterns = {
     /^(?!.*\s$)([\p{L}\u0E00-\u0E7F\d\p{Sc}@%*+_\-/\\,.:;=<>!?&^#'\x22()[\]]\s?){1,160}$/u,
   registeredNamePattern:
     /^(?!.*\s$)[a-zA-ZÀ-ÿŚął\d][a-zA-ZÀ-ÿŚął\d\s!#'$@&%()*+,\-_./:;=<>?[\]\\^]{2,60}$/,
-  regionPattern: /^(?!.*\s$)([a-zA-Z0-9À-ÿŚął,"()'-]\s?)*$/,
+  regionPattern: /^[A-Z0-9]{1,3}$/,
   postalCodePattern:
     /^(?!.*\s$)(?=[a-zA-Z\d-]*[-\s]?[a-zA-Z\d-]*$)[a-zA-Z\d\s-]{2,10}$/,
   countryPattern: /^[A-Za-zÀ-ÿ]{2,3}$/,
