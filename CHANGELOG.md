@@ -2,12 +2,19 @@
 
 ## Unreleased
 
-## 2.2.0-RC1
+## 2.2.0
 
 ### Feature
 
-- updated validation of region code for tagus release [#357](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
-- allow underscores and prevent numbers without letters in german commercial registration number [#364](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/364)
+- **Tagus Release of Clearing House**
+  - updated validation of region code [#357](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
+  - allow underscores and prevent numbers without letters in german commercial registration number [#364](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/364)
+
+### Technical Support
+
+- upgraded dependencies [#340](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/340), [#336](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/336), [#325](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/325), [#311](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/311)
+- upgraded axios dependency [#372](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/372)
+- adjusted dependency workflow [#363](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/363)
 
 ### Bugfix
 
