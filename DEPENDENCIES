@@ -31,7 +31,7 @@ npm/npmjs/-/async/3.2.6, Apache-2.0 AND MIT, approved, #1553
 npm/npmjs/-/asynckit/0.4.0, MIT, approved, clearlydefined
 npm/npmjs/-/attr-accept/2.2.2, MIT, approved, clearlydefined
 npm/npmjs/-/available-typed-arrays/1.0.7, MIT, approved, clearlydefined
-npm/npmjs/-/axios/1.8.3, MIT, approved, #19551
+npm/npmjs/-/axios/1.7.9, MIT, approved, #14871
 npm/npmjs/-/babel-jest/29.7.0, MIT, approved, clearlydefined
 npm/npmjs/-/babel-plugin-istanbul/6.1.1, BSD-3-Clause, approved, clearlydefined
 npm/npmjs/-/babel-plugin-jest-hoist/29.6.3, MIT, approved, clearlydefined
