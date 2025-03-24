@@ -144,29 +144,18 @@ export const CompanyDataCax = () => {
     setFields(companyDetails)
   }, [companyDetails])
 
-  const setFields = (bpnDetails: any) => {
-    const {
-      bpn,
-      name,
-      streetName,
-      region,
-      zipCode,
-      city,
-      countryAlpha2Code,
-      uniqueIds,
-    } = bpnDetails ?? {}
-
-    setBpn(bpn ?? '')
-    setLegalEntity(name ?? '')
-    setRegisteredName(name ?? '')
-    setStreetHouseNumber(streetName ?? '')
-    setRegion(region ?? '')
-    setPostalCode(zipCode ?? '')
-    setCity(city ?? '')
-    setCountry(countryAlpha2Code ?? '')
-    setUniqueIds(uniqueIds ?? '')
-    setIdentifierNumber(uniqueIds?.[0]?.value ?? '')
-    setIdentifierType(uniqueIds?.[0]?.type ?? '')
+  const setFields = (bpnDetails: any) =>{
+    setBpn(bpnDetails?.bpn ?? '')
+    setLegalEntity(bpnDetails?.name ?? '')
+    setRegisteredName(bpnDetails?.name ?? '')
+    setStreetHouseNumber(bpnDetails?.streetName ?? '')
+    setRegion(bpnDetails?.region ?? '')
+    setPostalCode(bpnDetails?.zipCode ?? '')
+    setCity(bpnDetails?.city ?? '')
+    setCountry(bpnDetails?.countryAlpha2Code ?? '')
+    setUniqueIds(bpnDetails?.uniqueIds ?? '')
+    setIdentifierNumber(bpnDetails?.uniqueIds?.[0]?.value ?? '')
+    setIdentifierType(bpnDetails?.uniqueIds?.[0]?.type ?? '')
   }
 
   useEffect(() => {
@@ -222,6 +211,10 @@ export const CompanyDataCax = () => {
       return t('registration.apiError')
     }
     return <Notify message={getMessage()} />
+  }
+
+  const utfNormalize = (value: string) => {
+    return value.normalize('NFC')
   }
 
   return (
