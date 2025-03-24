@@ -2,9 +2,28 @@
 
 ## Unreleased
 
+## 2.2.0
+
+### Feature
+
+- **Tagus Release of Clearing House**
+  - updated validation of region code [#357](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/357)
+  - allow underscores and prevent numbers without letters in german commercial registration number [#364](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/364)
+
+### Technical Support
+
+- upgraded dependencies [#340](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/340), [#336](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/336), [#325](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/325), [#311](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/311)
+- upgraded axios dependency [#372](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/372)
+- adjusted dependency workflow [#363](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/363)
+
 ### Bugfix
 
-- created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
+- **Form Header**
+  - created a new component for form header to avoid duplication of code in each step [#310](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/310)
+- **Registration Form**
+  - fixed disable confirm button issue for mandatory fields [#304](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/304)
+  - fixed email text break word issue [#305](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/305)
+  - normalise utf codes on all text input fields [#367](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/367)
 
 ## 2.1.0
 

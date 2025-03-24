@@ -20,6 +20,7 @@ import { Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { UniqueIdentifier } from 'state/features/application/applicationApiSlice'
 import { Patterns } from 'types/Patterns'
+import { utfNormalize } from 'helpers/validation'
 
 interface IdentifierFormProps {
   uniqueIds: { type: string; value: string }[]
@@ -74,7 +75,7 @@ export const IdentifierForm: React.FC<IdentifierFormProps> = ({
   useEffect(() => {
     identifierNumber &&
       identifierType &&
-      validateIdentifierNumber(identifierNumber)
+      validateIdentifierNumber(utfNormalize(identifierNumber))
   }, [identifierType, identifierNumber])
 
   return (

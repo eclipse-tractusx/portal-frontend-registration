@@ -26,13 +26,17 @@ const validate = (
   setError(pattern.test(value?.trim()) ? '' : errorKey)
 }
 
+export const utfNormalize = (value: string) => {
+  return value.normalize('NFC')
+}
+
 export const validateLegalEntity = (
   value: string,
   setLegalEntity: (value: string) => void,
   setErrors: (errors) => void
 ): void => {
   setLegalEntity(value)
-  validate(value, Patterns.legalEntityPattern, 'legalEntityError', (error) => {
+  validate(utfNormalize(value), Patterns.legalEntityPattern, 'legalEntityError', (error) => {
     setErrors((prevState) => ({
       ...prevState,
       legalEntity: error,
@@ -47,7 +51,7 @@ export const validateRegisteredName = (
 ) => {
   setRegisteredName(value)
   validate(
-    value,
+    utfNormalize(value),
     Patterns.registeredNamePattern,
     'registeredNameError',
     (error) => {
@@ -65,7 +69,7 @@ export const validatePostalCode = (
   setErrors: (errors) => void
 ) => {
   setPostalCode(value)
-  validate(value, Patterns.postalCodePattern, 'postalCodeError', (error) => {
+  validate(utfNormalize(value), Patterns.postalCodePattern, 'postalCodeError', (error) => {
     setErrors((prevState) => ({
       ...prevState,
       postalCode: error,
@@ -75,7 +79,7 @@ export const validatePostalCode = (
 
 export const validateCity = (value: string, setCity: (value: string) => void, setErrors: (errors)=>void) => {
   setCity(value)
-  validate(value, Patterns.CITY, 'cityError', (error) => {
+  validate(utfNormalize(value), Patterns.CITY, 'cityError', (error) => {
     setErrors((prevState) => ({
       ...prevState,
       city: error,
@@ -89,7 +93,7 @@ export const validateStreetHouseNumber = (
   setErrors: (errors) => void
 ) => {
   setStreetHouseNumber(value)
-  validate(value, Patterns.STREET, 'streetHouseNumberError', (error) => {
+  validate(utfNormalize(value), Patterns.STREET, 'streetHouseNumberError', (error) => {
     setErrors((prevState) => ({
       ...prevState,
       streetHouseNumber: error,
