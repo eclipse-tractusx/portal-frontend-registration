@@ -42,7 +42,7 @@
     "seachDatabase": "Suche (mit Hilfe der BPN)",
     "enterManualText": "oder füllen Sie die relevanten Felder manuell aus:",
     "bpn": "Business Partner Number",
-    "bpnTooltip": "Zeigt die BPN an und kann nicht bearbeitet werden.",
+    "bpnTooltip": "Zeigt die Business Partner Number an und kann nicht bearbeitet werden.",
     "legalEntity": "Rechtsträger",
     "legalEntityTooltip": "legaler Firmenname",
     "helperText": "In case you enter your data manually, this field fill be locked.",

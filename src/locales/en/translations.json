@@ -42,7 +42,7 @@
     "seachDatabase": "Search for your company data by BPN to autofill the relevant data fields",
     "enterManualText": "or enter your data manually:",
     "bpn": "Business Partner Number",
-    "bpnTooltip": "Displays the bpn and can't get eddited.",
+    "bpnTooltip": "Displays the Business Partner Number and can't get edited.",
     "legalEntity": "Legal Entity Name",
     "legalEntityTooltip": "Legal Company Name",
     "helperText": "In case you enter your data manually, this field fill be locked.",
