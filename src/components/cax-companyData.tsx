@@ -42,7 +42,7 @@ import StepHeader from './StepHeader'
 import { validateLegalEntity, validateRegisteredName } from 'helpers/validation'
 import { CountryType } from 'types/MainTypes'
 import { initialErrors } from 'helpers/constants'
-import { IdentifierForm } from './CompanyData/Identiifier'
+import { IdentifierForm } from './CompanyData/Identifier'
 import AddressForm from './CompanyData/AddressForm'
 import CompanyDataForm from './CompanyData/CompanyDataForm'
 
