@@ -17,16 +17,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
-
-import { Row } from 'react-bootstrap'
 import { getCompanyDetails } from '../helpers/utils'
-import { AiOutlineQuestionCircle } from 'react-icons/ai'
-import SearchInput from 'react-search-input'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { FooterButton } from './footerButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { isBPN, isCity, isStreet, Patterns } from '../types/Patterns'
+import { isBPN } from '../types/Patterns'
 import {
   useFetchApplicationsQuery,
   useFetchCompanyDetailsWithAddressQuery,
@@ -40,26 +36,15 @@ import {
   addCurrentStep,
   getCurrentStep,
 } from '../state/features/user/userApiSlice'
-import { Autocomplete, TextField } from '@mui/material'
 import i18n from '../services/I18nService'
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
-
-type CountryType = {
-  id: string
-  label: string
-}
-
-const initialErrors = {
-  legalEntity: '',
-  registeredName: '',
-  streetHouseNumber: '',
-  region: '',
-  postalCode: '',
-  city: '',
-  country: '',
-  identifierNumber: '',
-}
+import { validateLegalEntity, validateRegisteredName } from 'helpers/validation'
+import { CountryType } from 'types/MainTypes'
+import { initialErrors } from 'helpers/constants'
+import { IdentifierForm } from './CompanyData/Identifier'
+import AddressForm from './CompanyData/AddressForm'
+import CompanyDataForm from './CompanyData/CompanyDataForm'
 
 export const CompanyDataCax = () => {
   const { t } = useTranslation()
@@ -91,7 +76,6 @@ export const CompanyDataCax = () => {
   const [identifierNumber, setIdentifierNumber] = useState<string>()
   const [changedCountryValue, setChangedCountryValue] = useState<boolean>(false)
   const [errors, setErrors] = useState(initialErrors)
-
   const [submitError, setSubmitError] = useState(false)
   const [identifierError, setIdentifierError] = useState(false)
   const [notifyError, setNotifyError] = useState(false)
@@ -157,31 +141,32 @@ export const CompanyDataCax = () => {
   }, [identifierData, country, error])
 
   useEffect(() => {
-    if (errors.country === '' && country && changedCountryValue) {
-      refetch()
-      validateRegion(region)
-    }
-    identifierNumber &&
-      identifierType &&
-      validateIdentifierNumber(identifierNumber)
-  }, [identifierType, identifierNumber, country])
-
-  useEffect(() => {
     setFields(companyDetails)
   }, [companyDetails])
 
   const setFields = (bpnDetails: any) => {
-    setBpn(bpnDetails?.bpn ?? '')
-    setLegalEntity(bpnDetails?.name ?? '')
-    setRegisteredName(bpnDetails?.name ?? '')
-    setStreetHouseNumber(bpnDetails?.streetName ?? '')
-    setRegion(bpnDetails?.region ?? '')
-    setPostalCode(bpnDetails?.zipCode ?? '')
-    setCity(bpnDetails?.city ?? '')
-    setCountry(bpnDetails?.countryAlpha2Code ?? '')
-    setUniqueIds(bpnDetails?.uniqueIds ?? '')
-    setIdentifierNumber(bpnDetails?.uniqueIds?.[0]?.value ?? '')
-    setIdentifierType(bpnDetails?.uniqueIds?.[0]?.type ?? '')
+    const {
+      bpn,
+      name,
+      streetName,
+      region,
+      zipCode,
+      city,
+      countryAlpha2Code,
+      uniqueIds,
+    } = bpnDetails ?? {}
+
+    setBpn(bpn ?? '')
+    setLegalEntity(name ?? '')
+    setRegisteredName(name ?? '')
+    setStreetHouseNumber(streetName ?? '')
+    setRegion(region ?? '')
+    setPostalCode(zipCode ?? '')
+    setCity(city ?? '')
+    setCountry(countryAlpha2Code ?? '')
+    setUniqueIds(uniqueIds ?? '')
+    setIdentifierNumber(uniqueIds?.[0]?.value ?? '')
+    setIdentifierType(uniqueIds?.[0]?.type ?? '')
   }
 
   useEffect(() => {
@@ -193,154 +178,6 @@ export const CompanyDataCax = () => {
   const fetchData = async (expr: string) => {
     const details = await getCompanyDetails(expr)
     setFields(details)
-  }
-
-  const onSearchChange = (expr: string) => {
-    if (isBPN(expr?.trim())) {
-      fetchData(expr)
-        // make sure to catch any error
-        .catch((errorCode: number) => {
-          setFields(null)
-          console.log('errorCode', errorCode)
-          setBpnErrorMessage(t('registrationStepOne.bpnNotExistError'))
-        })
-      setBpnErrorMessage('')
-    } else {
-      setBpnErrorMessage(t('registrationStepOne.bpnInvalidError'))
-    }
-  }
-
-  const validateLegalEntity = (value: string) => {
-    setLegalEntity(value)
-
-    if (!Patterns.legalEntityPattern.test(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        legalEntity: 'legalEntityError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, legalEntity: '' }))
-  }
-
-  const validateRegisteredName = (value: string) => {
-    setRegisteredName(value)
-
-    if (!Patterns.registeredNamePattern.test(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        registeredName: 'registerdNameError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, registeredName: '' }))
-  }
-
-  const validateStreetHouseNumber = (value: string) => {
-    setStreetHouseNumber(value)
-
-    if (!isStreet(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        streetHouseNumber: 'streetHouseNumberError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, streetHouseNumber: '' }))
-  }
-
-  const validatePostalCode = (value: string) => {
-    setPostalCode(value)
-
-    if (!value) {
-      setErrors((prevState) => ({ ...prevState, postalCode: '' }))
-      return
-    }
-
-    if (!Patterns.postalCodePattern.test(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        postalCode: 'postalCodeError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, postalCode: '' }))
-  }
-
-  const validateCity = (value: string) => {
-    setCity(value)
-
-    if (!isCity(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        city: 'cityError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, city: '' }))
-  }
-
-  const validateCountry = (value: string) => {
-    setChangedCountryValue(true)
-    setCountry(value?.toUpperCase())
-    if (!Patterns.countryPattern.test(value?.trim())) {
-      setShowIdentifiers(false)
-      setErrors((prevState) => ({
-        ...prevState,
-        country: 'countryError',
-      }))
-      return
-    }
-    setErrors((prevState) => ({ ...prevState, country: '' }))
-  }
-
-  const validateRegion = (value: string) => {
-    setRegion(value)
-
-    if (!value && (country === 'MX' || country === 'CZ' || country === 'US')) {
-      setErrors((prevState) => ({ ...prevState, region: 'regionError' }))
-      return
-    } else {
-      setErrors((prevState) => ({ ...prevState, region: '' }))
-    }
-
-    if (value && !Patterns.regionPattern.test(value?.trim())) {
-      setErrors((prevState) => ({
-        ...prevState,
-        region: 'regionError',
-      }))
-      return
-    }
-
-    setErrors((prevState) => ({ ...prevState, region: '' }))
-  }
-
-  const validateIdentifierNumber = (value) => {
-    setChangedCountryValue(false)
-    setIdentifierNumber(value)
-    const countryCode =
-      country === 'DE' ||
-      country === 'FR' ||
-      country === 'IN' ||
-      country === 'MX'
-        ? country
-        : 'Worldwide'
-    if (
-      identifierType &&
-      !Patterns[countryCode][identifierType].test(value?.trim())
-    ) {
-      setErrors((prevState) => ({
-        ...prevState,
-        identifierNumber: countryCode + '_' + identifierType,
-      }))
-      return
-    }
-    setErrors((prevState) => ({ ...prevState, identifierNumber: '' }))
   }
 
   const handleIdentifierSelect = (type, value) => {
@@ -357,38 +194,34 @@ export const CompanyDataCax = () => {
   }
 
   const nextClick = () => {
-    const companyData = { ...companyDetails }
-    companyData.bpn = bpn?.trim()
-    companyData.name = legalEntity?.trim()
-    companyData.shortName = registeredName?.trim()
-    companyData.streetName = streetHouseNumber?.trim()
-    companyData.region = region?.trim()
-    companyData.city = city?.trim()
-    companyData.zipCode = postalCode?.trim()
-    companyData.countryAlpha2Code = country?.trim()
-    companyData.uniqueIds = [
-      {
-        type: identifierType,
-        value: identifierNumber?.trim(),
-      },
-    ]
-    //addCompanyData(companyData)
+    const companyData = {
+      ...companyDetails,
+      bpn: bpn?.trim(),
+      name: legalEntity?.trim(),
+      shortName: registeredName?.trim(),
+      streetName: streetHouseNumber?.trim(),
+      region: region?.trim(),
+      city: city?.trim(),
+      zipCode: postalCode?.trim(),
+      countryAlpha2Code: country?.trim(),
+      uniqueIds: [
+        {
+          type: identifierType,
+          value: identifierNumber?.trim(),
+        },
+      ],
+    }
     addCompanyDetailsWithAddress({ applicationId, companyData })
     setNextClicked(true)
   }
 
   const renderSnackbar = () => {
-    let message = t('registration.apiError')
-    if (identifierError) {
-      message = t('registrationStepOne.identifierError')
-    } else if (submitError) {
-      message = t('registrationStepOne.submitError')
+    const getMessage = () => {
+      if (identifierError) return t('registrationStepOne.identifierError')
+      if (submitError) return t('registrationStepOne.submitError')
+      return t('registration.apiError')
     }
-    return <Notify message={message} />
-  }
-
-  const utfNormalize = (value: string) => {
-    return value.normalize('NFC')
+    return <Notify message={getMessage()} />
   }
 
   return (
@@ -400,315 +233,56 @@ export const CompanyDataCax = () => {
           stepDescription={t('registrationStepOne.verifyCompayDataSubHeading')}
         />
         <div className="companydata-form">
-          <Row className="mx-auto col-9">
-            <div className={`form-search ${bpnErrorMsg ? 'error' : ''}`}>
-              <label> {t('registrationStepOne.seachDatabase')}</label>
-              <SearchInput
-                className="search-input"
-                value={''}
-                onChange={(expr) => {
-                  onSearchChange(expr)
-                }}
-              />
-              <label className="error-message">{bpnErrorMsg}</label>
-            </div>
-          </Row>
-
-          <Row className="col-9 mx-auto">
-            <div className="section-divider">
-              <span className="text-center">
-                {t('registrationStepOne.enterManualText')}
-              </span>
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className="form-data">
-              <label>
-                {' '}
-                {t('registrationStepOne.bpn')}{' '}
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  // tip data need to get moved to the locales files
-                  data-tip="Displays the bpn and can't get eddited."
-                />
-              </label>
-              <input type="text" disabled value={bpn} />
-              <div className="company-hint">
-                {t('registrationStepOne.helperText')}
-              </div>
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.legalEntity && 'error'}`}>
-              <label>
-                {' '}
-                {t('registrationStepOne.legalEntity')}{' '}
-                <span className="mandatory-asterisk">*</span>
-                <AiOutlineQuestionCircle
-                  color="#939393"
-                  // tip data need to get moved to the locales files
-                  data-tip="Legal Company Name"
-                />{' '}
-              </label>
-              <input
-                type="text"
-                value={legalEntity}
-                onChange={(e) => {
-                  validateLegalEntity(utfNormalize(e.target.value))
-                }}
-                onBlur={(e) => {
-                  setLegalEntity(e.target.value.trim())
-                }}
-              />
-              {errors.legalEntity && (
-                <label>{t(`registrationStepOne.${errors.legalEntity}`)}</label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.registeredName && 'error'}`}>
-              <label>
-                {' '}
-                {t('registrationStepOne.registeredName')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={registeredName}
-                onChange={(e) => {
-                  validateRegisteredName(utfNormalize(e.target.value))
-                }}
-                onBlur={(e) => {
-                  setRegisteredName(e.target.value.trim())
-                }}
-              />
-              {errors.registeredName && (
-                <label>
-                  {t(`registrationStepOne.${errors.registeredName}`)}
-                </label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <span className="form-heading">
-              {t('registrationStepOne.organizationAdd')}
-            </span>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`form-data ${errors.streetHouseNumber && 'error'}`}>
-              <label>
-                {t('registrationStepOne.streetHouseNumber')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={streetHouseNumber}
-                onChange={(e) => {
-                  validateStreetHouseNumber(utfNormalize(e.target.value))
-                }}
-                onBlur={(e) => {
-                  setStreetHouseNumber(e.target.value.trim())
-                }}
-              />
-              {errors.streetHouseNumber && (
-                <label>
-                  {t(`registrationStepOne.${errors.streetHouseNumber}`)}
-                </label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`col-4 form-data ${errors.postalCode && 'error'}`}>
-              <label> {t('registrationStepOne.postalCode')} </label>
-              <input
-                type="text"
-                value={postalCode}
-                onChange={(e) => {
-                  validatePostalCode(e.target.value)
-                }}
-                onBlur={(e) => {
-                  setPostalCode(e.target.value.trim())
-                }}
-              />
-              {errors.postalCode && (
-                <label>{t(`registrationStepOne.${errors.postalCode}`)}</label>
-              )}
-            </div>
-
-            <div className={`col-8 form-data ${errors.city && 'error'}`}>
-              <label>
-                {t('registrationStepOne.city')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => {
-                  validateCity(utfNormalize(e.target.value))
-                }}
-                onBlur={(e) => {
-                  setCity(e.target.value.trim())
-                }}
-              />
-              {errors.city && (
-                <label>{t(`registrationStepOne.${errors.city}`)}</label>
-              )}
-            </div>
-          </Row>
-
-          <Row className="mx-auto col-9">
-            <div className={`col-4 form-data ${errors.country && 'error'}`}>
-              <label>
-                {t('registrationStepOne.country')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              {(countryArr?.length || errors.country) && (
-                <Autocomplete
-                  id="selectList"
-                  options={countryArr}
-                  value={defaultSelectedCountry}
-                  renderInput={(params) => (
-                    <TextField variant="standard" {...params} />
-                  )}
-                  onChange={(_e, values) => {
-                    validateCountry(values?.id)
-                  }}
-                  sx={{
-                    '.MuiInput-input': {
-                      height: '31px',
-                    },
-                  }}
-                />
-              )}
-              {errors.country && (
-                <label>{t(`registrationStepOne.${errors.country}`)}</label>
-              )}
-            </div>
-
-            <div className={`col-8 form-data ${errors.region && 'error'}`}>
-              <label>
-                {t('registrationStepOne.region')}{' '}
-                <span className="mandatory-asterisk">*</span>
-              </label>
-              <input
-                type="text"
-                value={region}
-                onChange={(e) => {
-                  validateRegion(utfNormalize(e.target.value))
-                }}
-                onBlur={(e) => {
-                  setRegion(e.target.value.trim())
-                }}
-              />
-              {errors.region && (
-                <label>{t(`registrationStepOne.${errors.region}`)}</label>
-              )}
-            </div>
-          </Row>
-
-          {uniqueIds && uniqueIds?.length > 1 ? (
-            <>
-              <Row className="mx-auto col-9">
-                <span className="form-heading">
-                  {t('registrationStepOne.countryIdentifier')}
-                  <div className="company-hint">
-                    {t('registrationStepOne.identifierhelperText')}
-                  </div>
-                </span>
-              </Row>
-              <Row className="mx-auto col-9">
-                <ul className="agreement-check-list">
-                  {uniqueIds?.map((id) => (
-                    <li key={id.type} className="agreement-li">
-                      <input
-                        type="radio"
-                        name="uniqueIds"
-                        value={id.type}
-                        className="regular-radio agreement-check"
-                        onChange={() => {
-                          handleIdentifierSelect(id.type, id.value)
-                        }}
-                        defaultChecked={uniqueIds[0].type === id.type}
-                      />
-                      <label>
-                        {t(`registrationStepOne.identifierTypes.${id.type}`) +
-                          ' : ' +
-                          id.value}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              </Row>
-            </>
-          ) : (
-            showIdentifiers && (
-              <>
-                <Row className="mx-auto col-9">
-                  <span className="form-heading">
-                    {t('registrationStepOne.countryIdentifier')}
-                  </span>
-                </Row>
-                <Row className="mx-auto col-9">
-                  <div className={'form-data'}>
-                    <label>
-                      {t('registrationStepOne.identifierType')}{' '}
-                      <span className="mandatory-asterisk">*</span>
-                    </label>
-                    <select
-                      value={identifierType}
-                      onChange={(e) => {
-                        onIdentifierTypeChange(e)
-                      }}
-                    >
-                      <option value="">
-                        {t('registrationStepOne.pleaseSelect')}
-                      </option>
-                      {identifierDetails?.map((identifier) => (
-                        <option key={identifier.id} value={identifier.label}>
-                          {t(
-                            `registrationStepOne.identifierTypes.${identifier.label}`
-                          )}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </Row>
-                <Row className="mx-auto col-9">
-                  <div
-                    className={`form-data ${
-                      errors.identifierNumber && 'error'
-                    }`}
-                  >
-                    <label>
-                      {t('registrationStepOne.identifierNumber')}{' '}
-                      <span className="mandatory-asterisk">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={identifierNumber}
-                      onChange={(e) => {
-                        validateIdentifierNumber(utfNormalize(e.target.value))
-                      }}
-                      onBlur={(e) => {
-                        setIdentifierNumber(e.target.value.trim())
-                      }}
-                    />
-                    {errors.identifierNumber && (
-                      <label>
-                        {t(`registrationStepOne.${errors.identifierNumber}`)}
-                      </label>
-                    )}
-                  </div>
-                </Row>
-              </>
-            )
-          )}
+          <CompanyDataForm
+            bpn={bpn}
+            bpnErrorMsg={bpnErrorMsg}
+            legalEntity={legalEntity}
+            registeredName={registeredName}
+            errors={errors}
+            validateLegalEntity={validateLegalEntity}
+            validateRegisteredName={validateRegisteredName}
+            setLegalEntity={setLegalEntity}
+            setRegisteredName={setRegisteredName}
+            setErrors={setErrors}
+            isBPN={isBPN}
+            fetchData={fetchData}
+            setFields={setFields}
+            setBpnErrorMessage={setBpnErrorMessage}
+          />
+          <AddressForm
+            country={country}
+            city={city}
+            setCity={setCity}
+            postalCode={postalCode}
+            setPostalCode={setPostalCode}
+            region={region}
+            setRegion={setRegion}
+            countryArr={countryArr}
+            defaultSelectedCountry={defaultSelectedCountry}
+            setErrors={setErrors}
+            errors={errors}
+            setStreetHouseNumber={setStreetHouseNumber}
+            streetHouseNumber={streetHouseNumber}
+            setShowIdentifiers={setShowIdentifiers}
+            setChangedCountryValue={setChangedCountryValue}
+            setCountry={setCountry}
+            refetch={refetch}
+            changedCountryValue={changedCountryValue}
+          />
+          <IdentifierForm
+            uniqueIds={uniqueIds}
+            handleIdentifierSelect={handleIdentifierSelect}
+            showIdentifiers={showIdentifiers}
+            identifierType={identifierType}
+            identifierNumber={identifierNumber}
+            errors={errors}
+            onIdentifierTypeChange={onIdentifierTypeChange}
+            setIdentifierNumber={setIdentifierNumber}
+            identifierDetails={identifierDetails}
+            country={country}
+            setErrors={setErrors}
+            setChangedCountryValue={setChangedCountryValue}
+          />
         </div>
       </div>
       {notifyError && renderSnackbar()}
