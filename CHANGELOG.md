@@ -9,6 +9,7 @@
 - upgrade development-dependencies [#381](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/381)
 - upgrade production-dependencies [#385](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/385)
 - upgrade workflow-dependencies [#384](github.com/eclipse-tractusx/portal-frontend-registration/pull/384)
+- refactor: optimize and improve the cax-campanydata.tsx [#317](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/317)
 
 ## 2.2.0
 
