@@ -50,7 +50,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install Dependencies
-        run: yarn
+        run: yarn --frozen-lockfile
 
 #      - name: Linter Checks
 #        run: yarn lint
