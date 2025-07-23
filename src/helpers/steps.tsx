@@ -25,5 +25,7 @@ export const stepNames = {
   2: i18n.t('registration.responsAdmin'),
   3: i18n.t('registration.companyRole'),
   4: i18n.t('registration.uploadDocument'),
-  5: i18n.t('registration.verifyEntries'),
+  5: i18n.t('registration.wallet'),
+  6: i18n.t('registration.verifyEntries'),
+  
 }

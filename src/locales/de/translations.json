@@ -6,7 +6,8 @@
     "submitting": "Wird gesendet...",
     "sending": "Sending...",
     "back": "zurück",
-    "reload": "Reload Page"
+    "reload": "Reload Page",
+    "validating": "Prüfen..."
   },
   "header": {
     "logout": "Ausloggen",
@@ -32,6 +33,7 @@
     "responsAdmin": "Benutzer hinzufügen",
     "companyRole": "Unternehmensrolle",
     "uploadDocument": "Dokumente",
+    "wallet": "Wallet",
     "verifyEntries": "Prüfen & Senden",
     "statusApplicationError": "Application ID not existing. Please contact the administrator.",
     "apiError": "Something went wrong. Please try again later or contact the administrator."
@@ -158,6 +160,15 @@
     "emailRequired": "E-Mail ist erforderlich",
     "sendInviteSuccessMsg": "Invite sent successfully."
   },
+  "wallet": {
+    "title": "Verbinden Sie Ihre eigene Wallet",
+    "optional":"OPTIONAL:",
+    "subtitle": "Sie können Ihre eigene Catena-X-kompatible Wallet verwenden, falls Sie bereits eine besitzen. Wenn Sie keine haben oder sich nicht sicher sind, können Sie diesen Schritt überspringen. Wir stellen Ihnen eine Wallet zur Verfügung, die Sie im Catena-X Dataspace verwenden können.",
+    "userAgreementText": "Ich habe eine Catena-X-kompatible Wallet und werde die DID der Wallet bereitstellen",
+    "didValidationFailed": "Bitte geben Sie eine gültige DID ein.",
+    "issuerCredsInfo": "Um die automatische Ausstellung von Credentials zu ermöglichen, stellen Sie bitte sicher, dass Ihre eigene Wallet der DID des Ausstellers vertraut:"
+   
+  },
   "verifyRegistration": {
     "title": "Verify your registration data",
     "subtitle": "Verify your company registration data before submitting the registration. Please ensure that all information are correctly filled. As soon as the verification is finished, click the 'Submit' button below to submit the registration for approval.",
@@ -172,7 +183,10 @@
     "ActiveRole": "Unternehmesrolle",
     "ActiveParticipant": "Active Participant",
     "UploadedCertificates": "Dokumente",
-    "submitErrorMessage": "The submission was unsuccessful. Please try it later again"
+    "submitErrorMessage": "The submission was unsuccessful. Please try it later again",
+    "verifyPageParticipantWallet": "Teilnehmereigene Wallet",
+    "companyProvidedWallet": "Vom CX Operator bereitgestellte Wallet",
+    "wallet":"Wallet"
   },
   "ErrorMessage": {
     "400": "Input value is invalid",

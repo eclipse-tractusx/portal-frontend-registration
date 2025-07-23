@@ -38,6 +38,9 @@ import {
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
 
+import { useSaveHolderDidMutation } from
+  '../state/features/applicationWallet/applicationWalletApiSlice'
+
 export const VerifyRegistration = () => {
   const { t } = useTranslation()
   const history = useHistory()
@@ -53,6 +56,8 @@ export const VerifyRegistration = () => {
   const obj = status?.[status.length - 1]
   const applicationId = obj?.applicationId
 
+  const LS_KEY_WALLET_DID = 'registration.wallet.did'
+  const walletDID = window.localStorage.getItem(LS_KEY_WALLET_DID) || ''
   const {
     data: registrationData,
     error: dataError,
@@ -61,11 +66,13 @@ export const VerifyRegistration = () => {
   const { data: documents, error: documentsError } =
     useFetchDocumentsQuery(applicationId)
   const [updateRegistration] = useUpdateRegistrationMutation()
-  
+  const [saveHolderDid] = useSaveHolderDidMutation()
+
   useEffect(() => {
     refetch()
+
   }, [])
-  
+
   const backClick = () => {
     dispatch(addCurrentStep(currentActiveStep - 1))
   }
@@ -73,16 +80,22 @@ export const VerifyRegistration = () => {
   const nextClick = async () => {
     if (loading) return
     setLoading(true)
-    await updateRegistration(applicationId)
-      .unwrap()
-      .then(() => {
-        history.push('/finish')
-      })
-      .catch((errors: any) => {
-        console.log('errors', errors)
-        setLoading(false)
-        setSubmitError(true)
-      })
+    try {
+      const companyId = registrationData?.companyId
+      if (companyId && walletDID.trim()) {
+        await saveHolderDid({ companyId, did: walletDID.trim() }).unwrap()
+      }
+
+
+      await updateRegistration(applicationId).unwrap()
+      history.push('/finish')
+
+    }
+    catch (errors: any) {
+      console.log('errors', errors)
+      setLoading(false)
+      setSubmitError(true)
+    }
   }
 
   const getTooltip = () => {
@@ -108,7 +121,7 @@ export const VerifyRegistration = () => {
   return (
     <>
       <div className="mx-auto col-9 container-registration">
-        <StepHeader 
+        <StepHeader
           step={currentActiveStep}
           stepName={t('verifyRegistration.title')}
           stepDescription={t('verifyRegistration.subtitle')}
@@ -236,6 +249,40 @@ export const VerifyRegistration = () => {
               })}
             </ul>
           </Row>
+          <Row>
+            <ul className="list-group-cax px-2">
+              <li className="list-group-item-cax list-header">
+                <Row>
+                  <span className="col-11">
+                    {t('verifyRegistration.wallet')}
+                  </span>
+                </Row>
+              </li>
+              {walletDID !== '' && (
+                <li className="list-group-item-cax" key="Wallet">
+                  <Row>
+                    <span className="col-6">
+                      {t(
+                        'verifyRegistration.verifyPageParticipantWallet'
+                      )}
+                    </span>
+                    <span className="col-6 verify-wallet-did">{walletDID}</span>
+                  </Row>
+                </li>)}
+              {walletDID == '' && (
+                <li key="wallet" className="list-group-item-cax">
+                  <Row>
+                    <span className="col-12">{t(
+                      'verifyRegistration.companyProvidedWallet'
+                    )}</span>
+                  </Row>
+                </li>
+              )}
+
+            </ul>
+          </Row>
+
+
         </div>
       </div>
       {(dataError ?? documentsError ?? submitError) && renderSnackbar()}

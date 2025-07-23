@@ -6,7 +6,8 @@
     "submitting": "Submitting...",
     "sending": "Sending...",
     "back": "Back",
-    "reload": "Reload Page"
+    "reload": "Reload Page",
+    "validating": "Validating"
   },
   "header": {
     "logout": "Logout",
@@ -32,6 +33,7 @@
     "responsAdmin": "Add Users",
     "companyRole": "Company Role",
     "uploadDocument": "Documents",
+    "wallet": "Wallet",
     "verifyEntries": "Verify & Submit",
     "statusApplicationError": "Application ID not existing. Please contact the administrator.",
     "apiError": "Something went wrong. Please try again later or contact the administrator."
@@ -158,6 +160,15 @@
     "emailRequired": "Email is required",
     "sendInviteSuccessMsg": "Invite sent successfully."
   },
+  "wallet": {
+    "title": "Connect your own wallet",
+    "optional":"OPTIONAL:",
+    "subtitle": "Use your own Catena-X-compliant wallet if you already have one.If you don’t or are unsure, you can skip this step. We will provide you with a wallet to use in the Catena-X dataspace.",
+    "userAgreementText": "I have a Catena-X-compliant wallet and will provide the wallet’s DID.",
+    "didValidationFailed": "Please enter a valid DID.",
+    "issuerCredsInfo": "To ensure automatic issuance of credentials, please make sure your own wallet trusts the issuer's DID:"
+ 
+  },
   "verifyRegistration": {
     "title": "Verify your registration data",
     "subtitle": "Verify your company registration data before submitting the registration. Please ensure that all information are correctly filled. As soon as the verification is finished, click the 'Submit' button below to submit the registration for approval.",
@@ -172,7 +183,10 @@
     "ActiveRole": "Active Role",
     "ActiveParticipant": "Active Participant",
     "UploadedCertificates": "Uploaded Documents",
-    "submitErrorMessage": "The submission was unsuccessful. Please try it later again"
+    "submitErrorMessage": "The submission was unsuccessful. Please try it later again",
+    "verifyPageParticipantWallet": "Participant-owned wallet",
+    "companyProvidedWallet": "CX Operator provided wallet",
+    "wallet":"Wallet"
   },
   "ErrorMessage": {
     "400": "Input value is invalid",
