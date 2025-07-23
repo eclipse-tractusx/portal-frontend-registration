@@ -26,6 +26,7 @@ import { apiSlice as applicationInviteUserSlice } from './applicationInviteUser/
 import { apiSlice as applicationCompanyRoleApiSlice } from './applicationCompanyRole/applicationCompanyRoleApiSlice'
 import { apiSlice as applicationDocumentsApiSlice } from './applicationDocuments/applicationDocumentsApiSlice'
 import { apiSlice as applicationVerifyRegisterApiSlice } from './applicationVerifyRegister/applicationVerifyRegisterApiSlice'
+import { applicationWalletApiSlice }  from './applicationWallet/applicationWalletApiSlice'
 
 export const reducers = {
   user: userApiSlice.reducer,
@@ -37,6 +38,7 @@ export const reducers = {
     applicationDocumentsApiSlice.reducer,
   [applicationVerifyRegisterApiSlice.reducerPath]:
     applicationVerifyRegisterApiSlice.reducer,
+    [applicationWalletApiSlice.reducerPath]: applicationWalletApiSlice.reducer,
 }
 
 export const store = configureStore({
@@ -47,7 +49,8 @@ export const store = configureStore({
       .concat(applicationInviteUserSlice.middleware)
       .concat(applicationCompanyRoleApiSlice.middleware)
       .concat(applicationDocumentsApiSlice.middleware)
-      .concat(applicationVerifyRegisterApiSlice.middleware),
+      .concat(applicationVerifyRegisterApiSlice.middleware)
+      .concat(applicationWalletApiSlice.middleware)
 })
 
 type RootState = ReturnType<typeof store.getState>

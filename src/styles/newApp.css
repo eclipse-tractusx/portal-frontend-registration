@@ -840,6 +840,72 @@ textarea {
   text-decoration: underline;
 }
 
+.container-registration .subheader {
+  color: #333;
+  text-align: center;
+  font-family: "Libre Franklin 400";
+  font-size: 20px;
+  font-style: normal;
+  line-height: 140%;
+}
+
+.wallet-page-checkbox >label {
+  color: #363535;
+  font-family: "Libre Franklin 400";
+  font-size: 16px;
+  line-height: 130%;
+}
+
+.additonal-subheader {
+  font-family: "Libre Franklin 600";
+}
+
+.wallet-header {
+  margin-bottom: 24px;
+}
+
+.did-input input {
+  padding: 8px 8px 8px 12px;
+  height: 40px;
+  align-items: center;
+}
+
+.wallet-page-checkbox {
+  margin-bottom: 24px;
+}
+
+.issuer-cred-info-container {
+  border-radius: 4px;
+  background: #EAF1FE;
+  padding: 8px !important ;
+  align-items: flex-start;
+  align-self: stretch;
+  color: #363535;
+  font-size: 16px;
+  line-height: 130%;
+
+}
+
+.issuer-cred-info {
+  font-family: 'Libre Franklin 400';
+  font-size: 15px;
+}
+
+.issuer-cred-id {
+ font-family: 'Libre Franklin 600';
+}
+
+.verify-wallet-did {
+  overflow-wrap: break-word;
+}
+
+.did-label {
+  color: #333;
+  font-family: 'LibreFranklin-bold';
+  font-size: 16px;
+  line-height: 140%;
+}
+
 .initial-loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
