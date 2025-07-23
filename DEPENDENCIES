@@ -152,7 +152,7 @@ npm/npmjs/-/escape-string-regexp/4.0.0, MIT, approved, clearlydefined
 npm/npmjs/-/escodegen/2.1.0, BSD-2-Clause AND (BSD-2-Clause AND BSD-3-Clause), approved, #9306
 npm/npmjs/-/eslint-compat-utils/0.5.1, MIT, approved, #13999
 npm/npmjs/-/eslint-config-love/43.1.0, MIT, approved, #13906
-npm/npmjs/-/eslint-config-prettier/9.1.0, MIT, approved, #11979
+npm/npmjs/-/eslint-config-prettier/9.1.2, MIT, approved, #11979
 npm/npmjs/-/eslint-config-standard/17.1.0, MIT, approved, clearlydefined
 npm/npmjs/-/eslint-import-resolver-node/0.3.9, MIT, approved, #9923
 npm/npmjs/-/eslint-module-utils/2.12.0, MIT, approved, #16409
@@ -861,7 +861,7 @@ npm/npmjs/@types/jsdom/20.0.1, MIT, approved, clearlydefined
 npm/npmjs/@types/json5/0.0.29, MIT, approved, clearlydefined
 npm/npmjs/@types/lodash.debounce/4.0.9, MIT, approved, clearlydefined
 npm/npmjs/@types/lodash.uniq/4.5.9, MIT, approved, #13930
-npm/npmjs/@types/lodash/4.17.16, MIT, approved, #18358
+npm/npmjs/@types/lodash/4.17.20, MIT, approved, #18358
 npm/npmjs/@types/node/20.16.15, MIT, approved, #16051
 npm/npmjs/@types/node/22.7.4, MIT, approved, #16398
 npm/npmjs/@types/papaparse/5.3.15, MIT, approved, #10964
