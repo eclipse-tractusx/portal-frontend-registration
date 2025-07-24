@@ -64,14 +64,14 @@ export const RegistrationCax = () => {
             </div>
             <Stepper></Stepper>
             {currentActiveStep === 1 ? (
-             <CompanyDataCax />
+              <CompanyDataCax />
             ) : currentActiveStep === 2 ? (
               <ResponsibilitiesCax />
             ) : currentActiveStep === 3 ? (
               <CompanyRoleCax />
             ) : currentActiveStep === 4 ? (
               <DragDrop />
-            ) : currentActiveStep === 5 ?(
+            ) : currentActiveStep === 5 ? (
               <WalletCax />
             ) : (
               <VerifyRegistration />

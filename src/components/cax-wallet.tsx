@@ -40,14 +40,17 @@ export const WalletCax = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [apiError, setApiError] = useState(false)
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('')
 
   const currentActiveStep = useSelector(getCurrentStep)
 
   const [nextClicked, setNextClicked] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [did, setDid] = useState('')
-  const [validateDidTrigger, { error: didValidationError, isLoading: isValidating }] = useValidateDidMutation()
+  const [
+    validateDidTrigger,
+    { error: didValidationError, isLoading: isValidating },
+  ] = useValidateDidMutation()
   const didTrimmed = did.trim()
   const isNextDisabled = isChecked && didTrimmed.length === 0
   const LS_KEY_WALLET_DID = 'registration.wallet.did'
@@ -88,7 +91,7 @@ export const WalletCax = () => {
     } catch (err) {
       //backend is sending 400 as response whenever an invalid DID is being given
       if (err.status == 400) {
-        setMessage(t('wallet.didValidationFailed'));
+        setMessage(t('wallet.didValidationFailed'))
       }
 
       DataErrorCodes.includes(err.status)
@@ -97,7 +100,13 @@ export const WalletCax = () => {
       setApiError(true)
       setLoading(false)
     }
-  }, [isNextDisabled, validateDidTrigger, didTrimmed, dispatch, currentActiveStep])
+  }, [
+    isNextDisabled,
+    validateDidTrigger,
+    didTrimmed,
+    dispatch,
+    currentActiveStep,
+  ])
 
   const [notifyError, setNotifyError] = useState(false)
   useEffect(() => {
@@ -112,7 +121,7 @@ export const WalletCax = () => {
     return <Notify message={message} />
   }
 
-  const issuerId = (ENV as any).ISSUER_ID;
+  const issuerId = (ENV as any).ISSUER_ID
 
   return (
     <>
@@ -138,7 +147,10 @@ export const WalletCax = () => {
             />
           </FormGroup>
           <Row className="col-12">
-            <label htmlFor="wallet-did" className='did-label'> DID (Decentralized Identifier) * </label>
+            <label htmlFor="wallet-did" className="did-label">
+              {' '}
+              DID (Decentralized Identifier) *{' '}
+            </label>
             <TextField
               id="wallet-did"
               value={did}
@@ -146,12 +158,19 @@ export const WalletCax = () => {
               disabled={!isChecked}
               placeholder="did:web:<URI>"
               variant="filled"
-              className='did-input'
+              className="did-input"
               error={false}
-              helperText=' '
+              helperText=" "
               fullWidth
             />
-            {isChecked && <div className='issuer-cred-info-container'><div className='issuer-cred-info'>{t('wallet.issuerCredsInfo')}</div><span className='issuer-cred-id'>{issuerId}</span> </div>}
+            {isChecked && (
+              <div className="issuer-cred-info-container">
+                <div className="issuer-cred-info">
+                  {t('wallet.issuerCredsInfo')}
+                </div>
+                <span className="issuer-cred-id">{issuerId}</span>{' '}
+              </div>
+            )}
           </Row>
         </div>
       </div>
@@ -163,11 +182,11 @@ export const WalletCax = () => {
         handleNextClick={nextClick}
         loading={loading}
         disabled={isNextDisabled || isValidating}
-        helpUrl={'/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'}
+        helpUrl={
+          '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
+        }
       />
       {notifyError && renderSnackbar()}
     </>
   )
 }
-
-

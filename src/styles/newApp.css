@@ -843,21 +843,21 @@ textarea {
 .container-registration .subheader {
   color: #333;
   text-align: center;
-  font-family: "Libre Franklin 400", sans-serif;
+  font-family: 'Libre Franklin 400', sans-serif;
   font-size: 20px;
   font-style: normal;
   line-height: 140%;
 }
 
-.wallet-page-checkbox >label {
+.wallet-page-checkbox > label {
   color: #363535;
-  font-family: "Libre Franklin 400", sans-serif;
+  font-family: 'Libre Franklin 400', sans-serif;
   font-size: 16px;
   line-height: 130%;
 }
 
 .additonal-subheader {
-  font-family: "Libre Franklin 600", sans-serif;
+  font-family: 'Libre Franklin 600', sans-serif;
 }
 
 .wallet-header {
@@ -876,14 +876,13 @@ textarea {
 
 .issuer-cred-info-container {
   border-radius: 4px;
-  background: #EAF1FE;
+  background: #eaf1fe;
   padding: 8px !important ;
   align-items: flex-start;
   align-self: stretch;
   color: #363535;
   font-size: 16px;
   line-height: 130%;
-
 }
 
 .issuer-cred-info {
@@ -892,7 +891,7 @@ textarea {
 }
 
 .issuer-cred-id {
- font-family: 'Libre Franklin 600', sans-serif;
+  font-family: 'Libre Franklin 600', sans-serif;
 }
 
 .verify-wallet-did {

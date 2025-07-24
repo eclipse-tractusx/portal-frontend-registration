@@ -23,9 +23,14 @@ type StepHeaderProps = {
   stepDescription: string
   className?: string
   additionalDescription?: string
-
 }
-const StepHeader = ({ step, stepName, stepDescription, className = "", additionalDescription = '' }: StepHeaderProps) => {
+const StepHeader = ({
+  step,
+  stepName,
+  stepDescription,
+  className = '',
+  additionalDescription = '',
+}: StepHeaderProps) => {
   return (
     <div className={`head-section ${className}`}>
       <div className="mx-auto step-highlight d-flex align-items-center justify-content-center">

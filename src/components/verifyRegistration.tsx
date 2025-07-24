@@ -38,8 +38,7 @@ import {
 import { Notify } from './Snackbar'
 import StepHeader from './StepHeader'
 
-import { useSaveHolderDidMutation } from
-  '../state/features/applicationWallet/applicationWalletApiSlice'
+import { useSaveHolderDidMutation } from '../state/features/applicationWallet/applicationWalletApiSlice'
 
 export const VerifyRegistration = () => {
   const { t } = useTranslation()
@@ -70,7 +69,6 @@ export const VerifyRegistration = () => {
 
   useEffect(() => {
     refetch()
-
   }, [])
 
   const backClick = () => {
@@ -86,12 +84,9 @@ export const VerifyRegistration = () => {
         await saveHolderDid({ companyId, did: walletDID.trim() }).unwrap()
       }
 
-
       await updateRegistration(applicationId).unwrap()
       history.push('/finish')
-
-    }
-    catch (errors: any) {
+    } catch (errors: any) {
       console.log('errors', errors)
       setLoading(false)
       setSubmitError(true)
@@ -262,27 +257,23 @@ export const VerifyRegistration = () => {
                 <li className="list-group-item-cax" key="Wallet">
                   <Row>
                     <span className="col-6">
-                      {t(
-                        'verifyRegistration.verifyPageParticipantWallet'
-                      )}
+                      {t('verifyRegistration.verifyPageParticipantWallet')}
                     </span>
                     <span className="col-6 verify-wallet-did">{walletDID}</span>
                   </Row>
-                </li>)}
+                </li>
+              )}
               {walletDID == '' && (
                 <li key="wallet" className="list-group-item-cax">
                   <Row>
-                    <span className="col-12">{t(
-                      'verifyRegistration.companyProvidedWallet'
-                    )}</span>
+                    <span className="col-12">
+                      {t('verifyRegistration.companyProvidedWallet')}
+                    </span>
                   </Row>
                 </li>
               )}
-
             </ul>
           </Row>
-
-
         </div>
       </div>
       {(dataError ?? documentsError ?? submitError) && renderSnackbar()}

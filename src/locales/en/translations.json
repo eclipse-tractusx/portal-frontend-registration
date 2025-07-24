@@ -162,12 +162,11 @@
   },
   "wallet": {
     "title": "Connect your own wallet",
-    "optional":"OPTIONAL:",
+    "optional": "OPTIONAL:",
     "subtitle": "Use your own Catena-X-compliant wallet if you already have one.If you don’t or are unsure, you can skip this step. We will provide you with a wallet to use in the Catena-X dataspace.",
     "userAgreementText": "I have a Catena-X-compliant wallet and will provide the wallet’s DID.",
     "didValidationFailed": "Please enter a valid DID.",
     "issuerCredsInfo": "To ensure automatic issuance of credentials, please make sure your own wallet trusts the issuer's DID:"
- 
   },
   "verifyRegistration": {
     "title": "Verify your registration data",
@@ -186,7 +185,7 @@
     "submitErrorMessage": "The submission was unsuccessful. Please try it later again",
     "verifyPageParticipantWallet": "Participant-owned wallet",
     "companyProvidedWallet": "CX Operator provided wallet",
-    "wallet":"Wallet"
+    "wallet": "Wallet"
   },
   "ErrorMessage": {
     "400": "Input value is invalid",

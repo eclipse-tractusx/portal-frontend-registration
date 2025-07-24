@@ -56,7 +56,7 @@ export const FooterButton = ({
           <Button
             label={labelNext}
             styleClass={
-              tooltip ?? disabled
+              (tooltip ?? disabled)
                 ? 'button btn-disabledCax'
                 : 'button btn-primaryCax'
             }

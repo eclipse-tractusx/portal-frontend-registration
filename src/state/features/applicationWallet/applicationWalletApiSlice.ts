@@ -22,43 +22,42 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiBaseQuery } from '../../utils/rtkUtil'
 
 export interface ValidateDidResponse {
-    valid: boolean
-    message?: string
+  valid: boolean
+  message?: string
 }
 
 export type ValidateDidArg = string
 
 export const applicationWalletApiSlice = createApi({
-    reducerPath: 'rtk/applicationWallet',
-    baseQuery: fetchBaseQuery(apiBaseQuery()),
-    endpoints: (builder) => ({
-        validateDid: builder.mutation<ValidateDidResponse, ValidateDidArg>({
-            query: (did) => ({
-                url: `api/registration/bringYourOwnWallet/${encodeURIComponent(did)}/validateDid`,
-                method: 'POST',
-                body: did,
-            }),
-            transformResponse: (response: any): ValidateDidResponse => {
-                if (typeof response === 'object' && response !== null) {
-                    const { valid, message } = response as any
-                    return { valid: Boolean(valid), message }
-                }
-                // fallback: treat any truthy response as valid
-                return { valid: Boolean(response) }
-            },
-        }),
-        saveHolderDid: builder.mutation<
-            string,                                  
-            { companyId: string; did: string }
-        >({
-            query: ({ companyId, did }) => ({
-                url: `api/registration/bringYourOwnWallet/${companyId}/saveHolderDid/${encodeURIComponent(did)}`,
-                method: 'POST',
-                body: { companyId, did },
-            }),
-        }),
+  reducerPath: 'rtk/applicationWallet',
+  baseQuery: fetchBaseQuery(apiBaseQuery()),
+  endpoints: (builder) => ({
+    validateDid: builder.mutation<ValidateDidResponse, ValidateDidArg>({
+      query: (did) => ({
+        url: `api/registration/bringYourOwnWallet/${encodeURIComponent(did)}/validateDid`,
+        method: 'POST',
+        body: did,
+      }),
+      transformResponse: (response: any): ValidateDidResponse => {
+        if (typeof response === 'object' && response !== null) {
+          const { valid, message } = response as any
+          return { valid: Boolean(valid), message }
+        }
+        // fallback: treat any truthy response as valid
+        return { valid: Boolean(response) }
+      },
     }),
+    saveHolderDid: builder.mutation<string, { companyId: string; did: string }>(
+      {
+        query: ({ companyId, did }) => ({
+          url: `api/registration/bringYourOwnWallet/${companyId}/saveHolderDid/${encodeURIComponent(did)}`,
+          method: 'POST',
+          body: { companyId, did },
+        }),
+      }
+    ),
+  }),
 })
 
-export const { useValidateDidMutation, useSaveHolderDidMutation } = applicationWalletApiSlice
-
+export const { useValidateDidMutation, useSaveHolderDidMutation } =
+  applicationWalletApiSlice
