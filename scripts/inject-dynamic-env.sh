@@ -20,9 +20,9 @@
 ###############################################################
 
 # Define custom variable
-custom_env_vars='{PORTAL_ASSETS_URL:"'$PORTAL_ASSETS_URL'",PORTAL_BACKEND_URL:"'$PORTAL_BACKEND_URL'",CENTRALIDP_URL:"'$CENTRALIDP_URL'",REALM:"'$REALM'",CLIENT_ID_REGISTRATION:"'$CLIENT_ID_REGISTRATION'"}'
+custom_env_vars='{PORTAL_ASSETS_URL:"'$PORTAL_ASSETS_URL'",PORTAL_BACKEND_URL:"'$PORTAL_BACKEND_URL'",CENTRALIDP_URL:"'$CENTRALIDP_URL'",REALM:"'$REALM'",CLIENT_ID_REGISTRATION:"'$CLIENT_ID_REGISTRATION'",ISSUER_ID:"'$ISSUER_ID'"}'
 # Define anchor variable
-custom_env_vars_anchor='{PORTAL_ASSETS_URL:"http://localhost:3000/assets",PORTAL_BACKEND_URL:"https://portal-backend.example.org",CENTRALIDP_URL:"https://centralidp.example.org/auth",REALM:"CX-Central",CLIENT_ID_REGISTRATION:"Cl1-CX-Registration"}'
+custom_env_vars_anchor='{PORTAL_ASSETS_URL:"http://localhost:3000/assets",PORTAL_BACKEND_URL:"https://portal-backend.example.org",CENTRALIDP_URL:"https://centralidp.example.org/auth",REALM:"CX-Central",CLIENT_ID_REGISTRATION:"Cl1-CX-Registration",ISSUER_ID:"did:web:example.org:api:administration:staticdata:did:BPNL00000003CRHK"}'
 # Read content of the reference index.html file into the index_html_reference variable
 index_html_reference=`cat /usr/share/nginx/html/index.html.reference`
 # Replace the anchor variable with the custom variable in the index.html file 

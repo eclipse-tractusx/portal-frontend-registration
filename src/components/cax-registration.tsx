@@ -26,6 +26,7 @@ import { Tooltip } from 'react-tooltip'
 import { useSelector } from 'react-redux'
 import 'react-datepicker/dist/react-datepicker.css'
 import { CompanyDataCax } from './cax-companyData'
+import { WalletCax } from './cax-wallet'
 import { ResponsibilitiesCax } from './cax-responsibilities'
 import { DragDrop } from './dragdrop'
 import { CompanyRoleCax } from './cax-companyRole'
@@ -70,6 +71,8 @@ export const RegistrationCax = () => {
               <CompanyRoleCax />
             ) : currentActiveStep === 4 ? (
               <DragDrop />
+            ) : currentActiveStep === 5 ? (
+              <WalletCax />
             ) : (
               <VerifyRegistration />
             )}
