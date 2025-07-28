@@ -85,8 +85,10 @@ export const WalletCax = () => {
     if (loading) return
     setNextClicked(true)
     try {
-      setLoading(true)
-      await validateDidTrigger(didTrimmed).unwrap()
+      if (isChecked) {
+        setLoading(true)
+        await validateDidTrigger(didTrimmed).unwrap()
+      }
       dispatch(addCurrentStep(currentActiveStep + 1))
     } catch (err) {
       //backend is sending 400 as response whenever an invalid DID is being given
@@ -148,8 +150,7 @@ export const WalletCax = () => {
           </FormGroup>
           <Row className="col-12">
             <label htmlFor="wallet-did" className="did-label">
-              {' '}
-              DID (Decentralized Identifier) *{' '}
+              {t('wallet.didLabel')}
             </label>
             <TextField
               id="wallet-did"

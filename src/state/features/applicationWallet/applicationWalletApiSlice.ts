@@ -26,13 +26,11 @@ export interface ValidateDidResponse {
   message?: string
 }
 
-export type ValidateDidArg = string
-
 export const applicationWalletApiSlice = createApi({
   reducerPath: 'rtk/applicationWallet',
   baseQuery: fetchBaseQuery(apiBaseQuery()),
   endpoints: (builder) => ({
-    validateDid: builder.mutation<ValidateDidResponse, ValidateDidArg>({
+    validateDid: builder.mutation<ValidateDidResponse, string>({
       query: (did) => ({
         url: `api/registration/bringYourOwnWallet/${encodeURIComponent(did)}/validateDid`,
         method: 'POST',
@@ -40,7 +38,7 @@ export const applicationWalletApiSlice = createApi({
       }),
       transformResponse: (response: any): ValidateDidResponse => {
         if (typeof response === 'object' && response !== null) {
-          const { valid, message } = response as any
+          const { valid, message } = response
           return { valid: Boolean(valid), message }
         }
         // fallback: treat any truthy response as valid
