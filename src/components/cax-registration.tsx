@@ -51,6 +51,23 @@ export const RegistrationCax = () => {
     }
   }, [])
 
+  const renderStepComponent = (step) => {
+    switch (step) {
+      case 1:
+        return <CompanyDataCax />
+      case 2:
+        return <ResponsibilitiesCax />
+      case 3:
+        return <CompanyRoleCax />
+      case 4:
+        return <DragDrop />
+      case 5:
+        return <WalletCax />
+      default:
+        return <VerifyRegistration />
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -63,19 +80,7 @@ export const RegistrationCax = () => {
               <div>{t('registration.regiSubHeading')}</div>
             </div>
             <Stepper></Stepper>
-            {currentActiveStep === 1 ? (
-              <CompanyDataCax />
-            ) : currentActiveStep === 2 ? (
-              <ResponsibilitiesCax />
-            ) : currentActiveStep === 3 ? (
-              <CompanyRoleCax />
-            ) : currentActiveStep === 4 ? (
-              <DragDrop />
-            ) : currentActiveStep === 5 ? (
-              <WalletCax />
-            ) : (
-              <VerifyRegistration />
-            )}
+            {renderStepComponent(currentActiveStep)}
           </Col>
         )}
       </Row>
