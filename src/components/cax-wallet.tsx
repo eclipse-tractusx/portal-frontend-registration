@@ -42,8 +42,6 @@ export const WalletCax = () => {
   const [message, setMessage] = useState('')
 
   const currentActiveStep = useSelector(getCurrentStep)
-
-  const [nextClicked, setNextClicked] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [did, setDid] = useState('')
   const [
@@ -89,7 +87,6 @@ export const WalletCax = () => {
 
   const nextClick = useCallback(async () => {
     if (isNextDisabled || loading) return
-    // setNextClicked(true)
     resetDidError()
     setApiError(false)
     setMessage('')
@@ -110,7 +107,6 @@ export const WalletCax = () => {
         : setMessage(t('ErrorMessage.default'))
       setApiError(true)
       setLoading(false)
-      // setNextClicked(false)
     }
   }, [
     isNextDisabled,
@@ -122,8 +118,9 @@ export const WalletCax = () => {
 
   const [notifyError, setNotifyError] = useState(false)
   useEffect(() => {
-    if (message && (didValidationError || apiError)) setNotifyError(true)
-    else {
+    if (message && (didValidationError || apiError)) {
+      setNotifyError(true)
+    } else {
       setNotifyError(false)
     }
   }, [didValidationError, apiError])
