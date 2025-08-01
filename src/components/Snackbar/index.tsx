@@ -27,6 +27,11 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 
 const AUTO_CLOSE_DELAY_MS = 3000
 
+interface NotifyProps {
+  message: string
+  onClose?: () => void
+}
+
 const SlideTransition = (props: SlideProps) => (
   <Slide {...props} direction="left" />
 )
@@ -162,14 +167,12 @@ export const PageSnackbar = ({
   )
 }
 
-export const Notify = ({ message }: { message: string }) => {
-  return (
-    <PageSnackbar
-      open={true}
-      severity={SeverityType.ERROR}
-      description={message}
-      showIcon={true}
-      autoClose={true}
-    />
-  )
-}
+export const Notify = ({ message, onClose }: NotifyProps) => (
+  <PageSnackbar
+    open={true}
+    severity={SeverityType.ERROR}
+    description={message}
+    autoClose
+    onCloseNotification={onClose}
+  />
+)

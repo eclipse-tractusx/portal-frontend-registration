@@ -49,7 +49,11 @@ export const WalletCax = () => {
   const [did, setDid] = useState('')
   const [
     validateDidTrigger,
-    { error: didValidationError, isLoading: isValidating },
+    {
+      error: didValidationError,
+      isLoading: isValidating,
+      reset: resetDidError,
+    },
   ] = useValidateDidMutation()
   const didTrimmed = did.trim()
   const isNextDisabled = isChecked && didTrimmed.length === 0
@@ -72,6 +76,10 @@ export const WalletCax = () => {
   }, [])
 
   useEffect(() => {
+    resetDidError()
+  }, [resetDidError])
+
+  useEffect(() => {
     const stored = window.localStorage.getItem(LS_KEY_WALLET_DID) || ''
     setDid(stored)
   }, [])
@@ -81,9 +89,11 @@ export const WalletCax = () => {
   }, [did])
 
   const nextClick = useCallback(async () => {
-    if (isNextDisabled) return
-    if (loading) return
-    setNextClicked(true)
+    if (isNextDisabled || loading) return
+    // setNextClicked(true)
+    resetDidError()
+    setApiError(false)
+    setMessage('')
     try {
       if (isChecked) {
         setLoading(true)
@@ -101,6 +111,7 @@ export const WalletCax = () => {
         : setMessage(t('ErrorMessage.default'))
       setApiError(true)
       setLoading(false)
+      // setNextClicked(false)
     }
   }, [
     isNextDisabled,
@@ -112,16 +123,11 @@ export const WalletCax = () => {
 
   const [notifyError, setNotifyError] = useState(false)
   useEffect(() => {
-    if (nextClicked && (didValidationError || apiError)) {
-      setNotifyError(true)
-    } else {
+    if (message && (didValidationError || apiError)) setNotifyError(true)
+    else {
       setNotifyError(false)
     }
-  }, [nextClicked, didValidationError, apiError])
-
-  const renderSnackbar = () => {
-    return <Notify message={message} />
-  }
+  }, [didValidationError, apiError])
 
   const issuerId = (ENV as any).ISSUER_ID
 
@@ -187,7 +193,9 @@ export const WalletCax = () => {
           '/documentation/?path=user%2F01.+Onboarding%2F02.+Registration%2F02.+Add+Company+Data.md'
         }
       />
-      {notifyError && renderSnackbar()}
+      {notifyError && (
+        <Notify message={message} onClose={() => setNotifyError(false)} />
+      )}
     </>
   )
 }
