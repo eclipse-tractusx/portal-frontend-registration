@@ -34,7 +34,7 @@ export const Stepper = () => {
 
   return (
     <div className="mx-auto col-11 reg-steps">
-      <Row className="stepper-wrapper row-cols-5">
+      <Row className="stepper-wrapper row-cols-6">
         {Object.entries(stepNames).map((element, index) => {
           const stepNumber = +element[0]
           const stepName = element[1]
