@@ -5864,10 +5864,10 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-phone@^3.1.66:
-  version "3.1.66"
-  resolved "https://registry.yarnpkg.com/phone/-/phone-3.1.66.tgz#48300d251d96234cd8bb369e1e5d55382374976e"
-  integrity sha512-xElqlpBlI80ltMhcrjCi5vPYpczIlRi+HRg8Nx0ogvMAyNBKSz7OO7sqSWobhlTK4EEq27g9TL2V3TAPImqsYQ==
+phone@^3.1.67:
+  version "3.1.67"
+  resolved "https://registry.yarnpkg.com/phone/-/phone-3.1.67.tgz#ead28333463f97c35d56d53b8099f61f0c1d9db8"
+  integrity sha512-7XdKmQYhKcoDXQWM8lnnPMhcLrPEIo2uQByJu4Seo2ZfvOgonr2tP9ueBjZRdxIhfm8X1VeZU0+JRrEyJSs1SQ==
 
 picocolors@^1.0.0:
   version "1.1.0"
