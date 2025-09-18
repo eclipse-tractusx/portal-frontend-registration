@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 2.2.2-RC1
+## 2.2.2
 
 ### Technical Support
 
