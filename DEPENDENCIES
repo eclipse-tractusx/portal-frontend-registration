@@ -31,7 +31,7 @@ npm/npmjs/-/async/3.2.6, Apache-2.0 AND MIT, approved, #1553
 npm/npmjs/-/asynckit/0.4.0, MIT, approved, clearlydefined
 npm/npmjs/-/attr-accept/2.2.2, MIT, approved, clearlydefined
 npm/npmjs/-/available-typed-arrays/1.0.7, MIT, approved, clearlydefined
-npm/npmjs/-/axios/1.11.0, MIT, approved, clearlydefined
+npm/npmjs/-/axios/1.12.2, MIT, approved, clearlydefined
 npm/npmjs/-/babel-jest/30.0.5, MIT, approved, clearlydefined
 npm/npmjs/-/babel-plugin-istanbul/7.0.0, BSD-3-Clause, approved, clearlydefined
 npm/npmjs/-/babel-plugin-jest-hoist/30.0.1, MIT, approved, clearlydefined
@@ -809,12 +809,12 @@ npm/npmjs/@jest/test-sequencer/30.0.5, MIT, approved, clearlydefined
 npm/npmjs/@jest/transform/30.0.5, MIT, approved, clearlydefined
 npm/npmjs/@jest/types/29.6.3, MIT, approved, clearlydefined
 npm/npmjs/@jest/types/30.0.5, MIT, approved, clearlydefined
-npm/npmjs/@jridgewell/gen-mapping/0.3.12, MIT, approved, clearlydefined
-npm/npmjs/@jridgewell/gen-mapping/0.3.5, MIT, approved, clearlydefined
+npm/npmjs/@jridgewell/gen-mapping/0.3.12, MIT, approved, #22834
+npm/npmjs/@jridgewell/gen-mapping/0.3.5, MIT, approved, #22834
 npm/npmjs/@jridgewell/resolve-uri/3.1.2, MIT, approved, clearlydefined
 npm/npmjs/@jridgewell/set-array/1.2.1, MIT, approved, clearlydefined
-npm/npmjs/@jridgewell/sourcemap-codec/1.5.0, MIT, approved, clearlydefined
-npm/npmjs/@jridgewell/sourcemap-codec/1.5.4, MIT, approved, clearlydefined
+npm/npmjs/@jridgewell/sourcemap-codec/1.5.0, MIT, approved, #22833
+npm/npmjs/@jridgewell/sourcemap-codec/1.5.4, MIT, approved, #22833
 npm/npmjs/@jridgewell/trace-mapping/0.3.25, MIT, approved, #9904
 npm/npmjs/@jridgewell/trace-mapping/0.3.29, MIT, approved, #9904
 npm/npmjs/@jridgewell/trace-mapping/0.3.9, MIT, approved, #9904
