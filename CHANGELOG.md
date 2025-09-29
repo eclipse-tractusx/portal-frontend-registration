@@ -2,11 +2,11 @@
 
 ## Unreleased
 
-## 2.2.2-RC1
+## 2.2.2
 
 ### Technical Support
 
-- upgrade dependencies [#403](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/403), [#399](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/399), [#404](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/404), [#410](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/410)
+- upgrade dependencies [#403](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/403), [#399](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/399), [#404](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/404), [#410](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/410), [#422](https://github.com/eclipse-tractusx/portal-frontend-registration/pull/422)
 
 ## 2.2.1
 
